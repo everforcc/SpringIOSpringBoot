@@ -1,0 +1,33 @@
+<font face="Simsun" size=3>
+
+- [文档](http://mybatis.org/spring/zh/getting-started.html)
+- [中文文档](http://www.mybatis.cn/)
+
+## 一. mybatis 注解
+
+### 1.0 @mapper
+
+- 类上表明是个mapper类
+
+### 2.0 @MapperScan(value = "cn.cc.dawn.**.dao") //扫描包 找找文档， ** 任意多级包名
+
+- 主类，扫描包
+
+### 2.1 @Repository
+
+
+## 二. xml
+
+- 配置sql
+~~~
+xml-sql
+~~~
+- mybatis-config.xml
+
+
+## 三. 缓存
+
+
+
+
+</font>

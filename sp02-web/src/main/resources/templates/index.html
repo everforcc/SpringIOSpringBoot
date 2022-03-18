@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p> 首页-templates </p>
+
+<!-- 所有的html元素都可以被thymeleaf 替换接管 -->
+<p>1. text</p>
+<p th:text="${msg}"></p>
+<p th:utext="${msg}"></p>
+
+<hr>
+
+<p>2. list</p>
+<h3 th:each="str:${list}" th:text="${str}"></h3>
+<h3 th:each="str:${list}"> [[ ${str} ]]</h3>
+
+
+</body>
+</html>

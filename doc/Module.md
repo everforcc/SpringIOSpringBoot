@@ -1,0 +1,66 @@
+<font face="Simsun" size=3>
+
+## 各个模块功能介绍
+
+- [ ] sp01-init
+- 零散的东西
+~~~
+
+~~~
+
+- [ ] sp02-web
+
+~~~
+- banner
+- 如果不分离前端代码位置
+~~~
+
+- [ ] sp03-data
+
+~~~
+- mybaties
+~~~
+
+
+- [ ] sp04-security
+
+~~~
+- springsecurity的简单应用
+
+~~~
+
+---
+
+## 待完善
+
+
+- [ ] sp-log
+
+~~~
+- 日志链式追踪，方便分析
+~~~
+
+- [ ] sp-aop
+- [ ] sp90-utils
+~~~
+- base64
+- uuid
+- 加密
+~~~
+
+---
+
+### POM
+~~~
+### 热部署
+~~~
+
+### 散
+
+- banner
+~~~
+https://www.bootschool.net/ascii
+
+~~~
+
+</font>

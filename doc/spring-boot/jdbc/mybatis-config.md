@@ -1,0 +1,25 @@
+<font face="Simsun" size=3>
+
+~~~
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    
+    <typeHandlers>
+        <typeHandler handler="cn.cc.dawn.config.handler.StatusEnumHandler" javaType="cn.cc.dawn.utils.enums.StatusEnum" jdbcType="INTEGER"/>
+        <!--<typeHandler handler="org.apache.ibatis.type.IntegerTypeHandler" javaType="cn.cc.dawn.utils.enums.StatusEnum" jdbcType="INTEGER"/>-->
+    </typeHandlers>
+    <!--IntegerTypeHandler-->
+    
+</configuration>
+~~~
+
+</font>

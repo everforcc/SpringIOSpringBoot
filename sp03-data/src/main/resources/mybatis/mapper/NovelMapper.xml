@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cc.sp03data.mapper.NovelMapper">
+
+    <cache
+    eviction="FIFO"
+    flushInterval="60000"
+    size="512"
+    readOnly="true"
+    />
+
+    <!-- 列表查询 -->
+    <select id="queryNovelList" resultType="com.cc.sp03data.dto.NovelDto">
+        SELECT * FROM cc_novel ;
+    </select>
+
+
+    <select id="queryByID" resultType="com.cc.sp03data.dto.NovelDto">
+        SELECT * FROM cc_novel where id=#{id} ;
+    </select>
+
+</mapper>

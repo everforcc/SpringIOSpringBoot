@@ -1,0 +1,17 @@
+dog:
+  name: 张三
+  age: 1
+  list: [一,一,一]
+  email: 123@163.com
+spring:
+  profiles:
+    active: bdy # 用来激活不同的配置
+server:
+  port: 8080
+
+---
+
+server:
+  port: 8081
+spring:
+  profiles: dev # 已经过期了
