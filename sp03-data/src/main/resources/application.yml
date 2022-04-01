@@ -28,7 +28,9 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 mybatis:
+  # 指定全局配置文件位置  便于管理和扫描 config-location 和 configuration不能同时使用
   type-aliases-package: com.cc.sp03data.dto
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true # 驼峰命名法问题，等效配置文件
