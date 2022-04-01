@@ -1,0 +1,21 @@
+package com.cc.sp10aop.business.flow.controller;
+
+import com.cc.sp10aop.business.flow.service.FlowService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/aop/flow")
+public class FlowController {
+
+    @Autowired
+    FlowService flowService;
+
+    @GetMapping("/f")
+    public String flow(){
+        return flowService.testFlow();
+    }
+
+}
