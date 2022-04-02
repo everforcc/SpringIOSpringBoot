@@ -1,5 +1,6 @@
 package com.cc.sp01init.pojo;
 
+import com.cc.sp01init.i.ISave;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Validated// 数据校验
+//@Validated// 数据校验
 @Component
 @ConfigurationProperties(prefix = "dog")
 @Getter
@@ -21,7 +24,12 @@ import java.util.List;
 public class Dog {
 
     //@Value("狗")
+    @NotEmpty(message = "不能为空")
     private String name;
+
+    @NotNull(groups = {ISave.class},message = "str不允许为null")
+    private String str;
+
     //@Value("1")
     private Integer age;
 
