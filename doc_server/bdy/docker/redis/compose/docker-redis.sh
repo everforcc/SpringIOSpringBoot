@@ -1,0 +1,1 @@
+docker-compose -f docker-redis.yml up -d --build

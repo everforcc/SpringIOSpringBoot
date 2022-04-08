@@ -1,0 +1,15 @@
+FROM mysql:5.7
+
+#设置root密码
+ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
+
+#将所需文件放到容器中
+#COPY setup.sh /mysql/setup.sh
+COPY backup.sql /mysql/backup.sql
+COPY privileges.sql /mysql/privileges.sql
+
+#VOLUME ["/var/lib/mysql","/etc/mysql"]
+#设置容器启动时执行的命令
+#CMD ["sh", "/mysql/setup.sh"]
+
+EXPOSE 3307

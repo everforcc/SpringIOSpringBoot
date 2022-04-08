@@ -1,0 +1,15 @@
+version: '3.7'
+# 可以指定多个服务
+services:
+  redis:
+    container_name: redis-5.0.5
+    image: redis:5.0.5
+    restart: 'always'
+    ports:
+      - 6379:6379
+    volumes:
+      - "/home/data/redis-singleton:/data"
+    command: redis-server --requirepass c.c.5664
+    environment:
+      TZ: 'Asia/Shanghai'
+    network_mode: bridge
