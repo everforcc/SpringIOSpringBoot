@@ -1,0 +1,77 @@
+<font face="Simsun" size=3>
+
+## controller
+
+### 1. 请求方式
+
+1. 请求方式GET/POST, 只能使用这两种
+~~~
+- [ ] 还没在全局做出限制
+~~~
+
+2. 请求示例 GET
+
+- ?
+~~~
+~~~
+
+- rest
+
+
+3. POST
+
+~~~
+POST http://localhost:81/open/craw/add/addroot
+Accept: application/json
+Content-Type: application/json
+
+{
+"webroot": "https://www.internetdownloadmanager.com/",
+"webname": "IDM",
+"softtype": "web",
+"webtype": "软件",
+"vip": "EFFECT"
+}
+
+/**
+ * 网站主表
+ * @param webSiteDto
+ * @return
+ */
+@PostMapping("/addroot")
+public ResultE<Object> addroot(@RequestBody WebSiteDto webSiteDto){
+    log.info(webSiteDto.toString());
+    return new ResultE<>().call(() ->
+            webSiteService.insert(webSiteDto)
+    );
+}
+
+~~~
+
+
+4. 返回数据
+
+- 字符串类型
+
+~~~
+~~~
+
+- 媒体类型
+
+~~~
+~~~
+
+
+### 2. 参数规则
+
+#### 2.1 必须json传递
+
+~~~
+~~~
+
+#### 2.2 authon 必须带security注解取出用户
+
+~~~
+~~~
+
+</font>
