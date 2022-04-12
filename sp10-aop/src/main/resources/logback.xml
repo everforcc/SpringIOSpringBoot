@@ -12,7 +12,7 @@
     <!-- 输出日志文件名 -->
     <!-- 输出日志级别 -->
     <!-- log.home jvm启动参数注入 -->
-    <property name="LOG_HOME" value="${log.home:-default_log_home}/logs"/>
+    <property name="LOG_HOME" value="${log.home:-log_home}/logs"/>
     <!--<property name="LOG_HOME" value="logs"/>-->
     <property name="LOG_FILE_NAME" value="${log.file.name:-OneForAll}"/>
     <property name="LOG_LEVEL" value="${log.level:-INFO}"/>
