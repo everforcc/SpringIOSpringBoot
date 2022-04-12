@@ -1,8 +1,12 @@
 package com.cc.sp90utils.utils.httpclient.impl;
 
+import com.cc.sp90utils.enums.HttpTypeEnum;
+import com.cc.sp90utils.utils.check.ObjectUtils;
 import com.cc.sp90utils.utils.httpclient.HttpParam;
 import com.cc.sp90utils.utils.httpclient.HttpUtils;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 
+@Validated
 public class HttpUtilsURLConnection implements HttpUtils {
 
     public static void main(String[] args) {
@@ -21,12 +26,12 @@ public class HttpUtilsURLConnection implements HttpUtils {
 
         httpParam.setUrl("https://www.baidu.com/");
         //httpParam.setCharset(charset);
-        httpParam.setHttpTypeEnum("GET");
+        httpParam.setHttpTypeEnum(HttpTypeEnum.GET);
         httpParam.setTimeout(600);
         //requestForMsg(httpParam);
     }
 
-    public String requestForMsg(HttpParam httpParam) {
+    public String requestForMsg(@Valid HttpParam httpParam) {
 
         URL url = null;
         StringBuffer stringBuffer = new StringBuffer();
@@ -36,8 +41,10 @@ public class HttpUtilsURLConnection implements HttpUtils {
             HttpURLConnection httpURLConnection = (HttpURLConnection) urlConnection;
 
             //可以设置请求类型等
-            httpURLConnection.setRequestMethod(httpParam.getHttpTypeEnum());//请求类型
-
+            HttpTypeEnum httpTypeEnum = httpParam.getHttpTypeEnum();
+            if(ObjectUtils.nonNull(httpTypeEnum)){
+                httpURLConnection.setRequestMethod(httpTypeEnum.type);//请求类型
+            }
             Map<String,String> headersMap = httpParam.getHeaders();
             if(Objects.nonNull(headersMap)) {
                 for(Map.Entry<String,String> entry:headersMap.entrySet()) {

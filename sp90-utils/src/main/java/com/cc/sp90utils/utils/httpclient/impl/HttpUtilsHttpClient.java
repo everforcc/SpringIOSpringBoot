@@ -1,13 +1,12 @@
 package com.cc.sp90utils.utils.httpclient.impl;
 
+import com.cc.sp90utils.enums.HttpStateEnum;
+import com.cc.sp90utils.enums.HttpTypeEnum;
 import com.cc.sp90utils.utils.httpclient.HttpParam;
 import com.cc.sp90utils.utils.httpclient.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
+import org.apache.http.*;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.StringEntity;
@@ -33,7 +32,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
         HttpParam httpParam = new HttpParam();
         httpParam.setUrl("https://www.baidu.com/");
         //httpParam.setCharset(charset);
-        httpParam.setHttpTypeEnum("GET");
+        httpParam.setHttpTypeEnum(HttpTypeEnum.GET);
         httpParam.setTimeout(600);
         //httpParam.setHeaders(PropertiesHeader.ysCardMap());
 
@@ -69,7 +68,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
          * 2.1 网络代理
          * 一般的代理只能浏览器，代码要用，要开代理端口，在连接
          */
-        HttpHost proxy = httpParam.getProxy();
+        HttpHost proxy = httpParam.getProxy().toHttpHost();
         if(Objects.nonNull(proxy)){
             httpClientBuilder.setProxy(proxy);
         }
@@ -137,15 +136,20 @@ public class HttpUtilsHttpClient implements HttpUtils {
         HttpResponse httpResponse = null;
         try {
 
-            httpResponse = httpclient.execute(request);
-
             /**
              * 设置延迟
              */
             httpParam.sleep();
 
+            httpResponse = httpclient.execute(request);
+            StatusLine statusLine = httpResponse.getStatusLine();
+
+            if(HttpStateEnum._200.value!=statusLine.getStatusCode()){
+                throw new RuntimeException(statusLine.getReasonPhrase());
+            }
+
             log.info(" --- 分隔符 --- ");
-            String result = EntityUtils.toString(httpResponse.getEntity(),httpParam.getCharset());
+            String result = EntityUtils.toString(httpResponse.getEntity(),httpParam.getCharset().charset);
             return result;
         } catch (Exception e) {
 
