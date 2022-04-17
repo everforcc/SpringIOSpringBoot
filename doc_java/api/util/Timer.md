@@ -1,5 +1,8 @@
 <font face="Simsun" size=3>
 
+- [参考一](https://www.cnblogs.com/luckygxf/p/7078662.html)
+- [参考二](https://blog.csdn.net/xixi_haha123/article/details/81082321)
+
 [TOC]
 
 ## 定时任务
@@ -11,9 +14,10 @@
 
 ### 1. 主要结构
 
+- TimerTask 主要为任务的具体内容，可以继承重写run
 - Timer
-- TimerThread
-- TaskQueue
+- TaskQueue  存放即将执行的 TimerTask，下标为0表示不处理，最小下标从1开始处理
+- TimerThread 会一直从 TaskQueue中取出下标为1的任务执行，并根据是否需要重复执行来决定是否返回队列
 
 ### 2. 源码分析
 
@@ -58,8 +62,12 @@ public abstract class TimerTask implements Runnable {
 /**
  *  在上面  Timer(String name) new 之后，线程就已经创建了
  *  new TaskQueue() run(); 这一步之后就一直启用了
- *  
+ * 
+ *  // 如果某次任务延迟，则之后任务都会被延迟 
  *  .schedule( 这一步 组装 TimerTask 的相关信息 并 加入队列
+ *  // 如果出现某次任务的延迟，则之后的任务会快速执行，即按计划时间执行
+ *  scheduleAtFixedRate
+ * 
  */
  
  class TaskQueue {
@@ -114,6 +122,7 @@ public void run() {
                         
                         // 执行条件，当前时间大于executionTime 就执行，然后移除
                         if (taskFired = (executionTime<=currentTime)) {
+                            // 一次性的不重复执行，删除
                             if (task.period == 0) { // Non-repeating, remove
                                 queue.removeMin();
                                 task.state = TimerTask.EXECUTED;
@@ -148,5 +157,7 @@ void heapify() {
             fixDown(i);
     }
 ~~~
+
+## 模拟timer实现，自定义代码
 
 </font>

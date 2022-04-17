@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>2.6.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cc</groupId>
-    <artifactId>sp90-utils</artifactId>
+    <artifactId>sp70-craw</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sp90-utils</name>
-    <description>sp90-utils</description>
+    <name>sp70-craw</name>
+    <description>sp70-craw</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -79,6 +79,36 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>4.5.8</version>
+        </dependency>
+
+        <!-- xsoup -->
+        <!-- https://mvnrepository.com/artifact/us.codecraft/xsoup -->
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>xsoup</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- logback -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <!--<version>2.6.1</version>-->
+        </dependency>
+
+        <!-- selenium-java -->
+        <!-- guava -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.4.0</version>
         </dependency>
 
     </dependencies>
