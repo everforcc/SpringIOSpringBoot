@@ -1,5 +1,10 @@
 <font face="Simsun" size=3>
 
 - 判断依据是 == 而不是 equals,所以对象值修改后，就不是同一个锁了
+- 异常
+~~~
+java.lang.IllegalMonitorStateException
+wait和notify的锁不一样
+~~~
 
 </font>

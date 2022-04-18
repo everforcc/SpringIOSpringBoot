@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -33,6 +34,30 @@ public class SeleniumIHttp implements IHttp {
         String html = driver.getPageSource();
         driver.close();
         return html;
+    }
+
+    public static void psj(){
+
+        System.out.println();
+        //   此处是加载phantomjs.exe配置，放在那里就写哪里的路径
+        System.setProperty("phantomjs.binary.path","D:/java/code/github/SpringIOSpringBoot/sp70-craw/driver/phantomjs.exe");
+        WebDriver driver = new PhantomJSDriver();
+        driver.get("http://www.baidu.com");
+        driver.findElement(By.id("kw")).sendKeys("phantomJS");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //   获取title
+        String title = driver.getTitle();
+        System.out.println(title);
+        System.out.println(driver.getPageSource());
+        driver.quit();
+    }
+
+    public static void main(String[] args) {
+        psj();
     }
 
 }

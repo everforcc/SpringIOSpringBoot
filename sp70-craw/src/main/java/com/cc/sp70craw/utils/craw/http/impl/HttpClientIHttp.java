@@ -3,6 +3,7 @@ package com.cc.sp70craw.utils.craw.http.impl;
 import com.cc.sp70craw.utils.craw.http.IHttp;
 import com.cc.sp70craw.utils.craw.pool.HttpClientPool;
 import lombok.SneakyThrows;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -23,8 +24,10 @@ public class HttpClientIHttp implements IHttp {
             System.err.println(url + " :返回异常");
             throw new RuntimeException("返回异常");
         }
-
-        return EntityUtils.toString(httpResponse.getEntity(),"gbk");
+        HttpEntity httpEntity = httpResponse.getEntity();
+        String entity = EntityUtils.toString(httpEntity,"gbk");
+        EntityUtils.consume(httpEntity);
+        return entity;
     }
 
 }
