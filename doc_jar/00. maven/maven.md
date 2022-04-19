@@ -8,6 +8,16 @@ relativePath
 2. 没有relativePath标签等同…/pom.xml, 即默认从当前pom文件的上一级目录找
 3. 表示不从relativePath找, 直接从本地仓库找,找不到再从远程仓库找
 ~~~
+- 冲突解决
+~~~
+在新引入的jar包里面除去冲突
+<exclusions>
+    <exclusion>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+    </exclusion>
+</exclusions>
+~~~
 
 
 </font>
