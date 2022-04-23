@@ -40,7 +40,7 @@ public class SeleniumIHttp implements IHttp {
 
         System.out.println();
         //   此处是加载phantomjs.exe配置，放在那里就写哪里的路径
-        System.setProperty("phantomjs.binary.path","D:/java/code/github/SpringIOSpringBoot/sp70-craw/driver/phantomjs.exe");
+        System.setProperty("phantomjs.binary.path","D:/java/environment/driver/phantomjs.exe");
         WebDriver driver = new PhantomJSDriver();
         driver.get("http://www.baidu.com");
         driver.findElement(By.id("kw")).sendKeys("phantomJS");

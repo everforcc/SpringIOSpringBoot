@@ -1,0 +1,24 @@
+<font face="Simsun" size=3>
+
+[TOC]
+
+## [MIME](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
+
+- 媒体类型（通常称为 Multipurpose Internet Mail Extensions 或 MIME 类型 ）是一种标准，用来表示文档、文件或字节流的性质和格式。它在IETF RFC 6838中进行了定义和标准化。
+
+类型 | 描述 | 示例
+---|---|---
+text | 表明文件是普通文本，理论上是人类可读 | text/plain, text/html, text/css, text/javascript
+image | 表明是某种图像。不包括视频，但是动态图（比如动态gif）也使用image类型 | image/gif, image/png, image/jpeg, image/bmp, image/webp, image/x-icon, image/vnd.microsoft.icon
+audio | 表明是某种音频文件 | audio/midi, audio/mpeg, audio/webm, audio/ogg, audio/wav
+video | 表明是某种视频文件 | video/webm, video/ogg
+application | 表明是某种二进制数据 | application/octet-stream, application/pkcs12, application/vnd.mspowerpoint, application/xhtml+xml, application/xml,  application/pdf
+
+- 对于text文件类型若没有特定的subtype，就使用 text/plain。类似的，二进制文件没有特定或已知的 subtype，即使用 application/octet-stream。
+
+### Multipart 类型
+
+- multipart/form-data
+- multipart/byteranges
+
+</font>
