@@ -9,7 +9,7 @@ package com.cc.sp91test.test.jdk.sync;
 // 通过调用某对象的notify()方法能唤醒一个正在等待该对象的线程
 // 通过调用某对象的notifyAll()能唤醒所有正在等待该对象的线程
 
-public class ObjWait {
+public class TObjWait {
 
     public static void main(String[] args) throws InterruptedException {
         
