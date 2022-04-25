@@ -10,4 +10,12 @@ oldCapacity + (oldCapacity>> 1)
 10 + 10/2 = 15
 ~~~
 
+2. array/link
+
+~~~
+数组
+链表
+
+~~~
+
 </font>
