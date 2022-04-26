@@ -19,5 +19,29 @@ relativePath
 </exclusions>
 ~~~
 
+### dependency 
+
+- dependencyManagement
+~~~
+dependencyManagement 父pom
+让子项目中引用一个依赖而不用显示的列出版本号，会沿着父子层向上走，直到拥有
+dependencyManagement 的项目，然后用定义好的版本号
+
+需要修改的话，只需要在父项目修改就可以
+只是生命依赖，并不引入，只是提供一个规范
+~~~
+- dependencies
+~~~
+~~~
+- dependency
+~~~
+~~~
+
+### 跳过单元测试
+
+- 
+~~~
+toggle skip test model
+~~~
 
 </font>
