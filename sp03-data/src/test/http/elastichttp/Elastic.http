@@ -1,0 +1,19 @@
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+### 添加索引
+PUT 180.76.156.43:9200/blogs
+Content-Type: application/json
+
+{
+   "settings" : {
+      "number_of_shards" : 3,
+      "number_of_replicas" : 1
+   }
+}
+
+
+###
+GET 180.76.156.43:9200/blogs
+Content-Type: application/json
