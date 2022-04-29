@@ -15,6 +15,6 @@ public class RabbitMQConstant {
      */
     public static int port = 5672;
 
-    public static String username = "cc";
+    public static String username = "c.c.";
     public static String password = "c.c.c.c.";
 }
