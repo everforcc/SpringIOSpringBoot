@@ -1,6 +1,8 @@
 <font face="Simsun" size=3>
 
-- [参考](https://blog.csdn.net/weixin_49724150/article/details/121659693)
+- [三种模式](https://blog.csdn.net/weixin_49724150/article/details/121659693)
+- [面试问题](https://blog.csdn.net/qq_40430818/article/details/121802858)
+- [死锁](https://blog.csdn.net/luokn1995/article/details/108371863)
 
 [TOC]
 
@@ -9,6 +11,8 @@
 String
 List
 set
+hash -> hashmap
+sorted_set -> treeset
 ~~~
 
 ### 持久化
@@ -27,30 +31,7 @@ Rdb与Aof对比
 4、如果两个都配置了优先加载aof
 ~~~
 
-### 几种模式
 
-~~~
-主从 sentinel.conf
-    优点:     同一个Master可以同步多个Slaves。
-              master能自动将数据同步到slave，可以进行读写分离，分担master的读压力
-              master、slave之间的同步是以非阻塞的方式进行的，同步期间，客户端仍然可以提交查询或更新请求
-    缺点:     不具备容错和恢复功能  
-               难以火绒，取决于单机的上线
-                 
-
-哨兵 基于主从复制
-    优点: master挂了，子节点升级为master
-    
-    缺点: 切换需要时间丢数据，没办法解决master写的压力
-
-集群(直连)
-    优点:     1.无中心结构，链接任意一个节点即可
-             2. 支持扩容
-             3. 
-    1、资源隔离型较差，容易出现相互影响的情况。
-    2、数据通过异步复制，不保证数据的一致性。
-
-~~~
 - 故障转移,
 - 集群中的节点会向其它节点发送PING消息（该PING消息会带着当前集群和节点的信息），如果在规定时间内，没有收到对应的PONG消息，就把此节点标记为疑似下线
 - 
@@ -79,6 +60,12 @@ Rdb与Aof对比
 
 - 只要线程一加锁成功，就会启动一个watch dog看门狗，它是一个后台线程，会每隔10秒检查一下，如果线程1还持有锁，那么就会不断的延长锁key的生存时间。因此，Redisson就是使用Redisson解决了「锁过期释放，业务没执行完」问题。
 - 会每隔10秒检查一下，如果线程1还持有锁
+- 重入锁
+~~~
+redis存储的信息是Hash类型
+Hash数据类型的key包含了线程信息
+~~~
+
 
 2. Redlock+Redisson
 
@@ -88,5 +75,19 @@ Rdb与Aof对比
 - 如果获取锁失败，解锁！
 
 ### 死锁
+
+- 线程获取锁，执行lua脚本，成功就保存到redis
+- 获取失败就会循环获取
+~~~
+1. Redisson 设置超时时间
+2. watch dog后台线程，演唱key的生存时间
+3. lua脚本封装业务发送给redis，redis是单线程的，保证业务略记得原子性
+4. 那部分是单线程的 TODO 
+~~~
+- 性能
+~~~
+锁的粒度要小,比如库存，那就单独商品ID，范围不要太大
+锁的范围，哪行代码要锁，就锁哪行
+~~~
 
 </font>
