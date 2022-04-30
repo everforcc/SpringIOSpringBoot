@@ -34,3 +34,5 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true # 驼峰命名法问题，等效配置文件
+server:
+  port: 8003

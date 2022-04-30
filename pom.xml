@@ -8,9 +8,218 @@
     <artifactId>SpringIOSpringBoot</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <modules>
+        <module>sp01-init</module>
+        <module>sp02-web</module>
+        <module>sp03-data</module>
+        <module>sp04-security</module>
+        <module>sp10-aop</module>
+<!--        <module>sp20-comp</module>-->
+<!--        <module>sp21-jdk</module>-->
+        <!-- jar使用 -->
+        <module>sp30-user-craw</module>
+        <module>sp90-utils</module>
+        <module>sp91-test</module>
+    </modules>
+
+    <!-- 打包方式 -->
+    <packaging>pom</packaging>
+
+    <!--统一管理jar包版本-->
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <junit.version>4.12</junit.version>
+        <lombok.version>1.18.10</lombok.version>
+        <log4j.version>1.2.17</log4j.version>
+        <mysql.version>8.0.18</mysql.version>
+        <!--1.2.8-->
+        <druid.version>1.1.16</druid.version>
+        <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
+        <com.alibaba.fastjson>1.2.58</com.alibaba.fastjson>
+        <com.google.guava.guava>30.1.1-jre</com.google.guava.guava>
+        <org.apache.commons.commons-lang3>3.10</org.apache.commons.commons-lang3>
+        <net.jodah.expiringmap>0.5.8</net.jodah.expiringmap>
+        <org.codehaus.janino.janino>3.1.0</org.codehaus.janino.janino>
+        <commons-codec.version>1.13</commons-codec.version>
+        <!--<httpmime.version>4.5.10</httpmime.version>-->
+        <httpclient.version>4.5.2</httpclient.version>
+        <jakarta-annotation.version>1.3.5</jakarta-annotation.version>
+        <com.rabbitmq.amqp-client>5.9.0</com.rabbitmq.amqp-client>
+        <commons-io>2.6</commons-io>
+        <us.codecraft.xsoup>0.3.1</us.codecraft.xsoup>
+        <org.seleniumhq.selenium.selenium-java>3.4.0</org.seleniumhq.selenium.selenium-java>
+        <org.webjars.npm.phantomjs>2.1.7</org.webjars.npm.phantomjs>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- spirng -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.2.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- cloud Hoxton.SR1  -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!--mybatis-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot.version}</version>
+            </dependency>
+            <!--junit-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <!--log4j-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- 添加jquery -->
+            <!--<dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>alpaca</artifactId>
+                <version>1.5.24</version>
+            </dependency>-->
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${com.alibaba.fastjson}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${com.google.guava.guava}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${org.apache.commons.commons-lang3}</version>
+            </dependency>
+
+            <!-- 失效  map 做接口幂等的时候用过 -->
+            <dependency>
+                <groupId>net.jodah</groupId>
+                <artifactId>expiringmap</artifactId>
+                <version>${net.jodah.expiringmap}</version>
+            </dependency>
+
+            <!--
+            janino 可以执行java代码
+             spring自带的也有调用
+             -->
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>${org.codehaus.janino.janino}</version>
+            </dependency>
+
+            <!--  -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <!-- apache httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta-annotation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${com.rabbitmq.amqp-client}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io}</version>
+            </dependency>
+
+            <!-- xsoup解析html -->
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>xsoup</artifactId>
+                <version>${us.codecraft.xsoup}</version>
+            </dependency>
+            <!--  -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${org.seleniumhq.selenium.selenium-java}</version>
+            </dependency>
+            <!-- 无头浏览器 可能是上面的包已经有了??? -->
+            <!--<dependency>
+                <groupId>org.webjars.npm</groupId>
+                <artifactId>phantomjs</artifactId>
+                <version>${org.webjars.npm.phantomjs}</version>
+            </dependency>-->
+
+        </dependencies>
+    </dependencyManagement>
 
 </project>

@@ -4,35 +4,39 @@
 
 ## 各个模块功能介绍
 
-- [ ] sp01-init
+- 加新模块
+- pom依赖于外层
+- 
+
+### sp01-init
 - 零散的东西
 ~~~
 初始化 yml
 数据校验
 ~~~
 
-- [ ] sp02-web
+### sp02-web
 
 ~~~
 - banner
 - 如果不分离前端代码位置
 ~~~
 
-- [ ] sp03-data
+### sp03-data
 
 ~~~
 - mybaties
 ~~~
 
 
-- [ ] sp04-security
+### sp04-security
 
 ~~~
 - springsecurity的简单应用
 
 ~~~
 
-- [ ] sp10-aop
+### sp10-aop
 ~~~
 aop处理
 - sp-log
@@ -40,14 +44,23 @@ aop处理
 ~~~
 
 
-- [ ] sp21-algo
+### sp20-comp
 
-~~~
-算法相关
-~~~
+- 计算机基础知识
+- [ ] 数据结构
+- [ ] 算法
 
+### sp21-jdk
 
-- [ ] sp90-utils
+- jdk体系
+- [ ] io
+- [ ] 网络
+
+### sp30-userjar
+
+- jar包使用的问题
+
+### sp90-utils
 
 ~~~
 - base64
@@ -55,7 +68,7 @@ aop处理
 - 加密
 ~~~
 
-- [ ] sp91-test
+### sp91-test
 
 ~~~
 测试学习使用

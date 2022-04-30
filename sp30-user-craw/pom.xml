@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.cc</groupId>
-    <artifactId>sp90-utils</artifactId>
+    <artifactId>sp70-craw</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sp90-utils</name>
-    <description>sp90-utils</description>
+    <name>sp70-craw</name>
+    <description>sp70-craw</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -36,6 +36,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <!--<version>3.10</version>-->
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -56,17 +57,6 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-        <!-- httpclient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-        </dependency>
-        <!-- httpclient -->
-
         <!-- lombok -->
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -74,11 +64,55 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- logback -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+
+
+        <!-- IO 处理 -->
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!-- craw相关 -->
+        <!-- xsoup -->
+        <!-- https://mvnrepository.com/artifact/us.codecraft/xsoup -->
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>xsoup</artifactId>
+        </dependency>
+
+        <!-- selenium-java -->
+        <!-- guava -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars.npm/phantomjs -->
+        <!--<dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>phantomjs</artifactId>
+            <version>2.1.7</version>
+        </dependency>-->
 
     </dependencies>
 
