@@ -31,4 +31,14 @@ returnType methodName(@RequestHeader(name = "Content-Type") String Content_Type,
 - import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 ~~~
 
+### 参数
+
+spring | api
+---|---
+请求 | @FeignClient(name = "name", url = "${spring.}") <br> @FeignClient（类注解）
+根地址 | 注解可选参数url
+数据类型 | MediaType
+请求路径和类型 | @GetMapping(value = "/path", produces = APPLICATION_JSON_VALUE <br> value路径，produces数据类型
+
+
 </font>
