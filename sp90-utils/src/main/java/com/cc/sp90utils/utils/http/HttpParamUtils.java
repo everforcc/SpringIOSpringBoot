@@ -170,6 +170,47 @@ public class HttpParamUtils {
         return url.substring(0,url.lastIndexOf("/") + 1) + path;
     }
 
+    /**
+     * www.baidu.com/1/b/c.html c.html
+     * @param url
+     * @return
+     */
+    public static String getLastPath(String url){
+        if(StringUtils.isBlank(url)){
+            throw new RuntimeException("数据有误");
+        }
+        return url.substring(url.lastIndexOf("/") + 1);
+    }
+
+    /**
+     * www.baidu.com/1/b/c.html
+     * 0 c.html
+     * 1 b
+     * 2 1
+     * @param tagUrl
+     * @param index
+     * @return
+     */
+    public static String getLastPath(String tagUrl,int index){
+        if(StringUtils.isBlank(tagUrl)){
+            throw new RuntimeException("数据有误");
+        }
+
+        URL url = null;
+        try {
+            url = new URL(tagUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        String urlPath = url.getPath();
+        for(int i=0; i<index; i++) {
+            urlPath = urlPath.substring(0, urlPath.lastIndexOf("/"));
+        }
+        urlPath = urlPath.substring(urlPath.lastIndexOf("/") + 1);
+
+        return urlPath;
+    }
+
     public static void main(String[] args) {
 
 
@@ -198,7 +239,7 @@ public class HttpParamUtils {
 
                 String a = "www.baidu.com/1/b/c.html";
                 String b = "a.html";
-                System.out.println(replaceLastPath(a, b));
+                System.out.println(getLastPath(a));
 
             } catch (Exception e) {
                 e.printStackTrace();

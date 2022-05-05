@@ -20,6 +20,7 @@
         <module>sp30-user-craw</module>
         <module>sp90-utils</module>
         <module>sp91-test</module>
+        <module>sp-common-utils</module>
     </modules>
 
     <!-- 打包方式 -->
