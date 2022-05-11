@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>cn.cc</groupId>
     <artifactId>SpringIOSpringBoot</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -20,7 +20,8 @@
         <module>sp30-user-craw</module>
         <module>sp90-utils</module>
         <module>sp91-test</module>
-        <module>sp-common-utils</module>
+        <module>sp92-tools</module>
+        <module>tmaven</module>
     </modules>
 
     <!-- 打包方式 -->
