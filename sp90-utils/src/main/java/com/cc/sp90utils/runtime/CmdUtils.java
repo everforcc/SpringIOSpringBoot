@@ -63,8 +63,12 @@ public class CmdUtils {
      * 有六个重构，用到的话在看，举几个例子
      */
     @SneakyThrows
-    private static String execRuntime(String shell){
-        return execRuntime(null,null,shell);
+    public static String execRuntime(String shell){
+        Runtime runtime = Runtime.getRuntime();
+        Process process = runtime.exec(shell);
+        String result = process(process);
+        runtime.gc();
+        return result;
         // Process p = Runtime.getRuntime().exec("cmd /k startup.bat",null,new File(startFir));
         // Process p = Runtime.getRuntime().exec("cmd /c ipconfig ",null,new File(startFir));
     }
@@ -73,12 +77,16 @@ public class CmdUtils {
     public static String execRuntime(String filePath, String[] envp, String shell){
         Runtime runtime = Runtime.getRuntime();
         Process process = runtime.exec(EXE + DEFAULT_MODULE + shell,envp,new File(filePath));
-        String result = RIOUtils.toString(process.getInputStream());
+        String result = process(process);
         runtime.gc();
-        process.destroy();
         return result;
     }
 
+    private static String process(Process process){
+        String result = RIOUtils.toString(process.getInputStream());
+        process.destroy();
+        return result;
+    }
 
 
 }

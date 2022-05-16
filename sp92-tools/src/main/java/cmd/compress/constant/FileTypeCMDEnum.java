@@ -1,4 +1,4 @@
-package cmd.compress;
+package cmd.compress.constant;
 
 public enum FileTypeCMDEnum {
 

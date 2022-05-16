@@ -21,7 +21,6 @@
         <module>sp90-utils</module>
         <module>sp91-test</module>
         <module>sp92-tools</module>
-        <module>tmaven</module>
     </modules>
 
     <!-- 打包方式 -->

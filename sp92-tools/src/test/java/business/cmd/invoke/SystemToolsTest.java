@@ -8,7 +8,8 @@ public class SystemToolsTest {
 
     @Test
     public void openChrome(){
-        SystemTools.openBrowser("www.baidu.com");
+        String result = SystemTools.openBrowser("www.baidu.com");
+        System.out.println(result);
     }
 
     /**
