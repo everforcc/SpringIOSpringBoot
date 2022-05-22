@@ -1,8 +1,8 @@
 package com.cc.sp90utils.commons.io;
 
+import com.cc.sp90utils.constant.CharsetsConstant;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -54,6 +54,15 @@ public class RFileUtils {
     @SneakyThrows
     public static String readFileToString(String path, Charset charset){
         return FileUtils.readFileToString(new File(path),charset);
+    }
+
+    @SneakyThrows
+    public static void writeStringToFile(String path, String content, Charset charset){
+        FileUtils.writeStringToFile(new File(path),content,charset);
+    }
+    @SneakyThrows
+    public static void writeStringToFile(String path, String content){
+        FileUtils.writeStringToFile(new File(path),content, CharsetsConstant.UTF_8);
     }
 
 }

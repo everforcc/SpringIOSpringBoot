@@ -21,6 +21,7 @@
         <module>sp90-utils</module>
         <module>sp91-test</module>
         <module>sp92-tools</module>
+        <module>sp92-webapi</module>
     </modules>
 
     <!-- 打包方式 -->
@@ -52,6 +53,9 @@
         <us.codecraft.xsoup>0.3.1</us.codecraft.xsoup>
         <org.seleniumhq.selenium.selenium-java>3.4.0</org.seleniumhq.selenium.selenium-java>
         <org.webjars.npm.phantomjs>2.1.7</org.webjars.npm.phantomjs>
+
+        <com.baidu.aip.java-sdk>4.12.0</com.baidu.aip.java-sdk>
+        <org.testng.testng>RELEASE</org.testng.testng>
     </properties>
 
     <dependencyManagement>
@@ -219,6 +223,18 @@
                 <artifactId>phantomjs</artifactId>
                 <version>${org.webjars.npm.phantomjs}</version>
             </dependency>-->
+
+            <!-- 百度OCR识别 -->
+            <dependency>
+                <groupId>com.baidu.aip</groupId>
+                <artifactId>java-sdk</artifactId>
+                <version>${com.baidu.aip.java-sdk}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${org.testng.testng}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
