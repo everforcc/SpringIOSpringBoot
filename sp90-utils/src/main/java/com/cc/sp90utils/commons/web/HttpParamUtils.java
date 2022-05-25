@@ -1,15 +1,21 @@
 package com.cc.sp90utils.commons.web;
 
+import com.cc.sp90utils.commons.lang.RStringUtils;
+import com.cc.sp90utils.constant.CharsetsConstant;
+import com.cc.sp90utils.constant.CommonCharConstant;
+import com.cc.sp90utils.userinterface.ReflectFileFiled;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 public class HttpParamUtils {
 
@@ -50,6 +56,64 @@ public class HttpParamUtils {
         }
         // 去掉第一个&
         return paramStr.substring(1);
+    }
+
+    /**
+     * 通过反射拼接参数
+     * 对象中的所有字段必须是参数的一个
+     * @param obj
+     * @return
+     */
+    public static String asUrlParams(Object obj){
+        Class<?> clazz = obj.getClass();
+        StringBuffer stringBuffer = new StringBuffer();
+        // 多个字段
+        Field[] fields = clazz.getDeclaredFields();
+
+        if(Objects.isNull(fields)){
+            return stringBuffer.toString();
+        }
+
+        for(Field field:fields){
+            String alias = null;
+            try {
+                ReflectFileFiled reflectFileFiled = field.getAnnotation(ReflectFileFiled.class);
+
+                if(Objects.nonNull(reflectFileFiled)){
+                    if(!reflectFileFiled.use()) {
+                        continue;
+                    }else {
+                        alias = reflectFileFiled.alias();
+                    }
+                }
+
+                field.setAccessible(true);
+                Object value = field.get(obj);
+                if(Objects.nonNull(value)){
+                    String name = null;
+                    if(RStringUtils.isBlank(alias)){
+                        name = field.getName();
+                    }else {
+                        name = alias;
+                    }
+                    stringBuffer.append(name + CommonCharConstant.EQ + URLEncoder.encode(value.toString(), CharsetsConstant.UTF_8.toString()) + CommonCharConstant.AND);
+                    //stringBuffer.append(name + CommonCharConstant.EQ + value + CommonCharConstant.AND);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * 如果没有一个字段需要处理
+         */
+        if(stringBuffer.length() == 0){
+            return stringBuffer.toString();
+        }
+
+        // 去掉最后一个 & 字符
+        return stringBuffer.substring(0,stringBuffer.length()-1);
     }
 
     public static String getRootUrl(String weburl){

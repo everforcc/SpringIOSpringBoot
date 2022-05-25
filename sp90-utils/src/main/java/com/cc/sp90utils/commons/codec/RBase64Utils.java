@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
-public class Base64Utils {
+public class RBase64Utils {
 
     /**
      * 将指定编码的字符串转换为 Base64 编码字符串

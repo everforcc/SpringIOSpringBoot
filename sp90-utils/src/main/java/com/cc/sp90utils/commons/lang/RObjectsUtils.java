@@ -28,9 +28,12 @@ public class RObjectsUtils {
         return Objects.requireNonNull(obj);
     }
 
+    public static boolean equals(Object a,Object b){
+        return Objects.equals(a,b);
+    }
+
     public static void main(String[] args) {
         System.out.println(LogConstant.SPLIT + requireNonNull(null,"字符串不能为空"));
     }
-
 
 }

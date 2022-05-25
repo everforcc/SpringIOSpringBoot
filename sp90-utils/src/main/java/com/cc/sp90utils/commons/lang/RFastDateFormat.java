@@ -20,11 +20,11 @@ public class RFastDateFormat {
 
 
     public static String format(Date date){
-        return format(date,DateFormatConstant.format_1);
+        return format(date,DateFormatConstant.yyyy_MM_dd_2);
     }
 
     public static String format(long time){
-        return format(time,DateFormatConstant.format_1);
+        return format(time,DateFormatConstant.yyyy_MM_dd_2);
     }
 
     /**
@@ -44,8 +44,8 @@ public class RFastDateFormat {
 
     public static void main(String[] args) {
         Date date = new Date();
-        System.out.println(format(date,DateFormatConstant.format_1));
-        System.out.println(format(date.getTime(),DateFormatConstant.format_1));
+        System.out.println(format(date,DateFormatConstant.yyyy_MM_dd_2));
+        System.out.println(format(date.getTime(),DateFormatConstant.yyyy_MM_dd_2));
     }
 
 }

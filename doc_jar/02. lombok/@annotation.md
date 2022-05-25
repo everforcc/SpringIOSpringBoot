@@ -23,6 +23,7 @@
 
 - @RequiredArgsConstructor
 ~~~
+用final修饰对象后不用@Autowire就能注入了，简写
 ~~~
 - @Slf4j
 ~~~

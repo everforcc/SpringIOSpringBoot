@@ -4,6 +4,9 @@ import com.google.common.base.Charsets;
 
 import java.nio.charset.Charset;
 
+/**
+ * 非对象的情况下，单独使用
+ */
 public class CharsetsConstant {
 
     public static Charset UTF_8 = Charsets.UTF_8;

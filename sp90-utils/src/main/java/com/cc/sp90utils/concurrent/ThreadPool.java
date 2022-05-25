@@ -16,7 +16,6 @@ public class ThreadPool {
      */
     private static int threadSize(){
         int ncpus = Runtime.getRuntime().availableProcessors();
-        //System.out.println("ncpus: " + ncpus);
         return ncpus;
     }
 

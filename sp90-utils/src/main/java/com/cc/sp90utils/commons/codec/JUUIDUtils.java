@@ -2,7 +2,7 @@ package com.cc.sp90utils.commons.codec;
 
 import java.util.UUID;
 
-public class UUIDUtils {
+public class JUUIDUtils {
 
     /**
      * 生成uuid并去掉中间 -
@@ -12,5 +12,8 @@ public class UUIDUtils {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
+    public static void main(String[] args) {
+        System.out.println(uuid32());
+    }
 
 }

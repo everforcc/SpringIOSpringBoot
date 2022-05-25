@@ -11,13 +11,13 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class RStringUtils {
 
-    private void t(){
-
+    public static String urlSubFileName(String url){
+        return url.substring(url.lastIndexOf("/") + 1);
     }
-
 
     /**
      * 空 不能有任何字符
+     * 统一都用这个就算有制表符也算不为空
      * @param val
      * @return
      */
@@ -35,6 +35,10 @@ public class RStringUtils {
      */
     public static boolean isBlank(String val){
         return StringUtils.isBlank(val);
+    }
+
+    public static boolean isNotBlank(String val){
+        return StringUtils.isNotBlank(val);
     }
 
     /**
@@ -55,7 +59,6 @@ public class RStringUtils {
     public static String capitalize(String val){
         return StringUtils.capitalize(val);
     }
-
 
     /**
      * 移除指定的字符串，全部
@@ -85,6 +88,14 @@ public class RStringUtils {
 
     public static String repeat(String str,int count){
         return Strings.repeat(str, count);
+    }
+
+    public static boolean startsWith(CharSequence str, CharSequence prefix){
+        return StringUtils.startsWith(str, prefix);
+    }
+
+    public static String replace(String text, String searchString, String replacement){
+        return StringUtils.replace(text, searchString, replacement);
     }
 
     public static void main(String[] args) {
