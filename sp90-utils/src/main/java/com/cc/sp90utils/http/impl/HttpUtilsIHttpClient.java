@@ -2,8 +2,8 @@ package com.cc.sp90utils.http.impl;
 
 import com.cc.sp90utils.enums.HttpStateEnum;
 import com.cc.sp90utils.enums.HttpTypeEnum;
-import com.cc.sp90utils.http.HttpParam;
-import com.cc.sp90utils.http.HttpUtils;
+import com.cc.sp90utils.http.dto.HttpParamDto;
+import com.cc.sp90utils.http.IHttp;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.*;
@@ -23,14 +23,14 @@ import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
-public class HttpUtilsHttpClient implements HttpUtils {
+public class HttpUtilsIHttpClient implements IHttp {
 
     public static void main(String[] args) {
-        HttpParam httpParam = new HttpParam();
-        httpParam.setUrl("https://www.baidu.com/");
+        HttpParamDto httpParamDto = new HttpParamDto();
+        httpParamDto.setUrl("https://www.baidu.com/");
         //httpParam.setCharset(charset);
-        httpParam.setHttpTypeEnum(HttpTypeEnum.GET);
-        httpParam.setTimeout(600);
+        httpParamDto.setHttpTypeEnum(HttpTypeEnum.GET);
+        httpParamDto.setTimeout(600);
         //httpParam.setHeaders(PropertiesHeader.ysCardMap());
 
         //requestForMsg(httpParam);
@@ -39,7 +39,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
     /**
      * 用传入的参数来进行区分
      */
-    public String requestForMsg(HttpParam httpParam){
+    public String requestForMsg(HttpParamDto httpParamDto){
 
         /**
          * 1. 设置基本的请求头
@@ -65,7 +65,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
          * 2.1 网络代理
          * 一般的代理只能浏览器，代码要用，要开代理端口，在连接
          */
-        HttpHost proxy = httpParam.getProxy().toHttpHost();
+        HttpHost proxy = httpParamDto.getProxy().toHttpHost();
         if(Objects.nonNull(proxy)){
             httpClientBuilder.setProxy(proxy);
         }
@@ -87,19 +87,19 @@ public class HttpUtilsHttpClient implements HttpUtils {
          */
 
         RequestBuilder requestBuilder;
-        if("GET".equals(httpParam.getHttpTypeEnum())){
-            requestBuilder = RequestBuilder.get(httpParam.getUrl());
-        }else if("POST".equals(httpParam.getHttpTypeEnum())){
+        if("GET".equals(httpParamDto.getHttpTypeEnum())){
+            requestBuilder = RequestBuilder.get(httpParamDto.getUrl());
+        }else if("POST".equals(httpParamDto.getHttpTypeEnum())){
             requestBuilder = RequestBuilder.post();
         }else {
-            throw new RuntimeException("暂时不支持的类型: " + httpParam.getHttpTypeEnum());
+            throw new RuntimeException("暂时不支持的类型: " + httpParamDto.getHttpTypeEnum());
         }
         //requestBuilder.setUri(httpParam.getUrl());
 
         /**
          * 3.2 设置请求头
          */
-        Map<String,String> headerMap = httpParam.getHeaders();
+        Map<String,String> headerMap = httpParamDto.getHeaders();
         if(Objects.nonNull(headerMap)) {
             for (Map.Entry<String,String> entry : headerMap.entrySet()) {
                 requestBuilder.setHeader((String) entry.getKey(), (String) entry.getValue());
@@ -109,7 +109,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
         /**
          * 3.3 请求参数
          */
-        String requestParam = httpParam.getRequestParam();
+        String requestParam = httpParamDto.getRequestParam();
         if(!StringUtils.isEmpty(requestParam)){
             HttpEntity httpEntity = null;
             try {
@@ -136,7 +136,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
             /**
              * 设置延迟
              */
-            httpParam.sleep();
+            httpParamDto.sleep();
 
             httpResponse = httpclient.execute(request);
             StatusLine statusLine = httpResponse.getStatusLine();
@@ -146,7 +146,7 @@ public class HttpUtilsHttpClient implements HttpUtils {
             }
 
             log.info(" --- 分隔符 --- ");
-            String result = EntityUtils.toString(httpResponse.getEntity(),httpParam.getCharset().charset);
+            String result = EntityUtils.toString(httpResponse.getEntity(), httpParamDto.getCharset().charset);
             return result;
         } catch (Exception e) {
 

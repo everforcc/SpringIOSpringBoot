@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -63,6 +64,11 @@ public class RFileUtils {
     @SneakyThrows
     public static void writeStringToFile(String path, String content){
         FileUtils.writeStringToFile(new File(path),content, CharsetsConstant.UTF_8);
+    }
+
+    @SneakyThrows
+    public static String byteCountToDisplaySize(final BigInteger size){
+        return FileUtils.byteCountToDisplaySize(size);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.cc.sp90utils.http;
+package com.cc.sp90utils.http.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cc.sp90utils.commons.lang.RRandomUtils;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HttpParam {
+public class HttpParamDto {
 
     /**
      * 最基本的要个url

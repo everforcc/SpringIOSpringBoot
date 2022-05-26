@@ -1,23 +1,17 @@
 package baidu.ocr;
 
 import com.cc.sp90utils.commons.io.RFileUtils;
-import com.cc.sp90utils.http.HttpParam;
-import com.cc.sp90utils.http.HttpUtils;
-import com.cc.sp90utils.http.impl.HttpUtilsURLConnection;
+import com.cc.sp90utils.http.dto.HttpParamDto;
+import com.cc.sp90utils.http.IHttp;
+import com.cc.sp90utils.http.impl.IHttpURLConnection;
 import org.json.JSONObject;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 获取token类
  */
 public class AuthService {
 
-    private static HttpUtils httpUtils  =new HttpUtilsURLConnection();
+    private static IHttp IHttp =new IHttpURLConnection();
 
     public static void main(String[] args) {
         System.out.println(getAuth(BDConstant.APP_ID,BDConstant.SECRET_KEY));
@@ -48,9 +42,9 @@ public class AuthService {
                 + "&client_secret=" + sk;
         try {
 
-            HttpParam httpParam = new HttpParam();
-            httpParam.setUrl(getAccessTokenUrl);
-            String result = httpUtils.requestForMsg(httpParam);
+            HttpParamDto httpParamDto = new HttpParamDto();
+            httpParamDto.setUrl(getAccessTokenUrl);
+            String result = IHttp.requestForMsg(httpParamDto);
 
 //            URL realUrl = new URL(getAccessTokenUrl);
 //            // 打开和URL之间的连接

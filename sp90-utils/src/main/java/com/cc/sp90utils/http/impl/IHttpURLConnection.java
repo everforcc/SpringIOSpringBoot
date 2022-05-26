@@ -2,8 +2,8 @@ package com.cc.sp90utils.http.impl;
 
 import com.cc.sp90utils.commons.lang.RObjectsUtils;
 import com.cc.sp90utils.enums.HttpTypeEnum;
-import com.cc.sp90utils.http.HttpParam;
-import com.cc.sp90utils.http.HttpUtils;
+import com.cc.sp90utils.http.dto.HttpParamDto;
+import com.cc.sp90utils.http.IHttp;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,33 +15,33 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 
-public class HttpUtilsURLConnection implements HttpUtils {
+public class IHttpURLConnection implements IHttp {
 
     public static void main(String[] args) {
-        HttpParam httpParam = new HttpParam();
+        HttpParamDto httpParamDto = new HttpParamDto();
 
-        httpParam.setUrl("https://www.baidu.com/");
+        httpParamDto.setUrl("https://www.baidu.com/");
         //httpParam.setCharset(charset);
-        httpParam.setHttpTypeEnum(HttpTypeEnum.GET);
-        httpParam.setTimeout(600);
+        httpParamDto.setHttpTypeEnum(HttpTypeEnum.GET);
+        httpParamDto.setTimeout(600);
         //requestForMsg(httpParam);
     }
 
-    public String requestForMsg( HttpParam httpParam) {
+    public String requestForMsg( HttpParamDto httpParamDto) {
 
         URL url = null;
         StringBuffer stringBuffer = new StringBuffer();
         try {
-            url = new URL(httpParam.getUrl());
+            url = new URL(httpParamDto.getUrl());
             URLConnection urlConnection = url.openConnection();
             HttpURLConnection httpURLConnection = (HttpURLConnection) urlConnection;
 
             //可以设置请求类型等
-            HttpTypeEnum httpTypeEnum = httpParam.getHttpTypeEnum();
+            HttpTypeEnum httpTypeEnum = httpParamDto.getHttpTypeEnum();
             if(RObjectsUtils.nonNull(httpTypeEnum)){
                 httpURLConnection.setRequestMethod(httpTypeEnum.type);//请求类型
             }
-            Map<String,String> headersMap = httpParam.getHeaders();
+            Map<String,String> headersMap = httpParamDto.getHeaders();
             if(Objects.nonNull(headersMap)) {
                 for(Map.Entry<String,String> entry:headersMap.entrySet()) {
                     httpURLConnection.setRequestProperty(entry.getKey(), entry.getValue());//请求头设置
