@@ -1,7 +1,7 @@
 package com.cc.sp90utils.http.vo;
 
-import cn.cc.dawn.utils.enums.impl.FileMediumEnum;
-import cn.cc.dawn.utils.enums.impl.FileTypeEnum;
+import com.cc.sp90utils.enums.impl.FileMediumEnum;
+import com.cc.sp90utils.enums.impl.FileTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

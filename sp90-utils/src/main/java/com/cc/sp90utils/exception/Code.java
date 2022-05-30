@@ -4,7 +4,7 @@ package com.cc.sp90utils.exception;
 public enum Code implements ICode {
     A00000("成功"),
     A00001("失败"),
-
+    A00004("失败"),
     ;
     /**
      * 枚举属性说明

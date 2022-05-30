@@ -14,6 +14,9 @@ public class ISevenUtilsTest {
     private static String newPathFILE = "E:\\filesystem\\test\\7z\\newfile";
     private static String newPathDIR = "E:\\filesystem\\test\\7z\\newdir";
 
+    /**
+     * 压缩指定目录的所有文件
+     */
     @Test
     public void compress(){
 
@@ -30,6 +33,24 @@ public class ISevenUtilsTest {
          */
         iSevenUtils.compress(password,path,newPathFILE, FileTypeCMDEnum.z7, CompressEnum.FILE);
         iSevenUtils.compress(password,path,newPathDIR, FileTypeCMDEnum.z7, CompressEnum.DIR);
+    }
+
+    /**
+     * 压缩单个文件
+     */
+    @Test
+    public void compressOneFile(){
+        iSevenUtils.compress(password,path,newPathFILE, FileTypeCMDEnum.z7, CompressEnum.FILE);
+        iSevenUtils.compress(password,path,newPathDIR, FileTypeCMDEnum.z7, CompressEnum.DIR);
+    }
+
+    @Test
+    public void deCompressOneFile(){
+        String pas = "99";
+        String oldPath = "F:\\Cache\\java\\巧克力与香子兰番外.zip";
+        String newPath = "F:\\Cache\\java\\解压";
+        iSevenUtils.deCompression(pas, oldPath, newPath);
+
     }
 
 }

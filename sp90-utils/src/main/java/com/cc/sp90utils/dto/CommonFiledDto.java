@@ -1,10 +1,11 @@
 package com.cc.sp90utils.dto;
 
-import cn.cc.dawn.utils.commons.codec.JUUIDUtils;
-import cn.cc.dawn.utils.enums.impl.StatusEnum;
-import cn.cc.dawn.utils.i.valited.IUpdate;
+
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.cc.sp90utils.commons.codec.JUUIDUtils;
+import com.cc.sp90utils.enums.impl.StatusEnum;
+import com.cc.sp90utils.i.valited.IUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

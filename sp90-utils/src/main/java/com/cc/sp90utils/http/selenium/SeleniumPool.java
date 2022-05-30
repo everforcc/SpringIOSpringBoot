@@ -1,6 +1,6 @@
 package com.cc.sp90utils.http.selenium;
 
-import cn.cc.dawn.utils.commons.lang.RObjectsUtils;
+import com.cc.sp90utils.commons.lang.RObjectsUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

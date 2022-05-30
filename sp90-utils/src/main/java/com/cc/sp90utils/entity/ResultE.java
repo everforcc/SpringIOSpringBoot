@@ -1,12 +1,13 @@
 package com.cc.sp90utils.entity;
 
-import cn.cc.dawn.utils.constant.HttpHeadersConstant;
-import cn.cc.dawn.utils.constant.NumberConstant;
-import cn.cc.dawn.utils.exception.Code;
-import cn.cc.dawn.utils.exception.ICode;
-import cn.cc.dawn.utils.exception.UserException;
-import cn.cc.dawn.utils.i.ICall;
+
 import com.alibaba.fastjson.JSON;
+import com.cc.sp90utils.constant.HttpHeadersConstant;
+import com.cc.sp90utils.constant.NumberConstant;
+import com.cc.sp90utils.exception.Code;
+import com.cc.sp90utils.exception.ICode;
+import com.cc.sp90utils.exception.UserException;
+import com.cc.sp90utils.i.ICall;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

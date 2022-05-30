@@ -35,6 +35,18 @@ public class SevenUtilsCMD implements ISevenUtils {
         recursionFile(path,path,newPath,pas,fileTypeCMDEnum,compressEnum);
     }
 
+    @Override
+    public void deCompression(String pas, String oldPath, String newPath) {
+
+        String cmd = String.format(CompressConstant.deCompressionCommand,
+                oldPath,
+                newPath,
+                pas);
+        System.out.println("cmd: " + cmd);
+        String result = CmdUtils.execRuntime(cmd);
+        System.out.println("执行结果: " + result);
+    }
+
     private static void recursionFile(String path,String oldPath,String newPath, String pas, FileTypeCMDEnum fileTypeCMDEnum, CompressEnum compressEnum){
         File file = new File(path);
         // 获取该文件夹下的所有文件

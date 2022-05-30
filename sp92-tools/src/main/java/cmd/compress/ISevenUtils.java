@@ -9,4 +9,12 @@ public interface ISevenUtils {
 
     void compress(String pas, String path, String initPath, FileTypeCMDEnum fileTypeCMDEnum, CompressEnum compressEnum);
 
+    /**
+     *
+     * @param pas
+     * @param oldPath
+     * @param newPath
+     */
+    void deCompression(String pas, String oldPath, String newPath);
+
 }
