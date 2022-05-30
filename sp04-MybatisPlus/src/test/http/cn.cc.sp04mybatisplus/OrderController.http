@@ -1,0 +1,15 @@
+###
+GET http://localhost:8080/plus/tbase
+Accept: application/json
+
+###
+GET http://localhost:8080/plus/tSqlSession
+Accept: application/json
+
+###
+GET http://localhost:8080/plus/tDaoSelect/用户名
+Accept: application/json
+
+###
+GET http://localhost:8080/plus/tDaoPage/用户名/2/2
+Accept: application/json
