@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceAspect extends ServiceAspectImpl {
 
-    @Before("execution(* com.cc.sp10aop..*.service..*.save(..))")
+    @Before("execution(* com.cc.sp10aop..*.service..*.save*(..))")
     public void beforeSave(final JoinPoint joinPoint) {
-        save(joinPoint);
+        //save(joinPoint);
+        log.info("进入aop");
     }
 
 }

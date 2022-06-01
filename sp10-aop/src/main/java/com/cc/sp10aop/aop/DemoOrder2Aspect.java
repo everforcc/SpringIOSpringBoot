@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DemoOrder2Aspect {
 
-    @Pointcut(value = "execution(public String com.cc.sp10aop.business.flow.service.FlowService.testFlow(..))")
+    @Pointcut(value = "execution(public String com.cc.sp10aop.business.flow.service.impl.FlowService.testFlow(..))")
     public void pointcut() {}
 
     @Before("pointcut()")
