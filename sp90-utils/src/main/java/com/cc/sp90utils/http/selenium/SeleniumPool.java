@@ -11,6 +11,11 @@ import java.util.List;
 @Slf4j
 public class SeleniumPool {
 
+    /* spring中使用 ，需要将
+        getInstantce
+        destory
+        注册到bean，在初始化的时候初始化，在结束前，关闭驱动
+     */
 
     private static Object lock = new Object();
     private static List<WebDriverPDto> activityDriver = new ArrayList<>();
@@ -109,6 +114,12 @@ public class SeleniumPool {
                 leaveDriver.add(webDriverPDto);
             }
         }
+    }
+
+    /* 清空所有的驱动 */
+    public void destory(){
+        leaveDriver.forEach(WebDriverPDto::quit);
+        activityDriver.forEach(WebDriverPDto::quit);
     }
 
     private class SeleniumPoolCheckP extends Thread{

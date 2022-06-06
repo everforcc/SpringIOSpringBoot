@@ -14,9 +14,9 @@ public class WebDriverPDto {
         return index;
     }
 
-    /*public WebDriver getWebDriver() {
+    public WebDriver getWebDriver() {
         return webDriver;
-    }*/
+    }
 
     protected WebDriverPDto() {
     }
@@ -39,6 +39,9 @@ public class WebDriverPDto {
         log.info("创建webDriver: 坐标:{} 驱动类型{}",index,webDriver.getClass());
     }
 
-
+    public void quit(){
+        webDriver.quit();
+        log.info("关闭webDriver: 坐标:{} ",index);
+    }
 
 }

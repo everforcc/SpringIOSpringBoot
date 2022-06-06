@@ -78,4 +78,10 @@ public interface ICode {
         }
     }
 
+    default void assertNonNull(final Object value, final String exps, final Object... args) {
+        if(RObjectsUtils.isNull(value)){
+            throw toUserException(exps, args);
+        }
+    }
+
 }

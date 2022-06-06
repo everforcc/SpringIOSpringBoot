@@ -57,10 +57,19 @@
 
         <com.baidu.aip.java-sdk>4.12.0</com.baidu.aip.java-sdk>
         <org.testng.testng>RELEASE</org.testng.testng>
+        <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
+
+        <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>sp90-utils</artifactId>
+                <version>${cn.cc.utils}</version>
+            </dependency>
 
             <!-- spirng -->
             <dependency>
@@ -241,6 +250,12 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${org.testng.testng}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bytedeco</groupId>
+                <artifactId>javacv-platform</artifactId>
+                <version>${org.bytedeco.javacv.platform}</version>
             </dependency>
 
         </dependencies>
