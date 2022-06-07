@@ -3,7 +3,10 @@
 ### ocr
 
 - [首页](https://console.bce.baidu.com/ai/?fromai=1#/ai/ocr/app/detail~appId=1384361)
-- [java-sdk](https://ai.baidu.com/ai-doc/OCR/Ikibizxql)
+- [接入指南](https://ai.baidu.com/ai-doc/REFERENCE/Ck3dwjgn3)
+- [API-文档](https://ai.baidu.com/ai-doc/OCR/Ck3h7y2ia)
+- [HTTP-SDK-java](https://ai.baidu.com/ai-doc/OCR/Ikibizxql)
+- [免费测试资源](https://ai.baidu.com/ai-doc/OCR/fk3h7xu7h)
 
 ### token有效期
 
