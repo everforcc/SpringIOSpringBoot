@@ -1,0 +1,61 @@
+### msg
+### menu
+### content
+### 1. 获取小说基本信息
+POST http://localhost:31/novel/msg
+Content-Type: application/json
+
+{
+  "url": "",
+  "config":
+  {
+    "novelMsgTileXR": "",
+    "novelMsgDescriptionXR": "",
+    "novelMsgAuthXR": ""
+  }
+}
+
+### 2. 获取全部目录
+###
+POST http://localhost:31/novel/menu
+Content-Type: application/json
+
+{
+  "url": "",
+  "config":
+  {
+    "novelMsgTileXR": "",
+    "novelMsgDescriptionXR": "",
+    "novelMsgAuthXR": "",
+    "novelCapterMenuXR": "",
+    "novelCapterUrlListXR": "",
+    "novelCapterPageNextUrlXR": "",
+    "novelCapterNameXR": "",
+    "novelContentUrlPageXR": "",
+    "novelContentXRFlowList": [
+      ""
+    ]
+  }
+}
+
+### 3. 内容
+POST http://localhost:31/novel/content
+Content-Type: application/json
+
+{
+  "url": "",
+  "config":
+  {
+    "novelCapterNameXR": "",
+    "novelContentUrlPageXR": "",
+    "novelContentXRFlowList": [
+      "",
+      ""
+    ]
+  }
+}
+
+### https://www.wenku8.net/book/2632.htm
+### https://www.wenku8.net/book/1973.htm
+### //div[@id='content']//tr[@align='center']//td//table//tbody//tr//td//span//b//@text()
+### //div[@id='content']//tr[@align='center']//tr//td[1]//b//text()
