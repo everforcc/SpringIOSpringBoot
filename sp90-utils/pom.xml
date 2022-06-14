@@ -114,6 +114,11 @@
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv-platform</artifactId>
         </dependency>
+        <!-- 更方便的使用 tess4j 大概-->
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+        </dependency>
 
     </dependencies>
 
