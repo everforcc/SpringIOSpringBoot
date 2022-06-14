@@ -58,6 +58,7 @@
         <com.baidu.aip.java-sdk>4.12.0</com.baidu.aip.java-sdk>
         <org.testng.testng>RELEASE</org.testng.testng>
         <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
+        <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
 
         <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
     </properties>
@@ -257,6 +258,12 @@
                 <artifactId>javacv-platform</artifactId>
                 <version>${org.bytedeco.javacv.platform}</version>
             </dependency>
+            <dependency>
+                <groupId>net.sourceforge.tess4j</groupId>
+                <artifactId>tess4j</artifactId>
+                <version>${net.sourceforge.tess4j}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
