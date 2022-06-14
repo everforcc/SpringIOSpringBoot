@@ -30,8 +30,9 @@ public interface INovelCommonFlowService {
      *
      * @param url 章节地址
      * @param novelConfigDto 配置信息
+     * @param novelMsgDto
      * @return 章节内容
      */
-    NovelContentDto getContent(String url, NovelConfigDto novelConfigDto);
+    NovelContentDto getContent(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto);
 
 }

@@ -12,6 +12,7 @@
 package cn.cc.sp31usercraw.business;
 
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
+import com.cc.sp90utils.http.selenium.WebDriverPDto;
 
 /**
  * 处理特殊网站，通用接口无法完全处理的问题
@@ -31,7 +32,11 @@ public interface IBusiness {
      * @param novelConfigDto 配置信息
      * @return
      */
-    String endCondition(String pageSource, NovelConfigDto novelConfigDto);
+    default String endCondition(String pageSource, NovelConfigDto novelConfigDto){
+        return pageSource;
+    }
+
+    String endCondition(String pageSource, NovelConfigDto novelConfigDto, WebDriverPDto webDriverPDto, String linkText);
 
     /**
      * 如果结果是正确的页面,进行降噪处理

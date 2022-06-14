@@ -25,7 +25,7 @@ public class NovelCommonFlowServiceTests {
     void getContent(){
         String url = "https://www.wenku8.net/novel/1/1973/75974.htm";
         NovelConfigDto novelConfigDto = new NovelConfigDto();
-        NovelContentDto novelContentDto = iNovelCommonFlowService.getContent(url, novelConfigDto);
+        NovelContentDto novelContentDto = iNovelCommonFlowService.getContent(url, novelConfigDto, null);
         System.out.println(novelConfigDto.toString());
     }
 

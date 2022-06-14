@@ -42,15 +42,15 @@ public class NovelServiceImpl implements INovelService {
         List<String> novelCapterUrlList = novelMsgDto.getNovelCapterUrlList();
         for(String capterUrl: novelCapterUrlList){
             log.info("即将获取章节地址 [{}]", capterUrl);
-            iNovelCommonFlowService.getContent(capterUrl, novelConfigDto);
+            iNovelCommonFlowService.getContent(capterUrl, novelConfigDto, novelMsgDto);
         }
         log.info("获取完成 [{}]", url);
         return novelMsgDto;
     }
 
     @Override
-    public NovelContentDto getContent(String url, NovelConfigDto novelConfigDto) {
-        return iNovelCommonFlowService.getContent(url, novelConfigDto);
+    public NovelContentDto getContent(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto) {
+        return iNovelCommonFlowService.getContent(url, novelConfigDto, novelMsgDto);
     }
 
 

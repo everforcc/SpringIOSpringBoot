@@ -10,5 +10,5 @@ public interface INovelService {
 
     NovelMsgDto getMenu(String url, NovelConfigDto novelConfigDto);
 
-    NovelContentDto getContent(String url, NovelConfigDto novelConfigDto);
+    NovelContentDto getContent(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto);
 }

@@ -11,6 +11,7 @@
 
 package cn.cc.sp31usercraw.flow.impl;
 
+import cn.cc.sp31usercraw.business.IBusiness;
 import cn.cc.sp31usercraw.constant.FileConstant;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.dto.NovelContentDto;
@@ -33,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -45,8 +47,15 @@ import java.util.Set;
 @Service
 public class NovelCommonFlowService implements INovelCommonFlowService {
 
+    /**
+     * web驱动池
+     */
     @Autowired
     SeleniumPool seleniumPool;
+
+    // 数据处理的实现接口
+    @Resource(name = "businessDefault")
+    IBusiness iBusiness;
 
     /**
      * 根据小说页链接 获取小说基本信息
@@ -174,12 +183,12 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
      * 根据章节链接，上个接口返回的信息，
      * 获取内容信息
      *
-     * @param url 章节地址
+     * @param url            章节地址
      * @param novelConfigDto 配置信息
      * @return 章节内容
      */
     @Override
-    public NovelContentDto getContent(String url, NovelConfigDto novelConfigDto) {
+    public NovelContentDto getContent(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto) {
         log.info("准备获取小说章节地址");
         AppCode.A00100.assertNonNull(novelConfigDto, "小说配置不能为空");
         AppCode.A00100.assertNonNull(url, "小说地址不能为空");
@@ -209,18 +218,10 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
         // 不需要分页
         if (StringUtils.isEmpty(novelContentUrlPageXR)) {
             // 3.1 解析出内容的正则，并从网页中获取数据
-
-            // 获取页面数据
-            do {
-                content = getContentByRegex(novelContentXR, pageSource, novelContentXRFlowList);
-            } while (content.contains("Notice"));
-
+            // 如果不分页，那么当前页html就是本章的html
+            content = pageSource;
             novelContentDto.setContent(content);
-
         } else {
-            // 需要分页
-            List<String> linkTextList = XSoupUtils.htmlToList(pageSource, novelContentUrlPageXR);
-            // 内容分页
             /**
              * 1. http请求
              * 1.1. 完整地址
@@ -235,122 +236,48 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
              *
              * 当前使用2.2
              */
+
+            // 需要分页,分页的点击超链接集合
+            List<String> linkTextList = XSoupUtils.htmlToList(pageSource, novelContentUrlPageXR);
             log.info("小说一共有 {} 页", linkTextList.size());
             for (String linkText : linkTextList) {
-                log.info("按钮名, {}", linkText);
-                do {
-                    WebSiteDataVO clickLinkTextData = webDriverPDto.clickLinkText(linkText);
-                    pageSource = clickLinkTextData.getPageSource();
-
-                    // 获取页面数据
-                    content = getContentByRegex(novelContentXR, pageSource, novelContentXRFlowList);
-                    // 这个位置要修改为 配置，表示网页限制，再次请求
-                    //log.info("小说章节内容是 {} : {}", linkText, content);
-                } while (content.contains("Notice"));
-
+                log.info("点击按钮名, {}", linkText);
+                // 获取页面数据
+                content = iBusiness.endCondition(pageSource, novelConfigDto, webDriverPDto, linkText);
+                //log.info("小说章节内容是 {} : {}", linkText, content);
                 stringBuffer.append(content);
             }
             // 合并分页数据
             content = stringBuffer.toString();
         }
-
+        // 网页根地址
         String rootUrl = HttpParamUtils.getRootUrl(url);
         //
         /**
          * 1. 处理html各种标签
          * 2. 图片等
          */
-        RFileUtils.writeStringToFile(FileConstant.fileRoot + novelCapterName + "-html.txt", content);
-        content = dealContent(content, rootUrl);
-        RFileUtils.writeStringToFile(FileConstant.fileRoot + novelCapterName + ".txt", content);
+        String title = novelMsgDto.getTitle();
+        log.info("正在保存小说: 《{}》", title);
+        RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/html/"
+                + novelCapterName + "-html.txt", content);
+        // 对内容降噪处理
+        content = iBusiness.dealContent(content, rootUrl);
+
+        RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/"
+                + novelCapterName + ".txt", content);
         novelContentDto.setContent(content);
 
         seleniumPool.close(webDriverPDto);
         return novelContentDto;
     }
 
-    private static String getContentByRegex(String novelContentXR, String pageSource, List<String> novelContentXRFlowList) {
-        String content = null;
-        if (RStringUtils.isNotEmpty(novelContentXR)) {
-            content = XSoupUtils.htmlToStr(pageSource, novelContentXR);
-        } else if (RObjectsUtils.nonNull(novelContentXRFlowList)) {
-            for (String regex : novelContentXRFlowList) {
-                content = XSoupUtils.htmlToStr(pageSource, regex);
-                if (RStringUtils.isNotEmpty(content)) {
-                    break;
-                }
-            }
-
-        } else {
-            throw new RuntimeException("必须配置小说内容正则");
-        }
-        return content;
-    }
-
-    /**
-     * 需要优化
-     * 这个需要单独拿出来，写个通用的，然后复杂的网站特殊处理
-     *
-     * @param content
-     * @return
-     */
-    public static String dealContent(String content, String rootUrl) {
-        log.info("rootUrl: [{}]", rootUrl);
-
-        /**
-         * 将所有的换行处理为空
-         * 最后根据br来换行
-         */
-        content = content.replace("\n", "")
-                .replace("\r\n", "");
-        // 删除 标签之间的 空白字符
-        //content = content.replaceAll(">(\\s)*?<","");
-        content = content.replaceAll(">\\s+<","><");
-
-        // 将图片替换为文字
-        // 1. xsoup匹配出所有的图片
-        List<String> imgList = XSoupUtils.htmlToList(content, "//img");
-        // 2. 对图片进行保存和识别
-        // <img src="/toimg/data/0744208851.png">
-        Set<String> stringSet = new HashSet<>(imgList);
-        for(String imgUrl:stringSet){
-            log.info("imgUrl [{}]", imgUrl);
-            String urlPath = imgUrl
-                    .replace("<img src=\"","")
-                    .replace("\">","");
-            log.info("urlPath [{}]", urlPath);
-            // 3. 将图片替换为文字
-            String result = CharsetOCR.ocr(rootUrl + urlPath);
-
-            //  处理前后带空格的这些情况
-            content = content.replaceAll("\n " + imgUrl + " \n", result);
-            content = content.replaceAll("\n " + imgUrl + " ", result);
-            content = content.replaceAll("\n " + imgUrl, result);
-            content = content.replaceAll(" " + imgUrl, result);
-            content = content.replaceAll(imgUrl, result);
-
-        }
-
-        // 换行，处理掉 &nbsp 空格
-        content = content.replace("<br><br>", "\n")
-                .replace("<br>", "\n")
-                .replace("\n\n","")
-                .replace("&nbsp;", " ");
-        // 使用非贪婪模式处理调 <div>块
-        content = content.replaceAll("</div>","")
-                         .replaceAll("<div .*?>","");
-
-        // 最后处理玩给所有的换行加一行
-        content = content.replaceAll("\n","\n\n");
-        return content;
-    }
-
     public static void main(String[] args) {
         String content = "<div class=\"chapterinfo\" id=\"chapterinfo\">       2022年06月14日  " +
                 "a123" +
-                " </div>  <img src=\"/toimg/data/0990372354.png\">\n" +
-                " <img src=\"/toimg/data/7808420336.png\">风";
-        content = content.replaceAll(">\\s+<","><");
+                " </div>  <img src=\"/data/0990372354.png\">\n" +
+                " <img src=\"/data/7808420336.png\">风";
+        content = content.replaceAll(">\\s+<", "><");
 //        content = content.replaceAll("</div>","")
 //                .replaceAll("<div .*?>","");
 

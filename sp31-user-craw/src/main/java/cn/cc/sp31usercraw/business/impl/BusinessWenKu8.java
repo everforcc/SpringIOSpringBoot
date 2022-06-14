@@ -13,15 +13,18 @@ package cn.cc.sp31usercraw.business.impl;
 
 import cn.cc.sp31usercraw.business.IBusiness;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
+import com.cc.sp90utils.http.selenium.WebDriverPDto;
 import org.springframework.stereotype.Service;
 
 /**
- * 某个业务的实现类
+ * wenku8的实现类
+ * https://www.wenku8.net/novel/1/1973/75974.htm
  */
-@Service("businessDYBZ")
-public class BusinessDYBZ implements IBusiness {
+@Service("businessWenKu")
+public class BusinessWenKu8 implements IBusiness {
+
     @Override
-    public String endCondition(String pageSource, NovelConfigDto novelConfigDto) {
+    public String endCondition(String pageSource, NovelConfigDto novelConfigDto, WebDriverPDto webDriverPDto, String linkText) {
         return null;
     }
 
