@@ -273,7 +273,6 @@
                 <version>${net.sourceforge.tess4j}</version>
             </dependency>
 
-
         </dependencies>
     </dependencyManagement>
 
