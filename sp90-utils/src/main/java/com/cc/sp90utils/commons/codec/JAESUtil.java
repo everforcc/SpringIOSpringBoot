@@ -159,13 +159,13 @@ public class JAESUtil {
         return "{AES}" + aes_encrypt(str, strKey);
     }
 
-    public static void main(String[] args) {
-        String aeskey = "ABCDEFGHIJABCDEF";
-        String str = "abcde";
-        String str_enc = aes_encrypt(str, aeskey);
-        log.info("str_enc: {}", str_enc);
-        String str_dec = aes_decrypt(str_enc, aeskey);
-        log.info("str_dec: {}", str_dec);
-    }
+//    public static void main(String[] args) {
+//        String aeskey = "ABCDEFGHIJABCDEF";
+//        String str = "abcde";
+//        String str_enc = aes_encrypt(str, aeskey);
+//        log.info("str_enc: {}", str_enc);
+//        String str_dec = aes_decrypt(str_enc, aeskey);
+//        log.info("str_dec: {}", str_dec);
+//    }
 
 }

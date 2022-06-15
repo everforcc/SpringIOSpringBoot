@@ -45,11 +45,11 @@ public class OCRUtils {
         return OcrTess.simple_OCR_UTF_8(filePath);
     }
 
-    public static void main(String[] args) {
-        String picStr = "E:\\filesystem\\project\\SpringIOSpringBoot\\sp31-user-craw\\test\\";
-        String fileName = "8637348340.png";
-        String result = ocrSimpleDealLucency(picStr, fileName);
-        System.out.println("result: " + result);
-    }
+//    public static void main(String[] args) {
+//        String picStr = "E:\\filesystem\\project\\SpringIOSpringBoot\\sp31-user-craw\\test\\";
+//        String fileName = "8637348340.png";
+//        String result = ocrSimpleDealLucency(picStr, fileName);
+//        System.out.println("result: " + result);
+//    }
 
 }

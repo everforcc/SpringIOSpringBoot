@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>cn.cc</groupId>
     <artifactId>SpringIOSpringBoot</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -17,7 +24,7 @@
 <!--        <module>sp20-comp</module>-->
 <!--        <module>sp21-jdk</module>-->
         <!-- jar使用 -->
-        <module>sp30-user-craw</module>
+        <module>sp31-user-craw</module>
         <module>sp90-utils</module>
         <module>sp91-test</module>
         <module>sp92-tools</module>
@@ -29,6 +36,8 @@
 
     <!--统一管理jar包版本-->
     <properties>
+        <spring.boot>2.2.2.RELEASE</spring.boot>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -76,7 +85,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.2.2.RELEASE</version>
+                <version>${spring.boot}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

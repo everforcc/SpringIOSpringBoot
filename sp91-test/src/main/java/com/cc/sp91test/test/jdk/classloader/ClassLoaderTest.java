@@ -75,6 +75,9 @@ public class ClassLoaderTest {
 
     }
 
+    /**
+     * 加载其他项目的代码，但是要带个jar
+     */
     private static void jarClassLoader() {
         // 1. 原始路径,但是加载需要把类放到loadClass参数
         String RFileUtilsUrl = "file:" + "D:\\java\\code\\github\\OneForAll\\target\\classes\\";

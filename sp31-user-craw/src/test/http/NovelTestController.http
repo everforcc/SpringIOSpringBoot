@@ -2,22 +2,27 @@
 ### menu
 ### content
 ### 1. 获取小说基本信息
-POST http://localhost:31/novel/msg
+POST http://localhost:31/test/msg
 Content-Type: application/json
 
 {
-  "url": "",
+  "url": "https://www.wenku8.net/book/2632.htm",
   "config":
   {
-    "novelMsgTileXR": "",
-    "novelMsgDescriptionXR": "",
-    "novelMsgAuthXR": ""
+    "novelMsgTileXR": "//div[@id='content']//tr[@align='center']//tr//td[1]//b//text()",
+    "novelMsgDescriptionXR": "//div[@id='content']//table[2]//span[6]//text()",
+    "novelMsgAuthXR": "//div[@id='content']//tr[2]//td[2]//text()",
+    "novelCapterMenuXR": "//div[@id='content']//div[1]//div[4]//fieldset[1]//a//@href",
+    "novelCapterNameListXR": "",
+    "novelCapterUrlListXR": "//tbody//td[@class='ccss']//a//@href",
+    "novelContentXR": "//div[@id='content']",
+    "novelContentUrlPageXR": "//div[@id='foottext']//a/@href/regex('[0-9]{1,10}.htm')//text()"
   }
 }
 
 ### 2. 获取全部目录
 ###
-POST http://localhost:31/novel/menu
+POST http://localhost:31/test/menu
 Content-Type: application/json
 
 {
@@ -39,7 +44,7 @@ Content-Type: application/json
 }
 
 ### 3. 内容
-POST http://localhost:31/novel/content
+POST http://localhost:31/test/content
 Content-Type: application/json
 
 {

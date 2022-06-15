@@ -59,7 +59,4 @@ public enum CharsetsEnum {
         this.charset = charset;
     }
 
-    public static void main(String[] args) {
-
-    }
 }

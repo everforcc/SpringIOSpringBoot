@@ -13,8 +13,4 @@ public enum HttpTypeEnum {
         this.type = type;
     }
 
-    public static void main(String[] args) {
-        System.out.println(HttpTypeEnum.GET.type);
-    }
-
 }

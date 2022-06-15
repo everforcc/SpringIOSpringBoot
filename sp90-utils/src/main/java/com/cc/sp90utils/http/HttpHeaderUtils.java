@@ -38,9 +38,4 @@ public class HttpHeaderUtils {
         return URLDecoder.decode(fileName, CharsetsEnum.UTF_8.charset.toString());
     }
 
-    public static void main(String[] args) {
-        String content_dispositon = "attachment;filename=\"中文.mp4\"";
-        System.out.println(contentDispositionToFileName(content_dispositon));
-    }
-
 }

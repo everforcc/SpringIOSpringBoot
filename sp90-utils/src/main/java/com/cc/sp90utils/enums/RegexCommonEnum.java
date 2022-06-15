@@ -56,8 +56,4 @@ public enum RegexCommonEnum {
 //        this.errormsg = errormsg;
 //    }
 
-    public static void main(String[] args) {
-        System.out.println(RegexCommonEnum.FILE_NAME_P.regex());
-        System.out.println(RegexCommonEnum.FILE_NAME_P.errormsg());
-    }
 }

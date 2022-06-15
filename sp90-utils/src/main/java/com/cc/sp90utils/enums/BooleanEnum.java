@@ -12,9 +12,4 @@ public enum BooleanEnum {
         this.flag = flag;
     }
 
-    public static void main(String[] args) {
-        System.out.println(BooleanEnum.TRUE.flag);
-        System.out.println(BooleanEnum.FALSE.flag);
-    }
-
 }

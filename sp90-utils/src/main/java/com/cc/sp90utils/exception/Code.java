@@ -20,8 +20,4 @@ public enum Code implements ICode {
         return this.comment;
     }
 
-    public static void main(String[] args) {
-
-    }
-
 }

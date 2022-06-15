@@ -21,11 +21,6 @@ public class JsoupUtils {
      * 也不知道是我没找好api
      */
 
-    public static void main(String[] args) {
-        String url = "";
-        connect(url, CharsetsEnum.UTF_8.charset.toString(),null);
-    }
-
     /**
      *  请求地址，请求头，编码
      * @param targetUrl url
