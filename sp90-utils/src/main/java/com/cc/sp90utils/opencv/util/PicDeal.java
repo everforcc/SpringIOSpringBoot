@@ -44,7 +44,7 @@ public class PicDeal {
             throw new RuntimeException("图片问题识别，未处理情况");
         }
         changeImageBackground(picStr, fileName, newFileName);
-        return picStr + newFileName;
+        return newFileName;
     }
 
     /**
@@ -58,7 +58,7 @@ public class PicDeal {
 
         try {
             // 1. 读取图片
-            InputStream in = new FileInputStream(picStr + fileName);
+            InputStream in = new FileInputStream(picStr + File.separator + fileName);
             BufferedImage srcImage = ImageIO.read(in);
 
             // 2. 获取图片高宽
@@ -93,13 +93,14 @@ public class PicDeal {
             ImageIO.write(outImage, "jpg", os);
 
             @Cleanup
-            OutputStream outputStream = new FileOutputStream(picStr + newFileName);
+            OutputStream outputStream = new FileOutputStream(picStr + File.separator + newFileName);
             os.writeTo(outputStream);
 
             // 也可以拿到byte处理
             //byte[] bytes = os.toByteArray();
         } catch (IOException e) {
             log.info("ocr 将str转化io异常:");
+            e.printStackTrace();
             throw new RuntimeException("图片添加背景色异常");
         }
     }
