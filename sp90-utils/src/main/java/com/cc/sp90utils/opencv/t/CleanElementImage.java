@@ -1,10 +1,6 @@
 /**
- * Project:TODO ADD PROJECT NAME SpringIOSpringBoot
- *
  * @Description
- * @Author Author Date Description
- * ------ ------ ------
- *    TODO 开发人员邮箱前缀 调整时间 年-月-日 主要改动点>5字符
+ * @Author everforcc
  * @Date 2022-06-14 09:39
  * Copyright
  */
@@ -17,6 +13,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * [](https://www.jb51.net/article/218440.htm)
+ */
 public class CleanElementImage {
 
     public static void main(String[] args) {

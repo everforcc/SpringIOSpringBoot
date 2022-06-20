@@ -1,10 +1,6 @@
 /**
- * Project:TODO ADD PROJECT NAME SpringIOSpringBoot
- *
  * @Description
- * @Author Author Date Description
- * ------ ------ ------
- *    TODO 开发人员邮箱前缀 调整时间 年-月-日 主要改动点>5字符
+ * @Author everforcc
  * @Date 2022-05-27 11:33
  * Copyright
  */
