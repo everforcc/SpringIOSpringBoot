@@ -7,7 +7,7 @@
 
 package cn.cc.sp04mybatisplus.crud;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,9 +32,9 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectWrapperEQ(){
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         wrapper.eq("id",2L).eq("name","Jack");
-        List<User> userList = userMapper.selectList(wrapper);
+        List<MybatisPlusUser> userList = userMapper.selectList(wrapper);
         userList.forEach(System.out::println);
     }
 
@@ -43,9 +43,9 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectWrapperGt(){
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         wrapper.gt("id",1L);
-        List<User> userList = userMapper.selectList(wrapper);
+        List<MybatisPlusUser> userList = userMapper.selectList(wrapper);
         userList.forEach(System.out::println);
     }
 
@@ -54,9 +54,9 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectWrapperBetween(){
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         wrapper.between("id", 1L, 5L);
-        List<User> userList = userMapper.selectList(wrapper);
+        List<MybatisPlusUser> userList = userMapper.selectList(wrapper);
         userList.forEach(System.out::println);
     }
 
@@ -68,9 +68,9 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectWrapperLike(){
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         wrapper.like("name","o");
-        List<User> userList = userMapper.selectList(wrapper);
+        List<MybatisPlusUser> userList = userMapper.selectList(wrapper);
         userList.forEach(System.out::println);
     }
 
@@ -80,10 +80,10 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectWrapperNull(){
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         //wrapper.isNull("");
         wrapper.isNotNull("name");
-        List<User> userList = userMapper.selectList(wrapper);
+        List<MybatisPlusUser> userList = userMapper.selectList(wrapper);
         userList.forEach(System.out::println);
     }
 
@@ -92,8 +92,8 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectOrder(){
-        Page<User> page = new Page<>(1L,5L);
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        Page<MybatisPlusUser> page = new Page<>(1L,5L);
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         //wrapper.groupBy("id");
         wrapper.orderByDesc("id");
         userMapper.selectPage(page,wrapper);
@@ -105,8 +105,8 @@ public class SelectWrapperTests {
      */
     @Test
     public void selectHaving(){
-        Page<User> page = new Page<>(1L,5L);
-        QueryWrapper<User> wrapper = new QueryWrapper();
+        Page<MybatisPlusUser> page = new Page<>(1L,5L);
+        QueryWrapper<MybatisPlusUser> wrapper = new QueryWrapper();
         //wrapper.groupBy("id");
         wrapper.select("age", "COUNT(age)").groupBy("age").having("count(age) > {0}",1);
         userMapper.selectPage(page,wrapper);

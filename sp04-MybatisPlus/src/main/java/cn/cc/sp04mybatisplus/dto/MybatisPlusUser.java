@@ -15,7 +15,8 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class User {
+@TableName("cc_mybatis_plus_user")
+public class MybatisPlusUser {
 
     // id增长策略
     @TableId(type = IdType.AUTO)

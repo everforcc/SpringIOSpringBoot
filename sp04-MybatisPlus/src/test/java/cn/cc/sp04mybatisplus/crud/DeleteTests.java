@@ -7,7 +7,7 @@
 
 package cn.cc.sp04mybatisplus.crud;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class DeleteTests {
      */
     @Test
     void delete(){
-        User user = new User();
+        MybatisPlusUser user = new MybatisPlusUser();
         user.setId(1530027478620573697L);
         user.setAge(19);
         int insert = userMapper.deleteById(user);

@@ -7,7 +7,7 @@
 
 package cn.cc.sp04mybatisplus.crud;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class OptimisticLockerTests {
     @Test
     public void testOptimisticLocker(){
         // User user = userMapper.selectById(7L);
-        User user = new User();
+        MybatisPlusUser user = new MybatisPlusUser();
         user.setId(7L);
         user.setVersion(2);
         user.setEmail("1527-email");
@@ -39,11 +39,11 @@ public class OptimisticLockerTests {
 
     @Test
     public void testOptimisticLocker_2(){
-        User user = userMapper.selectById(7L);
+        MybatisPlusUser user = userMapper.selectById(7L);
         user.setId(7L);
         user.setEmail("1527-1-email");
 
-        User user2 = userMapper.selectById(7L);
+        MybatisPlusUser user2 = userMapper.selectById(7L);
         user2.setId(7L);
         user2.setEmail("1527-2-email");
         int insert2 = userMapper.updateById(user2);

@@ -8,7 +8,7 @@
 package cn.cc.sp04mybatisplus.controller;
 
 import cn.cc.sp04mybatisplus.dao.UserDao;
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import cn.cc.sp04mybatisplus.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class UserController {
 
     @GetMapping("/tbase")
     public void tBase(){
-        List<User> userList = userMapper.selectList(null);
+        List<MybatisPlusUser> userList = userMapper.selectList(null);
         log.info("共有 {} 条数据", userList.size());
     }
 
@@ -49,13 +49,13 @@ public class UserController {
      */
     @GetMapping("/tDaoSelect/{name}")
     public void tDaoSelect(@PathVariable String name){
-        List<User> userList = userDao.listUser(name);
+        List<MybatisPlusUser> userList = userDao.listUser(name);
         log.info("共有 {} 条数据", userList.size());
     }
 
     @GetMapping("/tDaoPage/{name}/{current}/{size}")
     public void tDaoPage(@PathVariable String name, @PathVariable Long current, @PathVariable Long size){
-        List<User> userList = userService.listUserPages(name, current, size);
+        List<MybatisPlusUser> userList = userService.listUserPages(name, current, size);
         log.info("共有 {} 条数据", userList.size());
     }
 

@@ -7,7 +7,7 @@
 
 package cn.cc.sp04mybatisplus.crud;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
@@ -39,9 +39,9 @@ public class SelectTests {
     void select(){
 //        List<User> userList = userMapper.selectList(null);
 //        System.out.println(userList.size());
-        User user = userMapper.selectById(1L);
+        MybatisPlusUser user = userMapper.selectById(1L);
         log.info("用户信息, {}", user);
-        List<User> userList = userMapper.selectBatchIds(Arrays.asList(1L,2l,3L));
+        List<MybatisPlusUser> userList = userMapper.selectBatchIds(Arrays.asList(1L,2l,3L));
         log.info("用户数量, {}", userList.size());
     }
 
@@ -52,7 +52,7 @@ public class SelectTests {
     public void selectByMap(){
         Map<String,Object> map = new HashMap<>();
         map.put("name", "Jone");
-        List<User> userList = userMapper.selectByMap(map);
+        List<MybatisPlusUser> userList = userMapper.selectByMap(map);
         userList.forEach(System.out::println);
     }
 
@@ -63,14 +63,14 @@ public class SelectTests {
     @Test
     public void selectPages(){
         // 当前页和页面大小
-        Page<User> page = new Page<>(1L,5L);
-        Page<User> result = userMapper.selectPage(page, null);
+        Page<MybatisPlusUser> page = new Page<>(1L,5L);
+        Page<MybatisPlusUser> result = userMapper.selectPage(page, null);
         Long total = result.getTotal();
         Long size = result.getSize();
 
         log.info("total {}", total);
         log.info("size {}", size);
-        List<User> records = result.getRecords();
+        List<MybatisPlusUser> records = result.getRecords();
 
         log.info("是否有下一页 {}", result.hasNext());
         log.info("是否有上一页 {}", result.hasPrevious());
@@ -83,7 +83,7 @@ public class SelectTests {
      */
     @Test
     public void selectList(){
-        List<User> userList = userMapper.selectList(null);
+        List<MybatisPlusUser> userList = userMapper.selectList(null);
         userList.forEach(System.out::println);
     }
 

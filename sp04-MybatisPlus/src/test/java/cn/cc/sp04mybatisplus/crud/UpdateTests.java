@@ -7,7 +7,7 @@
 
 package cn.cc.sp04mybatisplus.crud;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class UpdateTests {
      */
     @Test
     void t_orderMapper_update(){
-        User user = new User();
+        MybatisPlusUser user = new MybatisPlusUser();
         user.setId(7L);
         user.setAge(11);
 

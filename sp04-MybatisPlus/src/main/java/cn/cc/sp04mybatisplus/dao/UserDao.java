@@ -1,6 +1,6 @@
 package cn.cc.sp04mybatisplus.dao;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserDao {
 
     @Select("SELECT * FROM user WHERE NAME = #{name}")
-    List<User> listUser(String name);
+    List<MybatisPlusUser> listUser(String name);
 
     /**
      * 在用sql的同时使用 mybatis-plus 分页插件
@@ -21,13 +21,13 @@ public interface UserDao {
      * @return
      */
     @Select("SELECT * FROM user WHERE NAME = #{name}")
-    Page<User> listUserPages(String name, Page<User> userPage);
+    Page<MybatisPlusUser> listUserPages(String name, Page<MybatisPlusUser> userPage);
 
     /**
      *
      * 处理复杂sql
      */
-    Page<User> selectCondition();
+    Page<MybatisPlusUser> selectCondition();
 
     /**
      * 多行脚本用数组
@@ -37,5 +37,5 @@ public interface UserDao {
             "(id, NAME, age, email, VERSION, deleted, create_time, update_time)",
             "VALUES",
             "(#{id}, #{name}, #{age}, #{email}, #{version}, #{deleted}, #{create_time}, #{update_time})"})
-    int insert(User user);
+    int insert(MybatisPlusUser user);
 }

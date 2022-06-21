@@ -7,7 +7,7 @@
 
 package cn.cc.sp04mybatisplus.crud;
 
-import cn.cc.sp04mybatisplus.dto.User;
+import cn.cc.sp04mybatisplus.dto.MybatisPlusUser;
 import cn.cc.sp04mybatisplus.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class InsertTests {
      */
     @Test
     void t_orderMapper_insert(){
-        User user = new User();
+        MybatisPlusUser user = new MybatisPlusUser();
         user.setAge(18);
         user.setEmail("163@163.com");
         user.setName("用户名");
