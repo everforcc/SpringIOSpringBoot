@@ -1,7 +1,7 @@
 <font face="Simsun" size=3>
 
 - 数据源相关
-~~~
+~~~yml
 spring:
   datasource:
     url: jdbc:mysql://180.76.156.43:3308/oneforall?characterEncoding=UTF-8&&serverTimezone=GMT&useSSL=false # 编码和时区 &userSSL=false
