@@ -1,14 +1,14 @@
 package com.cc.sp02thymeleaf.config;
 
-import org.springframework.context.annotation.Bean;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Locale;
+import javax.annotation.PostConstruct;
 
 /**
  * 所有请求都会经过 DispatcherServlet
@@ -16,6 +16,16 @@ import java.util.Locale;
 @Configuration
 public class MyMVCConfig implements WebMvcConfigurer {
     //
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void myObjectMapper() {
+        // 解决enum不匹配问题 默认值为false
+        objectMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+        //objectMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true);
+    }
 
     /**
      * 实现视图解析器的类 ，我们就可以把他看作视图解析器

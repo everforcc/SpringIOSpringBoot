@@ -1,10 +1,6 @@
 /**
- * Project:TODO ADD PROJECT NAME SpringIOSpringBoot
- *
  * @Description
- * @Author Author Date Description
- * ------ ------ ------
- *    TODO 开发人员邮箱前缀 调整时间 年-月-日 主要改动点>5字符
+ * @Author everforcc
  * @Date 2022-06-14 22:49
  * Copyright
  */
@@ -114,6 +110,7 @@ public class BusinessDDDD implements IBusiness {
             String result = CharsetOCR.ocr(rootUrl + urlPath);
 
             //  处理前后带空格的这些情况
+            // 不需要了，最上层已经排除了所有空格换行
             content = content.replaceAll("\n " + imgUrl + " \n", result);
             content = content.replaceAll("\n " + imgUrl + " ", result);
             content = content.replaceAll("\n " + imgUrl, result);

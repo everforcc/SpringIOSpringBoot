@@ -18,7 +18,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 
         System.out.println("result: " + result);
 
-        if("true".equals(result)){
+        if(!"true".equals(result)){
             return true;
         }
         response.setContentType("text/plain;charset=utf-8");
