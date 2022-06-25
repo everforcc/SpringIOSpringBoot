@@ -13,7 +13,6 @@ import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.dto.NovelContentDto;
 import cn.cc.sp31usercraw.dto.NovelMsgDto;
 import cn.cc.sp31usercraw.flow.INovelCommonFlowService;
-import cn.cc.sp31usercraw.utils.CharsetOCR;
 import cn.cc.sp31usercraw.utils.UrlFormatUtils;
 import com.cc.sp90utils.commons.io.JFileNameUtils;
 import com.cc.sp90utils.commons.io.RFileUtils;
@@ -32,9 +31,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 处理公共的小说的流程
@@ -115,32 +112,56 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
      * @return 小说目录集合
      */
     @Override
-    public NovelMsgDto getMenu(String url, NovelConfigDto novelConfigDto) {
+    public NovelMsgDto getMenu(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto) {
         log.info("准备获取小说章节地址");
         AppCode.A00100.assertNonNull(novelConfigDto, "小说配置不能为空");
         AppCode.A00100.assertNonNull(url, "小说地址不能为空");
-        AppCode.A00100.assertNonNull(novelConfigDto.getNovelCapterMenuXR(), "小说章节地址不能为空");
+        //AppCode.A00100.assertNonNull(novelConfigDto.getNovelCapterMenuXR(), "小说章节地址不能为空");
 
-        NovelMsgDto novelMsgDto = new NovelMsgDto();
+        //NovelMsgDto novelMsgDto = new NovelMsgDto();
         String rootUrl = HttpParamUtils.getRootUrl(url);
 
+        //
+        String indexMenuUrl;
+        String nextPageUrl;
+
+        // 点击目录出现章节 的链接
         String novelCapterMenuXR = novelConfigDto.getNovelCapterMenuXR();
+
         WebDriverPDto webDriverPDto = seleniumPool.getDriverDto();
-        WebSiteDataVO webSiteDataVO = webDriverPDto.getHtml(url);
-        String pageSource = webSiteDataVO.getPageSource();
-        String indexMenuUrl = XSoupUtils.htmlToStr(pageSource, novelCapterMenuXR);
-        indexMenuUrl = UrlFormatUtils.formatUrl(indexMenuUrl, rootUrl);
-        log.info("小说章节地址是: {}", indexMenuUrl);
-        novelMsgDto.setIndexMenuUrl(indexMenuUrl);
+        WebSiteDataVO webSiteDataVO;
+        String pageSource = null;
 
         /* 章节链接总数 */
         List<String> dealUrlList = new ArrayList<>();
-        /* 判断是否有分页 */
-        String nextPageUrl = indexMenuUrl;
+
+        // 如果存在说明需要点击 才能出现目录列表
+        if (RStringUtils.isNotEmpty(novelCapterMenuXR)) {
+
+            webSiteDataVO = webDriverPDto.getHtml(url);
+            pageSource = webSiteDataVO.getPageSource();
+            indexMenuUrl = XSoupUtils.htmlToStr(pageSource, novelCapterMenuXR);
+            indexMenuUrl = UrlFormatUtils.formatUrl(indexMenuUrl, rootUrl);
+
+
+            /* 判断是否有分页 */
+            nextPageUrl = indexMenuUrl;
+
+            log.info("小说章节地址是: {}", nextPageUrl);
+            novelMsgDto.setIndexMenuUrl(nextPageUrl);
+
+        } else {
+            // 如果不存在,说明当前页就是包含目录的 模式
+
+            nextPageUrl = url;
+            novelMsgDto.setIndexMenuUrl(nextPageUrl);
+            log.info("小说章节地址是: {}", nextPageUrl);
+        }
         do {
             // 给下一页赋值，请求
             indexMenuUrl = nextPageUrl;
             log.info("准备请求目录地址 {}", nextPageUrl);
+
             // 取出目录中的章节列表
             if (RStringUtils.isNotEmpty(novelConfigDto.getNovelCapterUrlListXR())) {
                 /* 取出某一页的章节信息 */
@@ -164,9 +185,12 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
 
             // 获取下一页的地址
             String novelCapterPageNextUrlXR = novelConfigDto.getNovelCapterPageNextUrlXR();
-            nextPageUrl = XSoupUtils.htmlToStr(pageSource, novelCapterPageNextUrlXR);
-            nextPageUrl = UrlFormatUtils.formatUrl(nextPageUrl, rootUrl);
-
+            // 如果存在就 获取,如果不存在
+            if (RStringUtils.isNotEmpty(novelCapterPageNextUrlXR)) {
+                nextPageUrl = XSoupUtils.htmlToStr(pageSource, novelCapterPageNextUrlXR);
+                nextPageUrl = UrlFormatUtils.formatUrl(nextPageUrl, rootUrl);
+            }
+            // 如果不存在就什么都不做，直接退出
         } while (!nextPageUrl.equals(indexMenuUrl));
         // 放入链接总数
         log.info("一共有{}个链接", dealUrlList.size());
@@ -179,8 +203,9 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
      * 根据章节链接，上个接口返回的信息，
      * 获取内容信息
      *
-     * @param url            章节地址
+     * @param url 章节地址
      * @param novelConfigDto 配置信息
+     * @param novelMsgDto 测试的时候允许为空
      * @return 章节内容
      */
     @Override
@@ -208,6 +233,7 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
         String novelContentXR = novelConfigDto.getNovelContentXR();
         List<String> novelContentXRFlowList = novelConfigDto.getNovelContentXRFlowList();
         String content = "";
+        String txt = "";
         // 3. 小说是否需要分页
         String novelContentUrlPageXR = novelConfigDto.getNovelContentUrlPageXR();
 
@@ -215,8 +241,9 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
         if (StringUtils.isEmpty(novelContentUrlPageXR)) {
             // 3.1 解析出内容的正则，并从网页中获取数据
             // 如果不分页，那么当前页html就是本章的html
-            content = pageSource;
-            novelContentDto.setContent(content);
+            content = iBusiness.endCondition(pageSource, novelConfigDto, null, null);
+//            txt = iBusiness.dealContent(content, url);
+//            novelContentDto.setContent(txt);
         } else {
             /**
              * 1. http请求
@@ -253,16 +280,36 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
          * 1. 处理html各种标签
          * 2. 图片等
          */
-        String title = novelMsgDto.getTitle();
-        log.info("正在保存小说: 《{}》", title);
-        RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/html/"
-                + novelCapterName + "-html.txt", content);
         // 对内容降噪处理
-        content = iBusiness.dealContent(content, rootUrl);
+        txt = iBusiness.dealContent(content, rootUrl);
 
-        RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/"
-                + novelCapterName + ".txt", content);
-        novelContentDto.setContent(content);
+        // 在内容中加上标题, 标题前后加上换行
+        txt = "\r\n" + novelCapterName + "\r\n" + txt;
+
+        novelContentDto.setContent(txt);
+        // 如果不为空就下载
+        if (RObjectsUtils.nonNull(novelMsgDto)) {
+            String title = novelMsgDto.getTitle();
+
+            log.info("正在保存小说: 《{}》", title);
+
+            // 这个位置应该再处理下
+
+
+            // 保存html
+            RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/html/"
+                    + novelCapterName + "-html.txt", content);
+
+
+            // 保存txt
+            RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/txt/"
+                    + novelCapterName + ".txt", txt);
+            // 保存全本
+            boolean append = true;
+            RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/all/"
+                    + title + "-all" + ".txt", txt, append);
+        }
+
 
         seleniumPool.close(webDriverPDto);
         return novelContentDto;

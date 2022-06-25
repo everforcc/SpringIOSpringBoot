@@ -62,6 +62,11 @@ public class RFileUtils {
     }
 
     @SneakyThrows
+    public static String readFileToString(File file) {
+        return FileUtils.readFileToString(file, CharsetsConstant.UTF_8);
+    }
+
+    @SneakyThrows
     public static void writeStringToFile(String path, String content, Charset charset) {
         FileUtils.writeStringToFile(new File(path), content, charset);
     }
@@ -69,6 +74,11 @@ public class RFileUtils {
     @SneakyThrows
     public static void writeStringToFile(String path, String content) {
         FileUtils.writeStringToFile(new File(path), content, CharsetsConstant.UTF_8);
+    }
+
+    @SneakyThrows
+    public static void writeStringToFile(String path, String content, boolean append) {
+        FileUtils.writeStringToFile(new File(path), content, CharsetsConstant.UTF_8, append);
     }
 
     @SneakyThrows

@@ -22,7 +22,7 @@ public interface INovelCommonFlowService {
      * @param novelConfigDto 配置信息
      * @return 小说目录集合
      */
-    NovelMsgDto getMenu(String url, NovelConfigDto novelConfigDto);
+    NovelMsgDto getMenu(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto);
 
     /**
      * 根据章节链接，上个接口返回的信息，
@@ -30,7 +30,7 @@ public interface INovelCommonFlowService {
      *
      * @param url 章节地址
      * @param novelConfigDto 配置信息
-     * @param novelMsgDto
+     * @param novelMsgDto 测试的时候允许为空
      * @return 章节内容
      */
     NovelContentDto getContent(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto);

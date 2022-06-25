@@ -1,0 +1,19 @@
+###
+GET http://localhost:31/init/size
+Content-Type: application/json
+
+###
+GET http://localhost:31/init/contains?url=https://www.vipxs.la/0_56/
+Content-Type: application/json
+
+### 1.
+GET http://localhost:31/init/msg?url=https://www.vipxs.la/0_56/
+Content-Type: application/json
+
+### 2.
+GET http://localhost:31/init/menu?url=https://www.vipxs.la/0_56/
+Content-Type: application/json
+
+### 3.
+GET http://localhost:31/init/contnet?url=https://www.vipxs.la/0_56/50638466.html
+Content-Type: application/json

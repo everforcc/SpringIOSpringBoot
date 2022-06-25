@@ -9,13 +9,20 @@ package cn.cc.sp31usercraw.business.impl;
 
 import cn.cc.sp31usercraw.business.IBusiness;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
+import cn.cc.sp31usercraw.utils.CharsetOCR;
 import com.cc.sp90utils.http.selenium.WebDriverPDto;
 import com.cc.sp90utils.jsoup.XSoupUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 通用的默认实现类
  */
+@Slf4j
 @Service("businessDefault")
 public class BusinessDefault implements IBusiness {
 
@@ -29,6 +36,30 @@ public class BusinessDefault implements IBusiness {
 
     @Override
     public String dealContent(String content, String rootUrl) {
+        log.info("rootUrl: [{}]", rootUrl);
+
+        /**
+         * 将所有的换行处理为空
+         * 最后根据br来换行
+         */
+        content = content.replace("\n", "")
+                .replace("\r\n", "");
+        // 删除 标签之间的 空白字符
+        //content = content.replaceAll(">(\\s)*?<","");
+        content = content.replaceAll(">\\s+<", "><");
+
+
+        // 换行，处理掉 &nbsp 空格
+        content = content.replace("<br><br>", "\n")
+                .replace("<br>", "\n")
+                .replace("\n\n", "")
+                .replace("&nbsp;", " ");
+        // 使用非贪婪模式处理调 <div>块
+        content = content.replaceAll("</div>", "")
+                .replaceAll("<div .*?>", "");
+
+        // 最后处理玩给所有的换行加一行
+        content = content.replaceAll("\n", "\n\n");
         return content;
     }
 }

@@ -1,0 +1,17 @@
+### 用正则 剔除数据
+### 3. 内容
+POST http://localhost:31/novel/content
+Content-Type: application/json
+
+{
+  "url": "https://www.vipxs.la/56_56024",
+  "config":
+  {
+    "novelMsgTileXR": "//*[@id=\"info\"]/h1//text()",
+    "novelMsgDescriptionXR": "//*[@id=\"intro\"]/p//text()",
+    "novelMsgAuthXR": "//*[@id=\"info\"]/p[1]//text()",
+    "novelCapterUrlListXR": "//*[@id=\"list\"]/dl//a//@href",
+    "novelCapterNameXR": "//*[@id=\"wrapper\"]/div[5]/div[1]/div[2]/h1//text()",
+    "novelContentXR": "//[@id='content']"
+  }
+}

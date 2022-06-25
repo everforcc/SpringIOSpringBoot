@@ -112,4 +112,17 @@ public class RegexUtils {
         return stringSet;
     }
 
+    public static void main(String[] args) {
+        String p = "^(?!正文).*?$";
+        String p_2 = "^(正文)(.*?)$";
+        String msg = "正文第一章";
+        String msg_2 = "第一章";
+        System.out.println(matcheStr(p, msg));
+        System.out.println(matcheStr(p_2, msg, 0));
+        System.out.println(matcheStr(p_2, msg, 1));
+        System.out.println(matcheStr(p_2, msg, 2));
+        System.out.println(matcheStr(p, msg_2));
+    }
+
 }
+

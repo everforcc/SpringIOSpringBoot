@@ -6,17 +6,15 @@ POST http://localhost:31/test/msg
 Content-Type: application/json
 
 {
-  "url": "https://www.wenku8.net/book/2632.htm",
+  "url": "https://www.vipxs.la/56_56024/",
   "config":
   {
-    "novelMsgTileXR": "//div[@id='content']//tr[@align='center']//tr//td[1]//b//text()",
-    "novelMsgDescriptionXR": "//div[@id='content']//table[2]//span[6]//text()",
-    "novelMsgAuthXR": "//div[@id='content']//tr[2]//td[2]//text()",
-    "novelCapterMenuXR": "//div[@id='content']//div[1]//div[4]//fieldset[1]//a//@href",
-    "novelCapterNameListXR": "",
-    "novelCapterUrlListXR": "//tbody//td[@class='ccss']//a//@href",
-    "novelContentXR": "//div[@id='content']",
-    "novelContentUrlPageXR": "//div[@id='foottext']//a/@href/regex('[0-9]{1,10}.htm')//text()"
+    "novelMsgTileXR": "//*[@id=\"info\"]/h1//text()",
+    "novelMsgDescriptionXR": "//*[@id=\"intro\"]/p//text()",
+    "novelMsgAuthXR": "//*[@id=\"info\"]/p[1]//text()",
+    "novelCapterUrlListXR": "//*[@id=\"list\"]/dl//a//@href",
+    "novelCapterNameXR": "//*[@id=\"wrapper\"]/div[5]/div[1]/div[2]/h1//text()",
+    "novelContentXR": "//[@id='content']//text()"
   }
 }
 
@@ -26,20 +24,15 @@ POST http://localhost:31/test/menu
 Content-Type: application/json
 
 {
-  "url": "",
+  "url": "https://www.vipxs.la/56_56024/",
   "config":
   {
-    "novelMsgTileXR": "",
-    "novelMsgDescriptionXR": "",
-    "novelMsgAuthXR": "",
-    "novelCapterMenuXR": "",
-    "novelCapterUrlListXR": "",
-    "novelCapterPageNextUrlXR": "",
-    "novelCapterNameXR": "",
-    "novelContentUrlPageXR": "",
-    "novelContentXRFlowList": [
-      ""
-    ]
+    "novelMsgTileXR": "//*[@id=\"info\"]/h1//text()",
+    "novelMsgDescriptionXR": "//*[@id=\"intro\"]/p//text()",
+    "novelMsgAuthXR": "//*[@id=\"info\"]/p[1]//text()",
+    "novelCapterUrlListXR": "//*[@id=\"list\"]/dl//a//@href",
+    "novelCapterNameXR": "//*[@id=\"wrapper\"]/div[5]/div[1]/div[2]/h1//text()",
+    "novelContentXR": "//[@id='content']//text()"
   }
 }
 
@@ -48,18 +41,20 @@ POST http://localhost:31/test/content
 Content-Type: application/json
 
 {
-  "url": "",
+  "url": "https://www.vipxs.la/56_56024/14383878.html",
   "config":
   {
-    "novelCapterNameXR": "",
-    "novelContentUrlPageXR": "",
-    "novelContentXRFlowList": [
-      "",
-      ""
-    ]
+    "novelMsgTileXR": "//[@id='info']/h1//text()",
+    "novelMsgDescriptionXR": "//*[@id=\"intro\"]/p//text()",
+    "novelMsgAuthXR": "//*[@id=\"info\"]/p[1]//text()",
+    "novelCapterUrlListXR": "//*[@id=\"list\"]/dl//a//@href",
+    "novelCapterNameXR": "//*[@id=\"wrapper\"]/div[5]/div[1]/div[2]/h1/regex('<h1>(正文)(.*)</h1>', 2)",
+    "novelContentXR": "//[@id='content']"
   }
 }
 
+### //*[@id=\"wrapper\"]/div[5]/div[1]/div[2]/h1//text()/regex('^(正文)(.*?)$', 2)
+### //[@id='info']/h1//text()/regex('^(正文)(.*?)$', 2)
 ### https://www.wenku8.net/book/2632.htm
 ### https://www.wenku8.net/book/1973.htm
 ### //div[@id='content']//tr[@align='center']//td//table//tbody//tr//td//span//b//@text()

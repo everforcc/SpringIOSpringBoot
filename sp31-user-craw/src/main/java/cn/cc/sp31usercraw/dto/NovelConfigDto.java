@@ -7,6 +7,7 @@
 
 package cn.cc.sp31usercraw.dto;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -71,4 +72,8 @@ public class NovelConfigDto {
 
     /* 对最后的数据进行处理 */
 
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
+    }
 }
