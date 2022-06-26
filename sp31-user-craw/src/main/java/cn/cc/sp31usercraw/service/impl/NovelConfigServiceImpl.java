@@ -12,6 +12,8 @@ import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.dto.NovelMsgDto;
 import cn.cc.sp31usercraw.flow.INovelCommonFlowService;
 import cn.cc.sp31usercraw.service.INovelConfigService;
+import cn.cc.sp31usercraw.utils.DownUtils;
+import com.cc.sp90utils.commons.web.HttpParamUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,12 @@ public class NovelConfigServiceImpl implements INovelConfigService {
             log.info("即将获取章节地址 [{}]", capterUrl);
             iNovelCommonFlowService.getContent(capterUrl, novelConfigDto, novelMsgDto);
         }
+        // 章节地址的根目录应该和域名根目录一致
+        // 在获取章节内容的时候新增线程,在这边标记添加结束
+        String rootUrl = HttpParamUtils.getRootUrl(url);
+        DownUtils downUtils = DownUtils.instantce(rootUrl);
+        downUtils.markAddEnd();
+
         log.info("获取完成 [{}]", url);
         return null;
     }

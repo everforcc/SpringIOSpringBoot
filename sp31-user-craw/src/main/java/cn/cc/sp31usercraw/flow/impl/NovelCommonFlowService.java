@@ -9,10 +9,12 @@ package cn.cc.sp31usercraw.flow.impl;
 
 import cn.cc.sp31usercraw.business.IBusiness;
 import cn.cc.sp31usercraw.constant.FileConstant;
+import cn.cc.sp31usercraw.dodo.DownDo;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.dto.NovelContentDto;
 import cn.cc.sp31usercraw.dto.NovelMsgDto;
 import cn.cc.sp31usercraw.flow.INovelCommonFlowService;
+import cn.cc.sp31usercraw.utils.DownUtils;
 import cn.cc.sp31usercraw.utils.UrlFormatUtils;
 import com.cc.sp90utils.commons.io.JFileNameUtils;
 import com.cc.sp90utils.commons.io.RFileUtils;
@@ -26,24 +28,40 @@ import com.cc.sp90utils.http.vo.WebSiteDataVO;
 import com.cc.sp90utils.jsoup.XSoupUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * 处理公共的小说的流程
+ * <p>
+ * 1. http请求
+ * 1.1. 完整地址
+ * 1.2. /根目录地址
+ * 1.3. a.html 替换当前地址
+ * 取出之后自行判断
+ * <p>
+ * 2. 使用驱动
+ * 或者直接模拟点击，建议用这种，上面的判断逻辑麻烦，而且js重新运行特殊情况处理麻烦
+ * 2.1. 有下一页按钮
+ * 2.2. 没有下一页按钮,从1到最后全部存在，没有省略的模式
+ * <p>
+ * 当前使用2.2
  */
 @Slf4j
 @Service
 public class NovelCommonFlowService implements INovelCommonFlowService {
 
+
     /**
      * web驱动池
+     * 1. http直接请求,速度快但是编码麻烦
+     * 2. selenium运行慢,但是编写速度快
      */
-    @Autowired
+    @Resource
     SeleniumPool seleniumPool;
 
     // 数据处理的实现接口
@@ -51,7 +69,7 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
     IBusiness iBusiness;
 
     /**
-     * 根据小说页链接 获取小说基本信息
+     * 1. 获取小说基本信息
      *
      * @param url            小说页链接
      * @param novelConfigDto 配置信息
@@ -59,7 +77,7 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
      */
     @Override
     public NovelMsgDto getNovelMsg(String url, NovelConfigDto novelConfigDto) {
-        log.info("准备获取小说基本信息");
+        log.info("获取小说基本信息 [{}]", url);
 
         // 必传字段校验
         AppCode.A00100.assertNonNull(novelConfigDto, "小说配置不能为空");
@@ -69,43 +87,58 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
         // 汇总小说基本信息
         NovelMsgDto novelMsgDto = new NovelMsgDto();
 
-        /* 获取小说标题正则 */
+        // 小说标题正则
         String novelMsgTileXR = novelConfigDto.getNovelMsgTileXR();
 
-        // 发请求拿信息，然后正则匹配数据
-        WebDriverPDto webDriverPDto = seleniumPool.getDriverDto();
-        WebSiteDataVO webSiteDataVO = webDriverPDto.getHtml(url);
-        String pageSource = webSiteDataVO.getPageSource();
-        String title = XSoupUtils.htmlToStr(pageSource, novelMsgTileXR);
-        log.info("小说名是: {}", title);
-        novelMsgDto.setTitle(title);
+        // 请求客户端
+        WebDriverPDto webDriverPDto = null;
 
-        /* 小说作者 */
-        if (RStringUtils.isNotEmpty(novelConfigDto.getNovelMsgAuthXR())) {
-            String novelMsgAuthXR = novelConfigDto.getNovelMsgAuthXR();
-            webSiteDataVO = webDriverPDto.getHtml(url);
-            pageSource = webSiteDataVO.getPageSource();
-            String auther = XSoupUtils.htmlToStr(pageSource, novelMsgAuthXR);
-            log.info("小说作者是: {}", auther);
-            novelMsgDto.setAuther(auther);
+        try {
+            // 初始化客户端
+            webDriverPDto = seleniumPool.getDriverDto();
+            // 网站请求返回数据
+            WebSiteDataVO webSiteDataVO = webDriverPDto.getHtml(url);
+            String pageSource = webSiteDataVO.getPageSource();
+
+            // 1. 小说标题
+            String title = XSoupUtils.htmlToStr(pageSource, novelMsgTileXR);
+            novelMsgDto.setTitle(title);
+
+            log.info("小说名是: {}", title);
+
+            // 2. 小说作者
+            if (RStringUtils.isNotEmpty(novelConfigDto.getNovelMsgAuthXR())) {
+                String novelMsgAuthXR = novelConfigDto.getNovelMsgAuthXR();
+                webSiteDataVO = webDriverPDto.getHtml(url);
+                pageSource = webSiteDataVO.getPageSource();
+                String auther = XSoupUtils.htmlToStr(pageSource, novelMsgAuthXR);
+                log.info("小说作者是: {}", auther);
+                novelMsgDto.setAuther(auther);
+            }
+
+            // 3. 小说描述
+            if (RStringUtils.isNotEmpty(novelConfigDto.getNovelMsgDescriptionXR())) {
+                String novelMsgDescriptionXR = novelConfigDto.getNovelMsgDescriptionXR();
+                webSiteDataVO = webDriverPDto.getHtml(url);
+                pageSource = webSiteDataVO.getPageSource();
+                String description = XSoupUtils.htmlToStr(pageSource, novelMsgDescriptionXR);
+                log.info("小说描述: {}", description);
+                novelMsgDto.setDescription(description);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 最终都要释放
+            if (RObjectsUtils.nonNull(webDriverPDto)) {
+                seleniumPool.close(webDriverPDto);
+            }
         }
 
-        /* 小说描述 */
-        if (RStringUtils.isNotEmpty(novelConfigDto.getNovelMsgDescriptionXR())) {
-            String novelMsgDescriptionXR = novelConfigDto.getNovelMsgDescriptionXR();
-            webSiteDataVO = webDriverPDto.getHtml(url);
-            pageSource = webSiteDataVO.getPageSource();
-            String description = XSoupUtils.htmlToStr(pageSource, novelMsgDescriptionXR);
-            log.info("小说描述: {}", description);
-            novelMsgDto.setDescription(description);
-        }
-
-        seleniumPool.close(webDriverPDto);
         return novelMsgDto;
     }
 
     /**
-     * 根据小说地址获取小说目录集合
+     * 2. 根据小说地址获取小说目录集合
      *
      * @param url            小说地址
      * @param novelConfigDto 配置信息
@@ -113,213 +146,258 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
      */
     @Override
     public NovelMsgDto getMenu(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto) {
-        log.info("准备获取小说章节地址");
+        log.info("获取小说章节 [{}]", url);
+
+        // 必传字段校验
         AppCode.A00100.assertNonNull(novelConfigDto, "小说配置不能为空");
         AppCode.A00100.assertNonNull(url, "小说地址不能为空");
         //AppCode.A00100.assertNonNull(novelConfigDto.getNovelCapterMenuXR(), "小说章节地址不能为空");
 
-        //NovelMsgDto novelMsgDto = new NovelMsgDto();
-        String rootUrl = HttpParamUtils.getRootUrl(url);
+        // 从链接获取网站跟地址
+        // String rootUrl = HttpParamUtils.getRootUrl(url);
 
-        //
+        // 首页地址
         String indexMenuUrl;
+        // 目录下一页
         String nextPageUrl;
 
         // 点击目录出现章节 的链接
         String novelCapterMenuXR = novelConfigDto.getNovelCapterMenuXR();
+        // 客户端
+        WebDriverPDto webDriverPDto = null;
 
-        WebDriverPDto webDriverPDto = seleniumPool.getDriverDto();
-        WebSiteDataVO webSiteDataVO;
-        String pageSource = null;
+        try {
+            // 初始化客户端
+            webDriverPDto = seleniumPool.getDriverDto();
 
-        /* 章节链接总数 */
-        List<String> dealUrlList = new ArrayList<>();
+            // 网站请求返回数据
+            WebSiteDataVO webSiteDataVO;
+            String pageSource = null;
 
-        // 如果存在说明需要点击 才能出现目录列表
-        if (RStringUtils.isNotEmpty(novelCapterMenuXR)) {
+            /* 章节链接总数 */
+            List<String> dealUrlList = new ArrayList<>();
 
-            webSiteDataVO = webDriverPDto.getHtml(url);
-            pageSource = webSiteDataVO.getPageSource();
-            indexMenuUrl = XSoupUtils.htmlToStr(pageSource, novelCapterMenuXR);
-            indexMenuUrl = UrlFormatUtils.formatUrl(indexMenuUrl, rootUrl);
-
-
-            /* 判断是否有分页 */
-            nextPageUrl = indexMenuUrl;
-
-            log.info("小说章节地址是: {}", nextPageUrl);
-            novelMsgDto.setIndexMenuUrl(nextPageUrl);
-
-        } else {
-            // 如果不存在,说明当前页就是包含目录的 模式
-
-            nextPageUrl = url;
-            novelMsgDto.setIndexMenuUrl(nextPageUrl);
-            log.info("小说章节地址是: {}", nextPageUrl);
-        }
-        do {
-            // 给下一页赋值，请求
-            indexMenuUrl = nextPageUrl;
-            log.info("准备请求目录地址 {}", nextPageUrl);
-
-            // 取出目录中的章节列表
-            if (RStringUtils.isNotEmpty(novelConfigDto.getNovelCapterUrlListXR())) {
-                /* 取出某一页的章节信息 */
-                String novelCapterUrlListXR = novelConfigDto.getNovelCapterUrlListXR();
-                webSiteDataVO = webDriverPDto.getHtml(nextPageUrl);
+            // 如果存在说明需要点击 才能出现目录列表
+            if (RStringUtils.isNotEmpty(novelCapterMenuXR)) {
+                //
+                webSiteDataVO = webDriverPDto.getHtml(url);
                 pageSource = webSiteDataVO.getPageSource();
-                List<String> novelCapterUrlList = XSoupUtils.htmlToList(pageSource, novelCapterUrlListXR);
-                log.info("小说章节数: {}", novelCapterUrlList.size());
-                // 取出链接后进行处理
-                /**
-                 * 1. http:www/html
-                 * 2. /html
-                 * 3. html
-                 */
+                indexMenuUrl = XSoupUtils.htmlToStr(pageSource, novelCapterMenuXR);
+                // 将返回的链接处理为能直接访问的
+                indexMenuUrl = UrlFormatUtils.formatUrl(indexMenuUrl, url);
 
-                for (String urlStr : novelCapterUrlList) {
-                    dealUrlList.add(UrlFormatUtils.formatUrl(urlStr, rootUrl));
+                // 目录页地址
+                nextPageUrl = indexMenuUrl;
+
+                log.info("小说章节地址是: {}", nextPageUrl);
+                novelMsgDto.setIndexMenuUrl(nextPageUrl);
+
+            } else { // 如果不存在,说明当前页就是目录页
+                // 目录页地址
+                nextPageUrl = url;
+                novelMsgDto.setIndexMenuUrl(nextPageUrl);
+                log.info("小说章节地址是: {}", nextPageUrl);
+            }
+
+            do {
+                // 目录当前页,如果有下一页在下面赋值下一页
+                indexMenuUrl = nextPageUrl;
+
+                log.info("准备请求目录地址 {}", nextPageUrl);
+
+                // 取出目录中的章节列表
+                if (RStringUtils.isNotEmpty(novelConfigDto.getNovelCapterUrlListXR())) {
+                    // 当前页的章节 正则
+                    String novelCapterUrlListXR = novelConfigDto.getNovelCapterUrlListXR();
+                    // 请求链接html
+                    webSiteDataVO = webDriverPDto.getHtml(nextPageUrl);
+                    pageSource = webSiteDataVO.getPageSource();
+                    // 从html提取正则
+                    List<String> novelCapterUrlList = XSoupUtils.htmlToList(pageSource, novelCapterUrlListXR);
+                    log.info("小说章节数: {}", novelCapterUrlList.size());
+                    // 对链接进行处理,并放入集合
+                    for (String urlStr : novelCapterUrlList) {
+                        dealUrlList.add(UrlFormatUtils.formatUrl(urlStr, url));
+                    }
                 }
 
-            }
+                // 下一页的地址的 正则
+                String novelCapterPageNextUrlXR = novelConfigDto.getNovelCapterPageNextUrlXR();
+                // 如果存在正则就 获取
+                if (RStringUtils.isNotEmpty(novelCapterPageNextUrlXR)) {
+                    // 匹配出下一页地址
+                    nextPageUrl = XSoupUtils.htmlToStr(pageSource, novelCapterPageNextUrlXR);
+                    // 处理链接 为能直接访问的
+                    nextPageUrl = UrlFormatUtils.formatUrl(nextPageUrl, url);
+                }
+                // 如果不存在就什么都不做，直接退出
+            } while (!nextPageUrl.equals(indexMenuUrl));
 
-            // 获取下一页的地址
-            String novelCapterPageNextUrlXR = novelConfigDto.getNovelCapterPageNextUrlXR();
-            // 如果存在就 获取,如果不存在
-            if (RStringUtils.isNotEmpty(novelCapterPageNextUrlXR)) {
-                nextPageUrl = XSoupUtils.htmlToStr(pageSource, novelCapterPageNextUrlXR);
-                nextPageUrl = UrlFormatUtils.formatUrl(nextPageUrl, rootUrl);
+            // 输出链接总数
+            log.info("一共有{}个链接", dealUrlList.size());
+            // 放入对象
+            novelMsgDto.setNovelCapterUrlList(dealUrlList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 最终都要释放
+            if (RObjectsUtils.nonNull(webDriverPDto)) {
+                seleniumPool.close(webDriverPDto);
             }
-            // 如果不存在就什么都不做，直接退出
-        } while (!nextPageUrl.equals(indexMenuUrl));
-        // 放入链接总数
-        log.info("一共有{}个链接", dealUrlList.size());
-        novelMsgDto.setNovelCapterUrlList(dealUrlList);
-        seleniumPool.close(webDriverPDto);
+        }
         return novelMsgDto;
     }
 
     /**
-     * 根据章节链接，上个接口返回的信息，
-     * 获取内容信息
+     * 3. 根据章节链接,获取章节内容
      *
-     * @param url 章节地址
+     * @param url            章节地址
      * @param novelConfigDto 配置信息
-     * @param novelMsgDto 测试的时候允许为空
+     * @param novelMsgDto    测试的时候允许为空
      * @return 章节内容
      */
     @Override
     public NovelContentDto getContent(String url, NovelConfigDto novelConfigDto, NovelMsgDto novelMsgDto) {
-        log.info("准备获取小说章节地址");
+        log.info("获取小说章节内容 [{}]", url);
+
+        // 基础参数校验
         AppCode.A00100.assertNonNull(novelConfigDto, "小说配置不能为空");
         AppCode.A00100.assertNonNull(url, "小说地址不能为空");
         AppCode.A00100.assertNonNull(novelConfigDto.getNovelCapterNameXR(), "小说章节名不能为空");
 
-        StringBuffer stringBuffer = new StringBuffer();
+        // 小说章节内容
+        StringBuilder stringBuilder = new StringBuilder();
+        // 小说内容对象
         NovelContentDto novelContentDto = new NovelContentDto();
 
         // 1. 从web中获取当页内容
-        WebDriverPDto webDriverPDto = seleniumPool.getDriverDto();
-        WebSiteDataVO webSiteDataVO = webDriverPDto.getHtml(url);
-        String pageSource = webSiteDataVO.getPageSource();
+        WebDriverPDto webDriverPDto = null;
 
-        // 获取章节名
-        String novelCapterNameXR = novelConfigDto.getNovelCapterNameXR();
-        String novelCapterName = XSoupUtils.htmlToStr(pageSource, novelCapterNameXR);
-        novelCapterName = JFileNameUtils.checkFileName(novelCapterName);
-        log.info("章节名 {}", novelCapterName);
+        try {
+            webDriverPDto = seleniumPool.getDriverDto();
+            WebSiteDataVO webSiteDataVO = webDriverPDto.getHtml(url);
+            String pageSource = webSiteDataVO.getPageSource();
 
-        // 2. 从页面获取数据正则
-        String novelContentXR = novelConfigDto.getNovelContentXR();
-        List<String> novelContentXRFlowList = novelConfigDto.getNovelContentXRFlowList();
-        String content = "";
-        String txt = "";
-        // 3. 小说是否需要分页
-        String novelContentUrlPageXR = novelConfigDto.getNovelContentUrlPageXR();
+            // 2. 获取章节名
+            // 章节名 正则
+            String novelCapterNameXR = novelConfigDto.getNovelCapterNameXR();
+            // 章节名
+            String novelCapterName = XSoupUtils.htmlToStr(pageSource, novelCapterNameXR);
+            // 因为要保存所以校验整洁名
+            novelCapterName = JFileNameUtils.checkFileName(novelCapterName);
+            log.info("章节名 {}", novelCapterName);
 
-        // 不需要分页
-        if (StringUtils.isEmpty(novelContentUrlPageXR)) {
-            // 3.1 解析出内容的正则，并从网页中获取数据
-            // 如果不分页，那么当前页html就是本章的html
-            content = iBusiness.endCondition(pageSource, novelConfigDto, null, null);
-//            txt = iBusiness.dealContent(content, url);
-//            novelContentDto.setContent(txt);
-        } else {
-            /**
-             * 1. http请求
-             * 1.1. 完整地址
-             * 1.2. /根目录地址
-             * 1.3. a.html 替换当前地址
-             * 取出之后自行判断
-             *
-             * 2. 使用驱动
-             * 或者直接模拟点击，建议用这种，上面的判断逻辑麻烦，而且js重新运行特殊情况处理麻烦
-             * 2.1. 有下一页按钮
-             * 2.2. 没有下一页按钮,从1到最后全部存在，没有省略的模式
-             *
-             * 当前使用2.2
-             */
+            // 2. 从页面获取数据正则
+//        String novelContentXR = novelConfigDto.getNovelContentXR();
+//        List<String> novelContentXRFlowList = novelConfigDto.getNovelContentXRFlowList();
 
-            // 需要分页,分页的点击超链接集合
-            List<String> linkTextList = XSoupUtils.htmlToList(pageSource, novelContentUrlPageXR);
-            log.info("小说一共有 {} 页", linkTextList.size());
-            for (String linkText : linkTextList) {
-                log.info("点击按钮名, {}", linkText);
-                // 获取页面数据
-                content = iBusiness.endCondition(pageSource, novelConfigDto, webDriverPDto, linkText);
-                //log.info("小说章节内容是 {} : {}", linkText, content);
-                stringBuffer.append(content);
+            // 章节 html
+            String contentHtml;
+            // 章节处理后的txt
+            String txt;
+
+            // 3. 小说是否需要分页
+            String novelContentUrlPageXR = novelConfigDto.getNovelContentUrlPageXR();
+
+            // 不需要分页
+            if (StringUtils.isEmpty(novelContentUrlPageXR)) {
+                // 根据正则从html中获取 章节内容 数据
+                contentHtml = iBusiness.endCondition(pageSource, novelConfigDto, null, null);
+            } else { // 需要分页
+
+                // 分页的点击超链接集合
+                List<String> linkTextList = XSoupUtils.htmlToList(pageSource, novelContentUrlPageXR);
+                log.info("小说一共有 {} 页", linkTextList.size());
+                for (String linkText : linkTextList) {
+                    log.info("点击按钮名, {}", linkText);
+                    // 获取页面数据
+                    contentHtml = iBusiness.endCondition(pageSource, novelConfigDto, webDriverPDto, linkText);
+                    log.info("小说章节分页地址是 {} ", linkText);
+                    stringBuilder.append(contentHtml);
+                }
+                // 合并分页数据
+                contentHtml = stringBuilder.toString();
             }
-            // 合并分页数据
-            content = stringBuffer.toString();
+            // 网页根地址
+            String rootUrl = HttpParamUtils.getRootUrl(url);
+
+            // 对内容降噪处理
+            txt = iBusiness.dealContent(contentHtml, url);
+            // 在内容中加上标题, 标题前后加上换行
+            txt = "\r\n" + novelCapterName + "\r\n" + txt;
+            // 将处理后的数据放入对象
+            novelContentDto.setContent(txt);
+
+            // 如果不为空就下载.为空说明是测试
+            if (RObjectsUtils.nonNull(novelMsgDto)) {
+                String title = novelMsgDto.getTitle();
+                log.info("正在保存小说: 《{}》", title);
+                // 这个位置应该再处理下
+                StringBuilder saveHtml = new StringBuilder();
+                saveHtml.append(FileConstant.fileRoot)
+                        .append(title)
+                        .append("/html/")
+                        .append(novelCapterName).append(".txt");
+                StringBuilder saveCapTxt = new StringBuilder();
+                saveCapTxt.append(FileConstant.fileRoot)
+                        .append(title)
+                        .append("/txt/")
+                        .append(novelCapterName).append(".txt");
+                StringBuilder saveAllTxt = new StringBuilder();
+                saveAllTxt.append(FileConstant.fileRoot)
+                        .append(title)
+                        .append("/all/")
+                        .append(title).append(".txt");
+//                // 保存html
+//                // FileConstant.fileRoot + title + "/html/" + novelCapterName + "-html.txt"
+//                RFileUtils.writeStringToFile(saveHtml.toString(), contentHtml);
+//                // 保存txt
+//                // FileConstant.fileRoot + title + "/txt/" + novelCapterName + ".txt"
+//                RFileUtils.writeStringToFile(saveCapTxt.toString(), txt);
+//                // 保存全本
+//                // FileConstant.fileRoot + title + "/all/" + title + "-all" + ".txt"
+//                boolean append = true;
+//                RFileUtils.writeStringToFile(saveAllTxt.toString(), txt, append);
+
+
+                DownUtils downUtils = DownUtils.instantce(rootUrl);
+                // 1. html
+                DownDo downDoHtml = new DownDo();
+                downDoHtml.setPath(saveHtml.toString());
+                downDoHtml.setContent(contentHtml);
+                downDoHtml.setAppend(false);
+
+                // 2. 保存章节
+                DownDo downDoCapTXT = new DownDo();
+                downDoCapTXT.setPath(saveCapTxt.toString());
+                downDoCapTXT.setContent(txt);
+                downDoCapTXT.setAppend(false);
+
+                // 3. 全本txt
+                DownDo downDoAllTXT = new DownDo();
+                downDoAllTXT.setPath(saveAllTxt.toString());
+                downDoAllTXT.setContent(txt);
+                downDoAllTXT.setAppend(true);
+
+                downUtils.add(downDoHtml);
+                downUtils.add(downDoCapTXT);
+                downUtils.add(downDoAllTXT);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 最终都要释放
+            if (RObjectsUtils.nonNull(webDriverPDto)) {
+                seleniumPool.close(webDriverPDto);
+            }
         }
-        // 网页根地址
-        String rootUrl = HttpParamUtils.getRootUrl(url);
-        //
-        /**
-         * 1. 处理html各种标签
-         * 2. 图片等
-         */
-        // 对内容降噪处理
-        txt = iBusiness.dealContent(content, rootUrl);
 
-        // 在内容中加上标题, 标题前后加上换行
-        txt = "\r\n" + novelCapterName + "\r\n" + txt;
-
-        novelContentDto.setContent(txt);
-        // 如果不为空就下载
-        if (RObjectsUtils.nonNull(novelMsgDto)) {
-            String title = novelMsgDto.getTitle();
-
-            log.info("正在保存小说: 《{}》", title);
-
-            // 这个位置应该再处理下
-
-
-            // 保存html
-            RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/html/"
-                    + novelCapterName + "-html.txt", content);
-
-
-            // 保存txt
-            RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/txt/"
-                    + novelCapterName + ".txt", txt);
-            // 保存全本
-            boolean append = true;
-            RFileUtils.writeStringToFile(FileConstant.fileRoot + title + "/all/"
-                    + title + "-all" + ".txt", txt, append);
-        }
-
-
-        seleniumPool.close(webDriverPDto);
         return novelContentDto;
     }
 
     public static void main(String[] args) {
-        String content = "<div class=\"chapterinfo\" id=\"chapterinfo\">       2022年06月14日  " +
-                "a123" +
-                " </div>  <img src=\"/data/0990372354.png\">\n" +
-                " <img src=\"/data/7808420336.png\">风";
+        String content = "<div class=\"chapterinfo\" id=\"chapterinfo\">       2022年06月14日  " + "a123" + " </div>  <img src=\"/data/0990372354.png\">\n" + " <img src=\"/data/7808420336.png\">风";
         content = content.replaceAll(">\\s+<", "><");
 //        content = content.replaceAll("</div>","")
 //                .replaceAll("<div .*?>","");

@@ -38,8 +38,8 @@ public interface IBusiness {
      * 如果结果是正确的页面,进行降噪处理
      *
      * @param content 正确的内容
-     * @param rootUrl
-     * @return
+     * @param rootUrl 网站跟地址
+     * @return 处理后的内容
      */
     String dealContent(String content, String rootUrl);
 

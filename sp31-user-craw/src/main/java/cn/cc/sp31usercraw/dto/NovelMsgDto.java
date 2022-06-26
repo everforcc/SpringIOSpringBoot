@@ -22,13 +22,13 @@ import java.util.List;
 @Setter
 public class NovelMsgDto {
 
-    /* 标题 */
+    /* 小说标题 */
     private String title;
 
-    /* 作者 */
+    /* 小说作者 */
     private String auther;
 
-    /* 描述 */
+    /* 小说描述 */
     private String description;
 
     private String indexMenuUrl;

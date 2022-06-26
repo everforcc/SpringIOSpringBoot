@@ -19,7 +19,6 @@ import java.util.List;
 /**
  * 小说的配置对象
  * XR: xsoupRegex
- *
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,7 +52,11 @@ public class NovelConfigDto {
     private String novelMsgAuthXR;
 
     /* 小说章节信息 */
-    /* 章节目录，点了才出现章节 */
+
+    /**
+     * 1. 如果不为空,点了才出现章节目录
+     * 2. 如果为空,当前页内就是目录
+     */
     private String novelCapterMenuXR;
     /* 章节列表名字 */
     private String novelCapterNameListXR;
