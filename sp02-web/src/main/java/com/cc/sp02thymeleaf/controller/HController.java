@@ -2,12 +2,10 @@ package com.cc.sp02thymeleaf.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cc.sp02thymeleaf.dto.ParamDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/open")
 public class HController {
 
     @GetMapping("/")

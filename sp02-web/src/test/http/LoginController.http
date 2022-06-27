@@ -1,0 +1,10 @@
+###
+POST http://localhost:8002/login/u
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "name",
+  "pas": "pas"
+}
+### {"funcSet":["auth_2","auth_1"],"name":"name","pas":"pas"}

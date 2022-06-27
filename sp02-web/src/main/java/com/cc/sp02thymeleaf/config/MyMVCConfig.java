@@ -40,7 +40,11 @@ public class MyMVCConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+
+        registry.addInterceptor(new LoginHandlerInterceptor())
+                // 需要登录的路径
+                .addPathPatterns("/**")
+                // 除了下面的路径
                 .excludePathPatterns("/login/**")
                 .excludePathPatterns("/open/**");
     }
