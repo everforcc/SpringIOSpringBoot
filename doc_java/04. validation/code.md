@@ -1,5 +1,6 @@
 <font face="Simsun" size=3>
 
+- 代码中校验非空使用 @NotEmpty 也不能为空字符串
 ~~~
 1. dto类字段需要的加上注解
 
