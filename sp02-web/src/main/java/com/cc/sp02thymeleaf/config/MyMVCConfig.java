@@ -20,6 +20,9 @@ public class MyMVCConfig implements WebMvcConfigurer {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * dto枚举字段 不匹配映射为null
+     */
     @PostConstruct
     public void myObjectMapper() {
         // 解决enum不匹配问题 默认值为false

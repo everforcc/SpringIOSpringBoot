@@ -5,17 +5,12 @@ import com.cc.sp02thymeleaf.dto.CustomUser;
 import com.cc.sp02thymeleaf.utils.IToken;
 import com.cc.sp02thymeleaf.utils.impl.TokenJSON;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 
 @Slf4j
@@ -31,23 +26,28 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         //System.out.println("result: " + result);
         String token = request.getHeader("token");
         CustomUser customUser = iToken.stringToUser(token);
-        if(Objects.isNull(customUser)){
+        if (Objects.isNull(customUser)) {
             iToken.response(response, "没有用户信息");
             return false;
         }
 
-        if(handler instanceof HandlerMethod){
-            HandlerMethod handlerMethod = (HandlerMethod)handler;
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
             Authorization authorization = handlerMethod.getMethodAnnotation(Authorization.class);
-            if(authorization != null){
+            if (authorization != null) {
                 String[] auths = authorization.value();
                 HashSet<String> funcSet = customUser.getFuncSet();
-                for(String auth:auths){
-                    if(funcSet.contains(auth)){
-                     return true;
+                boolean flag = false;
+                for (String auth : auths) {
+                    // 只要任何一个包含权限就返回
+                    if (funcSet.contains(auth)) {
+                        flag = true;
+                        break;
                     }
                 }
-                iToken.response(response, "没有权限");
+                if(!flag) {
+                    iToken.response(response, "没有权限");
+                }
             }
         }
 

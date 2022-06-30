@@ -1,4 +1,9 @@
 ###
 GET http://localhost:8002/authController/auth_1?string=str
 Accept: application/json
-### token: {"funcSet":["auth_2","auth_1"],"name":"name","pas":"pas"}
+token: {"funcSet":["auth_2","auth_1"],"name":"name","pas":"pas"}
+
+###
+GET http://localhost:8002/authController/auth_2?string=str
+Accept: application/json
+token: {"funcSet":["auth_2","auth_3"],"name":"name","pas":"pas"}
