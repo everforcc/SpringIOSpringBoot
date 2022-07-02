@@ -1,0 +1,25 @@
+###
+GET http://localhost:8010/save
+Content-Type: application/json
+
+###
+POST http://localhost:8010/post
+Content-Type: application/json
+
+{
+  "k": "v"
+}
+
+###
+POST http://localhost:8010/postObj
+Content-Type: application/json
+
+{
+  "userid": 1,
+  "uuid": "uuiduuiduuid"
+}
+
+
+###
+GET http://localhost:8010/save
+Content-Type: application/json
