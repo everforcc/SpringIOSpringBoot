@@ -13,3 +13,11 @@ Accept: application/json
 ###
 GET http://localhost:8080/plus/tDaoPage/用户名/2/2
 Accept: application/json
+
+###
+POST http://localhost:8080/plus/tcondation
+Content-Type: application/json
+
+{
+  "name": "1"
+}

@@ -29,6 +29,18 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<MybatisPlusUser> selectCondition(MybatisPlusUser condition) {
+        Page<MybatisPlusUser> page = new Page<>(1, 10);
+        userDao.selectCondition(condition, page);
+        List<MybatisPlusUser> userList = page.getRecords();
+        long size = page.getSize();
+        long total = page.getTotal();
+        long pages = page.getPages();
+        long current = page.getCurrent();
+        return userList;
+    }
+
+    @Override
     public List<MybatisPlusUser> listUserPages(String name, long currentPage, long sizePage) {
         Page<MybatisPlusUser> page = new Page<>(currentPage, sizePage);
         userDao.listUserPages(name, page);

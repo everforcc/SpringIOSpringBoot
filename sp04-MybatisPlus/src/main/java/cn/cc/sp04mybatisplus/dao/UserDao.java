@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 
-    @Select("SELECT * FROM user WHERE NAME = #{name}")
+    @Select("SELECT * FROM cc_mybatis_plus_user WHERE NAME = #{name}")
     List<MybatisPlusUser> listUser(String name);
 
     /**
@@ -20,20 +20,27 @@ public interface UserDao {
      * @param userPage
      * @return
      */
-    @Select("SELECT * FROM user WHERE NAME = #{name}")
+    @Select("SELECT * FROM cc_mybatis_plus_user WHERE NAME = #{name}")
     Page<MybatisPlusUser> listUserPages(String name, Page<MybatisPlusUser> userPage);
 
     /**
      *
      * 处理复杂sql
      */
-    Page<MybatisPlusUser> selectCondition();
+    @Select({"<script>",
+            "SELECT * FROM cc_mybatis_plus_user WHERE 1=1 ",
+            "<if test='condition.name != null and condition.name != `` '>",
+            " and name = #{condition.name}",
+            "</if>",
+            "</script>"
+    })
+    Page<MybatisPlusUser> selectCondition(MybatisPlusUser condition, Page<MybatisPlusUser> userPage);
 
     /**
      * 多行脚本用数组
      * 新增用户
      */
-    @Insert({"INSERT INTO USER ",
+    @Insert({"INSERT INTO cc_mybatis_plus_user ",
             "(id, NAME, age, email, VERSION, deleted, create_time, update_time)",
             "VALUES",
             "(#{id}, #{name}, #{age}, #{email}, #{version}, #{deleted}, #{create_time}, #{update_time})"})

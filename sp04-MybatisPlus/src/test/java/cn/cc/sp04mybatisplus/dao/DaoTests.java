@@ -33,6 +33,14 @@ public class DaoTests {
     }
 
     @Test
+    void selectCondition(){
+        MybatisPlusUser condition = new MybatisPlusUser();
+        condition.setName("用户名");
+        List<MybatisPlusUser> userList = userService.selectCondition(condition);
+        log.info("userList, {}",userList.size());
+    }
+
+    @Test
     void page(){
         List<MybatisPlusUser> userList = userService.listUserPages("张三", 1L, 1L);
         log.info("userList, {}",userList.size());
