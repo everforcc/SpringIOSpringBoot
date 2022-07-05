@@ -1,19 +1,19 @@
-###
+### 1. 查看目前初始化了几个配置
 GET http://localhost:31/init/size
 Content-Type: application/json
 
-###
+### 2. 校验该网站配置是否存在
 GET http://localhost:31/init/contains?url=https://www.vipxs.la/0_56/
 Content-Type: application/json
 
-### 1.
+### 3. 小说基本信息
 GET http://localhost:31/init/msg?url=https://www.vipxs.la/0_56/
 Content-Type: application/json
 
-### 2.
+### 4. 小说菜单
 GET http://localhost:31/init/menu?url=https://www.vipxs.la/0_56/
 Content-Type: application/json
 
-### 3.
+### 5. 某一章节的内容
 GET http://localhost:31/init/contnet?url=https://www.vipxs.la/0_56/50638466.html
 Content-Type: application/json

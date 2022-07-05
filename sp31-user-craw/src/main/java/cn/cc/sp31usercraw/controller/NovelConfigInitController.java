@@ -38,7 +38,7 @@ public class NovelConfigInitController {
     INovelConfigInitService iNovelConfigInitService;
 
     /**
-     * 初始化了几个配置
+     * 1. 初始化了几个配置
      */
     @GetMapping("/size")
     public ResultE<Integer> size() {
@@ -47,6 +47,12 @@ public class NovelConfigInitController {
         );
     }
 
+    /**
+     * 2. 校验该网站配置是否存在
+     *
+     * @param url 地址
+     * @return 返回结果
+     */
     @GetMapping("/contains")
     public ResultE<Boolean> contains(@RequestParam("url") String url) {
         return new ResultE<Boolean>().execute(e ->
@@ -54,6 +60,12 @@ public class NovelConfigInitController {
         );
     }
 
+    /**
+     * 3. 小说基本信息
+     *
+     * @param url 小说地址
+     * @return 返回信息
+     */
     @GetMapping("/msg")
     public ResultE<NovelMsgDto> msg(@RequestParam("url") String url) {
         return new ResultE<NovelMsgDto>().execute(e ->
@@ -61,6 +73,12 @@ public class NovelConfigInitController {
         );
     }
 
+    /**
+     * 4. 小说菜单
+     *
+     * @param url 小说菜单
+     * @return 返回结果
+     */
     @GetMapping("/menu")
     public ResultE<NovelMsgDto> menu(@RequestParam("url") String url) {
         return new ResultE<NovelMsgDto>().execute(e ->
@@ -68,6 +86,12 @@ public class NovelConfigInitController {
         );
     }
 
+    /**
+     * 5. 某一章节的内容
+     *
+     * @param url 内容地址
+     * @return 返回结果
+     */
     @GetMapping("/contnet")
     public ResultE<NovelContentDto> content(@RequestParam("url") String url) {
         return new ResultE<NovelContentDto>().execute(e ->

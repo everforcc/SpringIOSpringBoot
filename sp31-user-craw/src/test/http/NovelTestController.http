@@ -1,7 +1,4 @@
-### msg
-### menu
-### content
-### 1. 获取小说基本信息
+### 1. 获取小说基本信息 msg
 POST http://localhost:31/test/msg
 Content-Type: application/json
 
@@ -18,8 +15,7 @@ Content-Type: application/json
   }
 }
 
-### 2. 获取全部目录
-###
+### 2. 获取全部目录 menu
 POST http://localhost:31/test/menu
 Content-Type: application/json
 
@@ -36,7 +32,8 @@ Content-Type: application/json
   }
 }
 
-### 3. 内容
+### 用正则 剔除数据 regex('<h1>(正文)(.*)</h1>', 2), 这个参数可以看下源码
+### 3. 内容 content
 POST http://localhost:31/test/content
 Content-Type: application/json
 
