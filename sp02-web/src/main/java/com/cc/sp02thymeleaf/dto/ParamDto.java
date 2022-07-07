@@ -7,9 +7,12 @@
 package com.cc.sp02thymeleaf.dto;
 
 
+import javax.validation.constraints.NotEmpty;
+
 public class ParamDto {
 
     private FieldEnum statusEnum;
+    @NotEmpty
     private String name;
     private String description;
 
