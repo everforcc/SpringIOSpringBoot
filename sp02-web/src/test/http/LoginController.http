@@ -8,3 +8,8 @@ Content-Type: application/json
   "pas": "pas"
 }
 ### {"funcSet":["auth_2","auth_1"],"name":"name","pas":"pas"}
+
+###
+GET http://localhost:8002/open/
+Accept: application/json
+Content-Type: application/json
