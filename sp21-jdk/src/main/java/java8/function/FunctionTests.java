@@ -14,6 +14,12 @@ public class FunctionTests {
 
     public void functionInteger() {
         Function<Integer, Integer> integerFunction = i -> i * 2;
+
+        // 默认是有返回值的,通常可以省略
+        Function<Integer, Integer> integerFunctionReturn = i -> {
+            return i * 2;
+        };
+
         Function<Integer, Integer> integerFunctionAndThen = i -> i * 2;
         // 执行第一个运算
         Integer result = integerFunction.apply(2);
@@ -33,7 +39,7 @@ public class FunctionTests {
                 };
             }
         };
-        Consumer<String> rConsumer = consumerFunction.apply(e->{
+        Consumer<String> rConsumer = consumerFunction.apply(e -> {
             System.out.println("---- a: " + e);
         });
         rConsumer.accept("rrrr");

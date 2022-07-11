@@ -13,6 +13,7 @@ import java.util.function.Function;
 public class YFact {
 
     /**
+     * 1.1 原版代码
      * <a href="https://raw.githubusercontent.com/xutianyi1999/picacg-spider/master/src/main/java/club/koumakan/spider/YFact.java">源码位置</a>
      * 函数分析
      * 1. applu接收function的第一个参数,返回第二个参数
@@ -50,6 +51,8 @@ public class YFact {
     }
 
     /**
+     * 1.2 增加入参
+     *
      * @param ff    函数
      * @param tData tConsumer 调用测试参数
      * @param <T>   参数类型
@@ -66,6 +69,26 @@ public class YFact {
 
         return tConsumer;
 
+    }
+
+    /**
+     * 1.3 增加函数内 返回值
+     *
+     * @param ff  函数
+     * @param <T> 参数类型
+     * @return 返回 rConsumer
+     */
+    public static <T> Consumer<T> yConsumerReturn(Function<Consumer<T>, Consumer<T>> ff) {
+//        return ff.apply(t -> {
+//            yConsumer(ff).accept(t);
+//        });
+        // 不论内部代码如何返回的都是一个接口
+        return ff.apply(new Consumer<T>() {
+            @Override
+            public void accept(T t) {
+
+            }
+        });
     }
 
     /**
