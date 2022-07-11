@@ -13,6 +13,7 @@ import java.util.function.Function;
 public class YFact {
 
     /**
+     * <a href="https://raw.githubusercontent.com/xutianyi1999/picacg-spider/master/src/main/java/club/koumakan/spider/YFact.java">源码位置</a>
      * 函数分析
      * 1. applu接收function的第一个参数,返回第二个参数
      *
@@ -25,11 +26,12 @@ public class YFact {
         System.out.println("----[yCo]: ----a");
         // 1.  返回 R
         // 2.                执行consumer的方法
-
-        // 原版
-//        return ff.apply(t ->
-//                yConsumer(ff).accept(t)
-//        );
+        // 3. 括号里面不懂,
+        //  3.1 大概就是参数是t
+        //  3.2 yConsumer(ff) 返回一个consumer
+        //  3.3 然后accept调用一下返回void
+        // 4. 也就是说不管入参T是什么,都返回R,客户端定义R的实现,然后返回consumer, 最后调用传参
+        return ff.apply(t -> yConsumer(ff).accept(t));
 
         // 但是这样也能达到效果,不知道原来什么意思
 //        Consumer<T> tConsumer = t -> {
@@ -38,9 +40,6 @@ public class YFact {
 //        tConsumer.accept();
 //        return ff.apply(tConsumer);
 
-        return ff.apply(t ->
-                yConsumer(ff).accept(t)
-        );
 
         // 递归调用报错
 //        Consumer<T> tempConsumer = yConsumer(ff);
