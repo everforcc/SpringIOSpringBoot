@@ -1,6 +1,7 @@
 package com.cc.sp90utils.commons.io;
 
 import com.cc.sp90utils.exception.Code;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -13,70 +14,77 @@ import java.io.PrintWriter;
  * 2020/7/3
  * 写入操作
  */
+@Slf4j
 public class JInputStreamCharUtils {
 
     private String fileName;
     private String path;
 
-    public String getPath() {
-        return path;
-    }
+    private String absolutePath;
 
-    public void setPath(String path) {
-        this.path = path;
-    }
 
-    public JInputStreamCharUtils() {
+    private JInputStreamCharUtils() {
     }
 
     /**
-     *
-     * @param path
-     * @param fileName
+     * @param path     文件路径
+     * @param fileName 文件名
      */
     public JInputStreamCharUtils(String path, String fileName) {
-        // 后缀可能有文件名，但是路径应该不会有点，所以分开它
-        /*if(path.contains("\\.")){
-            path=path.substring(0,path.lastIndexOf(File.separator));
-            System.out.println(path);
-        }*/
-        this.fileName=fileName;
+        this.fileName = fileName;
         File file = new File(path);
-        if(!file.exists()){
-            file.mkdirs();
+        if (!file.exists()) {
+            boolean mkdir = file.mkdirs();
+            log.info("文件夹【{}】创建结果 {}", path, mkdir);
         }
         this.path = path;
     }
 
+    /**
+     * @param absolutePath 完整路径
+     */
+    public JInputStreamCharUtils(String absolutePath) {
+        this.absolutePath = absolutePath;
+    }
+
+
+//    public void printWriterAppend(String path, String content) {
+//        this.writeAppend(path, new String[]{content});
+//    }
 
     /**
      * 系统文件 文件末尾追加
      */
-    public void IO_PrintWriter_Append(String path, String content) { this.writeAppend(path,new String[]{content}); }
-
-    public void IO_PrintWriter_Append(String content) { this.writeAppend(null,new String[]{content}); }
-
-    public void IO_PrintWriter_Append(String path, String[] content) {
-        this.writeAppend(path,content);
+    public void printWriterAppend(String content) {
+        this.writeAppend(new String[]{content});
     }
 
-    public void IO_PrintWriter_Append(String[] content) { this.writeAppend(null,content); }
+//    public void printWriterAppend(String path, String[] content) {
+//        this.writeAppend(path, content);
+//    }
 
-    private void writeAppend(String path, String content[]){
-        if(StringUtils.isEmpty(path)){
-            path=this.path; // 这里处理的还是有问题，也有可能没初始化path也过来，再说吧
+    public void printWriterAppend(String[] content) {
+        this.writeAppend(content);
+    }
+
+    private void writeAppend(String content[]) {
+        File f;
+        // 对应两种初始化方式
+        if (StringUtils.isEmpty(absolutePath)) {
+            f = new File(path + File.separator + this.fileName);
+        }else {
+            f = new File(absolutePath);
         }
-        File f = new File(path+this.fileName);
 
         // web乱码 printWriter=new PrintWriter(new OutputStreamWriter(new FileOutputStream(ndfFileName), "UTF-8"));
         try (FileWriter fw = new FileWriter(f, true);
-             PrintWriter pw = new PrintWriter(fw)){
+             PrintWriter pw = new PrintWriter(fw)) {
             //如果文件存在，则追加内容；如果文件不存在，则创建文件
             //File f=new File(IFilePath.pathRoot() + "/a.txt");
             // java.io.FileNotFoundException: C:\NEW\ideaProject\aly\OneForAll\temp\古文名句\《楞严经》.txt (另一个程序正在使用此文件，进程无法访问。)
             // 总是开启关闭浪费资源，直接组装好给放进来
 
-            for(String str:content) {
+            for (String str : content) {
                 pw.println(str);
             }
         } catch (IOException e) {
