@@ -31,6 +31,11 @@ import java.util.Objects;
 public class ConcatTXTFileToVideo {
 
     /**
+     * 整体流程
+     * 1. 拿到视频切片文件夹 D:/ABC/download
+     * 2. 将文件夹内的视频切片合并为 D:/ABC/download.txt (本方法)
+     * 3. 执行ffmpeg命令合并为 D:/ABC/download.txt.mp4
+     * <p>
      * 默认空和o的方法
      *
      * @param path 文件路径
