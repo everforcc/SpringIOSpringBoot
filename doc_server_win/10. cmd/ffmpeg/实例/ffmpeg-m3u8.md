@@ -58,7 +58,7 @@ new-视频1.m3u8
 
 ~~~
 盘符:\\路径/路径/ 
-注意盘符后为双斜线
+注意盘符后为两个反斜杠,后面的为一个正斜杠
 E:\\filesystem/project/SpringIOSpringBoot/sp92-tools/cmd/ffmpeg/m3u8
 ~~~
 

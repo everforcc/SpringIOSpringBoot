@@ -36,7 +36,9 @@ public class PicDeal {
         String newFileName;
         if (fileName.endsWith(".png")) {
             newFileName = fileName.replace(".png", ".jpg");
-        } else {
+        }if (fileName.endsWith(".jpg")) {
+            newFileName = fileName;
+        }else {
             throw new RuntimeException("图片问题识别，未处理情况");
         }
         changeImageBackground(picStr, fileName, newFileName);

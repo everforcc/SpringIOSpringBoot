@@ -79,7 +79,7 @@ public class OCRUtils {
 
     public static void main(String[] args) {
         String picStr = "E:\\filesystem\\project\\SpringIOSpringBoot\\sp90-utils\\ocr";
-        String fileName = "0203769080.png";
+        String fileName = "20220714140324.jpg";
 
 //        String resultSimple = ocrSimple(picStr, fileName);
 //        System.out.println("resultSimple: " + resultSimple);
