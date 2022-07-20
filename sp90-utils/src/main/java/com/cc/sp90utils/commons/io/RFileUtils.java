@@ -62,6 +62,11 @@ public class RFileUtils {
     }
 
     @SneakyThrows
+    public static byte[] readFileToBytes(String path) {
+        return FileUtils.readFileToByteArray(new File(path));
+    }
+
+    @SneakyThrows
     public static String readFileToString(File file) {
         return FileUtils.readFileToString(file, CharsetsConstant.UTF_8);
     }
