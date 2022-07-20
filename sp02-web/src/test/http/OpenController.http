@@ -1,0 +1,3 @@
+###
+GET http://localhost:8002/open/valited/4
+Accept: application/json
