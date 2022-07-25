@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 各种媒体数据以 base64 编码方式直接嵌入网页中的写法
 
@@ -437,4 +437,4 @@ zac	application/x-zaurus-zac
 zip	application/zip
 ~~~
 
-</font>
+</span>

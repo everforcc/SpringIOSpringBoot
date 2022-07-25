@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - [参考一](https://www.cnblogs.com/luckygxf/p/7078662.html)
 - [参考二](https://blog.csdn.net/xixi_haha123/article/details/81082321)
@@ -160,4 +160,4 @@ void heapify() {
 
 ## 模拟timer实现，自定义代码
 
-</font>
+</span>

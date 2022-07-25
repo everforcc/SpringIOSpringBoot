@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 参考
 - [cnblogs](https://www.cnblogs.com/mingforyou/p/4259113.html)
@@ -72,4 +72,4 @@ new String( fileMsg.getBytes("gb2312"), "ISO8859-1" )
 - 
 
 
-</font>
+</span>

@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 父类.class.isAssignableFrom(子类.class)
 - 子类实例 instanceof 父类类型
@@ -27,4 +27,4 @@ private static void check(){
 }
 ~~~
 
-</font>
+</span>

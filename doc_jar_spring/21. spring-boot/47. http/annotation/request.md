@@ -1,8 +1,8 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - @RequestAttribute("user")
 ~~~
 request.set("user", new User)
 ~~~
 
-</font>
+</span>

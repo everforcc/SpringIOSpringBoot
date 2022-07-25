@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - windows需要在官网下载，
 - 3.5之后的需要带-bin 的才能直接运行
@@ -20,4 +20,4 @@ clientPort=2181
      启动脚本 -Dzookeeper.admin.enableServer=false
 ~~~
 
-</font>
+</span>

@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 浅拷贝
 - 只copy本身，而不copy对象包含的其他对象
@@ -37,4 +37,4 @@ protected Object clone() throws CloneNotSupportedException {
 
 
 
-</font>
+</span>

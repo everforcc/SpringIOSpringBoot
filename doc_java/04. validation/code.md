@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 代码中校验非空使用 @NotEmpty 也不能为空字符串
 ~~~
@@ -25,4 +25,4 @@ IDelete
 ~~~
 
 
-</font>
+</span>

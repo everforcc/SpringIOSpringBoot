@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 https://www.cnblogs.com/zsh-blogs/p/10279276.html   
 我们经常要将数字进行格式化，比如取2位小数，这是最常见的。Java 提供 DecimalFormat　类，帮你用最快的速度将数字格式化为你需要的样子。下面是常用的例子：   
@@ -34,4 +34,4 @@ public class Test{
 DecimalFormat 类主要靠 # 和 0 两种占位符号来指定数字长度。0 表示如果位数不足则以 0 填充，# 表示只要有可能就把数字拉上这个位置。上面的例子包含了差不多所有的基本用法，如果你想了解更多，请参考 DecimalFormat 类的文档。   
 
 
-</font>
+</span>

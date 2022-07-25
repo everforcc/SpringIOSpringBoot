@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 1. 关于抽象类
 
@@ -85,4 +85,4 @@ public class StaticDemo {
 - 抽象类，固有属性
 - 接口，便于扩展
 
-</font>
+</span>

@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - Docker 容器在应用程序层创建抽象并将应用程序及其所有依赖项打包在一起
 
@@ -70,4 +70,4 @@ depends_on:
 -  docker-compose -f docker-compose.json up
 
 
-</font>
+</span>

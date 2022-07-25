@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ## 目录格式定义
 
@@ -33,4 +33,4 @@
 
 ~~~
 
-</font>
+</span>

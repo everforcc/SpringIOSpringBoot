@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 从主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。
 
@@ -6,4 +6,4 @@ Referer的正确英语拼法是referrer。由于早期HTTP规范的拼写错误�
 
 Request.ServerVariables("HTTP_REFERER")的用法是防外连接。
 
-</font>
+</span>

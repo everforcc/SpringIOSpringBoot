@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - [Range](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Range_requests)
 
@@ -55,4 +55,4 @@ conn.setRequestProperty("Range", "bytes=0-10");
 FileOutputStream fo = new FileOutputStream(file,true);
 ~~~
 
-</font>
+</span>

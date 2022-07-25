@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### 几种模式
 
@@ -72,4 +72,4 @@ Redis-Cluster采用无中心结构,它的特点如下：
 
 
 
-</font>
+</span>

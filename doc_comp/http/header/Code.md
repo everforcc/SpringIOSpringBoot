@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 编码
 - [HTTP消息](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Messages)
@@ -66,4 +66,4 @@ key | value| value
 504 | Gateway Time-out | 充当网关或代理的服务器，未及时从远端服务器获取请求
 505 | HTTP Version not supported | 服务器不支持请求的HTTP协议的版本，无法完成处理
 
-</font>
+</span>

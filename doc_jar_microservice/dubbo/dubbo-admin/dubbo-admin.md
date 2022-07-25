@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 # Dubbo控制台
 
@@ -65,4 +65,4 @@
 部署完成后，可以访问 http://localhost:8080/swagger-ui.html 来查看所有的restful api
 
 
-</font>
+</span>

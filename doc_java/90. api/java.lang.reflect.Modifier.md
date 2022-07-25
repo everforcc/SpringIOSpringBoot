@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ## 1. 各种属性对应码值
 
@@ -81,4 +81,4 @@
     }
 ~~~
 
-</font>
+</span>

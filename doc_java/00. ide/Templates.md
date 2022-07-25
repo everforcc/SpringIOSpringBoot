@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ~~~
 /**
@@ -18,4 +18,4 @@ public class ${NAME} {
 
 ~~~
 
-</font>
+</span>

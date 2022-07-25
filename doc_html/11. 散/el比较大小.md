@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ~~~
 实例:${fn:length(ecbussinessTripRelationList) gt 0}
@@ -31,4 +31,4 @@
 
 ~~~
 
-</font>
+</span>

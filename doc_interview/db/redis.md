@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - [三种模式](https://blog.csdn.net/weixin_49724150/article/details/121659693)
 - [面试问题](https://blog.csdn.net/qq_40430818/article/details/121802858)
@@ -90,4 +90,4 @@ Hash数据类型的key包含了线程信息
 锁的范围，哪行代码要锁，就锁哪行
 ~~~
 
-</font>
+</span>

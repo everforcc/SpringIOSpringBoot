@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ~~~java
 /** 字符串默认键值     */
@@ -173,4 +173,4 @@ private String decrypt(String strIn) throws Exception {
 
 ~~~
 
-</font>
+</span>

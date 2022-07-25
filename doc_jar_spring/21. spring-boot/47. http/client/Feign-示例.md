@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### GET
 ~~~
@@ -41,4 +41,4 @@ spring | api
 请求路径和类型 | @GetMapping(value = "/path", produces = APPLICATION_JSON_VALUE <br> value路径，produces数据类型
 
 
-</font>
+</span>

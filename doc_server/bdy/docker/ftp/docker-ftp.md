@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ~~~
 docker pull fauria/vsftpd
@@ -22,4 +22,4 @@ ftp://everforcc:c.c.5664@180.76.156.43/
 # vi /etc/vsftpd/virtual_users.txt
 ~~~
 
-</font>
+</span>

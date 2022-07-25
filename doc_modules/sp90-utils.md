@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 所有的工具包，全部放到这里
 - 除了spring的包
@@ -8,4 +8,4 @@
 - 写完代码后，install
 
 
-</font>
+</span>

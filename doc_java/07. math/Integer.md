@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 缓存机制
 ~~~
@@ -52,4 +52,4 @@ public void t3(){
 }
 ~~~
 
-</font>
+</span>

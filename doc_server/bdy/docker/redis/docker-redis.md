@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### 二. redis
 
@@ -31,4 +31,4 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
  --requirepass 123456 密码
 ~~~
 
-</font>
+</span>

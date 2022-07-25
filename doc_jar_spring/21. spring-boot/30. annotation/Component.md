@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ~~~
 @Component下无法使用@Autowired
@@ -13,4 +13,4 @@ private void setExecutorService(ExecutorService multiThread){
 }
 ~~~
 
-</font>
+</span>

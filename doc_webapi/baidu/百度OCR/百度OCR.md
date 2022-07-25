@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### ocr
 
@@ -18,4 +18,4 @@
 ---|---
 百度文字识别所有接口的图像大小限制 | base64编码urlencode后大小不超过4M，最短边至少15px，最长边最大4096px
 
-</font>
+</span>

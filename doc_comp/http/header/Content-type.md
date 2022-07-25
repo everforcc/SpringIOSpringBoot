@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - [Content-Type](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type)
 - [菜鸟教程](https://www.runoob.com/http/http-content-type.html)
@@ -88,4 +88,4 @@ application/x-www-form-urlencoded ： <form encType=””>中默认的encType�
 multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式
 ~~~
 
-</font>
+</span>

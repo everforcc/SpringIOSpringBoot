@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 # 原理
 
@@ -13,4 +13,4 @@
 
 https://www.cnblogs.com/chengmo/archive/2014/05/18/3735917.html
 
-</font>
+</span>

@@ -1,9 +1,9 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 BigDecimal.ROUND\_HALF_XXX的各种用法   
 在银行、帐户、计费等领域，BigDecimal提供了精确的数值计算。其中8种舍入方式值得掌握。   
 1. ROUND_UP   
-<font color="Red">舍入远离零的舍入模式。</font>   
+<font color="Red">舍入远离零的舍入模式。</span>   
 在丢弃非零部分之前始终增加数字(始终对非零舍弃部分前面的数字加1)。   
 注意，此舍入模式始终不会减少计算值的大小。   
 ~~~ java
@@ -13,27 +13,27 @@ System.out.println(a.setScale(2,BigDecimal.ROUND_UP));
 System.out.println(b.setScale(2,BigDecimal.ROUND_UP));
 ~~~
 2. ROUND_DOWN   
-<font color="Red">接近零的舍入模式。</font>   
+<font color="Red">接近零的舍入模式。</span>   
 在丢弃某部分之前始终不增加数字(从不对舍弃部分前面的数字加1，即截短)。   
 注意，此舍入模式始终不会增加计算值的大小。   
 3. ROUND_CEILING   
-<font color="Red">接近正无穷大的舍入模式。</font>   
+<font color="Red">接近正无穷大的舍入模式。</span>   
 如果 BigDecimal 为正，则舍入行为与 ROUND_UP 相同;   
 如果为负，则舍入行为与 ROUND_DOWN 相同。   
 注意，此舍入模式始终不会减少计算值。   
 4. ROUND_FLOOR   
-<font color="Red">接近负无穷大的舍入模式。</font>   
+<font color="Red">接近负无穷大的舍入模式。</span>   
 如果 BigDecimal 为正，则舍入行为与 ROUND_DOWN 相同;   
 如果为负，则舍入行为与 ROUND_UP 相同。   
 注意，此舍入模式始终不会增加计算值。   
 5. ROUND\_HALF_UP   
 向“最接近的”数字舍入，如果与两个相邻数字的距离相等，则为向上舍入的舍入模式。   
 如果舍弃部分 >= 0.5，则舍入行为与 ROUND\_UP 相同;否则舍入行为与 ROUND_DOWN 相同。   
-注意，这是我们大多数人在小学时就学过的舍入模式(<font color="Red">四舍五入</font>)。   
+注意，这是我们大多数人在小学时就学过的舍入模式(<font color="Red">四舍五入</span>)。   
 6. ROUND\_HALF\_DOWN   
 向“最接近的”数字舍入，如果与两个相邻数字的距离相等，则为上舍入的舍入模式。   
-如果舍弃部分 > 0.5，则舍入行为与 ROUND\_UP 相同;否则舍入行为与 ROUND\_DOWN 相同(<font color="Red">五舍六入</font>)。   
-7. ROUND\_HALF_EVEN    <font color="Red">银行家舍入法</font>   
+如果舍弃部分 > 0.5，则舍入行为与 ROUND\_UP 相同;否则舍入行为与 ROUND\_DOWN 相同(<font color="Red">五舍六入</span>)。   
+7. ROUND\_HALF_EVEN    <font color="Red">银行家舍入法</span>   
 向“最接近的”数字舍入，如果与两个相邻数字的距离相等，则向相邻的偶数舍入。   
 如果舍弃部分左边的数字为奇数，则舍入行为与 ROUND\_HALF_UP 相同;   
 如果为偶数，则舍入行为与 ROUND\_HALF_DOWN 相同。   
@@ -46,4 +46,4 @@ System.out.println(b.setScale(2,BigDecimal.ROUND_UP));
 v断言请求的操作具有精确的结果，因此不需要舍入。
 如果对获得精确结果的操作指定此舍入模式，则抛出ArithmeticException。
 
-</font>
+</span>

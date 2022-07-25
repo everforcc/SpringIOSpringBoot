@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 1. pom
 ~~~xml
@@ -37,4 +37,4 @@ JSONObject getAlbumCount(@RequestParam("uid")String uid);
 
 ~~~
 
-</font>
+</span>

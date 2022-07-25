@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### 一. mysql
 
@@ -44,4 +44,4 @@ source /mysql/backup.sql;
 ~~~
 
 
-</font>
+</span>

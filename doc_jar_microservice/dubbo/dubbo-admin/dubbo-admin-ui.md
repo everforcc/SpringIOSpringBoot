@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 # dubbo-admin-ui
 
@@ -27,4 +27,4 @@ managed by [front end maven plugin](https://github.com/eirslett/frontend-maven-p
 
 
 
-</font>
+</span>

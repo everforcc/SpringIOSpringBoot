@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - yml配置文件
 ~~~
@@ -8,4 +8,4 @@ com.mysql.jdbc.Driver
 com.mysql.cj.jdbc.Driver
 ~~~
 
-</font>
+</span>

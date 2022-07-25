@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 生成格式，
 - 换行符 /r/n
@@ -9,4 +9,4 @@ private static String imgPath = "![](%s)  ";
 - 
 
 
-</font>
+</span>

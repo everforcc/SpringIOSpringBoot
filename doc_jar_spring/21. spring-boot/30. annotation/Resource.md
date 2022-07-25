@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - [原文](https://cloud.tencent.com/developer/article/1520392)
 
@@ -247,4 +247,4 @@ public @interface Resource {
 
 ### 1.3 类
 
-</font>
+</span>

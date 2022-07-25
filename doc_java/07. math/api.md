@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 
 字段摘要
@@ -155,4 +155,4 @@ PI
                                            static double random()   
 
 
-</font>
+</span>

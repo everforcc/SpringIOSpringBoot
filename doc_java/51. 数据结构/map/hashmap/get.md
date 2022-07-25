@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ~~~
 
@@ -31,4 +31,4 @@ HashMapEntry
 若hash值相等且equals返回true，返回值
 ~~~
 
-</font>
+</span>

@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - [x] 17.设计模式
 - [ ] 25.设计模式
@@ -13,4 +13,4 @@
 
 
 
-</font>
+</span>

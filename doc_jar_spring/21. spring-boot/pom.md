@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 版本都在parent里面管理
 - 启动器
@@ -45,4 +45,4 @@ true: <!--可选依赖，如果你在项目B中把C依赖声明为可选，你�
 
 
 
-</font>
+</span>

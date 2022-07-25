@@ -1,4 +1,4 @@
-<font face="SimSun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### pro 
 
@@ -76,4 +76,4 @@ poolPreparedStatements false 是否缓存preparedStatement，也就是PSCache。
 ~~~
 
 
-</font>
+</span>

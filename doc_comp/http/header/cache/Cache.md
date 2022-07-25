@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 参考
 - [CSDN](https://blog.csdn.net/u012375924/article/details/82806617)
@@ -103,4 +103,4 @@ If-None-Match和If-Match的区别是：
 1. 缓存开关是： pragma， cache-control。
 2. 缓存校验有：Expires，Last-Modified，etag。
 
-</font>
+</span>

@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 - 2.2.2之后
 ~~~
@@ -6,4 +6,4 @@
 import org.junit.jupiter.api.Test;
 ~~~
 
-</font>
+</span>
