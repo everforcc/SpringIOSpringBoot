@@ -76,10 +76,10 @@
             <artifactId>lombok</artifactId>
             <!--<scope>test</scope>-->
         </dependency>
-<!--        <dependency>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <artifactId>slf4j-log4j12</artifactId>-->
+        <!--            <groupId>org.slf4j</groupId>-->
+        <!--        </dependency>-->
         <!-- JSR校验 -->
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -123,6 +123,11 @@
         <dependency>
             <groupId>net.sourceforge.tess4j</groupId>
             <artifactId>tess4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.crab2died</groupId>
+            <artifactId>Excel4J</artifactId>
         </dependency>
 
     </dependencies>

@@ -68,6 +68,7 @@
         <org.testng.testng>RELEASE</org.testng.testng>
         <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
         <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
+        <com.github.excel4j>3.0.0</com.github.excel4j>
 
         <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
     </properties>
@@ -271,6 +272,12 @@
                 <groupId>net.sourceforge.tess4j</groupId>
                 <artifactId>tess4j</artifactId>
                 <version>${net.sourceforge.tess4j}</version>
+            </dependency>
+            <!-- excle -->
+            <dependency>
+                <groupId>com.github.crab2died</groupId>
+                <artifactId>Excel4J</artifactId>
+                <version>${com.github.excel4j}</version>
             </dependency>
 
         </dependencies>

@@ -15,10 +15,10 @@ public class RegexUtils {
 
     // 不是javabean 无所谓
     public static boolean isMatches(String regex,String string){
-        Pattern pattern3 = Pattern.compile(regex);
-        Matcher matcher3 = pattern3.matcher(string);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
         //是否匹配到了
-        if (matcher3.matches()) {
+        if (matcher.matches()) {
             return true;
         }
         return false;
