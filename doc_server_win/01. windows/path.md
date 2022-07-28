@@ -7,5 +7,16 @@
 D:\java\environment\7-Zip;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
 - 
 ~~~
+- 别名
+~~~
+JAVA_HOME
+jdk路径
+~~~
+- path
+~~~
+%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin
+~~~
+
+
 
 </span>
