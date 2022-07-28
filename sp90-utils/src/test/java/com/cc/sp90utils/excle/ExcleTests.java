@@ -7,6 +7,7 @@
 
 package com.cc.sp90utils.excle;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cc.sp90utils.excle.modules.Student2;
 import com.github.crab2died.ExcelUtils;
 import com.github.crab2died.exceptions.Excel4JException;
@@ -65,6 +66,19 @@ public class ExcleTests {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void tJson() {
+        Student2 student2 = new Student2(10000L, "学生", new Date(), 201, true);
+        System.out.println(student2.toString());
+    }
+
+    @Test
+    public void jsonToDto() {
+        String json = "{\"classes\":201,\"date\":1658990859538,\"expel\":true,\"id\":10000,\"name\":\"学生\"}";
+        Student2 student2 = JSONObject.parseObject(json, Student2.class);
+        System.out.println(student2.toString());
     }
 
 }

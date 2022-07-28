@@ -7,16 +7,19 @@
 
 package com.cc.sp90utils.excle.modules;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cc.sp90utils.excle.converter.Student2DateConverter;
 import com.cc.sp90utils.excle.converter.Student2ExpelConverter;
 import com.github.crab2died.annotation.ExcelField;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student2 {
@@ -38,4 +41,8 @@ public class Student2 {
     @ExcelField(title = "是否开除", order = 5, readConverter = Student2ExpelConverter.class)
     private boolean expel;
 
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
+    }
 }

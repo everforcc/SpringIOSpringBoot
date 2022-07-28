@@ -2,6 +2,7 @@ package com.cc.sp02thymeleaf.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cc.sp02thymeleaf.annotation.EnumsValited;
+import com.cc.sp02thymeleaf.dto.CustomUser;
 import com.cc.sp02thymeleaf.dto.ParamDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -50,6 +51,17 @@ public class OpenController {
         ParamDto paramDto = JSONObject.parseObject(json, ParamDto.class);
         System.out.println("postObj参数 param: {}" + paramDto.toString());
         return paramDto;
+    }
+
+    /**
+     * 上传对象json转对象
+     *
+     * @param json 对象json
+     */
+    @GetMapping("/json")
+    public void getParamsJson(@RequestParam("json") String json) {
+        CustomUser customUser = JSONObject.parseObject(json, CustomUser.class);
+        System.out.println(customUser.toString());
     }
 
 }
