@@ -7,8 +7,20 @@
 package com.cc.sp02thymeleaf.dto;
 
 
-import javax.validation.constraints.NotEmpty;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import java.util.Date;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ParamDto {
 
     private FieldEnum statusEnum;
@@ -16,8 +28,8 @@ public class ParamDto {
     private String name;
     private String description;
 
-    public ParamDto() {
-    }
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date date;
 
     public ParamDto(FieldEnum statusEnum, String name, String description) {
         this.statusEnum = statusEnum;
@@ -25,28 +37,8 @@ public class ParamDto {
         this.description = description;
     }
 
-    public FieldEnum getStatusEnum() {
-        return statusEnum;
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
     }
-
-    public void setStatusEnum(FieldEnum statusEnum) {
-        this.statusEnum = statusEnum;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }
