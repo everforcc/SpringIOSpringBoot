@@ -6,3 +6,9 @@ Accept: application/json
 GET http://localhost:8002/open/json?json={"name":"name","pas":"pas"}
 Accept: application/json
 
+### 测试异步执行
+GET http://localhost:8082/open/asyn
+Accept: application/json
+### 测试异步执行带返回值
+GET http://localhost:8082/open/asynCallBack
+Accept: application/json

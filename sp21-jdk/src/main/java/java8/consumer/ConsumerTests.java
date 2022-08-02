@@ -14,7 +14,7 @@ public class ConsumerTests<E> {
     /**
      * 传入一个对象作为参数,然后执行对象的方法
      *
-     * @param consumer
+     * @param consumer 消费参数
      */
     public void execute(Consumer<ConsumerTests<E>> consumer) {
         System.out.println("---- 1111 ----");

@@ -1,0 +1,13 @@
+spring:
+  thymeleaf:
+    cache: false
+  task:
+    execution:
+      pool:
+        max-size: 6
+        core-size: 3
+        keep-alive: 3s
+        queue-capacity: 1000
+      thread-name-prefix: UserThread
+server:
+  port: 8082

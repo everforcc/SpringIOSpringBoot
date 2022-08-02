@@ -20,7 +20,7 @@ import java.util.Date;
 @RequestMapping("/open")
 @Validated
 @Slf4j
-public class DateController {
+public class OpenDateController {
 
     @GetMapping("/date")
     public String getParam() {
