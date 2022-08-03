@@ -13,14 +13,20 @@ import com.github.crab2died.ExcelUtils;
 import com.github.crab2died.exceptions.Excel4JException;
 import org.junit.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ExcleTests {
 
-
+    /**
+     * 从文件路径读取数据
+     */
     @Test
     public void readExcleTests() {
         // 从弟几行开始,第一行是0
@@ -52,6 +58,38 @@ public class ExcleTests {
         }
     }
 
+    /**
+     * 从文件流，读取数据
+     */
+    @Test
+    public void readExcleStreamTests() {
+
+        // 开始读取行坐标(默认0)
+        int offsetLine = 0;
+        // 最大读取行数(默认表尾)
+        int limitLine =  Integer.MAX_VALUE;
+        // Sheet索引(默认0)
+        int sheetIndex = 0;
+        String path = "./Student2.xlsx";
+        try (InputStream inputStream = Files.newInputStream(Paths.get(path))) {
+            /*
+             * offsetLine
+             * limitLine
+             * sheetIndex
+             */
+            List<Student2> lists = ExcelUtils.getInstance().readExcel2Objects(inputStream, Student2.class, 1, Integer.MAX_VALUE, 0);
+            System.out.println("读取Excel至String数组：");
+            for (Student2 list : lists) {
+                System.out.println(list);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 写入文件数据
+     */
     @Test
     public void writeExcleTests() {
         String path = "./Student2.xlsx";
