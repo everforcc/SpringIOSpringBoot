@@ -70,6 +70,7 @@
         <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
         <com.github.excel4j>3.0.0</com.github.excel4j>
 
+        <org.bouncycastle.bcprov.jdk15on>1.58</org.bouncycastle.bcprov.jdk15on>
         <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
     </properties>
 
@@ -278,6 +279,12 @@
                 <groupId>com.github.crab2died</groupId>
                 <artifactId>Excel4J</artifactId>
                 <version>${com.github.excel4j}</version>
+            </dependency>
+            <!-- 加密工具包 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${org.bouncycastle.bcprov.jdk15on}</version>
             </dependency>
 
         </dependencies>
