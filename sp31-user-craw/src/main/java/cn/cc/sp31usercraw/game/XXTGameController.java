@@ -51,7 +51,7 @@ public class XXTGameController {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
 
             // 网页结构是 40个一组
-            int pre = i / 40 + 1;
+            int pre = pre(i);
             int ind = i % 40;
 
             Map<String, WebElement> mapElement = new HashMap<>();
@@ -60,10 +60,11 @@ public class XXTGameController {
             WebElement webElement_1 = webDriver.findElement(By.xpath("//*[@id=\"GameLayer" + pre + "-" + ind + "\"]"));
             String classVal_1 = webElement_1.getAttribute("class");
             log.info(classVal_1);
+            log.info("webElement_1.toString: " + webElement_1.toString());
             put(classVal_1, webElement_1, mapElement, mapFlag);
 
             i++;
-            pre = i / 40 + 1;
+            pre = pre(i);
             ind = i % 40;
 
             WebElement webElement_2 = webDriver.findElement(By.xpath("//*[@id=\"GameLayer" + pre + "-" + ind + "\"]"));
@@ -72,7 +73,7 @@ public class XXTGameController {
             put(classVal_2, webElement_2, mapElement, mapFlag);
 
             i++;
-            pre = i / 40 + 1;
+            pre = pre(i);
             ind = i % 40;
 
             WebElement webElement_3 = webDriver.findElement(By.xpath("//*[@id=\"GameLayer" + pre + "-" + ind + "\"]"));
@@ -81,7 +82,7 @@ public class XXTGameController {
             put(classVal_3, webElement_3, mapElement, mapFlag);
 
             i++;
-            pre = i / 40 + 1;
+            pre = pre(i);
             ind = i % 40;
 
             WebElement webElement_4 = webDriver.findElement(By.xpath("//*[@id=\"GameLayer" + pre + "-" + ind + "\"]"));
@@ -90,6 +91,7 @@ public class XXTGameController {
             put(classVal_4, webElement_4, mapElement, mapFlag);
 
             for (Map.Entry<String, Boolean> entry : mapFlag.entrySet()) {
+                log.info("当前坐标: {}", i);
                 log.info("准备点击: {}", entry.getValue());
                 if (entry.getValue()) {
                     String key = entry.getKey();
@@ -100,8 +102,21 @@ public class XXTGameController {
                     continue;
                 }
             }
-            Thread.sleep(500);
+            Thread.sleep(1);
+//            if (79 == i) {
+//                Thread.sleep(60 * 1000);
+//            }
         }
+    }
+
+    /**
+     * 计算pre坐标
+     */
+    public static int pre(int i) {
+        // 1. 先除以 40
+        int pre = i / 40;
+        // 2. 如果是偶数那就是1，如果是奇数，俺就是2
+        return pre % 2 == 0 ? 1 : 2;
     }
 
     /**
