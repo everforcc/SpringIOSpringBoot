@@ -94,7 +94,7 @@ public class ExcleTests {
     public void writeExcleTests() {
         String path = "./Student2.xlsx";
         List<Student2> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5000; i++) {
             list.add(new Student2(10000L + i, "学生" + i, new Date(), 201, i % 2 == 0));
         }
         try {

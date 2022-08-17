@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class JDBCController {
+public class JdbcTemplateController {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -19,17 +19,21 @@ public class JDBCController {
     @Autowired
     private NovelMapper novelMapper;
 
-    @GetMapping("/jdbc")
-    public List<Map<String,Object>> jdbc(){
+    /**
+     * 使用 JdbcTemplate 发送脚本
+     */
+    @GetMapping("/jdbcTemplate")
+    public List<Map<String, Object>> jdbc() {
         // 查询数据库的所有信息
-
         String sql = "select * from cc_website";
-
         return jdbcTemplate.queryForList(sql);
     }
 
+    /**
+     * 使用 mybatis
+     */
     @GetMapping("/mybatis")
-    public List<NovelDto> novelList(){
+    public List<NovelDto> novelList() {
         return novelMapper.queryNovelList();
     }
 
