@@ -24,5 +24,8 @@ IDelete
 
 ~~~
 
+### 对象作为属性
+
+- @NotNull
 
 </span>
