@@ -2,6 +2,8 @@ package com.cc.sp90utils.commons.web;
 
 import com.cc.sp90utils.constant.CharsetsConstant;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
 /**
@@ -33,10 +35,13 @@ public class JUrlUtils {
     }
 
     public static void main(String[] args) {
-        String[] strings = new String[]{"+"," ","/","?","%"};
-        for(String s:strings){
-            System.out.println(charToUrlCode(s, CharsetsConstant.GB2312).toUpperCase());
-        }
+
+//        String[] strings = "coe@BH%*8L95#cjdA#".split("");
+//        System.out.println(strings.length);
+//        //String[] strings = new String[]{"+"," ","/","?","%"};
+//        for(String s:strings){
+//            System.out.print(charToUrlCode(s, CharsetsConstant.GB2312).toUpperCase());
+//        }
         /**
          * 2b
          * 20
@@ -44,6 +49,9 @@ public class JUrlUtils {
          * 3f
          * 25
          */
+        //System.out.println(charToUrlCode("@", CharsetsConstant.GB2312).toUpperCase());
+        String str = "coe@BH%*8L95#cjdA#";
+        System.out.println(URLEncoder.encode(str));
     }
 
 }

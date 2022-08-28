@@ -3,6 +3,8 @@ package business.cmd.invoke;
 import cmd.invoke.SystemTools;
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class SystemToolsTest {
 
 
@@ -20,8 +22,13 @@ public class SystemToolsTest {
      */
     @Test
     public void runShell(){
-        String result = SystemTools.runShell("E:\\filesystem\\test\\shell\\","shell.bat");
-        System.out.println(result);
+//        String result = SystemTools.runShell("E:\\filesystem\\test\\shell\\","shell.bat");
+//        System.out.println(result);
+        try {
+            Runtime.getRuntime().exec("explorer.exe /select," + "ftp://everforcc:c.c.5664@180.76.156.43/");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
