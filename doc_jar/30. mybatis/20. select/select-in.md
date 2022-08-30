@@ -11,11 +11,11 @@
 <select id="whereIn" resultType="java.lang.String">
     SELECT e.`orderno` FROM cc_t_order e
     WHERE e.`id` IN
-    <foreach collection="stringList" index="index" open="(" close=")" item="id" separator=",">
+    <foreach collection="stringList" index="index" open="(" close=")" item="bean" separator=",">
         <if test="(index % 1000) == 999">
             ) OR e.`id` IN(
         </if>
-        #{id}
+        #{bean.id},#{bean.uuid}
     </foreach>
 </select>
 ~~~
