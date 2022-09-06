@@ -1,4 +1,4 @@
-<font face="Simsun" size=3>
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
 
 ### 使用说明
 
@@ -53,4 +53,4 @@
 某一章的具体内容
 ~~~
 
-</font>
+</span>

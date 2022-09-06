@@ -65,7 +65,8 @@ public class NovelCommonFlowService implements INovelCommonFlowService {
     SeleniumPool seleniumPool;
 
     // 数据处理的实现接口
-    @Resource(name = "businessDefault")
+    //@Resource(name = "businessDefault")
+    @Resource(name = "businessDDDD")
     IBusiness iBusiness;
 
     /**

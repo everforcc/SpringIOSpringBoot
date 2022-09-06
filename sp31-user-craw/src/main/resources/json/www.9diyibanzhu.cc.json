@@ -1,0 +1,15 @@
+{
+  "rootUrl": "http://www.tz659.com",
+  "novelMsgTileXR": "//div[@class='right']//h1//text()",
+  "novelMsgDescriptionXR": "//div[@class='mod book-intro']//div[@class='bd']//text()",
+  "novelMsgAuthXR": "//div[@class='right']//p[@class='info']//text()",
+  "novelCapterMenuXR": "//a[@class='indexPage']//@href",
+  "novelCapterUrlListXR": "//div[@class='container']//div[7]//a//@href",
+  "novelCapterPageNextUrlXR": "//a[@class='nextPage']//@href",
+  "novelCapterNameXR": "//h1[@class='page-title']/text()",
+  "novelContentUrlPageXR": "//center[@class='chapterPages']//a//text()",
+  "novelContentXRFlowList": [
+    "//div[@id='ad']",
+    "//div[@class='neirong']"
+  ]
+}
