@@ -23,13 +23,19 @@ public class DateTimeFormatterTests {
         return dateTimeFormatter;
     }
 
+    /**
+     * 不同格式化
+     */
     public static DateTimeFormatter initlocalDateTime() {
         DateTimeFormatter defaultDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         return dateTimeFormatter;
     }
 
-    public static void localDate(){
+    /**
+     * 格式化测试
+     */
+    public static void localDate() {
         String timeStr = "2022年08月02日";
         DateTimeFormatter dateTimeFormatter = initLocalDate();
         LocalDate date = LocalDate.parse(timeStr, dateTimeFormatter);
@@ -38,7 +44,10 @@ public class DateTimeFormatterTests {
         System.out.println(format);
     }
 
-    public static void localDateTime(){
+    /**
+     * 格式化测试
+     */
+    public static void localDateTime() {
         String timeStr = "2022-08-02 12:00:00";
         DateTimeFormatter dateTimeFormatter = initlocalDateTime();
         LocalDateTime date = LocalDateTime.parse(timeStr, dateTimeFormatter);
@@ -47,8 +56,23 @@ public class DateTimeFormatterTests {
         System.out.println(format);
     }
 
+    /**
+     * 时间增加
+     * 时分秒
+     */
+    public static void timeAdd() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("当前时间: " + now.format(dateTimeFormatter));
+        now = now.plusMonths(1).plusDays(1).plusHours(1).plusMinutes(1).plusSeconds(1);
+        System.out.println("增加一月一天一小时一分钟一秒钟后的时间是: " + now.format(dateTimeFormatter));
+        now = now.plusMonths(-2).plusDays(-2).plusHours(-2).plusMinutes(-2).plusSeconds(-2);
+        System.out.println("减少一月一天一小时一分钟一秒钟后的时间是: " + now.format(dateTimeFormatter));
+    }
+
     public static void main(String[] args) {
-        localDateTime();
+        //localDateTime();
+        timeAdd();
     }
 
 }
