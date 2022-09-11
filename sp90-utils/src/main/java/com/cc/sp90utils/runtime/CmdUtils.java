@@ -83,8 +83,14 @@ public class CmdUtils {
         return result;
     }
 
+    /**
+     * 读取执行返回结果
+     *
+     * @param process 进程
+     * @return 返回执行结果
+     */
     private static String process(Process process) {
-        String result = RIOUtils.toString(process.getInputStream());
+        String result = RIOUtils.toString(process.getInputStream(), CharsetsConstant.GBK.toString());
         process.destroy();
         return result;
     }
