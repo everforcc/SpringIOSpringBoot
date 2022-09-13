@@ -5,8 +5,6 @@ import com.cc.sp10aop.userinterface.ServiceAspect;
 import com.cc.sp10aop.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -23,7 +21,7 @@ public class ServiceAspectImpl {
      * 2. 更新的时候处理更新字段， eg: 更新时间,用户id，用户名，
      */
 
-    protected void save(JoinPoint joinPoint){
+    protected void save(JoinPoint joinPoint) {
 
         MDC.put("X-B3-TraceId", StringUtils.uuid32());
 
@@ -32,7 +30,7 @@ public class ServiceAspectImpl {
          */
         ServiceAspect serviceAspect = joinPoint.getTarget().getClass().getAnnotation(com.cc.sp10aop.userinterface.ServiceAspect.class);
 
-        if(Objects.nonNull(serviceAspect)){
+        if (Objects.nonNull(serviceAspect)) {
             /**
              * 提取系统中公共的字段赋值
              */
@@ -51,9 +49,9 @@ public class ServiceAspectImpl {
             final Object obj = joinPoint.getArgs()[0]; // 当前新增对象
             final Object userId = joinPoint.getArgs().length > 1 ? joinPoint.getArgs()[1] : 0; // 当前操作用户id
             // 如果有多余的可以指定忽略某些字段
-            BeanUtils.copyProperties(CommonFiledDto.save(userId),obj);
+            BeanUtils.copyProperties(CommonFiledDto.save(userId), obj);
 
-        }else {
+        } else {
             //
             log.info("没有获取到注解 @ServiceAspect");
         }
