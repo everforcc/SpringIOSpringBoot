@@ -35,4 +35,13 @@ public interface ISevenUtils {
      */
     void deCompression(String pas, String oldPath, String newPath);
 
+    /**
+     * 解压目录
+     *
+     * @param pas        解压密码
+     * @param oldPathDir 压缩文件夹路径
+     * @param newPath    解压后的路径, 直接到当前文件夹下,这个使用要注意
+     */
+    void deCompressionDir(String pas, String oldPathDir, String newPath);
+
 }

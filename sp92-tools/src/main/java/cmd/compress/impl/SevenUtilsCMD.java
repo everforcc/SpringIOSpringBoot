@@ -57,6 +57,24 @@ public class SevenUtilsCMD implements ISevenUtils {
         System.out.println("执行结果: " + result);
     }
 
+    @Override
+    public void deCompressionDir(String pas, String oldPathDir, String newPath) {
+        File file = new File(oldPathDir);
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File tempDir : files) {
+                if (tempDir.isDirectory()) {
+                    File[] files7z = tempDir.listFiles();
+                    System.out.println("files7z.length:" + files7z.length);
+                    for (File z7 : files7z) {
+                        System.out.println(z7.getAbsolutePath());
+                        this.deCompression(pas, z7.getAbsolutePath(), newPath);
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * 递归处理文件
      *
