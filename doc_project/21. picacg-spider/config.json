@@ -1,0 +1,11 @@
+{
+  "email": "",
+  "password": "",
+  "imgDirectory": "E:\\filesystem\\project\\picacg-spider",
+  "range": [1, 20],
+  "socks5": {
+    "isEnable": true,
+    "host": "127.0.0.1",
+    "port": 1090
+  }
+}
