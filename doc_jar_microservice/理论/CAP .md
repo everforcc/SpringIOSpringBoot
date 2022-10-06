@@ -1,10 +1,5 @@
 <span  style="font-family: Simsun,serif; font-size: 17px; ">
 
-### 微服务框架
-
-- SpringCloud
-- Dubbo
-
 ### CAP
 
 - CAP理论
