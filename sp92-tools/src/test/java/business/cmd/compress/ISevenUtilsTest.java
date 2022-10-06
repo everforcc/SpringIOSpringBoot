@@ -22,8 +22,15 @@ public class ISevenUtilsTest {
      * 压缩指定目录的所有文件
      */
     @Test
-    public void compress() {
-        //iSevenUtils.compress(password, path, FileTypeCMDEnum.z7, CompressEnum.DIR);
+    public void compressFILE() {
+        iSevenUtils.compress(password, path, newPathDIR, FileTypeCMDEnum.z7, CompressEnum.FILE);
+    }
+
+    /**
+     * 压缩指定目录 到7z
+     */
+    @Test
+    public void compressDIR() {
         iSevenUtils.compress(password, path, newPathDIR, FileTypeCMDEnum.z7, CompressEnum.DIR);
     }
 
