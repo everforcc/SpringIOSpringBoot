@@ -10,13 +10,13 @@ public class ISevenUtilsTest {
 
     ISevenUtils iSevenUtils = new SevenUtilsCMD();
     // 压缩密码
-    private static final String password = "123qwe";
+    private static final String password = "";
     // 待压缩文件/目录 路径
-    private static final String path = "E:\\filesystem\\project\\SpringIOSpringBoot\\sp92-tools\\compress";
-    // 目标文件路径
-    private static final String newPathFILE = "F:\\everforcc\\移动硬盘\\正在上传\\东周列国·春秋篇7z";
-    // 目标目录路径
-    private static final String newPathDIR = "E:\\filesystem\\project\\SpringIOSpringBoot\\sp92-tools\\compress7z";
+    private static final String path = "fielPath";
+    // 目标 文件路径
+    //private static final String newPathFILE = "F:\\everforcc\\移动硬盘\\正在上传\\东周列国·春秋篇7z";
+    // 目标 目录路径
+    private static final String newPathDIR = "targetPath";
 
     /**
      * 压缩指定目录的所有文件
@@ -40,7 +40,7 @@ public class ISevenUtilsTest {
     @Test
     public void compressOneFile() {
         //iSevenUtils.compress(password, path, FileTypeCMDEnum.z7, CompressEnum.FILE);
-        iSevenUtils.compress(password, path, newPathFILE, FileTypeCMDEnum.z7, CompressEnum.FILE);
+        //iSevenUtils.compress(password, path, newPathFILE, FileTypeCMDEnum.z7, CompressEnum.FILE);
     }
 
     /**
@@ -48,11 +48,26 @@ public class ISevenUtilsTest {
      */
     @Test
     public void deCompressOneFile() {
-        String pas = "99";
-        String oldPath = "F:\\Cache\\java\\巧克力与香子兰番外.zip";
-        String newPath = "F:\\Cache\\java\\解压";
-        iSevenUtils.deCompression(pas, oldPath, newPath);
+        String pas = "coser01.com";
+//        String oldPath = "F:\\everforcc\\移动硬盘\\待处理数据\\Vol.013-蠢沫沫 [更新至 194 期]\\No.001\\No.001-艾米莉亚的睡衣 [40P].7z";
+        String newPath = "F:\\everforcc\\移动硬盘\\待处理数据\\蠢沫沫\\";
+//        iSevenUtils.deCompression(pas, oldPath, newPath);
 
+        String fileRoot = "F:\\everforcc\\移动硬盘\\待处理数据\\Vol.013-蠢沫沫 [更新至 194 期]";
+//        File file = new File(fileRoot);
+//        if (file.isDirectory()) {
+//            File[] files = file.listFiles();
+//            for (File tempDir : files) {
+//                if (tempDir.isDirectory()) {
+//                    File[] files7z = tempDir.listFiles();
+//                    System.out.println("files7z.length:" + files7z.length);
+//                    for (File z7 : files7z) {
+//                        System.out.println(z7.getAbsolutePath());
+//                        iSevenUtils.deCompression(pas, z7.getAbsolutePath(), newPath);
+//                    }
+//                }
+//            }
+//        }
     }
 
 }
