@@ -19,10 +19,11 @@
         <module>sp01-init</module>
         <module>sp02-web</module>
         <module>sp03-data</module>
+        <module>sp04-MybatisPlus</module>
         <module>sp04-security</module>
         <module>sp10-aop</module>
-<!--        <module>sp20-comp</module>-->
-<!--        <module>sp21-jdk</module>-->
+        <!--        <module>sp20-comp</module>-->
+        <!--        <module>sp21-jdk</module>-->
         <!-- jar使用 -->
         <module>sp31-user-craw</module>
         <module>sp90-utils</module>
