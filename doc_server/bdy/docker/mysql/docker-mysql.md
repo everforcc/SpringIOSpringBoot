@@ -5,6 +5,7 @@
 - [文档](https://hub.docker.com/_/mysql)
 
 #### - 5.7
+
 ~~~
 # 1. build
 docker build -t mysql5.7 -f Dckerfile-mysql5.7 .
@@ -23,7 +24,9 @@ c.c.5664
 source /mysql/privileges.sql
 source /mysql/backup.sql
 ~~~
+
 #### - 8.0
+
 ~~~
 # 1. build
 docker build -t mysql8.0 -f Dckerfile-mysql8.0 .
@@ -42,6 +45,5 @@ c.c.5664/ 本地不需要密码
 source /mysql/privileges.sql;
 source /mysql/backup.sql;
 ~~~
-
 
 </span>
