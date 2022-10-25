@@ -10,13 +10,13 @@ public class ISevenUtilsTest {
 
     ISevenUtils iSevenUtils = new SevenUtilsCMD();
     // 压缩密码
-    private static final String password = "";
+    private static final String password = "c.c.5664";
     // 待压缩文件/目录 路径
-    private static final String path = "fielPath";
+    private static final String path = "F:\\everforcc\\移动硬盘\\正在上传\\文\\左传 作者左丘明";
     // 目标 文件路径
     //private static final String newPathFILE = "F:\\everforcc\\移动硬盘\\正在上传\\东周列国·春秋篇7z";
     // 目标 目录路径
-    private static final String newPathDIR = "targetPath";
+    private static final String newPathDIR = "F:\\everforcc\\移动硬盘\\正在上传\\文\\左传 作者左丘明7z";
 
     /**
      * 压缩指定目录的所有文件

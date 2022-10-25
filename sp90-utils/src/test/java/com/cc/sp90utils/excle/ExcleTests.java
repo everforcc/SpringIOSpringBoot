@@ -13,9 +13,7 @@ import com.github.crab2died.ExcelUtils;
 import com.github.crab2died.exceptions.Excel4JException;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,6 +21,26 @@ import java.util.Date;
 import java.util.List;
 
 public class ExcleTests {
+
+    @Test
+    public void readUserExcleTests() {
+        int offsetLine = 2;
+        int limitLine = Integer.MAX_VALUE;
+        int sheetIndex = 0;
+        File file = new File("F:\\Cache\\Tencent\\718497737\\FileRecv\\王文庆用户系统注册-20221020151720.xlsx");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            List<UcodeUser> ucodeUserList = ExcelUtils.getInstance().readExcel2Objects(fileInputStream, UcodeUser.class, offsetLine, limitLine, sheetIndex);
+            System.out.println(ucodeUserList.size());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Excel4JException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * 从文件路径读取数据
