@@ -1,0 +1,4 @@
+cd hazelcast-5.1.4-slim/bin
+start "cluster-1" hz-start.bat
+start "cluster-2" hz-start.bat
+start "cluster-3" hz-start.bat
