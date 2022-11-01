@@ -23,35 +23,18 @@ import java.util.Map;
  */
 public class HZClientMap {
 
-    // 拿到客户端
-    private static HazelcastInstance hzClient = HZClientInit.init_2();
-    // 拿到 hz 内map str 的 key
-    private static final String hzMapStr = "my-distributed-map-str-2";
-    // 拿到 hz 内map obj 的 key
-    private static final String hzMapObj = "my-distributed-map-obj";
-
-
-    public static void main(String[] args) {
-        // 写数据
-        //writeStrWithMap();
-        // 读数据
-        //readStrWithMap();
-
-        // 读写对象
-        //writeObjWithMap();
-        readObjWithMap();
-
-        // 关闭客户端
-        shutDown();
-    }
+    // 通过这里来改变配置
+    static final HZServerDto currentServer = HZServerDto.getTXYInstance();
+    private static final HazelcastInstance client = HZClientInit.init(currentServer);
 
     /**
      * 用map写入 str
      */
     public static void writeStrWithMap() {
-        IMap<String, String> map = hzClient.getMap(hzMapStr);
+        System.out.printf("写入map:%s 数据中写入数据\n", currentServer.getMapKey());
+        IMap<String, String> map = client.getMap(currentServer.getMapKey());
         for (int i = 0; i < 10; i++) {
-            map.put("k" + i, "John" + i);
+            map.put(currentServer.getMapKey() + "k" + i, "John" + i);
         }
     }
 
@@ -59,21 +42,23 @@ public class HZClientMap {
      * 用map读 str
      */
     public static void readStrWithMap() {
+        System.out.printf("从map: %s 中读取数据\n", currentServer.getMapKey());
         // 必须要指定类型,否则 map.entrySet() 无法判断类型
-        IMap<String, String> map = hzClient.getMap(hzMapStr);
+        IMap<String, String> map = client.getMap(currentServer.getMapKey());
         // 文档写的是
         for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            System.out.println("key: " + key + "\r\nvalue: " + value);
+            System.out.printf("key: %s\tvalue: %s\n", key, value);
         }
+        System.out.println("读取数据结束");
     }
 
     /**
      * 用map写入 obj
      */
     public static void writeObjWithMap() {
-        IMap<String, Customer> mapCustomers = hzClient.getMap(hzMapObj); //creates the map proxy
+        IMap<String, Customer> mapCustomers = client.getMap(currentServer.getMapKey()); //creates the map proxy
         for (int i = 0; i < 10; i++) {
             mapCustomers.put("k-" + i, new Customer("Joe-" + i, "Smith-" + i));
         }
@@ -83,11 +68,11 @@ public class HZClientMap {
      * 用map读 obj
      */
     public static IMap<String, Customer> readObjWithMap() {
-        IMap<String, Customer> mapCustomers = hzClient.getMap(hzMapObj); //creates the map proxy
+        IMap<String, Customer> mapCustomers = client.getMap(currentServer.getMapKey()); //creates the map proxy
         for (Map.Entry<String, Customer> entrySet : mapCustomers.entrySet()) {
             String keyStr = entrySet.getKey();
             Customer valueCustomer = entrySet.getValue();
-            System.out.println("key: " + keyStr + "\r\nvalue: " + valueCustomer.toString());
+            System.out.printf("key: %s\tvalue: %s\n", keyStr, valueCustomer.toString());
         }
         return mapCustomers;
     }
@@ -104,7 +89,8 @@ public class HZClientMap {
      */
     public static void shutDown() {
         // 关了，要不会一直存在
-        hzClient.shutdown();
+        client.shutdown();
+        System.out.printf("关闭%s客户端\n", currentServer.getHzEnviroment());
     }
 
     /**
@@ -113,17 +99,17 @@ public class HZClientMap {
     public void imapApi() {
 
         // Get the Distributed Map from Cluster.
-        IMap map = hzClient.getMap(hzMapStr);
+        IMap map = client.getMap(currentServer.getMapKey());
         //Standard Put and Get.
         map.put("key", "value");
         Object valueKey = map.get("key");
-        System.out.println("valueKey: " + valueKey);
+        System.out.printf("valueKey: %s\n", valueKey);
         //Concurrent Map methods, optimistic updating
         map.putIfAbsent("somekey", "somevalue");
         map.replace("key", "value", "newvalue");
 
         Object valueSomeKey = map.get("somekey");
-        System.out.println("valueSomeKey: " + valueSomeKey);
+        System.out.printf("valueSomeKey:  %s\n", valueSomeKey);
     }
 
     /**
@@ -141,6 +127,21 @@ public class HZClientMap {
         public String toString() {
             return JSONObject.toJSONString(this);
         }
+    }
+
+    public static void main(String[] args) {
+
+        // 写数据
+        writeStrWithMap();
+        // 读数据
+        readStrWithMap();
+
+        // 读写对象
+        //writeObjWithMap();
+        //readObjWithMap();
+
+        // 关闭客户端
+        shutDown();
     }
 
 }
