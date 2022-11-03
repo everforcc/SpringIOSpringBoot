@@ -35,7 +35,7 @@ docker build -t mysql8.0 -f Dckerfile-mysql8.0 .
 docker run -p 3308:3306 -d --restart=always -e MYSQL_ROOT_PASSWORD=c.c.5664  -v /home/data/mysql/mysql8.0/var/lib/mysql:/var/lib/mysql mysql8.0
 
 # 3. 进入容器
-docker exec -it name bash
+docker exec -it bf316efedf00 bash
 
 # 4. 登录
 mysql  -u root -p

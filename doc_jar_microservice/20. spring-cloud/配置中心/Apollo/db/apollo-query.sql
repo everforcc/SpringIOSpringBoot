@@ -12,3 +12,4 @@ WHERE e.`Key` = 'eureka.service.url';
 -- update ApolloConfigDB.`ServerConfig` e set e.`Value` = 'http://localhost:8081/eureka/'
 -- where e.`Key` = 'eureka.service.url';
 
+SELECT * FROM ApolloPortalDB.`App` e;
