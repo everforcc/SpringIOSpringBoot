@@ -1,0 +1,122 @@
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
+
+- [docker-hub.mysql-docker](https://hub.docker.com/_/mysql)
+- [非docker主从复制](https://www.cnblogs.com/wolfstark/p/16505307.html)
+- [docker-主从复制](https://blog.csdn.net/wuguandi/article/details/126595407)
+- [mysql主从配置常见错误处理](http://t.zoukankan.com/easyidea-p-14323847.html)
+-
+
+### 0. 简介
+
+- 参数配置
+
+### 1. 主库
+
+- 主要参数
+
+~~~
+# 设置唯一id
+--server-id=1
+# 设置binlog日志文件名，因为主从复制是通过这个日志来传输
+--log-bin=bin-log
+# 对应要复制的数据名
+--binlog-do-db=oneforall
+~~~
+
+- 主节点 docker 启动
+
+~~~
+docker run -p 3308:3306 -d --name master_mysql8.0 --restart=always -e MYSQL_ROOT_PASSWORD=c.c.5664  -v /home/data/mysql/mysql8.0/var/lib/mysql:/var/lib/mysql mysql8.0 --server-id=1 --log-bin=bin-log --binlog-do-db=oneforall
+~~~
+
+#### 1.1 授权
+
+- 创建用户
+- 导入数据库
+- 创建从库同步数据的账号
+    - 此账号只用来主从同步
+
+~~~
+CREATE USER 'slave'@'119.3.239.81' IDENTIFIED WITH sha256_password BY '5664c.c.';
+-- 此处创建用户一定要指定好ip
+grant replication slave on *.* to 'slave'@'119.3.239.81';
+flush privileges;
+~~~
+
+- 查询状态
+
+~~~
+show master status;
+~~~
+
+- 返回参数的是ok，不是的话看error码和错误信息
+
+### 2. 从库
+
+- 主要参数
+
+~~~
+# 设置唯一id
+--server-id=2
+# 日志文件名，因为主从复制时去主库复制过来后，会先写入这个本机日志，然后再写入sql库里
+--relay-log=mysql-relayrelay-log
+# 表示从库，只读不能写
+--read-only=1
+
+~~~
+
+- 从节点 docker 启动
+
+~~~
+docker run -p 3308:3306 -d --name slave_mysql8.0 --restart=always -e MYSQL_ROOT_PASSWORD=c.c.5664  -v /home/data/mysql/mysql8.0/var/lib/mysql:/var/lib/mysql mysql8.0  --server-id=2 --relay-log=mysql-relay --read-only=1
+~~~
+
+#### 2.1 设置查询账号
+
+- 授权一个能查询的账号
+- 该库下所有账号都是只能查询
+
+#### 2.2 从库 配置连接 主库 信息
+
+- 参数说明
+
+~~~
+ip
+端口
+用户名
+密码
+日志名(从主库查询出来的)
+日志pos(从主库查询出来的)
+~~~
+
+~~~
+CHANGE MASTER TO MASTER_HOST='121.36.67.107', MASTER_PORT=3308,MASTER_USER='slave', MASTER_PASSWORD='5664c.c.', MASTER_LOG_FILE='bin-log.000003', MASTER_LOG_POS=157;
+~~~
+
+#### 2.3 启动主从同步
+
+~~~
+START SLAVE;
+~~~
+
+- 然后会提示成功。如果报错，可以执行如下操作，删除之前的relay_log信息，然后重新执行 CHANGE MASTER TO …语句
+
+~~~
+reset slave; #删除SLAVE数据库的relaylog日志文件,并重新启用新的relaylog文件
+~~~
+
+#### 2.4 查看从库状态
+
+~~~
+show slave status\G;
+~~~
+
+- 返回参数的是ok，不是的话看error码和错误信息
+
+### 3. 验证
+
+- 主库修改数据
+    - 从库跟着调整
+- 从库不能修改数据
+
+</span>
