@@ -1,0 +1,11 @@
+### sub表
+GET http://localhost:8003/auto/select?from=_capter&id=1
+Accept: application/json
+
+### 主表
+GET http://localhost:8003/auto/select?from=&id=1
+Accept: application/json
+
+### 不存在的表
+GET http://localhost:8003/auto/select?from=a&id=1
+Accept: application/json

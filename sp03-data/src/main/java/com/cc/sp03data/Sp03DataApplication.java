@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(value = "com.cc.sp03data.**.mapper")
+@MapperScan(value = {"com.cc.sp03data.**.mapper","com.cc.sp03data.**.dao"})
 public class Sp03DataApplication {
 
     public static void main(String[] args) {
