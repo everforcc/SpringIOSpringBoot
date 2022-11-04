@@ -23,23 +23,47 @@
 --binlog-do-db=oneforall
 ~~~
 
+- 需要修改的参数
+
+~~~
+密码
+表名
+~~~
+
 - 主节点 docker 启动
 
 ~~~
+-- 如果没有镜像,需要先构建镜像，把需要的脚本都传上去
 docker run -p 3308:3306 -d --name master_mysql8.0 --restart=always -e MYSQL_ROOT_PASSWORD=c.c.5664  -v /home/data/mysql/mysql8.0/var/lib/mysql:/var/lib/mysql mysql8.0 --server-id=1 --log-bin=bin-log --binlog-do-db=oneforall
 ~~~
 
 #### 1.1 授权
 
 - 创建用户
-- 导入数据库
-- 创建从库同步数据的账号
-    - 此账号只用来主从同步
 
 ~~~
-CREATE USER 'slave'@'119.3.239.81' IDENTIFIED WITH sha256_password BY '5664c.c.';
+source /mysql/privileges.sql;
+~~~
+
+- 导入数据库
+
+~~~
+-- 这一步可以随后做
+source /mysql/backup.sql;
+~~~
+
+- 创建从库同步数据的账号
+    - 此账号只用来主从同步
+    - 需要改用户和ip
+        - 从库的ip
+        - 和从库同步使用的用户
+
+~~~
+-- 创建用户
+CREATE USER 'slave'@'43.143.228.164' IDENTIFIED WITH sha256_password BY '5664c.c.';
 -- 此处创建用户一定要指定好ip
-grant replication slave on *.* to 'slave'@'119.3.239.81';
+-- 授权
+grant replication slave on *.* to 'slave'@'43.143.228.164';
 flush privileges;
 ~~~
 
@@ -65,18 +89,20 @@ show master status;
 
 ~~~
 
+- 需要修改的参数
+
+~~~
+-- 新镜像,清空历史数据
+-- 用户名和密码端口
+~~~
+
 - 从节点 docker 启动
 
 ~~~
 docker run -p 3308:3306 -d --name slave_mysql8.0 --restart=always -e MYSQL_ROOT_PASSWORD=c.c.5664  -v /home/data/mysql/mysql8.0/var/lib/mysql:/var/lib/mysql mysql8.0  --server-id=2 --relay-log=mysql-relay --read-only=1
 ~~~
 
-#### 2.1 设置查询账号
-
-- 授权一个能查询的账号
-- 该库下所有账号都是只能查询
-
-#### 2.2 从库 配置连接 主库 信息
+#### 2.1 从库 配置连接 主库 信息
 
 - 参数说明
 
@@ -90,10 +116,10 @@ ip
 ~~~
 
 ~~~
-CHANGE MASTER TO MASTER_HOST='121.36.67.107', MASTER_PORT=3308,MASTER_USER='slave', MASTER_PASSWORD='5664c.c.', MASTER_LOG_FILE='bin-log.000003', MASTER_LOG_POS=157;
+CHANGE MASTER TO MASTER_HOST='43.143.232.133', MASTER_PORT=3308,MASTER_USER='slave', MASTER_PASSWORD='5664c.c.', MASTER_LOG_FILE='bin-log.000003', MASTER_LOG_POS=157;
 ~~~
 
-#### 2.3 启动主从同步
+#### 2.2 启动主从同步
 
 ~~~
 START SLAVE;
@@ -105,13 +131,25 @@ START SLAVE;
 reset slave; #删除SLAVE数据库的relaylog日志文件,并重新启用新的relaylog文件
 ~~~
 
-#### 2.4 查看从库状态
+#### 2.3 查看从库状态
 
 ~~~
 show slave status\G;
 ~~~
 
 - 返回参数的是ok，不是的话看error码和错误信息
+
+#### 2.4 设置查询账号
+
+- 授权一个能查询的账号
+
+~~~
+-- 创建查询账号
+source /mysql/privileges.sql;
+-- 数据是同步过来的,不需要创建
+~~~
+
+- 该库下所有账号都是只能查询
 
 ### 3. 验证
 
