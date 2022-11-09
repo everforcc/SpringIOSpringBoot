@@ -8,7 +8,7 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - "/home/data/redis-singleton:/data"
+      - "/home/data/redis/redis-singleton:/data"
     command: redis-server --requirepass c.c.5664
     environment:
       TZ: 'Asia/Shanghai'
