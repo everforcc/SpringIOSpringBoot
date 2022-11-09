@@ -30,4 +30,18 @@ ftp://everforcc:c.c.5664@43.143.232.133/
 # vi /etc/vsftpd/virtual_users.txt
 ~~~
 
+- 参数分开
+
+~~~
+docker run --name vsftpd \
+-p 20:20 -p 21:21 -p 21100-21110:21100-21110  \
+-e PASV_MIN_PORT=21100  \
+-e PASV_MAX_PORT=21110  \
+-e PASV_ADDRESS=0.0.0.0  \
+-v /home/data/ftp/data:/home/vsftpd  \
+-v /home/data/ftp/log:/var/log/vsftpd  \
+-e FTP_USER=everforcc -e FTP_PASS=c.c.5664  \
+--restart=always -d fauria/vsftpd
+~~~
+
 </span>

@@ -2,6 +2,9 @@
 
 ### nginx
 
+- [参考-docker安装nginx](https://blog.csdn.net/weixin_46244732/article/details/114315708)
+- [docker-hub-nginx](https://hub.docker.com/_/nginx)
+
 #### 一. 下载镜像
 
 ~~~
