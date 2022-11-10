@@ -1,0 +1,7 @@
+### 主表
+POST http://localhost:8003/jsonfield/test
+Content-Type: application/json
+
+{
+  "uuid": "123"
+}
