@@ -36,8 +36,9 @@ public class UserController {
     private SqlSessionFactory sqlSessionFactory;
 
     @GetMapping("/tbase")
-    public void tBase(){
+    public void tBase() {
         List<MybatisPlusUser> userList = userMapper.selectList(null);
+        userList.forEach(System.out::println);
         log.info("共有 {} 条数据", userList.size());
     }
 
@@ -45,26 +46,27 @@ public class UserController {
      * 测试dao层用@select的查询
      */
     @GetMapping("/tDaoSelect/{name}")
-    public void tDaoSelect(@PathVariable String name){
+    public void tDaoSelect(@PathVariable String name) {
         List<MybatisPlusUser> userList = userDao.listUser(name);
+        userList.forEach(System.out::println);
         log.info("共有 {} 条数据", userList.size());
     }
 
     @GetMapping("/tDaoPage/{name}/{current}/{size}")
-    public void tDaoPage(@PathVariable String name, @PathVariable Long current, @PathVariable Long size){
+    public void tDaoPage(@PathVariable String name, @PathVariable Long current, @PathVariable Long size) {
         List<MybatisPlusUser> userList = userService.listUserPages(name, current, size);
         log.info("共有 {} 条数据", userList.size());
     }
 
     @PostMapping("/tcondation")
-    public void tDaoPage(@RequestBody MybatisPlusUser mybatisPlusUser){
+    public void tDaoPage(@RequestBody MybatisPlusUser mybatisPlusUser) {
         List<MybatisPlusUser> userList = userService.selectCondition(mybatisPlusUser);
         log.info("共有 {} 条数据", userList.size());
     }
 
     @GetMapping("/tSqlSession")
-    public void tSqlSession(){
-        log.info("sqlSessionFactory: {}",sqlSessionFactory.getClass());
+    public void tSqlSession() {
+        log.info("sqlSessionFactory: {}", sqlSessionFactory.getClass());
     }
 
 }

@@ -31,7 +31,7 @@ public class OptimisticLockerTests {
         MybatisPlusUser user = new MybatisPlusUser();
         user.setId(7L);
         user.setVersion(2);
-        user.setEmail("1527-email");
+        user.setEe("1527-email");
         int insert = userMapper.updateById(user);
         log.info("更新结果 {}",insert);
         log.info("更新对象 {}",user);
@@ -41,11 +41,11 @@ public class OptimisticLockerTests {
     public void testOptimisticLocker_2(){
         MybatisPlusUser user = userMapper.selectById(7L);
         user.setId(7L);
-        user.setEmail("1527-1-email");
+        user.setEe("1527-1-email");
 
         MybatisPlusUser user2 = userMapper.selectById(7L);
         user2.setId(7L);
-        user2.setEmail("1527-2-email");
+        user2.setEe("1527-2-email");
         int insert2 = userMapper.updateById(user2);
         log.info("更新结果 {}",insert2);
         log.info("更新对象 {}",user2);

@@ -10,11 +10,17 @@ package cn.cc.sp04mybatisplus.dto;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("cc_mybatis_plus_user")
 public class MybatisPlusUser {
 
@@ -23,7 +29,10 @@ public class MybatisPlusUser {
     private Long id;
     private String name;
     private Integer age;
-    private String email;
+
+    //@TableField("email")
+    @TableField(value = "email")
+    private String ee;
 
     // 乐观锁注解
     @Version
@@ -33,8 +42,10 @@ public class MybatisPlusUser {
     @TableLogic
     private Integer deleted;
 
+    //@TableField(value = "create_time", fill = FieldFill.INSERT)
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
+    // value = "update_time",
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 

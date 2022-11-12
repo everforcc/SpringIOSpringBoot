@@ -31,7 +31,7 @@ public class InsertTests {
     void t_orderMapper_insert(){
         MybatisPlusUser user = new MybatisPlusUser();
         user.setAge(18);
-        user.setEmail("163@163.com");
+        user.setEe("163@163.com");
         user.setName("用户名");
         int insert = userMapper.insert(user);
         log.info("插入结果 {}",insert);
