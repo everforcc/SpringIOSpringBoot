@@ -6,14 +6,14 @@
 
 | instantce     | port      | map     |
 |--------------|---------------|------|
-| consul | / | / |
+| consul | 8500 | / |
 | es  | / | / |
 | ftp  | 20 | 20 |
 | hazelcast  | / | / |
 | mysql-version  | / | / |
-| rabbitmq  | / | / |
+| rabbitmq  | 15672 | 15672 |
 | redis  | / | / |
-| zookeeper  | / | / |
+| zookeeper  | 2181 | / |
 
 ### 二. file
 

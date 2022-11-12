@@ -5,6 +5,7 @@
 - [rabbitmq](https://hub.docker.com/_/rabbitmq)
 - [参考](https://www.cnblogs.com/yufeng218/p/9452621.html)
 - 支持版本，management带有web管理页面
+
 ~~~
 3.10.0-rc.4, 3.10-rc
 3.10.0-rc.4-management, 3.10-rc-management
@@ -29,10 +30,13 @@ docker pull rabbitmq:3.10-rc-management
 ### 启动
 
 - 还没映射目录
+
 ~~~
 docker run -d --name rabbitmq310 -p 5672:5672 -p 15672:15672 -v `pwd`/data:/var/lib/rabbitmq --hostname myRabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost  -e RABBITMQ_DEFAULT_USER=c.c. -e RABBITMQ_DEFAULT_PASS=c.c.c.c. rabbitmq:3.10-rc-management
 ~~~
+
 - err
+
 ~~~
 docker run -d --name rabbitmq310 -p 5672:5672 -p 15672:15672   \
 -v /home/rabbitmq/etc/rabbitmq:/etc/rabbitmq -v /home/rabbitmq/lib/rabbitmq:/var/lib/rabbitmq -v /home/rabbitmq/log/rabbitmq/:/var/log/rabbitmq --hostname myRabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost  -e RABBITMQ_DEFAULT_USER=cc -e RABBITMQ_DEFAULT_PASS=c.c.c.c. rabbitmq:3.10-rc-management
@@ -40,14 +44,17 @@ docker run -d --name rabbitmq310 -p 5672:5672 -p 15672:15672   \
 
 ### 访问
 
-- [本地]()
+- [本地](127.0.0.1:15672)
+
 ~~~
-180.76.156.43:15672
 一定要输入对用户名密码，否则就会报错
 您与***不是私密链接
 c.c.
 c.c.c.c.
 ~~~
 
+### 后续配置
+
+- 参考 doc_middleware
 
 </span>
