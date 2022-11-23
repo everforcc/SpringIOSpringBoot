@@ -1,4 +1,0 @@
-### 请求用户信息接口
-### ?uid=58572396&type=268435455&from=header
-GET https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=58572396&type=268435455&from=header
-
