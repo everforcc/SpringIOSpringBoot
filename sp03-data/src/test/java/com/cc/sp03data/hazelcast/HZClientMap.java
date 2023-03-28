@@ -9,7 +9,8 @@ package com.cc.sp03data.hazelcast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.map.IMap;
+import com.hazelcast.core.IMap;
+//import com.hazelcast.map.IMap;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用客户端处理map
@@ -36,6 +38,8 @@ public class HZClientMap {
         for (int i = 0; i < 10; i++) {
             map.put(currentServer.getMapKey() + "k" + i, "John" + i);
         }
+        // 三个构造
+        //map.tryLock();
     }
 
     /**
@@ -75,6 +79,30 @@ public class HZClientMap {
             System.out.printf("key: %s\tvalue: %s\n", keyStr, valueCustomer.toString());
         }
         return mapCustomers;
+    }
+
+    public static void tMapLock() {
+        try {
+            String busiLock = "busiLock";
+            IMap<String, String> mapLock = client.getMap(busiLock);
+            boolean canLocked = mapLock.tryLock("key", 0, null, 2, TimeUnit.SECONDS);
+            System.out.println("是否获取到锁: " + canLocked);
+            if (canLocked) {
+                try {
+                    System.out.println("模拟业务逻辑开始");
+                    Thread.sleep(3 * 1000);
+                    System.out.println("模拟业务逻辑结束");
+                } finally {
+                    System.out.println("最后释放锁");
+                    mapLock.unlock(busiLock);
+                }
+            } else {
+                System.out.println("未获取到锁");
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.err.println("获取锁失败" + e.getMessage());
+        }
     }
 
     /**
