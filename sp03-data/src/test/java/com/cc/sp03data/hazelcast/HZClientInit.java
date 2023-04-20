@@ -9,8 +9,6 @@ package com.cc.sp03data.hazelcast;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
-import com.hazelcast.config.Config;
-import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 /**
@@ -40,10 +38,12 @@ public class HZClientInit {
      */
     public static HazelcastInstance init(HZServerDto hzServerDto) {
         ClientConfig clientConfig = new ClientConfig();
+        clientConfig.setInstanceName(hzServerDto.getInstanceName());
+        // hazelcast-5.1.4-slim\config\hazelcast.xml
         clientConfig.setClusterName(hzServerDto.getClusterName());
         clientConfig.getNetworkConfig().setAddresses(hzServerDto.getAddressList());
         hzClient = HazelcastClient.newHazelcastClient(clientConfig);
-        System.out.println("初始化 Hazelcast 配置完成 - txy");
+        System.out.println("初始化 Hazelcast 配置完成 - : " + hzServerDto.getEnv());
         return hzClient;
     }
 

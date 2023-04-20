@@ -9,8 +9,8 @@ package com.cc.sp03data.hazelcast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
-//import com.hazelcast.map.IMap;
+//import com.hazelcast.core.IMap;
+import com.hazelcast.map.IMap;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class HZClientMap {
 
     // 通过这里来改变配置
-    static final HZServerDto currentServer = HZServerDto.getTXYInstance();
+    static final HZServerDto currentServer = HZServerDto.getLocalInstance();
     private static final HazelcastInstance client = HZClientInit.init(currentServer);
 
     /**

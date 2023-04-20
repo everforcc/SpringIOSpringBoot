@@ -38,6 +38,18 @@ public class HZServerDto {
     private List<String> addressList;
 
     /**
+     * 环境名
+     */
+    @Getter
+    private String env;
+
+    /**
+     * 实例名
+     */
+    @Getter
+    private String instanceName;
+
+    /**
      * 集群名,不能调整
      */
     @Getter
@@ -54,9 +66,11 @@ public class HZServerDto {
     public static HZServerDto getLocalInstance() {
         String localIP = "127.0.0.1";
         HZServerDto hzServerDto = new HZServerDto();
-        hzServerDto.clusterName = "local";
-        hzServerDto.clusterName = "hello-world";
-        hzServerDto.setMapKey("map-local-str");
+        hzServerDto.env = "local";
+        hzServerDto.instanceName = "client-instance-" + hzServerDto.env;
+        hzServerDto.clusterName = "hello-world-" + hzServerDto.env;
+        hzServerDto.setMapKey("map-str-" + hzServerDto.env);
+        // 127.0.0.1:5701;
         hzServerDto.addressList = (new ArrayList<String>() {{
             add(localIP + ":5701");
             add(localIP + ":5702");
@@ -68,9 +82,10 @@ public class HZServerDto {
     public static HZServerDto getTXYInstance() {
         String txyIP = "43.143.228.164";
         HZServerDto hzServerDto = new HZServerDto();
-        hzServerDto.clusterName = "txy";
-        hzServerDto.clusterName = "txy-hello-world";
-        hzServerDto.setMapKey("map-txy-str");
+        hzServerDto.env = "txy";
+        hzServerDto.instanceName = "client-instance-" + hzServerDto.env;
+        hzServerDto.clusterName = "hello-world-" + hzServerDto.env;
+        hzServerDto.setMapKey("map-str-" + hzServerDto.env);
         hzServerDto.addressList = (new ArrayList<String>() {{
             add(txyIP + ":5701");
             add(txyIP + ":5702");
