@@ -24,5 +24,13 @@ public class SqlContext {
         }.toString();
     }
 
+    public String deleteTest(final String from, String id, String effect, String status) {
+        return new SQL() {
+            {
+                DELETE_FROM("cc_novel" + from);
+                WHERE(" id=#{id } ", " effect=#{effect } ", " status=#{status } ");
+            }
+        }.toString();
+    }
 
 }

@@ -66,16 +66,25 @@ public class MyMVCConfig implements WebMvcConfigurer {
         registry.addViewController("/index.html").setViewName("index");
     }
 
+    /**
+     * 添加拦截器
+     *
+     * @param registry 注册进去
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //WebMvcConfigurer.super.addInterceptors(registry);
 
+        // 添加某个业务系统拦截器
         registry.addInterceptor(new LoginHandlerInterceptor())
                 // 需要登录的路径
                 .addPathPatterns("/**")
                 // 除了下面的路径
                 .excludePathPatterns("/login/**")
                 .excludePathPatterns("/open/**");
+
+        //  也可以添加别的系统的拦截器
+
     }
 
     /*@Bean

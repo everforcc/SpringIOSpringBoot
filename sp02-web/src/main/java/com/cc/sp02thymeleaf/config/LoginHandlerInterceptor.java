@@ -13,10 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.Objects;
 
+/**
+ * 可以继续往下继承
+ */
 @Slf4j
 public class LoginHandlerInterceptor implements HandlerInterceptor {
 
     IToken iToken = new TokenJSON();
+
+    public LoginHandlerInterceptor(){
+
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
