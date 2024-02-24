@@ -65,7 +65,6 @@ public class SeleniumPool {
         }
     }
 
-
     public WebDriverPDto getDriverDto(){
         return getDriverDto(0);
     }
