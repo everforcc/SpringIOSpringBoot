@@ -1,11 +1,16 @@
-package com.cc.sp91test.test.rabbitmq;
+package com.cc.sp91test.test.rabbitmq.headers;
 import com.cc.sp91test.test.rabbitmq.constant.RabbitMQConstant;
 import com.rabbitmq.client.*;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class Receive {
 
-    private final static String QUEUE_NAME = "hello";
+public class HeadersReceive {
+
+    private final static String EXCHANGE_NAME = "xc_exchange_headers_name";
+
+    private final static String queueName_1 = "xc_queue_name_headers_1";
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
@@ -18,8 +23,7 @@ public class Receive {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        channel.queueDeclare(queueName_1, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         /*
@@ -37,6 +41,20 @@ public class Receive {
             System.out.println("取消消息: " + consumerTag);
         };
 
+        Map<String,Object> headerMap = new HashMap<>();
+        //headerMap.put("x-match","all");
+        headerMap.put("x-match","any");
+        headerMap.put("name","xiaochuan");
+        headerMap.put("sex","男");
+
+        /*
+         * 将队列和交换机绑定
+         * 1. 队列名称
+         * 2. 交换机名称
+         * 3. 路由键，在我们直连模式下，可以为我们的队列名称
+         */
+        channel.queueBind(queueName_1, EXCHANGE_NAME, "", headerMap);
+
         /*
          * 消费这条消息
          * 1. 消费哪个队列
@@ -44,7 +62,7 @@ public class Receive {
          * 3. 接收消息后的回调函数
          * 4. 取消消息的回调函数
          */
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, cancelCallback);
+        channel.basicConsume(queueName_1, true, deliverCallback, cancelCallback);
     }
 
 }

@@ -1,11 +1,11 @@
-package com.cc.sp91test.test.rabbitmq;
+package com.cc.sp91test.test.rabbitmq.direct;
 import com.cc.sp91test.test.rabbitmq.constant.RabbitMQConstant;
 import com.rabbitmq.client.*;
 
 
-public class Receive {
+public class DirectReceive {
 
-    private final static String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "xc_queue_name_4";
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

@@ -1,11 +1,11 @@
-package com.cc.sp91test.test.rabbitmq;
+package com.cc.sp91test.test.rabbitmq.topic;
 import com.cc.sp91test.test.rabbitmq.constant.RabbitMQConstant;
 import com.rabbitmq.client.*;
 
 
-public class Receive {
+public class TopicReceive {
 
-    private final static String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "xc_queue_name_fanout_4";
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
@@ -17,7 +17,6 @@ public class Receive {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-
 
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");

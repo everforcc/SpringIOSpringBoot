@@ -1,8 +1,8 @@
-package com.cc.sp91test.test.rabbitmq;
+package com.cc.sp91test.test.rabbitmq.constant;
 
 public class RabbitMQConstant {
 
-    public static String host = "180.76.156.43";
+    public static String host = "8.146.199.165";
 
     /**
      * com.rabbitmq.client.impl.ForgivingExceptionHandler - An unexpected connection driver error occured

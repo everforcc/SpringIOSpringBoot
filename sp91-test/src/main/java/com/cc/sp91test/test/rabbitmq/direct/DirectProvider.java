@@ -1,4 +1,4 @@
-package com.cc.sp91test.test.rabbitmq;
+package com.cc.sp91test.test.rabbitmq.direct;
 
 import com.cc.sp91test.test.rabbitmq.constant.RabbitMQConstant;
 import com.rabbitmq.client.BuiltinExchangeType;
@@ -8,12 +8,19 @@ import com.rabbitmq.client.ConnectionFactory;
 
 import java.nio.charset.StandardCharsets;
 
-public class Provider {
+public class DirectProvider {
 
-    private final static String QUEUE_NAME = "hello";
     private final static String EXCHANGE_NAME = "xc_exchange_name";
-    //private final static String EXCHANGE_NAME = "my_vhost";
-    //private final static String EXCHANGE_NAME = "/";
+
+    //private final static String queueName = "hello";
+    private final static String queueName_1 = "xc_queue_name_1";
+    private final static String queueName_2 = "xc_queue_name_2";
+    private final static String queueName_3 = "xc_queue_name_3";
+    private final static String queueName_4 = "xc_queue_name_4";
+
+    private final static String key_1 = "key_1";
+    private final static String key_3 = "key_3";
+    private final static String key_4 = "key_4";
 
     public static void main(String[] args) throws Exception {
         // 1. 创建链接
@@ -47,28 +54,34 @@ public class Provider {
              * 4. 队列在没有消费者订阅的情况下，是否自动删除
              * 5. 队列的一些结构化信息，比如声明为 死信队列，磁盘队列会用到
              */
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            // 生成四个队列
+            channel.queueDeclare(queueName_1, false, false, false, null);
+            channel.queueDeclare(queueName_2, false, false, false, null);
+            channel.queueDeclare(queueName_3, false, false, false, null);
+            channel.queueDeclare(queueName_4, false, false, false, null);
+
             /*
              * 将队列和交换机绑定
              * 1. 队列名称
              * 2. 交换机名称
              * 3. 路由键，在我们直连模式下，可以为我们的队列名称
              */
-            channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, QUEUE_NAME);
+            // 交换机和队列绑定
+            channel.queueBind(queueName_1, EXCHANGE_NAME, key_1);
+            channel.queueBind(queueName_2, EXCHANGE_NAME, key_1);
+            channel.queueBind(queueName_3, EXCHANGE_NAME, key_3);
+            channel.queueBind(queueName_4, EXCHANGE_NAME, key_4);
 
-            /*
-             * 发送消息
-             */
-            String message = "Hello World 1008611-5";
             /*
              * 1. 发送到哪个交换机
              * 2. 队列名称
              * 3. 其他参数信息
              * 4. 发送消息的消息体
              */
-            channel.basicPublish(EXCHANGE_NAME, QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
+            channel.basicPublish(EXCHANGE_NAME, key_1, null, "key_1 message".getBytes(StandardCharsets.UTF_8));
+            channel.basicPublish(EXCHANGE_NAME, key_3, null, "key_3 message".getBytes(StandardCharsets.UTF_8));
+            channel.basicPublish(EXCHANGE_NAME, key_4, null, "key_4 message".getBytes(StandardCharsets.UTF_8));
 
-            System.out.println(" [x] Send '" + message + "'");
         }
     }
 

@@ -1,19 +1,17 @@
-package com.cc.sp91test.test.rabbitmq;
+package com.cc.sp91test.test.rabbitmq.headers;
 
 import com.cc.sp91test.test.rabbitmq.constant.RabbitMQConstant;
-import com.rabbitmq.client.BuiltinExchangeType;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Provider {
+public class HeadersProvider {
 
-    private final static String QUEUE_NAME = "hello";
-    private final static String EXCHANGE_NAME = "xc_exchange_name";
-    //private final static String EXCHANGE_NAME = "my_vhost";
-    //private final static String EXCHANGE_NAME = "/";
+    private final static String EXCHANGE_NAME = "xc_exchange_headers_name";
+
+    private final static String queueName_1 = "xc_queue_name_headers_1";
 
     public static void main(String[] args) throws Exception {
         // 1. 创建链接
@@ -28,6 +26,7 @@ public class Provider {
         // 自动关闭
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
+
             /*
              * 交换机
              * 1. 交换机名称
@@ -37,7 +36,7 @@ public class Provider {
              * 4. 定义交换机在没有队列绑定时，是否需要删除，设置为false，表示不删除
              * 5. Map<String,Obj>类型，用来指定交换机的其他结构滑参数
              */
-            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT, false, false, null);
+            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS, false, false, null);
 
             /*
              * 生成队列
@@ -47,28 +46,22 @@ public class Provider {
              * 4. 队列在没有消费者订阅的情况下，是否自动删除
              * 5. 队列的一些结构化信息，比如声明为 死信队列，磁盘队列会用到
              */
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-            /*
-             * 将队列和交换机绑定
-             * 1. 队列名称
-             * 2. 交换机名称
-             * 3. 路由键，在我们直连模式下，可以为我们的队列名称
-             */
-            channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, QUEUE_NAME);
+            channel.queueDeclare(queueName_1, false, false, false, null);
 
-            /*
-             * 发送消息
-             */
-            String message = "Hello World 1008611-5";
+            Map<String,Object> headerMap = new HashMap<>();
+            headerMap.put("name","xiaochuanxx");
+//            headerMap.put("name","xiaochuan");
+            headerMap.put("sex","男");
+            AMQP.BasicProperties.Builder properties = new AMQP.BasicProperties.Builder().headers(headerMap);
+
             /*
              * 1. 发送到哪个交换机
              * 2. 队列名称
              * 3. 其他参数信息
              * 4. 发送消息的消息体
              */
-            channel.basicPublish(EXCHANGE_NAME, QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
-
-            System.out.println(" [x] Send '" + message + "'");
+            channel.basicPublish(EXCHANGE_NAME, "", properties.build(), "all message".getBytes(StandardCharsets.UTF_8));
+            System.out.println("发送成功");
         }
     }
 
