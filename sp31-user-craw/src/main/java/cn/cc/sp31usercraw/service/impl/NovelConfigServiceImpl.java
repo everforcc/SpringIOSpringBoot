@@ -7,6 +7,7 @@
 
 package cn.cc.sp31usercraw.service.impl;
 
+import cn.cc.sp31usercraw.config.SysConfig;
 import cn.cc.sp31usercraw.dodo.NovelConfigDo;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.dto.NovelMsgDto;
@@ -33,6 +34,8 @@ public class NovelConfigServiceImpl implements INovelConfigService {
 
     @Resource
     NovelConfigDo novelConfigDo;
+    @Resource
+    SysConfig sysConfig;
 
     @Override
     public String down(String url) {
@@ -51,7 +54,7 @@ public class NovelConfigServiceImpl implements INovelConfigService {
         // 章节地址的根目录应该和域名根目录一致
         // 在获取章节内容的时候新增线程,在这边标记添加结束
         String rootUrl = HttpParamUtils.getRootUrl(url);
-        DownUtils downUtils = DownUtils.instantce(rootUrl);
+        DownUtils downUtils = DownUtils.instantce(rootUrl, sysConfig.getFileRoot());
         downUtils.markAddEnd();
 
         log.info("获取完成 [{}]", url);

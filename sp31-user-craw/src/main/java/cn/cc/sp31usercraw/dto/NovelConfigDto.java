@@ -64,6 +64,8 @@ public class NovelConfigDto {
     private String novelCapterUrlListXR;
     /* 下一页 */
     private String novelCapterPageNextUrlXR;
+    /* 下一页按钮 */
+    private String novelCapterPageNextButtonXR;
 
     /* 小说内容 */
     private String novelContentXR;

@@ -34,18 +34,5 @@ public class UrlFormatUtils {
         }
     }
 
-    public static void main(String[] args) {
-        String currentUrl = "http://www.everforcc.com/abc/i.html";
-
-        String m_1 = "http://www.everforcc.com/abc/iiiii.html";
-        System.out.println(formatUrl(m_1, currentUrl));
-
-        String m_2 = "/index.html";
-        System.out.println(formatUrl(m_2, currentUrl));
-
-        String m_3 = "index.html";
-        System.out.println(formatUrl(m_3, currentUrl));
-
-    }
 
 }

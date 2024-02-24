@@ -11,6 +11,7 @@ import cn.cc.sp31usercraw.dodo.NovelConfigDo;
 import cn.cc.sp31usercraw.dto.NovelContentDto;
 import cn.cc.sp31usercraw.dto.NovelMsgDto;
 import cn.cc.sp31usercraw.service.INovelConfigInitService;
+import cn.cc.sp31usercraw.service.INovelConfigService;
 import com.cc.sp90utils.entity.ResultE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * 初始化配置文件
+ * 配制好的controller
+ * 配置信息直接保存到后端
+ * 直接请求就好
  */
 @Slf4j
-@RequestMapping("/init")
+@RequestMapping("/novel")
 @RestController
-public class NovelConfigInitController {
+public class NovelController {
 
     /* 小说配置 */
     @Resource
@@ -36,6 +39,9 @@ public class NovelConfigInitController {
     /* 获取小说内容 */
     @Autowired
     INovelConfigInitService iNovelConfigInitService;
+
+    @Resource
+    INovelConfigService iNovelConfigService;
 
     /**
      * 1. 初始化了几个配置
@@ -96,6 +102,16 @@ public class NovelConfigInitController {
     public ResultE<NovelContentDto> content(@RequestParam("url") String url) {
         return new ResultE<NovelContentDto>().execute(e ->
                 e.setSuccess(iNovelConfigInitService.getContent(url))
+        );
+    }
+
+    /**
+     * 章节内容
+     */
+    @GetMapping("/down")
+    public ResultE<String> down(@RequestParam("url") String url) {
+        return new ResultE<String>().execute(e ->
+                e.setSuccess(iNovelConfigService.down(url))
         );
     }
 

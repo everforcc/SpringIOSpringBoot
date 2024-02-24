@@ -1,2 +1,5 @@
 server:
   port: 31
+sysconfig:
+  fileRoot: D:/Cache/BaiduNetdiskWorkspace/java/filesystem/project/SpringIOSpringBoot/sp31-user-craw/novel/
+  chromedriver: C:/everforcc/java/environment\driver\chromedriver.exe

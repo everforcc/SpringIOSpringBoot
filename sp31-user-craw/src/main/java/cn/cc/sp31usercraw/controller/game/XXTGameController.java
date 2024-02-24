@@ -5,7 +5,7 @@
  * Copyright
  */
 
-package cn.cc.sp31usercraw.game;
+package cn.cc.sp31usercraw.controller.game;
 
 import com.cc.sp90utils.http.selenium.SeleniumPool;
 import com.cc.sp90utils.http.selenium.WebDriverPDto;

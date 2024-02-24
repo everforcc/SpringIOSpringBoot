@@ -69,9 +69,5 @@ public class CharsetOCR {
         return result;
     }
 
-    public static void main(String[] args) {
-        String url = "";
-        log.info(ocr(url));
-    }
 
 }

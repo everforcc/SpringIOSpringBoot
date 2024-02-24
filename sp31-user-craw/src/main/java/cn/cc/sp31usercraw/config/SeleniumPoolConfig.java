@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * webdriver驱动
@@ -21,13 +22,20 @@ import javax.annotation.PreDestroy;
 @Component
 public class SeleniumPoolConfig {
 
+    @Resource
+    SysConfig sysConfig;
+
+    private final String chromeDriverKey = "webdriver.chrome.driver";
+
     /**
      * 初始化驱动
+     *
      * @return bean
      */
     @Bean
-    public SeleniumPool getSeleniumPool(){
-        log.info("初始化SeleniumPool...");
+    public SeleniumPool getSeleniumPool() {
+        log.info("初始化SeleniumPool...: {}", System.getProperty(chromeDriverKey));
+        System.setProperty(chromeDriverKey, sysConfig.getChromedriver());
         SeleniumPool seleniumPool = SeleniumPool.getInstantce();
         log.info("已完成初始化SeleniumPool...");
         return seleniumPool;
@@ -37,7 +45,7 @@ public class SeleniumPoolConfig {
      * 关闭spring前关闭驱动池
      */
     @PreDestroy
-    public void destroySeleniumPool(){
+    public void destroySeleniumPool() {
         log.info("清空SeleniumPool...");
         SeleniumPool.getInstantce().destory();
         log.info("已经清空SeleniumPool...");

@@ -54,25 +54,5 @@ public class NovelConfigDo extends HashMap {
         return containsKey(rootUrl);
     }
 
-    public static void main(String[] args) {
-//        NovelConfigDto novelConfigDto = new NovelConfigDto();
-//        novelConfigDto.setRootUrl("setRootUrl_1");
-//        novelConfigDto.setTypeUrlXR("setTypeUrlXR-1");
-//
-//        NovelConfigDto novelConfigDto_2 = new NovelConfigDto();
-//        novelConfigDto_2.setRootUrl("setRootUrl_2");
-//        novelConfigDto_2.setTypeUrlXR("setTypeUrlXR_2");
-//
-//        NovelConfigDo novelConfigDo = new NovelConfigDo();
-//        novelConfigDo.putConfig(novelConfigDto);
-//        novelConfigDo.putConfig(novelConfigDto_2);
-//
-//        System.out.println(novelConfigDo.getConfig("setRootUrl_1").toString());
-//        System.out.println(novelConfigDo.getConfig("setRootUrl_2").toString());
-//
-        String url = "https://www.vipxs.la/56_56024/";
-        System.out.println(HttpParamUtils.getRootUrl(url));
-
-    }
 
 }

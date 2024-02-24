@@ -33,20 +33,20 @@ public class NovelConfigInitServiceImpl implements INovelConfigInitService {
     NovelConfigDo novelConfigDo;
 
     @Override
-    public NovelMsgDto getMsg(String url) {
-        log.info("加载配置文件获取小说基本信息 [{}]", url);
-        NovelConfigDto novelConfigDto = novelConfigDo.getConfig(url);
-        return iNovelCommonFlowService.getNovelMsg(url, novelConfigDto);
+    public NovelMsgDto getMsg(String novelUrl) {
+        log.info("加载配置文件获取小说基本信息 [{}]", novelUrl);
+        NovelConfigDto novelConfigDto = novelConfigDo.getConfig(novelUrl);
+        return iNovelCommonFlowService.getNovelMsg(novelUrl, novelConfigDto);
     }
 
     @Override
-    public NovelMsgDto getMenu(String url) {
-        log.info("加载配置文件获取小说章节信息 [{}]", url);
-        NovelConfigDto novelConfigDto = novelConfigDo.getConfig(url);
+    public NovelMsgDto getMenu(String novelUrl) {
+        log.info("加载配置文件获取小说章节信息 [{}]", novelUrl);
+        NovelConfigDto novelConfigDto = novelConfigDo.getConfig(novelUrl);
         // 1. 获取基本信息
-        NovelMsgDto novelMsgDto = iNovelCommonFlowService.getNovelMsg(url, novelConfigDto);
+        NovelMsgDto novelMsgDto = iNovelCommonFlowService.getNovelMsg(novelUrl, novelConfigDto);
         // 2. 获取章节信息
-        novelMsgDto = iNovelCommonFlowService.getMenu(url, novelConfigDto, novelMsgDto);
+        novelMsgDto = iNovelCommonFlowService.getMenu(novelUrl, novelConfigDto, novelMsgDto);
         // 3. 取出章节
         List<String> novelCapterUrlList = novelMsgDto.getNovelCapterUrlList();
         // 4. 打印章节地址
@@ -57,9 +57,14 @@ public class NovelConfigInitServiceImpl implements INovelConfigInitService {
     }
 
     @Override
-    public NovelContentDto getContent(String url) {
-        log.info("加载配置文件获取小说内容 信息 [{}]", url);
-        NovelConfigDto novelConfigDto = novelConfigDo.getConfig(url);
-        return iNovelCommonFlowService.getContent(url, novelConfigDto, null);
+    public NovelContentDto getContent(String novelCapterUrl) {
+        log.info("加载配置文件获取小说内容 信息 [{}]", novelCapterUrl);
+        NovelConfigDto novelConfigDto = novelConfigDo.getConfig(novelCapterUrl);
+        return iNovelCommonFlowService.getContent(novelCapterUrl, novelConfigDto, null);
+    }
+
+    @Override
+    public void down(String novelUrl) {
+
     }
 }
