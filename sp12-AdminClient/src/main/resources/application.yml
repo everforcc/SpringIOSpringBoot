@@ -1,0 +1,28 @@
+
+spring:
+  boot:
+    admin:
+      client:
+        # Spring Boot Admin Server 地址   http://localhost:8080  可自定义
+        url:  http://localhost:80
+  # 默认情况下，大多数端点都不通过http公开，我们公开了所有端点。对于生产，您应该仔细选择要公开的端点。
+  application:
+    name: AdminClient
+management:
+#  server:
+#    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+server:
+  port: 8081
+logging:
+  file:
+    name: logs/adminclient/info.log

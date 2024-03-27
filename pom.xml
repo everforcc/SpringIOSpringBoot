@@ -22,6 +22,8 @@
         <module>sp04-MybatisPlus</module>
         <module>sp04-security</module>
         <module>sp10-aop</module>
+        <module>sp11-AdminServer</module>
+        <module>sp12-AdminClient</module>
         <!--        <module>sp20-comp</module>-->
         <!--        <module>sp21-jdk</module>-->
         <!-- jar使用 -->
@@ -37,9 +39,11 @@
 
     <!--统一管理jar包版本-->
     <properties>
-        <spring.boot>2.2.2.RELEASE</spring.boot>
-
+        <java.version>1.8</java.version>
+        <!--<spring.boot>2.2.2.RELEASE</spring.boot>-->
+        <spring.boot>2.3.12.RELEASE</spring.boot>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <junit.version>4.12</junit.version>
@@ -75,17 +79,17 @@
 
         <org.bouncycastle.bcprov.jdk15on>1.58</org.bouncycastle.bcprov.jdk15on>
         <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
+
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>sp90-utils</artifactId>
                 <version>${cn.cc.utils}</version>
             </dependency>
-
             <!-- spirng -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -301,6 +305,14 @@
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>${org.bouncycastle.bcprov.jdk15on}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
         </dependencies>
