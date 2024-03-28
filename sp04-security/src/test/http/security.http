@@ -1,0 +1,8 @@
+###
+GET http://localhost:8004/user/login
+Accept: application/json
+
+###
+GET http://localhost:8004/roles
+Accept: application/json
+token: {"accountNonExpired":true,"accountNonLocked":false,"authorities":[{"authority":"ROLE_ROOT"},{"authority":"ROLE_ADMIN"},{"authority":"ROLE_TEST"},{"authority":"ROLE_GUEST"}],"credentialsNonExpired":false,"enabled":false,"id":0,"password":"passoword","roles":["ROLE_ROOT","ROLE_ADMIN","ROLE_TEST","ROLE_GUEST"],"username":"CustomUser"}

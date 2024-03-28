@@ -59,6 +59,7 @@ public class SPSecurityConfig{
 
     @Order(1)
     @Configuration(proxyBeanMethods = false)
+    @EnableGlobalMethodSecurity(prePostEnabled=true)
     public static class LoginSecurityConfig extends WebSecurityConfigurerAdapter{
 
         /**
