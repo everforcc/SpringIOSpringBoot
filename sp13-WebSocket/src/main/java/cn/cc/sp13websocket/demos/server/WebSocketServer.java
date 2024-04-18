@@ -1,16 +1,23 @@
 package cn.cc.sp13websocket.demos.server;
 
+import cn.cc.sp13websocket.demos.bean.BeanInit;
 import cn.cc.sp13websocket.demos.utils.MessageMap;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -54,9 +61,23 @@ public class WebSocketServer {
          * session.getId()：当前session会话会自动生成一个id，从0开始累加的。
          */
         log.info("连接建立中 ==> session_id = {}， sid = {}", session.getId(), sid);
+
+        // 上锁
         //加入 Map中。将页面的sid和session绑定或者session.getId()与session
         //onlineSessionIdClientMap.put(session.getId(), session);
-        MessageMap.getSessionMap().put(sid, session);
+        RedissonClient redissonClient = BeanInit.getRedissonClient();
+        final RBucket<Map<String, Session>> imapRBucket = redissonClient.getBucket(MessageMap.BUSI_TEST);
+        if (imapRBucket.isExists()) {
+            Map<String, Session> onlineSessionClientMap = imapRBucket.get();
+            onlineSessionClientMap.put(sid, session);
+            log.info("锁存在，新增值: {}", onlineSessionClientMap.toString());
+            imapRBucket.set(onlineSessionClientMap, 10, TimeUnit.MINUTES);
+        } else {
+            Map<String, Session> onlineSessionClientMap = new HashMap<>();
+            onlineSessionClientMap.put(sid, session);
+            log.info("锁不存在，新值: {}", onlineSessionClientMap.toString());
+            imapRBucket.set(onlineSessionClientMap, 10, TimeUnit.MINUTES);
+        }
 
         //在线数加1
         onlineSessionClientCount.incrementAndGet();

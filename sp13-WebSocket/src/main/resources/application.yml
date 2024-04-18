@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   thymeleaf:
@@ -10,3 +10,5 @@ spring:
     suffix: .html
     check-template-location: true
     template-resolver-order: 1
+  profiles:
+    active: hkzk

@@ -4,16 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+<!--    <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;
+    </parent>-->
 
     <groupId>cn.cc</groupId>
     <artifactId>SpringIOSpringBoot</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <description> spring系列功能测试 </description>
+
+    <!-- 打包方式 -->
+    <packaging>pom</packaging>
 
     <modules>
         <module>sp01-init</module>
@@ -24,6 +29,7 @@
         <module>sp10-aop</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
+        <module>sp13-WebSocket</module>
         <!--        <module>sp20-comp</module>-->
                 <module>sp21-jdk</module>
         <!-- jar使用 -->
@@ -32,29 +38,44 @@
         <module>sp91-test</module>
         <module>sp92-tools</module>
         <module>sp92-webapi</module>
+        <module>sp05-redis</module>
     </modules>
-
-    <!-- 打包方式 -->
-    <packaging>pom</packaging>
 
     <!--统一管理jar包版本-->
     <properties>
+        <!-- 环境变量 -->
         <java.version>1.8</java.version>
-        <!--<spring.boot>2.2.2.RELEASE</spring.boot>-->
-        <spring.boot>2.3.12.RELEASE</spring.boot>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- maven -->
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+
+        <!-- spring -->
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+        <!--<spring.boot>2.2.2.RELEASE</spring.boot>-->
+        <spring.boot>2.3.12.RELEASE</spring.boot>
+
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.10</lombok.version>
         <log4j.version>1.2.17</log4j.version>
+
+        <!-- 数据库相关 -->
         <mysql.version>8.0.18</mysql.version>
         <!--1.2.8-->
         <druid.version>1.1.16</druid.version>
         <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
+        <!--缓存-->
+        <org.redisson>3.16.7</org.redisson>
         <hazelcast>5.1.4</hazelcast>
         <hazelcast.sql>5.1.3</hazelcast.sql>
+		
+		<!-- rabbitmq -->
+        <com.rabbitmq.amqp-client>5.9.0</com.rabbitmq.amqp-client>
+
+		<!-- 工具类 -->
+        <commons-io>2.6</commons-io>
         <com.alibaba.fastjson>1.2.58</com.alibaba.fastjson>
         <com.google.guava.guava>30.1.1-jre</com.google.guava.guava>
         <org.apache.commons.commons-lang3>3.10</org.apache.commons.commons-lang3>
@@ -64,32 +85,51 @@
         <!--<httpmime.version>4.5.10</httpmime.version>-->
         <httpclient.version>4.5.2</httpclient.version>
         <jakarta-annotation.version>1.3.5</jakarta-annotation.version>
-        <com.rabbitmq.amqp-client>5.9.0</com.rabbitmq.amqp-client>
-        <commons-io>2.6</commons-io>
-        <org.jsoup>1.11.3</org.jsoup>
-        <us.codecraft.xsoup>0.3.1</us.codecraft.xsoup>
-        <org.seleniumhq.selenium.selenium-java>3.4.0</org.seleniumhq.selenium.selenium-java>
-        <org.webjars.npm.phantomjs>2.1.7</org.webjars.npm.phantomjs>
-
-        <com.baidu.aip.java-sdk>4.12.0</com.baidu.aip.java-sdk>
-        <org.testng.testng>RELEASE</org.testng.testng>
-        <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
-        <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
+        <!-- excel -->
         <com.github.excel4j>3.0.0</com.github.excel4j>
 
+        <!-- 加密相关 -->
         <org.bouncycastle.bcprov.jdk15on>1.58</org.bouncycastle.bcprov.jdk15on>
-        <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
 
-        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+        <!-- 媒体相关 -->
+        <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
+        <!-- 文字识别 -->
+        <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
+
+		<!-- 爬虫解析相关 -->
+        <org.jsoup>1.11.3</org.jsoup>
+        <us.codecraft.xsoup>0.3.1</us.codecraft.xsoup>
+		<!-- chrome驱动 -->
+        <org.seleniumhq.selenium.selenium-java>3.4.0</org.seleniumhq.selenium.selenium-java>
+		<!-- phantomjs驱动 -->
+        <org.webjars.npm.phantomjs>2.1.7</org.webjars.npm.phantomjs>
+
+        <!-- sdk -->
+        <!-- 百度 api -->		
+        <com.baidu.aip.java-sdk>4.12.0</com.baidu.aip.java-sdk>
+
+        <!-- todo 忘了 -->
+        <org.testng.testng>RELEASE</org.testng.testng>
+
+        <!-- 自定义 -->
+        <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
+        <cn.cc.redis>1.0-SNAPSHOT</cn.cc.redis>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>sp90-utils</artifactId>
                 <version>${cn.cc.utils}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>sp05-redis</artifactId>
+                <version>${cn.cc.redis}</version>
+            </dependency>
+
             <!-- spirng -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -136,6 +176,13 @@
                 <version>${mybatis.spring.boot.version}</version>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${org.redisson}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.hazelcast</groupId>
                 <artifactId>hazelcast</artifactId>
@@ -175,11 +222,19 @@
                 <version>1.5.24</version>
             </dependency>-->
 
+
+            <!-- JSON 解析器和生成器 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${com.alibaba.fastjson}</version>
             </dependency>
+       <!--     <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>-->
+
 
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -317,5 +372,71 @@
 
         </dependencies>
     </dependencyManagement>
+
+<!--    <dependencies>
+        &lt;!&ndash; bootstrap 启动器 &ndash;&gt;
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+    </dependencies>-->
+
+    <!-- 构建方式 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!-- 指定打包编码 -->
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!-- maven依赖地址 -->
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

@@ -18,4 +18,6 @@ public class MessageMap {
         return onlineSessionClientMap;
     }
 
+    public static final String BUSI_TEST = "BUSI_TEST";
+
 }
