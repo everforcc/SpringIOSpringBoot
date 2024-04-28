@@ -24,19 +24,17 @@ public class RedissonConfig {
         ClusterServersConfig clusterServersConfig = config.useClusterServers();
         if (RedisConstant.cluster.equals(redisConfiguration.getType())) {
             clusterServersConfig.addNodeAddress(redisConfiguration.getCluster().dealAddress());
-            log.debug("当前redis为cluster： ", clusterServersConfig.getNodeAddresses());
+            log.debug("当前redis为cluster： {}", clusterServersConfig.getNodeAddresses());
             clusterServersConfig.setScanInterval(redisConfiguration.getScanInterval());
             clusterServersConfig.setPassword(redisConfiguration.getPassword());
             clusterServersConfig.setTimeout(redisConfiguration.getTimeout());
         } else if (RedisConstant.single.equals(redisConfiguration.getType())) {
             SingleServerConfig singleServerConfig = config.useSingleServer();
             singleServerConfig.setAddress(redisConfiguration.dealAddress());
-            log.debug("当前redis为single： ", config.useSingleServer().getAddress());
+            log.debug("当前redis为single： {}", config.useSingleServer().getAddress());
             singleServerConfig.setTimeout(redisConfiguration.getTimeout());
             singleServerConfig.setPassword(redisConfiguration.getPassword());
-
         }
-
         log.info("初始化 Redisson : {}", config.toString());
         return Redisson.create(config);
     }

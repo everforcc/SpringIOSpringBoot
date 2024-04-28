@@ -44,12 +44,11 @@ public class RedisConfiguration {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class Cluster {
+    public static class Cluster {
         private String nodes;
 
         public String[] dealAddress() {
             try {
-
                 String[] cluster = nodes.split(",");
                 int length = cluster.length;
                 String[] stringList = new String[length];
@@ -63,7 +62,6 @@ public class RedisConfiguration {
                 throw new RuntimeException("redis配置文件解析异常");
             }
         }
-
     }
 
     public String dealAddress() {
