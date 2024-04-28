@@ -1,0 +1,9 @@
+package com.leopard.drools
+import com.leopard.drools.pojo.QueryParam
+
+dialect  "java"
+rule "girl"
+    when queryParam : QueryParam(paramId != null && paramSign.equals("-"))
+    then
+        System.out.println(queryParam.getParamId() +  "是女孩");
+end
