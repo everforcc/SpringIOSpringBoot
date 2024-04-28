@@ -31,6 +31,8 @@ public class ParamDto {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
+    private JSONObject jsonObject;
+
     public ParamDto(FieldEnum statusEnum, String name, String description) {
         this.statusEnum = statusEnum;
         this.name = name;

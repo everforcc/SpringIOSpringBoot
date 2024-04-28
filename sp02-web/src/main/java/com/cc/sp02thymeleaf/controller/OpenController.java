@@ -1,5 +1,7 @@
 package com.cc.sp02thymeleaf.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cc.sp02thymeleaf.annotation.EnumsValited;
 import com.cc.sp02thymeleaf.dto.CustomUser;
@@ -8,15 +10,47 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/open")
 @Validated
 @Slf4j
 public class OpenController {
 
-    @GetMapping("/")
+//    @GetMapping("/")
+//    public JSONArray he() {
+//
+//        return jsonArray2;
+//    }
+
+    @GetMapping("/a")
     public String H() {
-        return "123";
+//        List<ParamDto> paramDtoList = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray();
+        ParamDto pre = new ParamDto();
+        pre.setName("name");
+        pre.setDate(new Date());
+
+        for (int i = 0; i < 3; i++) {
+            ParamDto paramDto = new ParamDto();
+            paramDto.setDescription("第几个对象: " + i);
+            pre.setName("name");
+            jsonArray.add(paramDto);
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        for (int i = 0; i < 3; i++) {
+            jsonObject.put("k", i);
+            jsonObject.put("key0", jsonArray);
+        }
+
+        JSONArray jsonArray2 = new JSONArray();
+        for (int i = 0; i < 3; i++) {
+            jsonArray2.add(jsonObject);
+        }
+
+        return JSON.toJSONString(jsonArray2);
     }
 
     /**

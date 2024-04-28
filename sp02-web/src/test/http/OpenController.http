@@ -1,4 +1,12 @@
 ###
+GET http://localhost:8082/open/
+Accept: application/json
+
+###
+GET http://localhost:8082/open/a
+Accept: application/json
+
+###
 GET http://localhost:8002/open/valited/4
 Accept: application/json
 
