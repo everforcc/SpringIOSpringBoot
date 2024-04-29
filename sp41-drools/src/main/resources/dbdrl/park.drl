@@ -1,0 +1,40 @@
+package dbdrl
+import cn.cc.dto.PCarInfo
+import cn.cc.service.IRuleService
+
+global cn.cc.service.service.RuleOnceDrlImpl ruleOnceDrlImpl
+global cn.cc.service.service.RuleDurationDrlImpl ruleDurationDrlImpl
+global cn.cc.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl
+global cn.cc.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl
+
+dialect  "java"
+
+// 1. 特殊会员 免费
+rule "特殊车辆"
+    when $p : PCarInfo(0==carType)
+    then
+        ruleVIPFreeDrlImpl.dealFee($p);
+end
+
+// 2. 天卡
+
+// 3. 月卡
+
+rule "普通车辆 月卡"
+    when $p : PCarInfo(1==carType && 0==vipLevel)
+    then
+        ruleVIPMonthDrlImpl.dealFee($p);
+end
+
+// 4. 季卡
+
+// 5. 年卡
+
+// 10. 非会员计费规则
+// 11. 按次计费
+
+// 12. 时段计费
+
+// 13. 时长计费
+
+// 14. 分时计费

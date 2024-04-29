@@ -1,0 +1,9 @@
+
+###
+GET http://localhost:8080/test/park
+
+###
+GET http://localhost:8080/test/reloaddb
+
+###
+GET http://localhost:8080/test/reloadfile
