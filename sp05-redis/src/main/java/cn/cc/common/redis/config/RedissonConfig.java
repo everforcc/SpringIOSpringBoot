@@ -8,18 +8,19 @@ import org.redisson.api.RedissonClient;
 import org.redisson.config.ClusterServersConfig;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 
 @Slf4j
 @Configuration
 public class RedissonConfig {
 
+    @Autowired
     RedisConfiguration redisConfiguration;
 
     @Bean
-    public RedissonClient redissonConfig() {
+    public RedissonClient redissonClient() {
         Config config = new Config();
         ClusterServersConfig clusterServersConfig = config.useClusterServers();
         if (RedisConstant.cluster.equals(redisConfiguration.getType())) {

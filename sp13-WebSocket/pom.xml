@@ -15,13 +15,6 @@
     <name>sp13-WebSocket</name>
     <description>sp13-WebSocket</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.6</spring-boot.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>cn.cc</groupId>
-            <artifactId>sp05-redis</artifactId>
+            <artifactId>common-redis-cluster</artifactId>
         </dependency>
     </dependencies>
 

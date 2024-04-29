@@ -21,6 +21,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cc-common</module>
         <module>sp01-init</module>
         <module>sp02-web</module>
         <module>sp03-data</module>
@@ -69,6 +70,7 @@
         <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
         <!--缓存-->
         <org.redisson>3.16.7</org.redisson>
+        <org.redisson.spring>3.17.7</org.redisson.spring>
         <hazelcast>5.1.4</hazelcast>
         <hazelcast.sql>5.1.3</hazelcast.sql>
 		
@@ -115,11 +117,14 @@
         <!-- 自定义 -->
         <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
         <cn.cc.redis>1.0-SNAPSHOT</cn.cc.redis>
+        <cn.cc.redis.single>1.0-SNAPSHOT</cn.cc.redis.single>
+        <cn.cc.redis.cluster>1.0-SNAPSHOT</cn.cc.redis.cluster>
     </properties>
 
     <dependencyManagement>
         <dependencies>
 
+            <!-- 自定义 cn.cc -->
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>sp90-utils</artifactId>
@@ -130,6 +135,17 @@
                 <artifactId>sp05-redis</artifactId>
                 <version>${cn.cc.redis}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-redis-single</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-redis-cluster</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!-- 自定义 cn.cc -->
 
             <!-- spirng -->
             <dependency>
@@ -178,10 +194,18 @@
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
+            <!-- 单机用 -->
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>${org.redisson}</version>
+            </dependency>
+            <!-- spring中用 -->
+            <!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${org.redisson.spring}</version>
             </dependency>
 
             <dependency>
