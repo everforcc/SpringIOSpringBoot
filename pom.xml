@@ -37,6 +37,7 @@
         <!-- jar使用 -->
         <module>sp31-user-craw</module>
         <module>sp40-Drools</module>
+        <module>sp41-drools</module>
         <module>sp90-utils</module>
         <module>sp91-test</module>
         <module>sp92-tools</module>
@@ -65,9 +66,12 @@
 
         <!-- 数据库相关 -->
         <mysql.version>8.0.18</mysql.version>
+        <mysql.j.version>8.0.33</mysql.j.version>
         <!--1.2.8-->
         <druid.version>1.1.16</druid.version>
+        <druid.spring.version>1.2.20</druid.spring.version>
         <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
+        <dynamic-ds.version>4.2.0</dynamic-ds.version>
         <!--缓存-->
         <org.redisson>3.16.7</org.redisson>
         <org.redisson.spring>3.17.7</org.redisson.spring>
@@ -119,6 +123,7 @@
         <cn.cc.redis>1.0-SNAPSHOT</cn.cc.redis>
         <cn.cc.redis.single>1.0-SNAPSHOT</cn.cc.redis.single>
         <cn.cc.redis.cluster>1.0-SNAPSHOT</cn.cc.redis.cluster>
+        <cn.cc.mysql>1.0-SNAPSHOT</cn.cc.mysql>
     </properties>
 
     <dependencyManagement>
@@ -138,12 +143,17 @@
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>common-redis-single</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${cn.cc.redis.single}</version>
             </dependency>
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>common-redis-cluster</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${cn.cc.redis.cluster}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-mysql</artifactId>
+                <version>${cn.cc.mysql}</version>
             </dependency>
             <!-- 自定义 cn.cc -->
 
@@ -174,24 +184,44 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- mysql,包名规范后用 mysql-connector-j -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.j.version}</version>
+            </dependency>
+            <!-- mysql -->
 
+            <!-- Druid 单独使用 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.spring.version}</version>
+            </dependency>
+            <!-- Druid 集成spring -->
 
-            <!--mybatis-->
+            <!-- mybatis -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.spring.boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-ds.version}</version>
+            </dependency>
+            <!-- mybatis-plus插件 -->
 
             <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
             <!-- 单机用 -->

@@ -1,9 +1,15 @@
 
-###
+### 根据停车规则计算金额
 GET http://localhost:8080/test/park
 
-###
+### 从数据库加载规则
 GET http://localhost:8080/test/reloaddb
 
-###
+### 从文件加载规则
 GET http://localhost:8080/test/reloadfile
+
+### 测试数据库和缓存
+GET http://localhost:8080/testdb/result/2
+
+### 缓存
+GET http://localhost:8080/actuator/caches

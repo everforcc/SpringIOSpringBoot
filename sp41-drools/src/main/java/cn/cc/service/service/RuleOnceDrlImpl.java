@@ -5,7 +5,6 @@ import cn.cc.dto.PCarInfo;
 import cn.cc.service.IRuleService;
 import cn.cc.utils.BigDecimalUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ import java.math.BigDecimal;
 public class RuleOnceDrlImpl implements IRuleService {
 
     @Resource
-    RedisTemplate<String,BigDecimal> redisTemplate;
+    RedisTemplate<Object, String> redisTemplate;
 
     public static final String park_name = "A";
     /**
@@ -41,9 +40,9 @@ public class RuleOnceDrlImpl implements IRuleService {
     public void dealFee(PCarInfo pCarInfo) {
         log.info("按次收费不需要处理车辆入场出场时间，当前车辆: {}", pCarInfo);
         log.info("当前收费逻辑《按次收费》，车场:{} ,收费: {}", park_name, BigDecimalUtils.trans(park_A_once_fee));
-        BigDecimal obj = redisTemplate.opsForValue().get(RuleCacheConstants.RULE_COUNT_DRL);
+        String str = redisTemplate.opsForValue().get(RuleCacheConstants.RULE_COUNT_DRL);
 //        String redisOnce = BigDecimalUtils.trans(obj);
-        log.info("从redis取出数据: {}", BigDecimalUtils.trans(obj));
+        log.info("从redis取出数据: {}", new BigDecimal(str));
     }
 
 }

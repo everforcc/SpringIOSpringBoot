@@ -39,12 +39,14 @@ public class TestController {
     IRuleService ruleVIPFreeDrlImpl;
     @Autowired
     IRuleService ruleVIPMonthDrlImpl;
+    //    @Autowired
+//    RedisTemplate<String,BigDecimal> redisTemplate;
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisTemplate<Object, Object> redisTemplate;
 
     @PostConstruct
     public void init() {
-        redisTemplate.opsForValue().set(RuleCacheConstants.RULE_COUNT_DRL, new BigDecimal(222), 30L, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(RuleCacheConstants.RULE_COUNT_DRL, new BigDecimal(222).toString(), 30L, TimeUnit.MINUTES);
     }
 
     /**

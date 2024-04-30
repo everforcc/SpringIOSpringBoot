@@ -16,15 +16,33 @@
     <description>sp41-drools</description>
 
     <dependencies>
+
+        <!-- spring start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- SpringBoot Actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+        </dependency>
+        <!-- spring end -->
 
+        <!-- cn.cc start -->
         <dependency>
             <groupId>cn.cc</groupId>
             <artifactId>common-redis-cluster</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-mysql</artifactId>
+        </dependency>
+        <!-- cn.cc end -->
 
         <!--drools规则引擎-->
         <dependency>
