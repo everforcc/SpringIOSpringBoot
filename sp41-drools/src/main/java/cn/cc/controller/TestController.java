@@ -6,6 +6,7 @@ import cn.cc.service.IRuleService;
 import cn.cc.utils.KieUtils;
 import cn.cc.utils.ReloadDroolsRules;
 import lombok.extern.slf4j.Slf4j;
+import org.kie.api.event.rule.*;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,9 +33,9 @@ public class TestController {
     @Autowired
     ReloadDroolsRules reloadFileDroolsRules;
     @Autowired
-    IRuleService ruleOnceDrlImpl;
+    IRuleService ruleTempOnceDrlImpl;
     @Autowired
-    IRuleService ruleDurationDrlImpl;
+    IRuleService ruleTempDurationDrlImpl;
     @Autowired
     IRuleService ruleVIPFreeDrlImpl;
     @Autowired
@@ -46,7 +47,17 @@ public class TestController {
 
     @PostConstruct
     public void init() {
+        // 1. 按次收费
         redisTemplate.opsForValue().set(RuleCacheConstants.RULE_COUNT_DRL, new BigDecimal(222).toString(), 30L, TimeUnit.MINUTES);
+        // 2. 按时间计费
+        // 3. 按照时间段计费
+
+        // 10. 会员
+        // 11. 免费
+        // 12. 包天
+        // 13. 包月
+        // 14. 包季度
+        // 15. 包年
     }
 
     /**
@@ -60,12 +71,64 @@ public class TestController {
         pCarInfo.setVipLevel(0);
 
         kieSession.insert(pCarInfo);
-        kieSession.setGlobal("ruleOnceDrlImpl", ruleOnceDrlImpl);
-        kieSession.setGlobal("ruleDurationDrlImpl", ruleDurationDrlImpl);
+        kieSession.setGlobal("ruleTempOnceDrlImpl", ruleTempOnceDrlImpl);
+        kieSession.setGlobal("ruleTempDurationDrlImpl", ruleTempDurationDrlImpl);
         kieSession.setGlobal("ruleVIPFreeDrlImpl", ruleVIPFreeDrlImpl);
         kieSession.setGlobal("ruleVIPMonthDrlImpl", ruleVIPMonthDrlImpl);
 //        kieSession.insert(ruleCountDrlImpl);
 //        kieSession.insert(ruleVIPFreeDrlImpl);
+        // 监听器
+        kieSession.addEventListener(new AgendaEventListener() {
+            @Override
+            public void matchCreated(MatchCreatedEvent event) {
+
+            }
+
+            @Override
+            public void matchCancelled(MatchCancelledEvent event) {
+
+            }
+
+            @Override
+            public void beforeMatchFired(BeforeMatchFiredEvent event) {
+
+            }
+
+            @Override
+            public void afterMatchFired(AfterMatchFiredEvent event) {
+
+            }
+
+            @Override
+            public void agendaGroupPopped(AgendaGroupPoppedEvent event) {
+
+            }
+
+            @Override
+            public void agendaGroupPushed(AgendaGroupPushedEvent event) {
+
+            }
+
+            @Override
+            public void beforeRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
+
+            }
+
+            @Override
+            public void afterRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
+
+            }
+
+            @Override
+            public void beforeRuleFlowGroupDeactivated(RuleFlowGroupDeactivatedEvent event) {
+
+            }
+
+            @Override
+            public void afterRuleFlowGroupDeactivated(RuleFlowGroupDeactivatedEvent event) {
+
+            }
+        });
         int ruleFiredCount = kieSession.fireAllRules();
         log.info("触发了" + ruleFiredCount + "条规则");
     }

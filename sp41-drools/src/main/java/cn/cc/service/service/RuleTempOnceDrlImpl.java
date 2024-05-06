@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Slf4j
 @Service
-public class RuleOnceDrlImpl implements IRuleService {
+public class RuleTempOnceDrlImpl implements IRuleService {
 
     @Resource
     RedisTemplate<Object, String> redisTemplate;

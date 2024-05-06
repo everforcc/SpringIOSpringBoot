@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @Date: 2024-04-26 15:30
  */
 @Data
-public class RuleCount extends RuleBase{
+public class RuleTempCount extends RuleBase{
 
     /**
      * 单次收费价格

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description : 会员按月收费
+ * @Description : 月费会员
  * @Author : GKL
  * @Date: 2024-04-28 10:01
  */

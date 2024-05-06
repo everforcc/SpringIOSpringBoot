@@ -2,6 +2,7 @@ package cn.cc.service.service;
 
 import cn.cc.mapper.SysUseMapper;
 import cn.cc.service.IDBRedisService;
+import com.baomidou.dynamic.datasource.annotation.Master;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class DBRedisServiceImpl implements IDBRedisService {
      * @param id id
      * @return 返回值
      */
+    @Master
     @Cacheable(cacheNames = "TEST_CACHE", key = "#id")
     @Override
     public String selectSysUser(int id) {

@@ -2,8 +2,8 @@ package dbdrl
 import cn.cc.dto.PCarInfo
 import cn.cc.service.IRuleService
 
-global cn.cc.service.service.RuleOnceDrlImpl ruleOnceDrlImpl
-global cn.cc.service.service.RuleDurationDrlImpl ruleDurationDrlImpl
+global cn.cc.service.service.RuleTempOnceDrlImpl ruleTempOnceDrlImpl
+global cn.cc.service.service.RuleTempDurationDrlImpl ruleTempDurationDrlImpl
 global cn.cc.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl
 global cn.cc.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl
 

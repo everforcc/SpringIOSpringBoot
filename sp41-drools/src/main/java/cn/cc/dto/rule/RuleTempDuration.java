@@ -10,21 +10,21 @@ import java.math.BigDecimal;
  * @Date: 2024-04-26 15:35
  */
 @Data
-public class RuleDuration extends RuleBase{
+public class RuleTempDuration extends RuleBase{
 
     /**
-     * 收费价格
+     * {}元/
      */
     private BigDecimal fee;
 
     /**
-     * 时长区间开始
+     * /{}分钟
      */
-    private Double durationStart;
+    private Integer minute;
 
-    /**
+/*    *//**
      * 时长区间结束
-     */
-    private Double durationEnd;
+     *//*
+    private Double durationEnd;*/
 
 }

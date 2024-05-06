@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * @Description : 计费规则基类
+ * @Description : 计费规则基类，必须有一个长期规则，只能有一个临时规则
  * @Author : GKL
  * @Date: 2024-04-26 15:30
  */

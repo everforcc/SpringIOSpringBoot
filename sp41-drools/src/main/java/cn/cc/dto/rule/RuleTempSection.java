@@ -1,6 +1,8 @@
 package cn.cc.dto.rule;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,8 +12,10 @@ import java.util.Date;
  * @Author : GKL
  * @Date: 2024-04-26 15:36
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class RuleSection extends RuleBase {
+public class RuleTempSection extends RuleBase {
 
     /**
      * 收费价格
@@ -21,11 +25,11 @@ public class RuleSection extends RuleBase {
     /**
      * 时长区间开始
      */
-    private Date durationStart;
+    private Integer durationStart;
 
     /**
      * 时长区间结束
      */
-    private Date durationEnd;
+    private Integer durationEnd;
 
 }
