@@ -12,7 +12,6 @@ import java.util.Date;
  * @Author : GKL
  * @Date: 2024-04-26 15:30
  */
-//@Data
 @Getter
 @Setter
 @NoArgsConstructor

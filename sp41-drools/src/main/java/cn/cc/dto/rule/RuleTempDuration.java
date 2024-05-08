@@ -13,18 +13,15 @@ import java.math.BigDecimal;
 public class RuleTempDuration extends RuleBase{
 
     /**
-     * {}元/
+     * 免费时长
      */
-    private BigDecimal fee;
+    public int freeMinute = 30;
 
     /**
-     * /{}分钟
+     * 每多长时间计费一次
      */
-    private Integer minute;
+    public int durationMinute = 30;
 
-/*    *//**
-     * 时长区间结束
-     *//*
-    private Double durationEnd;*/
+    public BigDecimal ruleDurationFee = new BigDecimal("2.5");
 
 }

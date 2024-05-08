@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface SysUseMapper {
 
-    @Select("SELECT nick_name FROM sys_user WHERE user_id = #{id };")
+    @Select("SELECT nick_name FROM sys_user WHERE user_id = #{id}")
     public String selectAdmin(int id);
 
 }

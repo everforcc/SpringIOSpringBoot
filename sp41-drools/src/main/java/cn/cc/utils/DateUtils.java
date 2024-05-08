@@ -64,7 +64,7 @@ public class DateUtils {
      * @return 返回结果
      */
     public static int difMinute(Date startDate, Date endDate) {
-        double aDouble = Math.ceil((endDate.getTime() - startDate.getTime()) / 60d);
+        double aDouble = Math.ceil((endDate.getTime() - startDate.getTime()) / (60d * 1000));
         return (int) aDouble;
     }
 
@@ -79,7 +79,6 @@ public class DateUtils {
      * @return 结果
      */
     public static boolean isOverLap(Date startDate, Date endDate, Date durationStartDate, Date durationEndDate) {
-        // 几种情况
         if (
                 (startDate.before(durationEndDate) && startDate.after(durationStartDate)) ||
                         (endDate.before(durationEndDate) && endDate.after(durationStartDate)) ||
@@ -94,6 +93,8 @@ public class DateUtils {
     public static Date hourOFDay(int hour) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
         return calendar.getTime();
     }
 

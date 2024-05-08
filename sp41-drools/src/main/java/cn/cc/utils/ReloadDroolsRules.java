@@ -1,5 +1,6 @@
 package cn.cc.utils;
 
+import cn.cc.dto.RuleDrlDto;
 import lombok.extern.slf4j.Slf4j;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieBuilder;
@@ -15,12 +16,12 @@ import org.kie.api.builder.Results;
 @Slf4j
 public abstract class ReloadDroolsRules {
 
-    protected abstract void loadRule(String drlName, KieFileSystem kfs);
+    protected abstract void loadRule(RuleDrlDto ruleDrlDto, KieFileSystem kfs);
 
-    public void reload(String drlName) {
+    public void reload(RuleDrlDto ruleDrlDto) {
         KieServices kieServices = KieUtils.getKieServices();
         KieFileSystem kfs = kieServices.newKieFileSystem();
-        loadRule(drlName, kfs);
+        loadRule(ruleDrlDto, kfs);
         KieBuilder kieBuilder = kieServices.newKieBuilder(kfs).buildAll();
         Results results = kieBuilder.getResults();
         if (results.hasMessages(Message.Level.ERROR)) {

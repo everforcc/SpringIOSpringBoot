@@ -1,6 +1,7 @@
 package cn.cc.utils.ext;
 
 import cn.cc.constant.RuleEngineConstants;
+import cn.cc.dto.RuleDrlDto;
 import cn.cc.utils.ReloadDroolsRules;
 import lombok.extern.slf4j.Slf4j;
 import org.kie.api.builder.KieFileSystem;
@@ -22,14 +23,14 @@ import java.io.IOException;
 @Component
 public class ReloadFileDroolsRules extends ReloadDroolsRules {
     @Override
-    protected void loadRule(String drlName, KieFileSystem kfs) {
+    protected void loadRule(RuleDrlDto ruleDrlDto, KieFileSystem kfs) {
         Resource[] resources;
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
         try {
-            if (StringUtils.isEmpty(drlName)) {
+            if (StringUtils.isEmpty(ruleDrlDto.getFileName())) {
                 resources = resourcePatternResolver.getResources(RuleEngineConstants.Load_PATH + RuleEngineConstants.filePattern);
             } else {
-                resources = resourcePatternResolver.getResources(RuleEngineConstants.Load_PATH + "**/" + drlName + ".*");
+                resources = resourcePatternResolver.getResources(RuleEngineConstants.Load_PATH + "**/" + ruleDrlDto.getFileName() + ".*");
             }
             for (Resource file : resources) {
                 kfs.write(ResourceFactory.newClassPathResource(RuleEngineConstants.Load_PATH + file.getFilename(), RuleEngineConstants.charset));

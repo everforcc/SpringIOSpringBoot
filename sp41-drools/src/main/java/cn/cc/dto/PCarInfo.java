@@ -1,5 +1,7 @@
 package cn.cc.dto;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,6 +13,8 @@ import java.util.Date;
  */
 @Data
 public class PCarInfo {
+
+    private Integer parkId;
 
     /**
      * 车辆类型：
@@ -54,4 +58,8 @@ public class PCarInfo {
      */
     private Date outTime;
 
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this, SerializerFeature.PrettyFormat);
+    }
 }

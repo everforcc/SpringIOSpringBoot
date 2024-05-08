@@ -2,6 +2,8 @@ package cn.cc.controller;
 
 import cn.cc.constant.RuleCacheConstants;
 import cn.cc.dto.PCarInfo;
+import cn.cc.dto.RuleDrlDto;
+import cn.cc.dto.rule.RuleBase;
 import cn.cc.service.IRuleService;
 import cn.cc.utils.KieUtils;
 import cn.cc.utils.ReloadDroolsRules;
@@ -10,13 +12,9 @@ import org.kie.api.event.rule.*;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Description : 测试drools
@@ -40,41 +38,55 @@ public class TestController {
     IRuleService ruleVIPFreeDrlImpl;
     @Autowired
     IRuleService ruleVIPMonthDrlImpl;
+    @Autowired
+    IRuleService ruleTempSectionDrlImpl;
     //    @Autowired
 //    RedisTemplate<String,BigDecimal> redisTemplate;
     @Autowired
     RedisTemplate<Object, Object> redisTemplate;
 
+
+
     @PostConstruct
     public void init() {
+
+        RuleCacheConstants ruleCacheConstants = new RuleCacheConstants();
+
         // 1. 按次收费
-        redisTemplate.opsForValue().set(RuleCacheConstants.RULE_COUNT_DRL, new BigDecimal(222).toString(), 30L, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(RuleCacheConstants.RTempOnce.KEY, RuleCacheConstants.RTempOnce.getValue(), RuleCacheConstants.RTempOnce.TIMEOUT, RuleCacheConstants.RTempOnce.UNIT);
         // 2. 按时间计费
+        redisTemplate.opsForValue().set(RuleCacheConstants.RTempDuration.KEY, RuleCacheConstants.RTempDuration.getValue(), RuleCacheConstants.RTempDuration.TIMEOUT, RuleCacheConstants.RTempDuration.UNIT);
         // 3. 按照时间段计费
 
         // 10. 会员
+
         // 11. 免费
+
         // 12. 包天
+
         // 13. 包月
+
         // 14. 包季度
+
         // 15. 包年
     }
 
     /**
      * 测试drools
      */
-    @GetMapping("/park")
-    public void tDrools() {
+    @PostMapping("/park")
+    public void tDrools(@RequestBody PCarInfo pCarInfo) {
         KieSession kieSession = KieUtils.getKieSession();
-        PCarInfo pCarInfo = new PCarInfo();
-        pCarInfo.setCarType(1);
-        pCarInfo.setVipLevel(0);
+//        PCarInfo pCarInfo = new PCarInfo();
+//        pCarInfo.setCarType(1);
+//        pCarInfo.setVipLevel(0);
 
         kieSession.insert(pCarInfo);
         kieSession.setGlobal("ruleTempOnceDrlImpl", ruleTempOnceDrlImpl);
         kieSession.setGlobal("ruleTempDurationDrlImpl", ruleTempDurationDrlImpl);
         kieSession.setGlobal("ruleVIPFreeDrlImpl", ruleVIPFreeDrlImpl);
         kieSession.setGlobal("ruleVIPMonthDrlImpl", ruleVIPMonthDrlImpl);
+        kieSession.setGlobal("ruleTempSectionDrlImpl", ruleTempSectionDrlImpl);
 //        kieSession.insert(ruleCountDrlImpl);
 //        kieSession.insert(ruleVIPFreeDrlImpl);
         // 监听器
@@ -136,16 +148,15 @@ public class TestController {
     /**
      * 重新加载drl规则
      */
-    @GetMapping("/reloaddb")
-    public void reloadDB() {
-        String drlName = "park";
-        reloadDBDroolsRules.reload(drlName);
+    @PostMapping("/reloaddb")
+    public void reloadDB(@RequestBody RuleDrlDto ruleDrlDto) {
+        reloadDBDroolsRules.reload(ruleDrlDto);
     }
 
-    @GetMapping("/reloadfile")
-    public void reloadFile() {
-        String drlName = "park";
-        reloadFileDroolsRules.reload(drlName);
-    }
+//    @GetMapping("/reloadfile")
+//    public void reloadFile() {
+//        String drlName = "park";
+//        reloadFileDroolsRules.reload(drlName);
+//    }
 
 }

@@ -1,9 +1,26 @@
 
 ### 根据停车规则计算金额
-GET http://localhost:8080/test/park
+POST http://localhost:8082/test/park
+Accept: application/json
+Content-Type: application/json
+
+{
+  "carNum":"豫A123456",
+  "carType":1,
+  "inTime":1717686061000,
+  "outTime":1717819261000,
+  "parkId":123,
+  "vipLevel":0
+}
 
 ### 从数据库加载规则
-GET http://localhost:8080/test/reloaddb
+POST http://localhost:8082/test/reloaddb
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ruleId": 3
+}
 
 ### 从文件加载规则
 GET http://localhost:8080/test/reloadfile

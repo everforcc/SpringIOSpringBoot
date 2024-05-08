@@ -35,7 +35,6 @@ public class RuleTempSectionDrlImpl implements IRuleService {
         }
     }
 
-
     @Override
     public void dealFee(PCarInfo pCarInfo) {
         log.info("时段收费.");
@@ -70,23 +69,36 @@ public class RuleTempSectionDrlImpl implements IRuleService {
                 tempEndLocalDate = day.atTime(LocalTime.of(23, 59, 59));
             }
 
-
             // 比如停车时间 [0506-11:10, 0507-12:20)
+            int tempStartHour = tempStartLocalDate.getHour();
+            int tempEndHour = tempEndLocalDate.getHour();
             for (RuleTempSection e : ruleTempSectionList) {
-                Date startDate = DateUtils.hourOFDay(i * 24 + e.getDurationStart());
-                Date endDate = DateUtils.hourOFDay(i * 24 + e.getDurationEnd());
-                boolean overLap = DateUtils.isOverLap(DateUtils.localDateTimeToDate(tempStartLocalDate),
-                        DateUtils.localDateTimeToDate(tempEndLocalDate),
-                        startDate, endDate
-                );
+                // todo 要修改为取出当天的计费逻辑
+                // 先判断停车区间内，是否有多个收费逻辑，如果有，分开计算每个区间的金额，但是，具体的方法内，只计算，当前收费区间和钱的逻辑
+//                Date startDate = DateUtils.hourOFDay(i * 24 + e.getDurationStart());
+//                Date endDate = DateUtils.hourOFDay(i * 24 + e.getDurationEnd());
+//                boolean overLap = DateUtils.isOverLap(DateUtils.localDateTimeToDate(tempStartLocalDate),
+//                        DateUtils.localDateTimeToDate(tempEndLocalDate),
+//                        startDate, endDate
+//                );
+                boolean overLap = isOverLap(tempStartHour, tempEndHour, e);
                 if (overLap) {
-                    log.info("触发时间[{},{}),收费规则: {}", DateUtils.localDateTimeToDate(tempStartLocalDate), DateUtils.localDateTimeToDate(tempEndLocalDate), e.getFee());
+                    log.info("触发时间区间[{}:00:00,{}:00:00),收费规则: {}/元", e.getDurationStart(), e.getDurationEnd(), e.getFee());
                     cost = cost.add(e.getFee());
                 }
             }
-            log.info("第{}天消费消费: {}", i + 1, cost);
+            log.info("第{}天累计消费: {}", i + 1, cost);
         }
         log.info("共消费: {}", cost);
+    }
+
+    private static boolean isOverLap(int tempStartHour, int tempEndHour, RuleTempSection e) {
+        // case1：开始时间在区间之中
+        return (tempStartHour < e.getDurationEnd() && tempStartHour >= e.getDurationStart()) ||
+                // case2：结束时间在区间之中
+                (tempEndHour < e.getDurationEnd() && tempEndHour >= e.getDurationStart()) ||
+                // case3：开始时间<=区间 或者 结束时间
+                (tempStartHour < e.getDurationEnd() && tempEndHour >= e.getDurationStart());
     }
 
 }

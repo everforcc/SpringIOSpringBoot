@@ -1,6 +1,6 @@
 package cn.cc.dto.rule;
 
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -9,12 +9,15 @@ import java.math.BigDecimal;
  * @Author : GKL
  * @Date: 2024-04-26 15:30
  */
-@Data
-public class RuleTempCount extends RuleBase{
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RuleTempOnce extends RuleBase{
 
     /**
      * 单次收费价格
      */
-    private BigDecimal fee;
+    public BigDecimal ruleOnceFee = new BigDecimal(222);
 
 }

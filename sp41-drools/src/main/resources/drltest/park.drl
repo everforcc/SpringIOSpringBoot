@@ -16,8 +16,8 @@ rule "特殊车辆"
         ruleVIPFreeDrlImpl.dealFee(p);
 end
 
-rule "普通车辆"
+rule "时长收费"
     when p : PCarInfo(1==carType && 0==vipLevel)
     then
-        ruleTempOnceDrlImpl.dealFee(p);
+        ruleTempDurationDrlImpl.dealFee(p);
 end
