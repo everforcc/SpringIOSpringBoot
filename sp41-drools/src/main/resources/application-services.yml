@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: mysql-hkzk-m,redis-s
+      label: master
+      profile: services

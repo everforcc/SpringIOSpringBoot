@@ -2,6 +2,12 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: sp41-drools
+  profiles:
+    # local # @deploy.type@
+    # maven侧边栏 刷新一下 Profiles
+    active: @deploy.type@
   datasource:
     druid:
       stat-view-servlet:
@@ -30,22 +36,20 @@ spring:
         # 主库数据源
         master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://8.146.199.165:3308/hkzkcrcc?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-          username: cceverfor
-          password: 5664c.c.
+          url: jdbc:mysql://${mysql.m.ip}:${mysql.m.port}/${mysql.m.db}?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+          username: ${mysql.m.un}
+          password: ${mysql.m.ps}
   redis:
-    cluster:
-      nodes: 10.250.250.21:5201,10.250.250.21:5202,10.250.250.21:5203,10.250.250.21:5204,10.250.250.21:5205,10.250.250.21:5206
-    password: hkzkdev
-    timeout: 3000
+    host: ${redis.s.ip}
+    port: ${redis.s.port}
+    database: ${redis.s.database}
+    password: ${redis.s.ps}
   cache:
     type: redis
   boot:
     admin:  # 监控地址
       client:
         url: http://localhost:80
-  application:
-    name: sp41-drools
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

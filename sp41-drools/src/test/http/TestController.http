@@ -9,7 +9,7 @@ GET http://localhost:8080/test/reloaddb
 GET http://localhost:8080/test/reloadfile
 
 ### 测试数据库和缓存
-GET http://localhost:8080/testdb/result/2
+GET http://localhost:8082/testdb/result/100
 
 ### 缓存
 GET http://localhost:8080/actuator/caches

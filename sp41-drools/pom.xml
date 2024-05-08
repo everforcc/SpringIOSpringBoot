@@ -33,6 +33,13 @@
         </dependency>
         <!-- spring end -->
 
+        <!-- spring cloud start -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <!-- spring cloud end -->
+
         <!-- cn.cc start -->
         <dependency>
             <groupId>cn.cc</groupId>
@@ -83,6 +90,14 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <targetPath>${basedir}/target/classes</targetPath>
+                <!-- 开启 filtering 会替换静态资源（html|js|...）中使用 ${key:属性名} 占位的属性，可以定义在 pom.xml -> properties -> key  -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -98,5 +113,30 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>services</id>
+            <!-- 默认 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <deploy.type>services</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <deploy.type>local</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>company</id>
+            <properties>
+                <deploy.type>company</deploy.type>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
