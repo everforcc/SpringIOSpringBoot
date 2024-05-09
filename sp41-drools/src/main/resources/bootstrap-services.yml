@@ -1,0 +1,10 @@
+server:
+  port: 8082
+
+config:
+  uri: http://43.140.221.95:8888
+  name: mysql-hkzk-m,redis-s
+  label: master
+  profile: services
+  confun: cc
+  confps: everforcc

@@ -1,6 +1,6 @@
 
 ### 根据停车规则计算金额
-POST http://localhost:8082/test/park
+POST http://localhost:8083/test/park
 Accept: application/json
 Content-Type: application/json
 
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### 从数据库加载规则
-POST http://localhost:8082/test/reloaddb
+POST http://localhost:8083/test/reloaddb
 Accept: application/json
 Content-Type: application/json
 

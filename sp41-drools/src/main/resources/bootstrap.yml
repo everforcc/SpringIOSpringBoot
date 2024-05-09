@@ -1,3 +1,4 @@
+
 server:
   port: 8080
 
@@ -5,9 +6,18 @@ spring:
   application:
     name: sp41-drools
   profiles:
-    # local # @deploy.type@
+    # local services
+    # @deploy.type@
     # maven侧边栏 刷新一下 Profiles
-    active: @deploy.type@
+    active: ${deploy.type}
+  cloud:
+    config:
+      uri:  ${config.uri}
+      name: ${config.name}
+      label: ${config.label}
+      profile: ${config.profile}
+      username: ${config.confun}
+      password: ${config.confps}
   datasource:
     druid:
       stat-view-servlet:
