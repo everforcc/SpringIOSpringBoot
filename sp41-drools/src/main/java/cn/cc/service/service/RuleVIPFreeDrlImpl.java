@@ -5,6 +5,8 @@ import cn.cc.service.IRuleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 /**
  * @Description : 免费会员
  * @Author : GKL
@@ -15,9 +17,10 @@ import org.springframework.stereotype.Service;
 public class RuleVIPFreeDrlImpl implements IRuleService {
 
     @Override
-    public void dealFee(PCarInfo pCarInfo) {
+    public BigDecimal dealFee(PCarInfo pCarInfo) {
         log.info("车辆信息: {}", pCarInfo);
         log.info("当前计费逻辑为《免费》");
+        return BigDecimal.ZERO;
     }
 
 }

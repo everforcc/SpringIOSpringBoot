@@ -33,13 +33,14 @@ public class RuleTempOnceDrlImpl implements IRuleService {
      * @param pCarInfo 停车车辆信息
      */
     @Override
-    public void dealFee(PCarInfo pCarInfo) {
+    public BigDecimal dealFee(PCarInfo pCarInfo) {
         log.info("按次收费不需要处理车辆入场出场时间，当前车辆: {}", pCarInfo);
 
         Object object = redisTemplate.opsForValue().get(RuleCacheConstants.RTempOnce.KEY);
         assert object != null;
         RuleTempOnce ruleTempOnce = JSONObject.parseObject(object.toString(), RuleTempOnce.class);
         log.info("当前收费逻辑《按次收费》，车场:{} ,收费: {}", pCarInfo.getParkId(), ruleTempOnce.getRuleOnceFee());
+        return ruleTempOnce.getRuleOnceFee();
     }
 
 }

@@ -2,6 +2,8 @@ package cn.cc.service;
 
 import cn.cc.dto.PCarInfo;
 
+import java.math.BigDecimal;
+
 /**
  * @Description : 收费规则接口
  * @Author : GKL
@@ -14,6 +16,6 @@ public interface IRuleService {
      *
      * @param pCarInfo 停车车辆信息
      */
-    public void dealFee(PCarInfo pCarInfo);
+    public BigDecimal dealFee(PCarInfo pCarInfo);
 
 }

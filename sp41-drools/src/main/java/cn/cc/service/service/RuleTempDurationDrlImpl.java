@@ -55,7 +55,7 @@ public class RuleTempDurationDrlImpl implements IRuleService {
      * @param pCarInfo 停车车辆信息
      */
     @Override
-    public void dealFee(PCarInfo pCarInfo) {
+    public BigDecimal dealFee(PCarInfo pCarInfo) {
         log.info("当前车场按照时长收费，当前车辆: {}", pCarInfo);
         log.info("入场时间: {}", pCarInfo.getInTime());
         log.info("出场时间: {}", pCarInfo.getOutTime());
@@ -71,7 +71,7 @@ public class RuleTempDurationDrlImpl implements IRuleService {
         // 1. x小时以内免费
         if (ruleTempDuration.getFreeMinute() > durationMinutes) {
             log.info("不足半小时，免费");
-            return;
+            return BigDecimal.ZERO;
         }
         // 2. 每 单位多少钱
         BigDecimal cost = ruleTempDuration.getRuleDurationFee().multiply(
@@ -83,6 +83,7 @@ public class RuleTempDurationDrlImpl implements IRuleService {
 
         log.info("当前收费逻辑《按时收费》，耗时:{},{}m/{}元", durationMinutes, ruleTempDuration.getDurationMinute(), BigDecimalUtils.trans(ruleTempDuration.getRuleDurationFee()));
         log.info("收费: {}", cost);
+        return cost;
     }
 
 }

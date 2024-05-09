@@ -3,7 +3,7 @@ package cn.cc.controller;
 import cn.cc.constant.RuleCacheConstants;
 import cn.cc.dto.PCarInfo;
 import cn.cc.dto.RuleDrlDto;
-import cn.cc.dto.rule.RuleBase;
+import cn.cc.mvc.Result;
 import cn.cc.service.IRuleService;
 import cn.cc.utils.KieUtils;
 import cn.cc.utils.ReloadDroolsRules;
@@ -12,9 +12,13 @@ import org.kie.api.event.rule.*;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 
 /**
  * @Description : 测试drools
@@ -46,7 +50,6 @@ public class TestController {
     RedisTemplate<Object, Object> redisTemplate;
 
 
-
     @PostConstruct
     public void init() {
 
@@ -75,20 +78,23 @@ public class TestController {
      * 测试drools
      */
     @PostMapping("/park")
-    public void tDrools(@RequestBody PCarInfo pCarInfo) {
+    public Result tDrools(@RequestBody PCarInfo pCarInfo) {
         KieSession kieSession = KieUtils.getKieSession();
 //        PCarInfo pCarInfo = new PCarInfo();
 //        pCarInfo.setCarType(1);
 //        pCarInfo.setVipLevel(0);
-
+        Result r = Result.success();
+//        BigDecimal cost = BigDecimal.ZERO;
         kieSession.insert(pCarInfo);
         kieSession.setGlobal("ruleTempOnceDrlImpl", ruleTempOnceDrlImpl);
         kieSession.setGlobal("ruleTempDurationDrlImpl", ruleTempDurationDrlImpl);
         kieSession.setGlobal("ruleVIPFreeDrlImpl", ruleVIPFreeDrlImpl);
         kieSession.setGlobal("ruleVIPMonthDrlImpl", ruleVIPMonthDrlImpl);
         kieSession.setGlobal("ruleTempSectionDrlImpl", ruleTempSectionDrlImpl);
+        kieSession.setGlobal("r", r);
 //        kieSession.insert(ruleCountDrlImpl);
 //        kieSession.insert(ruleVIPFreeDrlImpl);
+
         // 监听器
         kieSession.addEventListener(new AgendaEventListener() {
             @Override
@@ -141,16 +147,20 @@ public class TestController {
 
             }
         });
+
         int ruleFiredCount = kieSession.fireAllRules();
         log.info("触发了" + ruleFiredCount + "条规则");
+        log.info("result: " + r.getMsg());
+        return r;
     }
 
     /**
      * 重新加载drl规则
      */
     @PostMapping("/reloaddb")
-    public void reloadDB(@RequestBody RuleDrlDto ruleDrlDto) {
+    public Result reloadDB(@RequestBody RuleDrlDto ruleDrlDto) {
         reloadDBDroolsRules.reload(ruleDrlDto);
+        return Result.success();
     }
 
 //    @GetMapping("/reloadfile")

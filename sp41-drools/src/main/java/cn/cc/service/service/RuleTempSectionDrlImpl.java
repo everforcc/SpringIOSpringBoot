@@ -36,7 +36,7 @@ public class RuleTempSectionDrlImpl implements IRuleService {
     }
 
     @Override
-    public void dealFee(PCarInfo pCarInfo) {
+    public BigDecimal dealFee(PCarInfo pCarInfo) {
         log.info("时段收费.");
         BigDecimal cost = new BigDecimal(0);
         // 时间区间收费，先看当前时间段是否为多天，然后一个一个时间段处理
@@ -90,6 +90,7 @@ public class RuleTempSectionDrlImpl implements IRuleService {
             log.info("第{}天累计消费: {}", i + 1, cost);
         }
         log.info("共消费: {}", cost);
+        return cost;
     }
 
     private static boolean isOverLap(int tempStartHour, int tempEndHour, RuleTempSection e) {

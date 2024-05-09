@@ -5,6 +5,8 @@ import cn.cc.service.IRuleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 /**
  * @Description : 季度会员
  * @Author : GKL
@@ -15,8 +17,9 @@ import org.springframework.stereotype.Service;
 public class RuleVIPQuarterDrlImpl implements IRuleService {
 
     @Override
-    public void dealFee(PCarInfo pCarInfo) {
+    public BigDecimal dealFee(PCarInfo pCarInfo) {
         log.info("季度会员: {}", pCarInfo);
+        return BigDecimal.ZERO;
     }
 
 }

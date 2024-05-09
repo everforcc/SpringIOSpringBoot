@@ -5,6 +5,8 @@ import cn.cc.service.IRuleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 /**
  * @Description : 月费会员
  * @Author : GKL
@@ -22,8 +24,9 @@ public class RuleVIPMonthDrlImpl implements IRuleService {
      * @param pCarInfo 停车车辆信息
      */
     @Override
-    public void dealFee(PCarInfo pCarInfo) {
+    public BigDecimal dealFee(PCarInfo pCarInfo) {
         log.info("会员按月收费，当前车辆: {}", pCarInfo);
         log.info("当前收费逻辑《会员按月收费》，车场:{} ", park_name_a);
+        return BigDecimal.ZERO;
     }
 }

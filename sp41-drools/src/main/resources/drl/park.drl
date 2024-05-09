@@ -7,17 +7,18 @@ global cn.cc.service.service.RuleTempOnceDrlImpl ruleTempOnceDrlImpl
 global cn.cc.service.service.RuleTempSectionDrlImpl ruleTempSectionDrlImpl
 global cn.cc.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl
 global cn.cc.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl
+global cn.cc.mvc.Result r
 
 dialect  "java"
 
 rule "特殊车辆"
     when p : PCarInfo(0==carType)
     then
-        ruleVIPFreeDrlImpl.dealFee(p);
+        r.setMsg(ruleVIPFreeDrlImpl.dealFee(p));
 end
 
 rule "普通车辆"
     when p : PCarInfo(1==carType && 0==vipLevel)
     then
-        ruleTempOnceDrlImpl.dealFee(p);
+        r.setMsg(ruleTempOnceDrlImpl.dealFee(p));
 end
