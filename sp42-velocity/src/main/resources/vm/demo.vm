@@ -1,0 +1,18 @@
+## 测试
+<?xml version="1.0" encoding="utf-8"?>
+<TEST>
+    <Head>
+        <Time>$!{time}</Time>
+    </Head>
+    <Body>
+    <DEMO>
+        <ID>$!{id}</ID>
+        <STATUS/>
+        <LIST>
+            #foreach( $list in $listDemo )
+                <VALUE>$!{list.name}</VALUE>
+            #end
+        </LIST>
+    </DEMO>
+    </Body>
+</TEST>
