@@ -36,7 +36,6 @@
         <module>sp21-jdk</module>
         <!-- jar使用 -->
         <module>sp31-user-craw</module>
-        <module>sp40-Drools</module>
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp90-utils</module>

@@ -1,5 +1,0 @@
-###
-GET localhost:8080/test/param
-
-### 重新加载
-GET localhost:8080/test/reload
