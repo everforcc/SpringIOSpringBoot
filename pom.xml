@@ -38,6 +38,7 @@
         <module>sp31-user-craw</module>
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
+        <module>sp50-feign</module>
         <module>sp90-utils</module>
         <module>sp91-test</module>
         <module>sp92-tools</module>
@@ -285,11 +286,13 @@
                 <artifactId>fastjson</artifactId>
                 <version>${com.alibaba.fastjson}</version>
             </dependency>
-            <!--     <dependency>
-                     <groupId>com.alibaba.fastjson2</groupId>
-                     <artifactId>fastjson2</artifactId>
-                     <version>${fastjson.version}</version>
-                 </dependency>-->
+            <!--
+            <dependency>
+                 <groupId>com.alibaba.fastjson2</groupId>
+                 <artifactId>fastjson2</artifactId>
+                 <version>${fastjson.version}</version>
+             </dependency>
+             -->
 
 
             <dependency>

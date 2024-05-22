@@ -1,0 +1,10 @@
+GET http://localhost:8050/s
+Accept: application/json
+
+###
+GET http://localhost:8050/d
+Accept: application/json
+
+###
+GET http://localhost:8050/j
+Accept: application/json
