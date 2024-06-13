@@ -1,0 +1,27 @@
+GET http://localhost:8022/test
+Accept: application/json
+
+### work 模型
+GET http://localhost:8022/work
+Accept: application/json
+
+### fanout 交换机
+GET http://localhost:8022/fanout
+Accept: application/json
+
+
+### direct 交换机
+GET http://localhost:8022/direct/red
+Accept: application/json
+
+### direct 交换机
+GET http://localhost:8022/direct/blue
+Accept: application/json
+
+### topic 交换机
+GET http://localhost:8022/topic/news
+Accept: application/json
+-
+### topic 交换机
+GET http://localhost:8022/topic/weather
+Accept: application/json

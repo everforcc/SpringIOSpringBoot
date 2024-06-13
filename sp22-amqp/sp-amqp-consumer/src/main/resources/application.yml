@@ -1,0 +1,12 @@
+server:
+  port: 8023
+spring:
+  rabbitmq:
+    host: 8.146.199.165
+    port: 5672
+    virtual-host: my_vhost
+    username: c.c.
+    password: c.c.c.c.
+    listener:
+      simple:
+        prefetch: 1 # 默认只投递一条，处理完了才能继续下一个
