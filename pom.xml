@@ -35,6 +35,7 @@
         <!--        <module>sp20-comp</module>-->
         <module>sp21-jdk</module>
         <module>sp22-amqp</module>
+        <module>sp23-mqtt</module>
         <!-- jar使用 -->
         <module>sp31-user-craw</module>
         <module>sp41-drools</module>
