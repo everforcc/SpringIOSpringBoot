@@ -6,7 +6,7 @@ import org.springframework.amqp.support.converter.MessageConversionException;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+//@Component // 测试另一个虚拟主机，先屏蔽这个
 public class SpringRabbitListener {
 
     @RabbitListener(queues = "simple.queue")

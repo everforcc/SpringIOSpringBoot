@@ -4,7 +4,7 @@ spring:
   rabbitmq:
     host: 8.146.199.165
     port: 5672
-    virtual-host: my_vhost
+    virtual-host: / # my_vhost
     username: c.c.
     password: c.c.c.c.
     listener:
