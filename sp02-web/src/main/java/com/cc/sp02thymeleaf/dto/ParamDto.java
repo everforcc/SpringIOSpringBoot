@@ -28,7 +28,7 @@ public class ParamDto {
     private String name;
     private String description;
 
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+//    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     private JSONObject jsonObject;

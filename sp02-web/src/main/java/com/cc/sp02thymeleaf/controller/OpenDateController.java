@@ -23,10 +23,10 @@ import java.util.Date;
 public class OpenDateController {
 
     @GetMapping("/date")
-    public String getParam() {
+    public ParamDto getParam() {
         ParamDto paramDto = new ParamDto();
         paramDto.setDate(new Date());
-        return paramDto.toString();
+        return paramDto;
     }
 
 }

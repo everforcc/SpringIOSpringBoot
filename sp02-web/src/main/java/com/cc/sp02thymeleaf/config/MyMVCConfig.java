@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * 所有请求都会经过 DispatcherServlet
@@ -27,6 +29,14 @@ public class MyMVCConfig implements WebMvcConfigurer {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+//    /**
+//     * https://github.com/alibaba/fastjson/wiki/%E5%9C%A8-Spring-%E4%B8%AD%E9%9B%86%E6%88%90-Fastjson
+//     */
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        converters.add(0, fastJsonHttpMessageConverter());
+//    }
 
     /**
      * 启用 FastJson
@@ -39,10 +49,13 @@ public class MyMVCConfig implements WebMvcConfigurer {
         converter.setDefaultCharset(StandardCharsets.UTF_8);
         // 字段排序
         converter.getFastJsonConfig().setFeatures(Feature.OrderedField);
+        // converter.setDateFormat(); FastJsonConfig.setDateFormat(String)
+        converter.getFastJsonConfig().setDateFormat("yyyy-MM-dd");
         //
         converter.setSupportedMediaTypes(Collections.singletonList(
                 MediaType.APPLICATION_JSON
         ));
+
         return converter;
     }
 
