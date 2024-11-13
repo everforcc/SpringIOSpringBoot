@@ -7,6 +7,22 @@
 <body>
 
 <p> 首页-public </p>
+<img id="img" src="">
 
 </body>
+<script src="https://cdn.staticfile.net/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+    $.ajax({
+        url: 'http://localhost:8082/open/kaptcha/captchaProducer',
+        type: 'GET',
+        dataType: 'application/json',
+        success: function(response) {
+            $('#img').attr('src', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('An error occurred:', status, error);
+        }
+    });
+</script>
 </html>

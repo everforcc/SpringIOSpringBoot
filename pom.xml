@@ -128,6 +128,8 @@
         <cn.cc.redis.single>1.0-SNAPSHOT</cn.cc.redis.single>
         <cn.cc.redis.cluster>1.0-SNAPSHOT</cn.cc.redis.cluster>
         <cn.cc.mysql>1.0-SNAPSHOT</cn.cc.mysql>
+
+        <kaptcha.version>2.3.2</kaptcha.version>
     </properties>
 
     <dependencyManagement>
@@ -435,6 +437,13 @@
                 <version>${spring-boot-admin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- 验证码 -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
             </dependency>
 
         </dependencies>

@@ -1,0 +1,15 @@
+
+### 从配置文件读取
+GET http://localhost:8082/open/kaptcha/captchaProducer
+Accept: application/json
+
+
+### TXT 类型验证码
+GET http://localhost:8082/open/kaptcha/captchaProducerTXT
+Accept: application/json
+
+
+### MATH 类型验证码
+GET http://localhost:8082/open/kaptcha/captchaProducerMath
+Accept: application/json
+

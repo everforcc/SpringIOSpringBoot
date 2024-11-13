@@ -51,6 +51,12 @@
             <artifactId>validation-api</artifactId>
         </dependency>
 
+        <!--验证码 -->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+
     </dependencies>
 
     <!-- 打包必须要加 -->
