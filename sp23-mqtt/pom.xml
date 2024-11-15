@@ -49,19 +49,16 @@
         <!--        引入 mqtt 相关依赖-->
 
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <targetPath>${basedir}/target/classes</targetPath>
+                <!-- 开启 filtering 会替换静态资源（html|js|...）中使用 ${key:属性名} 占位的属性，可以定义在 pom.xml -> properties -> key  -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
