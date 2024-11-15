@@ -1,0 +1,5 @@
+minio:
+  url: http://43.140.221.95:9000
+  access-key: rootc.c.
+  secret-key: rootc.c.
+  bucket-name=: pro-test

@@ -5,3 +5,6 @@ minio:
   access-key: minioadmin
   secret-key: minioadmin
   bucket-name=: pro-test
+spring:
+  profiles:
+    active: txy
