@@ -15,6 +15,7 @@
     <description>公共模块儿</description>
 
     <modules>
+        <module>common-file-minio</module>
         <module>common-redis-single</module>
         <module>common-redis-cluster</module>
         <module>common-mysql</module>

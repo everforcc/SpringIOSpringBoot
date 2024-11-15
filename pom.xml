@@ -28,6 +28,7 @@
         <module>sp04-MybatisPlus</module>
         <module>sp04-security</module>
         <module>sp05-redis</module>
+        <module>sp06-file</module>
         <module>sp10-aop</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
@@ -128,8 +129,10 @@
         <cn.cc.redis.single>1.0-SNAPSHOT</cn.cc.redis.single>
         <cn.cc.redis.cluster>1.0-SNAPSHOT</cn.cc.redis.cluster>
         <cn.cc.mysql>1.0-SNAPSHOT</cn.cc.mysql>
+        <cn.cc.minio>1.0-SNAPSHOT</cn.cc.minio>
 
         <kaptcha.version>2.3.2</kaptcha.version>
+        <minio.version>8.2.2</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -160,6 +163,11 @@
                 <groupId>cn.cc</groupId>
                 <artifactId>common-mysql</artifactId>
                 <version>${cn.cc.mysql}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-file-minio</artifactId>
+                <version>${cn.cc.minio}</version>
             </dependency>
             <!-- 自定义 cn.cc -->
 
@@ -444,6 +452,13 @@
                 <groupId>com.github.penggle</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
+            </dependency>
+
+            <!-- minio -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
         </dependencies>
