@@ -1,6 +1,6 @@
 package com.cc.sp90utils.commons.regex;
 
-public class RegexConstant {
+public class RegexNumberConstant {
 
     /**
      * 匹配字符串中间的数字
