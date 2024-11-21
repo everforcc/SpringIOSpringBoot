@@ -13,4 +13,4 @@ spring:
 #    date-format: yyyy-MM-dd
 #    time-zone: GMT+8
 server:
-  port: 8082
+  port: 8002

@@ -7,11 +7,10 @@
 
 package cn.cc.sp31usercraw.utils;
 
-import com.cc.sp90utils.commons.io.RFileUtils;
-import com.cc.sp90utils.commons.web.HttpParamUtils;
-import com.cc.sp90utils.commons.web.JHttpUrlConnectUtils;
-import com.cc.sp90utils.opencv.OCRUtils;
-import com.cc.sp90utils.opencv.util.OcrTess;
+import cn.cc.utils.commons.io.RFileUtils;
+import cn.cc.utils.commons.web.HttpParamUtils;
+import cn.cc.utils.commons.web.JHttpUrlConnectUtils;
+import cn.cc.utils.opencv.OCRUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;

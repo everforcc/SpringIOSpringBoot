@@ -65,7 +65,7 @@
 
         <dependency>
             <groupId>cn.cc</groupId>
-            <artifactId>sp90-utils</artifactId>
+            <artifactId>common-utils</artifactId>
             <exclusions>
 <!--                <exclusion>-->
 <!--                    <groupId>ch.qos.logback</groupId>-->

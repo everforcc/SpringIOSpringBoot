@@ -4,8 +4,8 @@ import cmd.compress.ISevenUtils;
 import cmd.compress.constant.CompressConstant;
 import cmd.compress.constant.CompressEnum;
 import cmd.compress.constant.FileTypeCMDEnum;
-import com.cc.sp90utils.commons.lang.RStringUtils;
-import com.cc.sp90utils.runtime.CmdUtils;
+import cn.cc.utils.commons.lang.RStringUtils;
+import cn.cc.utils.runtime.CmdUtils;
 
 import java.io.File;
 

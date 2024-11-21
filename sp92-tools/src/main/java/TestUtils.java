@@ -1,4 +1,4 @@
-import com.cc.sp90utils.commons.lang.RObjectsUtils;
+import cn.cc.utils.commons.lang.RObjectsUtils;
 
 public class TestUtils {
 

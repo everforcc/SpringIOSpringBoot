@@ -1,9 +1,9 @@
 package baidu.ocr;
 
-import com.cc.sp90utils.commons.io.RFileUtils;
-import com.cc.sp90utils.http.dto.HttpParamDto;
-import com.cc.sp90utils.http.IHttp;
-import com.cc.sp90utils.http.impl.IHttpURLConnection;
+import cn.cc.utils.commons.io.RFileUtils;
+import cn.cc.utils.http.dto.HttpParamDto;
+import cn.cc.utils.http.IHttp;
+import cn.cc.utils.http.impl.IHttpURLConnection;
 import org.json.JSONObject;
 
 /**

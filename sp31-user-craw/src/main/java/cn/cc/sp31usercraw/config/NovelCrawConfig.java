@@ -10,7 +10,7 @@ package cn.cc.sp31usercraw.config;
 import cn.cc.sp31usercraw.dodo.NovelConfigDo;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import com.alibaba.fastjson.JSONObject;
-import com.cc.sp90utils.commons.io.RFileUtils;
+import cn.cc.utils.commons.io.RFileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

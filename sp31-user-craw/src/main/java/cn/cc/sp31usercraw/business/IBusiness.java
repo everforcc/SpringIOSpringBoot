@@ -8,7 +8,7 @@
 package cn.cc.sp31usercraw.business;
 
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
-import com.cc.sp90utils.http.selenium.WebDriverPDto;
+import cn.cc.utils.http.selenium.WebDriverPDto;
 
 /**
  * 处理特殊网站，通用接口无法完全处理的问题

@@ -9,15 +9,10 @@ package cn.cc.sp31usercraw.business.impl;
 
 import cn.cc.sp31usercraw.business.IBusiness;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
-import cn.cc.sp31usercraw.utils.CharsetOCR;
-import com.cc.sp90utils.http.selenium.WebDriverPDto;
-import com.cc.sp90utils.jsoup.XSoupUtils;
+import cn.cc.utils.http.selenium.WebDriverPDto;
+import cn.cc.utils.jsoup.XSoupUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * 通用的默认实现类

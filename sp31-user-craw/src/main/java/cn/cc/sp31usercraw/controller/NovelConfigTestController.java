@@ -8,7 +8,7 @@
 package cn.cc.sp31usercraw.controller;
 
 import cn.cc.sp31usercraw.service.INovelConfigTestService;
-import com.cc.sp90utils.entity.ResultE;
+import cn.cc.utils.entity.ResultE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

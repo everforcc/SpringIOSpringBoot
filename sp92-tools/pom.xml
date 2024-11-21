@@ -18,14 +18,9 @@
 
     <dependencies>
 
-        <!--<dependency>
-            <groupId>com.cc</groupId>
-            <artifactId>sp90-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
         <dependency>
             <groupId>cn.cc</groupId>
-            <artifactId>sp90-utils</artifactId>
+            <artifactId>common-utils</artifactId>
         </dependency>
         <!-- lombok -->
         <dependency>

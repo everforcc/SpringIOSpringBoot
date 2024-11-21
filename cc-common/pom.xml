@@ -16,9 +16,10 @@
 
     <modules>
         <module>common-file-minio</module>
+        <module>common-mysql</module>
         <module>common-redis-single</module>
         <module>common-redis-cluster</module>
-        <module>common-mysql</module>
+        <module>common-utils</module>
     </modules>
 
 </project>

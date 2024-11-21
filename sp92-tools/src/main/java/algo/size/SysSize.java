@@ -7,7 +7,7 @@
 
 package algo.size;
 
-import com.cc.sp90utils.commons.io.RFileUtils;
+import cn.cc.utils.commons.io.RFileUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 /**

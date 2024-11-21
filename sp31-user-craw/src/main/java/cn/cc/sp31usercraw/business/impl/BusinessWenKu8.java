@@ -9,7 +9,7 @@ package cn.cc.sp31usercraw.business.impl;
 
 import cn.cc.sp31usercraw.business.IBusiness;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
-import com.cc.sp90utils.http.selenium.WebDriverPDto;
+import cn.cc.utils.http.selenium.WebDriverPDto;
 import org.springframework.stereotype.Service;
 
 /**

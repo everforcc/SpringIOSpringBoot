@@ -1,6 +1,6 @@
 package baidu.ocr;
 import com.baidu.aip.ocr.AipOcr;
-import com.cc.sp90utils.commons.io.RFileUtils;
+import cn.cc.utils.commons.io.RFileUtils;
 import org.json.JSONObject;
 
 import java.util.HashMap;

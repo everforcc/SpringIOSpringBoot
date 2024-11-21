@@ -9,10 +9,10 @@ package cmd.ffmpeg;
 
 
 import cmd.ffmpeg.constant.ConstantFFmpeg;
-import com.cc.sp90utils.commons.io.JInputStreamCharUtils;
-import com.cc.sp90utils.commons.lang.RStringUtils;
-import com.cc.sp90utils.exception.AppCode;
-import com.cc.sp90utils.runtime.CmdUtils;
+import cn.cc.utils.commons.io.JInputStreamCharUtils;
+import cn.cc.utils.commons.lang.RStringUtils;
+import cn.cc.utils.exception.AppCode;
+import cn.cc.utils.runtime.CmdUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;

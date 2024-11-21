@@ -1,3 +1,11 @@
+param:
+  server:
+    port: 8004
+  mysql:
+    ip: 8.146.199.165
+    port: 3308
+    un: cceverfor
+    pas: 5664c.c.
 
 spring:
   datasource:
@@ -5,8 +13,8 @@ spring:
     url: jdbc:p6spy:mysql://43.143.232.133:3308/oneforall?characterEncoding=UTF-8&&serverTimezone=GMT&useSSL=false # 编码和时区 &userSSL=false
     #driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver # 性能分析
-    username: cceverfor
-    password: 5664c.c.
+    username: ${param.mysql.un}
+    password: ${param.mysql.pas}
 #    hikari:
 #      schema: classpath:db/schema.sql
 #      data: classpath:db/data.sql
@@ -27,3 +35,5 @@ mybatis-plus:
       logic-delete-field: flag
       logic-delete-value: 1 #逻辑已删除值(默认为1)
       logic-not-delete-value: 0 #逻辑未删除值(默认为0)
+server:
+  port: ${param.server.port}

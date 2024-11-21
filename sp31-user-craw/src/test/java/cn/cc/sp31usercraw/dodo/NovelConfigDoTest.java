@@ -7,7 +7,7 @@
 
 package cn.cc.sp31usercraw.dodo;
 
-import com.cc.sp90utils.commons.web.HttpParamUtils;
+import cn.cc.utils.commons.web.HttpParamUtils;
 import org.junit.Test;
 
 public class NovelConfigDoTest {

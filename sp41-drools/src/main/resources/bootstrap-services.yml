@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8041
 
 config:
   uri: http://43.140.221.95:8888

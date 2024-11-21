@@ -8,7 +8,7 @@
 package cn.cc.sp31usercraw.dodo;
 
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
-import com.cc.sp90utils.commons.web.HttpParamUtils;
+import cn.cc.utils.commons.web.HttpParamUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

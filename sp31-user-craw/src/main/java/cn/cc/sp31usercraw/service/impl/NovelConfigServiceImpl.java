@@ -14,7 +14,7 @@ import cn.cc.sp31usercraw.dto.NovelMsgDto;
 import cn.cc.sp31usercraw.flow.INovelCommonFlowService;
 import cn.cc.sp31usercraw.service.INovelConfigService;
 import cn.cc.sp31usercraw.utils.DownUtils;
-import com.cc.sp90utils.commons.web.HttpParamUtils;
+import cn.cc.utils.commons.web.HttpParamUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

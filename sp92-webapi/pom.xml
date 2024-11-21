@@ -49,7 +49,7 @@
 
         <dependency>
             <groupId>cn.cc</groupId>
-            <artifactId>sp90-utils</artifactId>
+            <artifactId>common-utils</artifactId>
         </dependency>
 
 <!--        <dependency>
