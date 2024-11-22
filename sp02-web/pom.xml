@@ -13,11 +13,7 @@
     <artifactId>sp02-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp02-web</name>
-    <description>sp02-web</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>测试spring web的一些功能</description>
 
     <dependencies>
         <dependency>

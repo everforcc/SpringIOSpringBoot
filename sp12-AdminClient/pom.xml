@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sp12-AdminClient</artifactId>
     <name>sp12-AdminClient</name>
-    <description>sp12-AdminClient</description>
+    <description>测试Admin监控客户端</description>
 
     <dependencies>
         <dependency>

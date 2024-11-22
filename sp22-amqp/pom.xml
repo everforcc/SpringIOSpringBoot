@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 <!--    <name>sp22-amqp</name>-->
-    <description>sp22-amqp</description>
+    <description>测试mqtt推送拉取</description>
 
     <modules>
         <module>sp-amqp-consumer</module>

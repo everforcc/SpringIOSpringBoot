@@ -13,7 +13,7 @@
     <artifactId>sp13-WebSocket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp13-WebSocket</name>
-    <description>sp13-WebSocket</description>
+    <description>测试websocket功能，配合postman</description>
 
     <dependencies>
         <dependency>

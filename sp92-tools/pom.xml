@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp92-tools</artifactId>
+    <description>工具包，但是按照不同的业务分开</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

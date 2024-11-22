@@ -10,10 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp21-jdk</artifactId>
+    <description>需要移动到utils的测试包下</description>
 
-    <properties>
+<!--    <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    </properties>-->
 
 </project>

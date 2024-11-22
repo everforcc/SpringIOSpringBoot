@@ -14,11 +14,7 @@
     <artifactId>sp04-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp04-security</name>
-    <description>sp04-security</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>测试-springsecurity-和类似自己实现的功能</description>
 
     <dependencies>
         <dependency>

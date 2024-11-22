@@ -14,7 +14,7 @@
     <artifactId>sp04-MybatisPlus</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp04-MybatisPlus</name>
-    <description>sp04-MybatisPlus</description>
+    <description>测试MybatisPlus功能</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -100,14 +100,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
+                <!--<configuration>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
+                </configuration>-->
             </plugin>
             <!--编译跳过测试文件检查的生命周期-->
             <plugin>

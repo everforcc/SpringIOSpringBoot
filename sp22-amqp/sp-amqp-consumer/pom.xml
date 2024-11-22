@@ -12,7 +12,7 @@
     <artifactId>sp-amqp-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp-amqp-consumer</name>
-    <description>sp-amqp-consumer</description>
+    <description>rabbitmq-拉取消费</description>
 
     <dependencies>
         <dependency>

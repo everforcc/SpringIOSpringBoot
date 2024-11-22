@@ -13,7 +13,7 @@
     <artifactId>sp50-feign</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp50-feign</name>
-    <description>sp50-feign</description>
+    <description>openfeign远程或者微服务之间互相调用</description>
 
     <dependencies>
         <dependency>

@@ -14,7 +14,7 @@
     <artifactId>sp91-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp91-test</name>
-    <description>sp91-test</description>
+    <description>测试使用</description>
 
     <properties>
         <java.version>1.8</java.version>

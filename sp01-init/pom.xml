@@ -10,15 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.cc</groupId>
+<!--    <groupId>com.cc</groupId>-->
     <artifactId>sp01-init</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp01-init</name>
-    <description>sp01-init</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>测试数据初始化</description>
 
     <dependencies>
         <dependency>

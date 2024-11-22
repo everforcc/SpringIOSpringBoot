@@ -11,13 +11,15 @@
 
     <artifactId>sp92-webapi</artifactId>
 
+    <description>第三方服务调用</description>
+<!--
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+-->
 
     <dependencies>
-
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

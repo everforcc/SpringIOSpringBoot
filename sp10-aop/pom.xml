@@ -14,7 +14,7 @@
     <artifactId>sp10-aop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp10-aop</name>
-    <description>sp10-aop</description>
+    <description>测试spring-aop</description>
 
     <properties>
         <java.version>1.8</java.version>

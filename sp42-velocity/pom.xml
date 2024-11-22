@@ -13,7 +13,7 @@
     <artifactId>sp42-velocity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp42-velocity</name>
-    <description>sp42-velocity</description>
+    <description>测试代码生成-velocity</description>
 
     <dependencies>
         <dependency>

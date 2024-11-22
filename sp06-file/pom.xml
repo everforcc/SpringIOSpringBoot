@@ -11,7 +11,7 @@
     <artifactId>sp06-file</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp06-file</name>
-    <description>sp06-file</description>
+    <description>测试file功能，目前实现了minio</description>
 
     <dependencies>
         <dependency>

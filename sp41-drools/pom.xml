@@ -13,7 +13,7 @@
     <artifactId>sp41-drools</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp41-drools</name>
-    <description>sp41-drools</description>
+    <description>测试规则引擎-drools</description>
 
     <dependencies>
 

@@ -107,7 +107,7 @@
         <!-- 中间件 -->
 
         <!-- 工具类 -->
-        <lombok.version>1.18.10</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
         <commons-io>2.6</commons-io>
         <com.alibaba.fastjson>1.2.58</com.alibaba.fastjson>
         <com.google.guava.guava>30.1.1-jre</com.google.guava.guava>

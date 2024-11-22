@@ -14,11 +14,7 @@
     <artifactId>sp03-data</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sp03-data</name>
-    <description>sp03-data</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>测试spring mysql功能</description>
 
     <dependencies>
         <dependency>
