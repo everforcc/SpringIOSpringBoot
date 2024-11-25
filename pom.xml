@@ -13,42 +13,17 @@
 
     <groupId>cn.cc</groupId>
     <artifactId>SpringIOSpringBoot</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <description>spring系列功能测试</description>
 
     <!-- 打包方式 -->
     <packaging>pom</packaging>
 
-    <modules>
-        <module>cc-common</module>
-        <module>sp01-init</module>
-        <module>sp02-web</module>
-        <module>sp03-data</module>
-        <module>sp04-MybatisPlus</module>
-        <module>sp04-security</module>
-        <module>sp05-redis</module>
-        <module>sp06-file</module>
-        <module>sp10-aop</module>
-        <module>sp11-AdminServer</module>
-        <module>sp12-AdminClient</module>
-        <module>sp13-WebSocket</module>
-        <!--        <module>sp20-comp</module>-->
-        <module>sp21-jdk</module>
-        <module>sp22-amqp</module>
-        <module>sp23-mqtt</module>
-        <!-- jar使用 -->
-        <module>sp31-user-craw</module>
-        <module>sp41-drools</module>
-        <module>sp42-velocity</module>
-        <module>sp50-feign</module>
-        <module>sp91-test</module>
-        <module>sp92-tools</module>
-        <module>sp92-webapi</module>
-    </modules>
-
     <!--统一管理jar包版本-->
     <properties>
+        <revision>1.0</revision>
+
         <!-- 环境变量 -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,6 +33,8 @@
         <!-- maven -->
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <!-- maven -->
 
         <!-- spring -->
@@ -155,53 +132,53 @@
         <com.baidu.aip.java-sdk>4.12.0</com.baidu.aip.java-sdk>
         <!-- 有道云 -->
         <!-- 第三方sdk -->
-
-        <!-- 自定义 -->
-        <cn.cc.utils>0.0.1-SNAPSHOT</cn.cc.utils>
-        <cn.cc.redis>1.0-SNAPSHOT</cn.cc.redis>
-        <cn.cc.redis.single>1.0-SNAPSHOT</cn.cc.redis.single>
-        <cn.cc.redis.cluster>1.0-SNAPSHOT</cn.cc.redis.cluster>
-        <cn.cc.mysql>1.0-SNAPSHOT</cn.cc.mysql>
-        <cn.cc.minio>1.0-SNAPSHOT</cn.cc.minio>
-        <!-- 自定义 -->
-
     </properties>
+
+    <modules>
+        <module>cc-common</module>
+        <module>sp01-init</module>
+        <module>sp02-web</module>
+        <module>sp03-data</module>
+        <module>sp04-MybatisPlus</module>
+        <module>sp04-security</module>
+        <module>sp05-redis</module>
+        <module>sp06-file</module>
+        <module>sp10-aop</module>
+        <module>sp11-AdminServer</module>
+        <module>sp12-AdminClient</module>
+        <module>sp13-WebSocket</module>
+        <!--        <module>sp20-comp</module>-->
+        <module>sp21-jdk</module>
+        <module>sp22-amqp</module>
+        <module>sp23-mqtt</module>
+        <!-- jar使用 -->
+        <module>sp31-user-craw</module>
+        <module>sp41-drools</module>
+        <module>sp42-velocity</module>
+        <module>sp50-feign</module>
+        <module>sp91-test</module>
+        <module>sp92-tools</module>
+        <module>sp92-webapi</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
 
-            <!-- 自定义 cn.cc -->
+            <!-- common 的依赖配置-->
             <dependency>
                 <groupId>cn.cc</groupId>
-                <artifactId>common-utils</artifactId>
-                <version>${cn.cc.utils}</version>
+                <artifactId>common-bom</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+
+            <!-- todo 待处理 -->
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>sp05-redis</artifactId>
                 <version>${cn.cc.redis}</version>
             </dependency>
-            <dependency>
-                <groupId>cn.cc</groupId>
-                <artifactId>common-redis-single</artifactId>
-                <version>${cn.cc.redis.single}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.cc</groupId>
-                <artifactId>common-redis-cluster</artifactId>
-                <version>${cn.cc.redis.cluster}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.cc</groupId>
-                <artifactId>common-mysql</artifactId>
-                <version>${cn.cc.mysql}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.cc</groupId>
-                <artifactId>common-file-minio</artifactId>
-                <version>${cn.cc.minio}</version>
-            </dependency>
-            <!-- 自定义 cn.cc -->
 
             <!-- spirng -->
             <dependency>
@@ -509,12 +486,39 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <!-- 指定打包编码 -->
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+            <!-- 统一版本号管理 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>

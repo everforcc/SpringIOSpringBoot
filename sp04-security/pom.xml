@@ -7,12 +7,12 @@
     <parent>
         <groupId>cn.cc</groupId>
         <artifactId>SpringIOSpringBoot</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <groupId>com.cc</groupId>
     <artifactId>sp04-security</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>sp04-security</name>
     <description>测试-springsecurity-和类似自己实现的功能</description>
 

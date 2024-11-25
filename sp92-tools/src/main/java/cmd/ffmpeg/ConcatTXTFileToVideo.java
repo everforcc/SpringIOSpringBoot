@@ -8,11 +8,12 @@
 package cmd.ffmpeg;
 
 import cmd.ffmpeg.constant.ConstantFFmpeg;
-import cn.cc.utils.commons.io.JInputStreamCharUtils;
-import cn.cc.utils.exception.AppCode;
-import cn.cc.utils.runtime.CmdUtils;
+import cn.cc.utils.cmd.util.CmdUtils;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -62,11 +63,9 @@ public class ConcatTXTFileToVideo {
         // 生成的文件名直接在目录后加.txt
         String resultFileName = path + ".txt";
 
-        JInputStreamCharUtils jInputStreamCharUtils = new JInputStreamCharUtils(resultFileName);
-
         File fileDir = new File(path);
         if (!fileDir.isDirectory()) {
-            throw AppCode.A00100.toUserException("必须是文件夹才能转换");
+            throw new RuntimeException("必须是文件夹才能转换");
         }
 
         int length = Objects.requireNonNull(fileDir.listFiles()).length;
@@ -78,7 +77,12 @@ public class ConcatTXTFileToVideo {
             if (new File(absolutePath).exists()) {
                 String str = "file '" + absolutePath + "'";
                 // 生成与文件夹同名的txt，里面包含目录下的所有文件路径信息
-                jInputStreamCharUtils.printWriterAppend(str);
+                try {
+                    FileUtils.writeStringToFile(new File(resultFileName), str, StandardCharsets.UTF_8);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("写入文件异常");
+                }
             }
         }
         return resultFileName;

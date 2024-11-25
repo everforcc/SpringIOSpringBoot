@@ -8,7 +8,7 @@
     <parent>
         <artifactId>SpringIOSpringBoot</artifactId>
         <groupId>cn.cc</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>sp05-redis</artifactId>

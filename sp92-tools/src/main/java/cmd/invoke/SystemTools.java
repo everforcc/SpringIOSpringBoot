@@ -1,6 +1,6 @@
 package cmd.invoke;
 
-import cn.cc.utils.runtime.CmdUtils;
+import cn.cc.utils.cmd.util.CmdUtils;
 
 public class SystemTools {
 

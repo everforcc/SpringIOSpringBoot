@@ -7,12 +7,11 @@
     <parent>
         <groupId>cn.cc</groupId>
         <artifactId>SpringIOSpringBoot</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <groupId>com.cc</groupId>
     <artifactId>sp03-data</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>sp03-data</name>
     <description>测试spring mysql功能</description>
 

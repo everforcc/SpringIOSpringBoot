@@ -1,11 +1,12 @@
-package cn.cc.utils.runtime;
+package cn.cc.utils.cmd.util;
 
-import cn.cc.utils.constant.CharsetsConstant;
-import cn.cc.utils.commons.io.RIOUtils;
+import cn.cc.utils.cmd.constant.CharsetsConstant;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 @Slf4j
@@ -43,7 +44,7 @@ public class CmdUtils {
          */
 //        if(0 == exitStatus){
         in = process.getInputStream();
-        String result = RIOUtils.outStreamWithLog(in, CharsetsConstant.GBK.toString());
+        String result = IOUtils.toString(in, CharsetsConstant.GBK.toString());
         //log.debug("执行结果 getInputStream: {}",result);
 //        }else {
 //            in = process.getErrorStream();
@@ -90,7 +91,12 @@ public class CmdUtils {
      * @return 返回执行结果
      */
     private static String process(Process process) {
-        String result = RIOUtils.toString(process.getInputStream(), CharsetsConstant.GBK.toString());
+        String result = null;
+        try {
+            result = IOUtils.toString(process.getInputStream(), CharsetsConstant.GBK.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         process.destroy();
         return result;
     }

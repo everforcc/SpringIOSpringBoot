@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.cc</groupId>
+    <artifactId>common-bom</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <description>common-依赖</description>
+
+    <properties>
+        <revision>1.0</revision>
+        <!-- 自定义 -->
+        <cn.cc.common>${revision}</cn.cc.common>
+        <cn.cc.minio>${revision}</cn.cc.minio>
+        <cn.cc.mysql>${revision}</cn.cc.mysql>
+        <cn.cc.redis>${revision}</cn.cc.redis>
+        <cn.cc.redis.cluster>${revision}</cn.cc.redis.cluster>
+        <cn.cc.redis.single>${revision}</cn.cc.redis.single>
+        <cn.cc.utils>${revision}</cn.cc.utils>
+        <cn.cc.utils.cmd>${revision}</cn.cc.utils.cmd>
+        <cn.cc.utils.craw>${revision}</cn.cc.utils.craw>
+        <cn.cc.utils.opencv>${revision}</cn.cc.utils.opencv>
+        <!-- 自定义 -->
+    </properties>
+
+    <dependencyManagement>
+        <!-- 自定义 cn.cc -->
+        <dependencies>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-file-minio</artifactId>
+                <version>${cn.cc.minio}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-mysql</artifactId>
+                <version>${cn.cc.mysql}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-redis-cluster</artifactId>
+                <version>${cn.cc.redis.cluster}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-redis-single</artifactId>
+                <version>${cn.cc.redis.single}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-utils</artifactId>
+                <version>${cn.cc.utils}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-utils-cmd</artifactId>
+                <version>${cn.cc.utils.cmd}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-utils-craw</artifactId>
+                <version>${cn.cc.utils.craw}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-utils-opencv</artifactId>
+                <version>${cn.cc.utils.opencv}</version>
+            </dependency>
+        </dependencies>
+        <!-- 自定义 cn.cc -->
+    </dependencyManagement>
+
+</project>

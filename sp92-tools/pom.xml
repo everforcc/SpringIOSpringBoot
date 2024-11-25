@@ -2,26 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <groupId>cn.cc</groupId>
         <artifactId>SpringIOSpringBoot</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp92-tools</artifactId>
     <description>工具包，但是按照不同的业务分开</description>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
     <dependencies>
-
         <dependency>
             <groupId>cn.cc</groupId>
             <artifactId>common-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-utils-cmd</artifactId>
         </dependency>
         <!-- lombok -->
         <dependency>
@@ -34,8 +33,8 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
-            <scope>test</scope>
+    <!--        <version>1.7.25</version>
+            <scope>test</scope>-->
         </dependency>
 
     </dependencies>

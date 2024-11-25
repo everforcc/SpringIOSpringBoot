@@ -12,7 +12,7 @@
     </parent>
     <groupId>cn.cc</groupId>
     <artifactId>sp04-MybatisPlus</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>sp04-MybatisPlus</name>
     <description>测试MybatisPlus功能</description>
 
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+<!--            <optional>true</optional>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
