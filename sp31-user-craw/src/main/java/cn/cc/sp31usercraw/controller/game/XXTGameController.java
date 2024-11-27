@@ -7,8 +7,8 @@
 
 package cn.cc.sp31usercraw.controller.game;
 
-import cn.cc.utils.http.selenium.SeleniumPool;
-import cn.cc.utils.http.selenium.WebDriverPDto;
+import cn.cc.utils.selenium.selenium.SeleniumPool;
+import cn.cc.utils.selenium.selenium.WebDriverPDto;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

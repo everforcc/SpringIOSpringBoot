@@ -7,7 +7,7 @@
 
 package cn.cc.sp31usercraw.config;
 
-import cn.cc.utils.http.selenium.SeleniumPool;
+import cn.cc.utils.selenium.selenium.SeleniumPool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

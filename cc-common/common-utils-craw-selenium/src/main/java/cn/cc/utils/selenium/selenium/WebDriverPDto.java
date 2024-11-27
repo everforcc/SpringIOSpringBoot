@@ -1,6 +1,6 @@
-package cn.cc.utils.http.selenium;
+package cn.cc.utils.selenium.selenium;
 
-import cn.cc.utils.http.vo.WebSiteDataVO;
+import cn.cc.utils.selenium.vo.WebSiteDataVO;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

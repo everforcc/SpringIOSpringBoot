@@ -1,7 +1,7 @@
-package cn.cc.utils.http;
+package cn.cc.utils.selenium;
 
-import cn.cc.utils.http.selenium.SeleniumPool;
-import cn.cc.utils.http.vo.WebSiteDataVO;
+import cn.cc.utils.selenium.selenium.SeleniumPool;
+import cn.cc.utils.selenium.vo.WebSiteDataVO;
 
 public interface ISelenium {
 

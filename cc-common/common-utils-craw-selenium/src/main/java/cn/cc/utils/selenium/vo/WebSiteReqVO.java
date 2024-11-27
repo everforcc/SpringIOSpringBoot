@@ -1,7 +1,5 @@
-package cn.cc.utils.http.vo;
+package cn.cc.utils.selenium.vo;
 
-import cn.cc.utils.enums.impl.FileMediumEnum;
-import cn.cc.utils.enums.impl.FileTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +25,7 @@ public class WebSiteReqVO {
      */
     private String webtype;
 
-    private FileTypeEnum filetype = FileTypeEnum.TXT;
-    private FileMediumEnum medium = FileMediumEnum.WINDOWS;
+//    private FileTypeEnum filetype = FileTypeEnum.TXT;
+//    private FileMediumEnum medium = FileMediumEnum.WINDOWS;
 
 }

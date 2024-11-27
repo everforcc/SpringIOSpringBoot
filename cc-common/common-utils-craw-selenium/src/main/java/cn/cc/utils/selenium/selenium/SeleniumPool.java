@@ -1,6 +1,5 @@
-package cn.cc.utils.http.selenium;
+package cn.cc.utils.selenium.selenium;
 
-import cn.cc.utils.commons.lang.RObjectsUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +35,7 @@ public class SeleniumPool {
 
     private SeleniumPool(int size) {
         // 在这里创建 给定次数的池子
-        if(RObjectsUtils.isNull(size)){
+        if(0 == size){
             size = defaultSize;
         }
         while (size > totalSize){

@@ -1,10 +1,10 @@
-package cn.cc.utils.http.impl;
+package cn.cc.utils.selenium.impl;
 
 
-import cn.cc.utils.http.selenium.SeleniumPool;
-import cn.cc.utils.http.selenium.WebDriverPDto;
-import cn.cc.utils.http.ISelenium;
-import cn.cc.utils.http.vo.WebSiteDataVO;
+import cn.cc.utils.selenium.ISelenium;
+import cn.cc.utils.selenium.selenium.SeleniumPool;
+import cn.cc.utils.selenium.selenium.WebDriverPDto;
+import cn.cc.utils.selenium.vo.WebSiteDataVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package cn.cc.utils.http.selenium;
+package cn.cc.utils.selenium.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

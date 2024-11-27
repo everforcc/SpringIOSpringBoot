@@ -1,4 +1,4 @@
-package cn.cc.utils.http.vo;
+package cn.cc.utils.selenium.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

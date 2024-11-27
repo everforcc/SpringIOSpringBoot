@@ -75,6 +75,10 @@
         </dependency>
         <dependency>
             <groupId>cn.cc</groupId>
+            <artifactId>common-utils-craw-selenium</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
             <artifactId>common-utils-opencv</artifactId>
         </dependency>
 

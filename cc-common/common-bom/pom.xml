@@ -23,6 +23,7 @@
         <cn.cc.utils>${revision}</cn.cc.utils>
         <cn.cc.utils.cmd>${revision}</cn.cc.utils.cmd>
         <cn.cc.utils.craw>${revision}</cn.cc.utils.craw>
+        <cn.cc.utils.craw.selenium>${revision}</cn.cc.utils.craw.selenium>
         <cn.cc.utils.opencv>${revision}</cn.cc.utils.opencv>
         <!-- 自定义 -->
     </properties>
@@ -64,6 +65,11 @@
                 <groupId>cn.cc</groupId>
                 <artifactId>common-utils-craw</artifactId>
                 <version>${cn.cc.utils.craw}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-utils-craw-selenium</artifactId>
+                <version>${cn.cc.utils.craw.selenium}</version>
             </dependency>
             <dependency>
                 <groupId>cn.cc</groupId>
