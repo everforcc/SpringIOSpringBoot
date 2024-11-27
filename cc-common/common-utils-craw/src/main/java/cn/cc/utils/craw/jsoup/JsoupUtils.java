@@ -1,4 +1,4 @@
-package cn.cc.utils.jsoup;
+package cn.cc.utils.craw.jsoup;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

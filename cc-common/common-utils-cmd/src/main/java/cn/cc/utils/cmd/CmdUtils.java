@@ -1,4 +1,4 @@
-package cn.cc.utils.cmd.util;
+package cn.cc.utils.cmd;
 
 import cn.cc.utils.cmd.constant.CharsetsConstant;
 import lombok.SneakyThrows;

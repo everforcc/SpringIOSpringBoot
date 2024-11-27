@@ -1,5 +1,6 @@
 server:
   port: 8031
 sysconfig:
-  fileRoot: D:/Cache/BaiduNetdiskWorkspace/java/filesystem/project/SpringIOSpringBoot/sp31-user-craw/novel/
-  chromedriver: C:/everforcc/java/environment\driver\chromedriver.exe
+  bdRoot: D:\cache\BaiduSyncdisk
+  fileRoot: ${sysconfig.bdRoot}\java\filesystem\project\SpringIOSpringBoot\sp31-user-craw\novel\
+  chromedriver: ${sysconfig.bdRoot}\sync\env\driver\chromedriver-win64-131.0.6778.85\chromedriver.exe

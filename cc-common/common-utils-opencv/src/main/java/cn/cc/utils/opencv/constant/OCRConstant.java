@@ -15,7 +15,7 @@ package cn.cc.utils.opencv.constant;
  */
 public class OCRConstant {
 
-    public static String dataPath = "F:\\Cache\\BaiduNetdiskWorkspace\\java\\github\\tesseract-ocr\\tessdata";
+    public static String dataPath = "D:\\environment\\github\\tesseract-ocr\\tessdata";
     public static String data = "chi_sim";
 
 }

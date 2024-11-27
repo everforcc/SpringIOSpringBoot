@@ -14,6 +14,26 @@
     <description>工具类</description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <!-- 依赖传递 -->
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+
+        <!-- 驱动 -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+        </dependency>
 
         <!-- apache 工具类 -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -62,23 +82,6 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-        </dependency>
-
-        <!-- lombok -->
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <!--<scope>test</scope>-->
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <artifactId>slf4j-log4j12</artifactId>-->
-        <!--            <groupId>org.slf4j</groupId>-->
-        <!--        </dependency>-->
         <!-- JSR校验 -->
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -87,28 +90,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- jsoup,xsoup -->
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-        </dependency>
-        <!-- xsoup -->
-        <dependency>
-            <groupId>us.codecraft</groupId>
-            <artifactId>xsoup</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
-        <!-- 驱动 -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>javax</groupId>
@@ -116,17 +98,7 @@
             <version>7.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-        </dependency>
 
-        <!-- ocr 识别 -->
-        <!-- 更方便的使用 tess4j 大概-->
-        <dependency>
-            <groupId>net.sourceforge.tess4j</groupId>
-            <artifactId>tess4j</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.github.crab2died</groupId>

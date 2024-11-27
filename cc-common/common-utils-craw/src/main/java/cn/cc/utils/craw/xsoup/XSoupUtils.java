@@ -1,4 +1,4 @@
-package cn.cc.utils.jsoup;
+package cn.cc.utils.craw.xsoup;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

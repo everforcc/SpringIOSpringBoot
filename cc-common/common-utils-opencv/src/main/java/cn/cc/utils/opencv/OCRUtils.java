@@ -7,9 +7,7 @@
 
 package cn.cc.utils.opencv;
 
-import cn.cc.utils.opencv.t.CleanElementImage;
-import cn.cc.utils.opencv.util.OcrTess;
-import cn.cc.utils.opencv.util.PicDeal;
+import cn.cc.utils.opencv.t.CleanElementImage;import cn.cc.utils.opencv.util.OcrTess;import cn.cc.utils.opencv.util.PicDeal;
 
 import java.io.IOException;
 

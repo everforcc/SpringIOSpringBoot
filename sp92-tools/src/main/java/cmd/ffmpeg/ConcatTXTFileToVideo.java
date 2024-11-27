@@ -8,7 +8,7 @@
 package cmd.ffmpeg;
 
 import cmd.ffmpeg.constant.ConstantFFmpeg;
-import cn.cc.utils.cmd.util.CmdUtils;
+import cn.cc.utils.cmd.CmdUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

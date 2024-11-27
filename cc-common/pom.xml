@@ -24,6 +24,7 @@
         <module>common-utils-cmd</module>
         <module>common-utils-opencv</module>
         <module>common-utils-craw</module>
+        <module>common-utils-craw-selenium</module>
     </modules>
 
     <build>

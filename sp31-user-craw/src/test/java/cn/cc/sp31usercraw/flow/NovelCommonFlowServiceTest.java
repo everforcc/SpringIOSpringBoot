@@ -7,20 +7,25 @@
 
 package cn.cc.sp31usercraw.flow;
 
+import cn.cc.sp31usercraw.config.SysConfig;
 import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
+import org.junit.jupiter.api.Test;import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-
+@SpringBootTest
 public class NovelCommonFlowServiceTest {
+
+    @Autowired
+    SysConfig sysConfig;
 
     @Before
     public void config() {
-        System.setProperty("webdriver.chrome.driver", "C:/everforcc/java/environment\\driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", sysConfig.getChromedriver());
     }
 
     @Test

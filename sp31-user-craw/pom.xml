@@ -69,6 +69,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-utils-craw</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-utils-opencv</artifactId>
+        </dependency>
 
     </dependencies>
 

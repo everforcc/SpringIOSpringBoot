@@ -7,6 +7,7 @@
 
 package cn.cc.sp31usercraw.flow;
 
+import cn.cc.sp31usercraw.config.SysConfig;
 import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.dto.NovelContentDto;
 import cn.cc.sp31usercraw.dto.NovelMsgDto;
@@ -23,9 +24,12 @@ public class CommonFlowTests {
     @Autowired
     INovelCommonFlowService iNovelCommonFlowService;
 
+    @Autowired
+    SysConfig sysConfig;
+
     @Before
     public void config() {
-        System.setProperty("webdriver.chrome.driver", "C:/everforcc/java/environment\\driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", sysConfig.getChromedriver());
     }
 
     @Test

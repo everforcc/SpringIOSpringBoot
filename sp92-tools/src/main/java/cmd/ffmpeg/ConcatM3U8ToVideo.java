@@ -9,7 +9,7 @@ package cmd.ffmpeg;
 
 
 import cmd.ffmpeg.constant.ConstantFFmpeg;
-import cn.cc.utils.cmd.util.CmdUtils;
+import cn.cc.utils.cmd.CmdUtils;
 import cn.cc.utils.commons.io.JInputStreamCharUtils;
 import cn.cc.utils.commons.lang.RStringUtils;
 import cn.cc.utils.exception.AppCode;

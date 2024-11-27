@@ -12,9 +12,9 @@ import cn.cc.sp31usercraw.dto.NovelConfigDto;
 import cn.cc.sp31usercraw.utils.CharsetOCR;
 import cn.cc.utils.commons.lang.RObjectsUtils;
 import cn.cc.utils.commons.lang.RStringUtils;
+import cn.cc.utils.craw.xsoup.XSoupUtils;
 import cn.cc.utils.http.selenium.WebDriverPDto;
 import cn.cc.utils.http.vo.WebSiteDataVO;
-import cn.cc.utils.jsoup.XSoupUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
