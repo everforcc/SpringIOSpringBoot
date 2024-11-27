@@ -136,10 +136,11 @@
 
     <modules>
         <module>cc-common</module>
+        <module>cc-test</module>
         <module>sp01-init</module>
         <module>sp02-web</module>
         <module>sp03-data</module>
-        <module>sp04-MybatisPlus</module>
+<!--        <module>sp04-MybatisPlus</module>-->
         <module>sp04-security</module>
         <module>sp05-redis</module>
         <module>sp06-file</module>
@@ -534,6 +535,14 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

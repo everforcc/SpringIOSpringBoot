@@ -40,11 +40,11 @@
             <version>5.5.2</version>
         </dependency>
         <!-- MQTT 客户端库，例如：Paho -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.eclipse.paho</groupId>
             <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
             <version>1.2.5</version>
-        </dependency>
+        </dependency>-->
         <!--        引入 mqtt 相关依赖-->
 
     </dependencies>

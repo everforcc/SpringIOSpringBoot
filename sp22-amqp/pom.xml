@@ -14,8 +14,9 @@
     <description>测试mqtt推送拉取</description>
 
     <modules>
-        <module>sp-amqp-consumer</module>
-        <module>sp-amqp-publisher</module>
+        <module>sp22-amqp-consumer</module>
+        <module>sp22-amqp-publisher</module>
+        <module>sp22-rabbitmq-client</module>
     </modules>
 
 </project>
