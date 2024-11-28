@@ -148,8 +148,6 @@
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
         <module>sp13-WebSocket</module>
-        <!--        <module>sp20-comp</module>-->
-        <module>sp21-jdk</module>
         <module>sp22-amqp</module>
         <module>sp23-mqtt</module>
         <!-- jar使用 -->
@@ -157,7 +155,6 @@
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp50-feign</module>
-        <module>sp91-test</module>
         <module>sp92-tools</module>
         <module>sp92-webapi</module>
     </modules>
