@@ -10,8 +10,8 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>sp02-web</artifactId>
-    <name>sp02-web-name</name>
+    <artifactId>sp01-web</artifactId>
+    <name>sp01-web</name>
     <description>测试spring web的一些功能</description>
 
     <dependencies>
@@ -21,6 +21,11 @@
             <artifactId>common-spring-core</artifactId>
         </dependency>
         <!-- common end -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,6 +41,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

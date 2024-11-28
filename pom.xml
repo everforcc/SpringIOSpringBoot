@@ -138,8 +138,7 @@
         <module>cc-common</module>
         <module>cc-common-spring</module>
         <module>cc-test</module>
-        <module>sp01-init</module>
-        <module>sp02-web</module>
+        <module>sp01-web</module>
         <module>sp03-data</module>
 <!--        <module>sp04-MybatisPlus</module>-->
         <module>sp04-security</module>

@@ -1,7 +1,0 @@
-server:
-  port: 8001
-dog:
-  name: 张三-bdy
-  age: 1
-  list: [一,一,一]
-  email: 123@163.com
