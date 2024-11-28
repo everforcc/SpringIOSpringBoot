@@ -3,7 +3,7 @@ GET http://localhost:8082/open/
 Accept: application/json
 
 ###
-GET http://localhost:8082/open/a
+GET http://localhost:8002/open/a
 Accept: application/json
 
 ###

@@ -136,6 +136,7 @@
 
     <modules>
         <module>cc-common</module>
+        <module>cc-common-spring</module>
         <module>cc-test</module>
         <module>sp01-init</module>
         <module>sp02-web</module>
@@ -170,6 +171,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-spring-bom</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- common 的依赖配置-->
 
             <!-- todo 待处理 -->
             <dependency>

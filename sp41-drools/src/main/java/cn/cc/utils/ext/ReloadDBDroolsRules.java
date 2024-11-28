@@ -19,12 +19,12 @@ public class ReloadDBDroolsRules extends ReloadDroolsRules {
 
     private static final String rule = "package drl\n" +
             "import cn.cc.dto.PCarInfo\n" +
-            "import cn.cc.service.IRuleService\n" +
+            "import cn.cc.asyn.service.IRuleService\n" +
             "\n" +
-            "global cn.cc.service.service.RuleTempOnceDrlImpl ruleTempOnceDrlImpl\n" +
-            "global cn.cc.service.service.RuleTempDurationDrlImpl ruleTempDurationDrlImpl\n" +
-            "global cn.cc.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl\n" +
-            "global cn.cc.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl\n" +
+            "global cn.cc.asyn.service.service.RuleTempOnceDrlImpl ruleTempOnceDrlImpl\n" +
+            "global cn.cc.asyn.service.service.RuleTempDurationDrlImpl ruleTempDurationDrlImpl\n" +
+            "global cn.cc.asyn.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl\n" +
+            "global cn.cc.asyn.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl\n" +
             "\n" +
             "dialect  \"java\"\n" +
             "\n" +

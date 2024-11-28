@@ -1,12 +1,12 @@
 package drl
 import cn.cc.dto.PCarInfo
-import cn.cc.service.IRuleService
+import cn.cc.asyn.service.IRuleService
 
-global cn.cc.service.service.RuleTempDurationDrlImpl ruleTempDurationDrlImpl
-global cn.cc.service.service.RuleTempOnceDrlImpl ruleTempOnceDrlImpl
-global cn.cc.service.service.RuleTempSectionDrlImpl ruleTempSectionDrlImpl
-global cn.cc.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl
-global cn.cc.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl
+global cn.cc.asyn.service.service.RuleTempDurationDrlImpl ruleTempDurationDrlImpl
+global cn.cc.asyn.service.service.RuleTempOnceDrlImpl ruleTempOnceDrlImpl
+global cn.cc.asyn.service.service.RuleTempSectionDrlImpl ruleTempSectionDrlImpl
+global cn.cc.asyn.service.service.RuleVIPFreeDrlImpl ruleVIPFreeDrlImpl
+global cn.cc.asyn.service.service.RuleVIPMonthDrlImpl ruleVIPMonthDrlImpl
 
 dialect  "java"
 

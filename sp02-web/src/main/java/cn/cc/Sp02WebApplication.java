@@ -1,0 +1,15 @@
+package cn.cc;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
+
+@EnableAsync
+@SpringBootApplication
+public class Sp02WebApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Sp02WebApplication.class, args);
+    }
+
+}

@@ -17,7 +17,6 @@
         <cn.cc.common>${revision}</cn.cc.common>
         <cn.cc.minio>${revision}</cn.cc.minio>
         <cn.cc.mysql>${revision}</cn.cc.mysql>
-        <cn.cc.redis>${revision}</cn.cc.redis>
         <cn.cc.redis.cluster>${revision}</cn.cc.redis.cluster>
         <cn.cc.redis.single>${revision}</cn.cc.redis.single>
         <cn.cc.utils>${revision}</cn.cc.utils>

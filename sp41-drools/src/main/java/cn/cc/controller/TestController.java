@@ -4,7 +4,7 @@ import cn.cc.constant.RuleCacheConstants;
 import cn.cc.dto.PCarInfo;
 import cn.cc.dto.RuleDrlDto;
 import cn.cc.mvc.Result;
-import cn.cc.service.IRuleService;
+import cn.cc.asyn.service.IRuleService;
 import cn.cc.utils.KieUtils;
 import cn.cc.utils.ReloadDroolsRules;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
 
 /**
  * @Description : 测试drools
