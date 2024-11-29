@@ -16,6 +16,8 @@
     <modules>
         <module>common-spring-core</module>
         <module>common-spring-bom</module>
+        <module>common-spring-aop-expiringmap</module>
+        <module>common-spring-aop</module>
     </modules>
 
     <build>

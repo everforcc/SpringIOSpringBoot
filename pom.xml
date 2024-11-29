@@ -97,7 +97,7 @@
         <!-- 代码生成 -->
         <org.apache.velocity>2.3</org.apache.velocity>
         <!-- java编译器 -->
-        <org.codehaus.janino.janino>3.1.0</org.codehaus.janino.janino>
+        <org.codehaus.janino.janino>3.0.6</org.codehaus.janino.janino>
 
         <!-- 编码加密 -->
         <commons-codec.version>1.13</commons-codec.version>
@@ -139,12 +139,12 @@
         <module>cc-common-spring</module>
         <module>cc-test</module>
         <module>sp01-web</module>
+        <module>sp02-aop</module>
         <module>sp03-data</module>
 <!--        <module>sp04-MybatisPlus</module>-->
         <module>sp04-security</module>
         <module>sp05-redis</module>
         <module>sp06-file</module>
-        <module>sp10-aop</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
         <module>sp13-WebSocket</module>
