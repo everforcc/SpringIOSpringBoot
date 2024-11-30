@@ -25,8 +25,8 @@ public class FlowService implements IFlowService {
     @Override
     public String save_a(String a, String b){
         log.info("3. 进入testFlow()");
-        //throw new RuntimeException("自定义异常");
-        return "abc";
+        throw new RuntimeException("自定义异常");
+//        return "abc";
     }
 
 }

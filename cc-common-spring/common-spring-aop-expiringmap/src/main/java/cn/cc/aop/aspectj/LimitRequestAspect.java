@@ -57,7 +57,7 @@ public class LimitRequestAspect {
         if (uCount >= allowCount) { // 超过次数，不执行目标方法
             throw new RuntimeException("接口请求超过次数: " + allowCount);
 //            return "接口请求超过次数";
-        } else if (uCount == 0){ // 第一次请求时，设置有效时间
+        } else if (uCount == 0) { // 第一次请求时，设置有效时间
 //            /** Expires entries based on when they were last accessed */
 //            ACCESSED,
 //            /** Expires entries based on when they were created */
@@ -73,7 +73,5 @@ public class LimitRequestAspect {
         log.info("result的值就是被拦截方法的返回值: " + result);
         return result;
     }
-
-
 
 }

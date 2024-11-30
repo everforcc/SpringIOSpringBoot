@@ -7,17 +7,19 @@ param:
     un: cceverfor
     pas: 5664c.c.
 
+server:
+  port: ${param.server.port}
 spring:
   datasource:
-    #url: jdbc:mysql://43.143.232.133:3308/oneforall?characterEncoding=UTF-8&&serverTimezone=GMT&useSSL=false # 编码和时区 &userSSL=false
-    url: jdbc:p6spy:mysql://${param.mysql.ip}:${param.mysql.port}/oneforall?characterEncoding=UTF-8&&serverTimezone=GMT&useSSL=false # 编码和时区 &userSSL=false
-    #driver-class-name: com.mysql.cj.jdbc.Driver
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver # 性能分析
+    url: jdbc:mysql://${param.mysql.ip}:${param.mysql.port}/oneforall?characterEncoding=UTF-8&&serverTimezone=GMT&useSSL=false # 编码和时区 &userSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url: jdbc:p6spy:mysql://${param.mysql.ip}:${param.mysql.port}/oneforall?characterEncoding=UTF-8&&serverTimezone=GMT&useSSL=false # 编码和时区 &userSSL=false
+    # driver-class-name: com.p6spy.engine.spy.P6SpyDriver # 性能分析
     username: ${param.mysql.un}
     password: ${param.mysql.pas}
-#    hikari:
-#      schema: classpath:db/schema.sql
-#      data: classpath:db/data.sql
+    # hikari:
+    # schema: classpath:db/schema.sql
+    # data: classpath:db/data.sql
     initialization-mode: never
     schema:
       - classpath:db/schema.sql
@@ -29,11 +31,9 @@ spring:
 mybatis-plus:
   configuration: # 日志输出
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    #map-underscore-to-camel-case: false
+    # map-underscore-to-camel-case: false
   global-config:
     db-config: # 逻辑删除
       logic-delete-field: flag
-      logic-delete-value: 1 #逻辑已删除值(默认为1)
-      logic-not-delete-value: 0 #逻辑未删除值(默认为0)
-server:
-  port: ${param.server.port}
+      logic-delete-value: 1 # 逻辑已删除值(默认为1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为0)
