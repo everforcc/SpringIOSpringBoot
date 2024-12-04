@@ -14,10 +14,11 @@
     <description>spring公共配置</description>
 
     <modules>
-        <module>common-spring-core</module>
-        <module>common-spring-bom</module>
-        <module>common-spring-aop-expiringmap</module>
         <module>common-spring-aop</module>
+        <module>common-spring-aop-expiringmap</module>
+        <module>common-spring-bom</module>
+        <module>common-spring-core</module>
+        <module>common-spring-fastjson</module>
     </modules>
 
     <build>

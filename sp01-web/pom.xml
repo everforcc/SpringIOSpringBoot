@@ -20,6 +20,10 @@
             <groupId>cn.cc</groupId>
             <artifactId>common-spring-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-spring-fastjson</artifactId>
+        </dependency>
         <!-- common end -->
 
         <dependency>

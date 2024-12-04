@@ -13,27 +13,33 @@
 
     <properties>
         <revision>1.0</revision>
-        <cn.cc.common.spring.core>${revision}</cn.cc.common.spring.core>
-        <common-spring-aop-expiringmap>${revision}</common-spring-aop-expiringmap>
-        <common-spring-aop>${revision}</common-spring-aop>
+        <common.spring.aop>${revision}</common.spring.aop>
+        <common.spring.aop.expiringmap>${revision}</common.spring.aop.expiringmap>
+        <common.spring.core>${revision}</common.spring.core>
+        <common.spring.fastjson>${revision}</common.spring.fastjson>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>cn.cc</groupId>
-                <artifactId>common-spring-core</artifactId>
-                <version>${cn.cc.common.spring.core}</version>
+                <artifactId>common-spring-aop</artifactId>
+                <version>${common.spring.aop}</version>
             </dependency>
             <dependency>
                 <groupId>cn.cc</groupId>
                 <artifactId>common-spring-aop-expiringmap</artifactId>
-                <version>${cn.cc.common.spring.core}</version>
+                <version>${common.spring.aop.expiringmap}</version>
             </dependency>
             <dependency>
                 <groupId>cn.cc</groupId>
-                <artifactId>common-spring-aop</artifactId>
-                <version>1.0</version>
+                <artifactId>common-spring-core</artifactId>
+                <version>${common.spring.core}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
+                <artifactId>common-spring-fastjson</artifactId>
+                <version>${common.spring.fastjson}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

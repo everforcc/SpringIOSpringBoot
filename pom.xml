@@ -157,6 +157,7 @@
         <module>sp50-feign</module>
         <module>sp92-tools</module>
         <module>sp92-webapi</module>
+        <module>sp25-hazelcast</module>
     </modules>
 
     <dependencyManagement>
