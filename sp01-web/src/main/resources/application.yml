@@ -19,5 +19,5 @@ app:
   dog:
     name: 张三
     age: 1
-    list: [一,一,一]
     email: 123@163.com
+    list: [一,一,一]
