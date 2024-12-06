@@ -140,14 +140,14 @@
         <module>cc-test</module>
         <module>sp01-web</module>
         <module>sp02-aop</module>
-        <module>sp03-data</module>
-<!--        <module>sp04-MybatisPlus</module>-->
         <module>sp04-security</module>
         <module>sp05-redis</module>
         <module>sp06-file</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
         <module>sp13-WebSocket</module>
+        <module>sp21-mybatis</module>
+        <!--        <module>sp21.2-MybatisPlus</module>-->
         <module>sp22-amqp</module>
         <module>sp23-mqtt</module>
         <module>sp25-hazelcast</module>
@@ -537,6 +537,8 @@
                     <executions>
                         <execution>
                             <goals>
+                                <!-- 加了这个才能打包出可执行文件 -->
+                                <!-- 否则只能打包出几k的文件，不能直接执行 -->
                                 <goal>repackage</goal>
                             </goals>
                         </execution>
