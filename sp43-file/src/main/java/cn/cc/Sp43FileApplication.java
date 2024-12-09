@@ -1,4 +1,4 @@
-package cn.cc.sp06file;
+package cn.cc;
 
 import cn.cc.config.MinioConfig;
 import org.springframework.boot.SpringApplication;
@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Import;
 // Correct the classpath of your application so that it contains a single, compatible version of okhttp3.RequestBody
 @Import(value = MinioConfig.class)
 @SpringBootApplication
-public class Sp06FileApplication {
+public class Sp43FileApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Sp06FileApplication.class, args);
+        SpringApplication.run(Sp43FileApplication.class, args);
     }
 
 }

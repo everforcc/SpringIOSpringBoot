@@ -8,8 +8,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp06-file</artifactId>
-    <name>sp06-file</name>
+    <artifactId>sp43-file</artifactId>
+    <name>sp43-file</name>
     <description>测试file功能，目前实现了minio</description>
 
     <dependencies>

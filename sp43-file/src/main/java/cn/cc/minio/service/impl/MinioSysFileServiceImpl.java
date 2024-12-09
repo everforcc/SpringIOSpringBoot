@@ -1,7 +1,7 @@
-package cn.cc.sp06file.service.impl;
+package cn.cc.minio.service.impl;
 
 import cn.cc.config.MinioConfig;
-import cn.cc.sp06file.service.ISysFileService;
+import cn.cc.minio.service.ISysFileService;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +27,7 @@ public class MinioSysFileServiceImpl implements ISysFileService {
      * @return
      * @throws Exception
      */
+    @Override
     public String uploadFile(MultipartFile file) throws Exception {
         String fileName = System.currentTimeMillis() + file.getOriginalFilename();
         log.info("上传文件: {}", fileName);

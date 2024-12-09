@@ -1,6 +1,6 @@
-package cn.cc.sp06file.controller;
+package cn.cc.minio.controller;
 
-import cn.cc.sp06file.service.ISysFileService;
+import cn.cc.minio.service.ISysFileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

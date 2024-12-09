@@ -142,7 +142,6 @@
         <module>sp02-aop</module>
         <module>sp04-security</module>
         <module>sp05-redis</module>
-        <module>sp06-file</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
         <module>sp13-WebSocket</module>
@@ -155,6 +154,7 @@
         <module>sp31-user-craw</module>
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
+        <module>sp43-file</module>
         <module>sp50-feign</module>
         <module>sp92-tools</module>
         <module>sp92-webapi</module>

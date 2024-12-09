@@ -1,4 +1,4 @@
-package cn.cc.sp06file.service;
+package cn.cc.minio.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
