@@ -1,0 +1,9 @@
+server:
+  port: 8033
+
+spring:
+  redis:
+    password: hkzksingledev
+    host: 8.146.199.165
+    port: 5200
+    database: 0

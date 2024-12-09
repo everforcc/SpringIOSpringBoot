@@ -1,0 +1,25 @@
+package cn.cc.websocket.utils;
+
+import javax.websocket.Session;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * @Description
+ * @Author everforcc
+ * @Date 2024-04-17 21:57
+ * Copyright
+ */
+public class MessageMap {
+
+    private static final Map<String, Session> onlineSessionClientMap = new ConcurrentHashMap<>();
+
+    public static Map<String, Session> getSessionMap(){
+        return onlineSessionClientMap;
+    }
+
+    public static final String BUSI_TEST = "BUSI_TEST";
+
+    public static final String type = "map";
+
+}

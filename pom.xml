@@ -144,7 +144,6 @@
         <module>sp05-redis</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
-        <module>sp13-WebSocket</module>
         <module>sp21-mybatis</module>
         <!--        <module>sp21.2-MybatisPlus</module>-->
         <module>sp22-amqp</module>
@@ -152,6 +151,7 @@
         <module>sp25-hazelcast</module>
         <!-- jar使用 -->
         <module>sp31-user-craw</module>
+        <module>sp33-WebSocket</module>
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp43-file</module>
