@@ -158,6 +158,7 @@
         <module>sp50-feign</module>
         <module>sp92-tools</module>
         <module>sp92-webapi</module>
+        <module>sp22-redis</module>
     </modules>
 
     <dependencyManagement>

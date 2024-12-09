@@ -1,0 +1,10 @@
+server:
+  port: 8022
+
+spring:
+  redis:
+    cluster:
+      nodes: 127.0.0.1:5200,127.0.0.1:5201,127.0.0.1:5202,127.0.0.1:5203,127.0.0.1:5204,127.0.0.1:5205
+      max-redirects: 5
+    password: password
+    timeout: 3000
