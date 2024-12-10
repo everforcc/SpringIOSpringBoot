@@ -146,6 +146,7 @@
         <module>sp04-security</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
+        <module>sp13-feign</module>
         <module>sp21-mybatis</module>
         <!--        <module>sp21.2-MybatisPlus</module>-->
         <module>sp22-redis</module>
@@ -158,7 +159,6 @@
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp43-file</module>
-        <module>sp50-feign</module>
         <module>sp92-tools</module>
         <module>sp92-webapi</module>
     </modules>

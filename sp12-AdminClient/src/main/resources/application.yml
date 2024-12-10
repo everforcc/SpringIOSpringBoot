@@ -23,4 +23,4 @@ server:
   port: 8012
 logging:
   file:
-    name: logs/adminclient/info.log
+    name: logs/sp12-AdminClient/info.log

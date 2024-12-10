@@ -1,6 +1,6 @@
-package cn.cc.sp42velocity.controller;
+package cn.cc.feign.controller;
 
-import cn.cc.sp42velocity.dto.ListDemo;
+import cn.cc.feign.dto.ListDemo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2024-05-21 10:08
  */
 @Slf4j
-@RequestMapping("/feign")
+@RequestMapping("/open/feign")
 @RestController
 public class FeignTestController {
 

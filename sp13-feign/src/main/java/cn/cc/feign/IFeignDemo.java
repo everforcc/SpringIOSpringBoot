@@ -1,14 +1,11 @@
-package cn.cc.sp50feign.feign;
+package cn.cc.feign;
 
-import cn.cc.sp50feign.dto.ListDemo;
+import cn.cc.dto.ListDemo;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "keytop", url = "localhost:8042/")
+@FeignClient(name = "keytop", url = "localhost:8001/open")
 public interface IFeignDemo {
 
     @GetMapping(value = "/feign/string")

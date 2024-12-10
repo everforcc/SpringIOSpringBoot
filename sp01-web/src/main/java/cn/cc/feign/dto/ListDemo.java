@@ -1,4 +1,4 @@
-package cn.cc.sp50feign.dto;
+package cn.cc.feign.dto;
 
 import lombok.Data;
 
