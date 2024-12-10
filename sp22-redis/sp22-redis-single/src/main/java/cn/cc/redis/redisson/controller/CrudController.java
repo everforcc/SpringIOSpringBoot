@@ -1,4 +1,4 @@
-package cn.cc.redis.single.controller;
+package cn.cc.redis.redisson.controller;
 
 import cn.cc.core.domain.R;
 import lombok.extern.slf4j.Slf4j;

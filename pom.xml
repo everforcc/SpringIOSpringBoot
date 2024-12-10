@@ -141,7 +141,6 @@
         <module>sp01-web</module>
         <module>sp02-aop</module>
         <module>sp04-security</module>
-        <module>sp05-redis</module>
         <module>sp11-AdminServer</module>
         <module>sp12-AdminClient</module>
         <module>sp21-mybatis</module>

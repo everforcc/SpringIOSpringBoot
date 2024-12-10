@@ -1,4 +1,4 @@
-package cn.cc.common.redis.configuration;
+package cn.cc.redis.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ * RedisProperties 有同样配置
+ *
  * @Description : redis配置信息
  * @Author : GKL
  * @Date: 2024-04-18 15:10
@@ -20,12 +22,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfiguration {
 
-    /**
-     * 当前redis类型
-     * cluster
-     * single
-     */
-    private String type;
 
     private String host;
 

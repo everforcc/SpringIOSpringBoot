@@ -1,0 +1,11 @@
+server:
+  port: 8022
+
+spring:
+  redis:
+    password: hkzksingledev
+    host: 8.146.199.165
+    port: 5200
+    database: 1
+  profiles:
+    active: test
