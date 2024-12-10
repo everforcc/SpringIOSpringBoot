@@ -27,7 +27,7 @@
 
         var cid = document.getElementById("cid").value;
         console.log("cid-->" + cid);
-        var reqUrl = "http://localhost:8033/websocket/" + cid;
+        var reqUrl = "http://localhost:8035/websocket/" + cid;
         socket = new WebSocket(reqUrl.replace("http", "ws"));
         //打开事件
         socket.onopen = function () {

@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp33-WebSocket</artifactId>
-    <name>sp33-WebSocket</name>
+    <artifactId>sp35-WebSocket</artifactId>
+    <name>sp35-WebSocket</name>
     <description>测试websocket功能，配合postman</description>
 
     <dependencies>
