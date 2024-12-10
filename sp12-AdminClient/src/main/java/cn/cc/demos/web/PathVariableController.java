@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.cc.sp11adminserver.demos.web;
+package cn.cc.demos.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

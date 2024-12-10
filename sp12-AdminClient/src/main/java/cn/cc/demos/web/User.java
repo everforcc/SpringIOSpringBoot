@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.cc.sp11adminserver.demos.web;
+package cn.cc.demos.web;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>

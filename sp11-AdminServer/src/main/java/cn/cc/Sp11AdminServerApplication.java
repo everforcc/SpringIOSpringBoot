@@ -1,4 +1,4 @@
-package cn.cc.sp11adminserver;
+package cn.cc;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;

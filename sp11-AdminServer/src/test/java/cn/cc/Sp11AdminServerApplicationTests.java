@@ -1,10 +1,10 @@
-package cn.cc.sp12adminclient;
+package cn.cc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Sp12AdminClientApplicationTests {
+class Sp11AdminServerApplicationTests {
 
     @Test
     void contextLoads() {
