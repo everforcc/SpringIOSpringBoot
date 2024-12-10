@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>cn.cc</groupId>
+        <artifactId>SpringIOSpringBoot</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sp33-amqp</artifactId>
+    <packaging>pom</packaging>
+    <description>测试mqtt推送拉取</description>
+
+    <modules>
+        <module>sp33-rabbitmq-client</module>
+        <module>sp33-amqp-consumer</module>
+        <module>sp34-amqp-publisher</module>
+    </modules>
+
+</project>
