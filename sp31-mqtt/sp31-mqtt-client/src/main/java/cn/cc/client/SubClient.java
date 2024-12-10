@@ -1,4 +1,4 @@
-package cn.cc.sp23mqtt.client;
+package cn.cc.client;
 
 
 import org.eclipse.paho.client.mqttv3.*;
@@ -11,7 +11,7 @@ public class SubClient {
 
     public static void main(String[] args) {
         try {
-            MqttClient mqttClient = new MqttClient("tcp://8.146.199.165:1883", "sub-cli-01", new MemoryPersistence());
+            MqttClient mqttClient = new MqttClient(MQTTConstant.serverURI, MQTTConstant.sub_clientId, new MemoryPersistence());
 
             // 服务质量 心跳
             // 创建连接配置
@@ -42,7 +42,7 @@ public class SubClient {
                 }
             });
 
-            mqttClient.subscribe("sd");
+            mqttClient.subscribe(MQTTConstant.topic);
             System.out.println("订阅已经准备好了");
         } catch (MqttException e) {
             e.printStackTrace();

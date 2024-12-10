@@ -1,4 +1,4 @@
-package cn.cc.sp23mqtt.client;
+package cn.cc.client;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -13,13 +13,13 @@ import java.nio.charset.StandardCharsets;
  */
 public class PubClient {
 
+    public static final String messageStr = "我是消息: " + System.currentTimeMillis();
+
     public static void main(String[] args) {
         try {
-            String messageStr = "我是消息";
-
             // 第一次名字写错了
             //  创建MQTT客户端
-            MqttClient mqttClient = new MqttClient("tcp://8.146.199.165:1883", "pub-cli-01", new MemoryPersistence());
+            MqttClient mqttClient = new MqttClient(MQTTConstant.serverURI, MQTTConstant.pub_clientId, new MemoryPersistence());
 
             //
             MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
@@ -33,7 +33,7 @@ public class PubClient {
             message.setQos(2);
 
             // 发布
-            mqttClient.publish("sd", message);
+            mqttClient.publish(MQTTConstant.topic, message);
 
             mqttClient.disconnect();
             mqttClient.close();

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
         <groupId>cn.cc</groupId>
-        <artifactId>SpringIOSpringBoot</artifactId>
+        <artifactId>sp31-mqtt</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp23-mqtt</artifactId>
-    <name>sp23-mqtt</name>
-    <description>测试-mqtt-拉去推送</description>
+    <artifactId>sp31-mqtt-consumer</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>sp31-mqtt-consumer</name>
+    <description>sp31-mqtt-consumer znkj ... 需要在写个集成spring的 </description>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -26,38 +25,32 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.paho</groupId>
-            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-
-        <!--        引入 mqtt 相关依赖-->
+        <!-- 引入 mqtt 相关依赖 -->
         <!-- Spring Integration MQTT -->
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-mqtt</artifactId>
-            <version>5.5.2</version>
+            <version>${mqtt.spring}</version>
         </dependency>
         <!-- MQTT 客户端库，例如：Paho -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.eclipse.paho</groupId>
             <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-            <version>1.2.5</version>
-        </dependency>-->
-        <!--        引入 mqtt 相关依赖-->
+        </dependency>
+        <!-- 引入 mqtt 相关依赖 -->
+
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-utils</artifactId>
+        </dependency>
 
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <targetPath>${basedir}/target/classes</targetPath>
-                <!-- 开启 filtering 会替换静态资源（html|js|...）中使用 ${key:属性名} 占位的属性，可以定义在 pom.xml -> properties -> key  -->
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
