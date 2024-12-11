@@ -154,7 +154,6 @@
         <module>sp22-redis</module>
         <module>sp25-hazelcast</module>
         <!-- jar使用 -->
-        <module>sp31-user-craw</module>
         <module>sp31-mqtt</module>
         <module>sp33-amqp</module>
         <module>sp35-WebSocket</module>
@@ -162,6 +161,7 @@
         <module>sp42-velocity</module>
         <module>sp43-file</module>
         <module>sp61-webapi</module>
+        <module>sp71-user-craw</module>
     </modules>
 
     <dependencyManagement>
