@@ -142,6 +142,7 @@
         <module>cc-common</module>
         <module>cc-common-spring</module>
         <module>cc-test</module>
+        <module>cc-tools</module>
         <module>sp01-web</module>
         <module>sp02-aop</module>
         <module>sp04-security</module>
@@ -160,7 +161,6 @@
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp43-file</module>
-        <module>sp92-tools</module>
         <module>sp92-webapi</module>
     </modules>
 
