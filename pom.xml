@@ -161,7 +161,7 @@
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp43-file</module>
-        <module>sp92-webapi</module>
+        <module>sp61-webapi</module>
     </modules>
 
     <dependencyManagement>
