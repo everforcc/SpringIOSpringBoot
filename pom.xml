@@ -101,6 +101,7 @@
         <org.apache.velocity>2.3</org.apache.velocity>
         <!-- java编译器 -->
         <org.codehaus.janino.janino>3.0.6</org.codehaus.janino.janino>
+        <org.drools>7.59.0.Final</org.drools>
 
         <!-- 编码加密 -->
         <commons-codec.version>1.13</commons-codec.version>
@@ -493,6 +494,34 @@
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
             </dependency>
+
+            <!-- drools start -->
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-core</artifactId>
+                <version>${org.drools}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-compiler</artifactId>
+                <version>${org.drools}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-templates</artifactId>
+                <version>${org.drools}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kie</groupId>
+                <artifactId>kie-api</artifactId>
+                <version>${org.drools}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kie</groupId>
+                <artifactId>kie-spring</artifactId>
+                <version>${org.drools}</version>
+            </dependency>
+            <!-- drools end -->
 
         </dependencies>
     </dependencyManagement>
