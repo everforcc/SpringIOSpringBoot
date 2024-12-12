@@ -11,6 +11,7 @@
 
     <artifactId>sp22-redis</artifactId>
     <packaging>pom</packaging>
+    <description>redis功能测试</description>
 
     <modules>
         <module>sp22-redis-single</module>

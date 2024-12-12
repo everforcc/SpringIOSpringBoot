@@ -15,7 +15,9 @@
 
     <modules>
         <module>sp31-mqtt-client</module>
-        <module>sp31-mqtt-consumer</module>
+        <module>sp31-mqtt-provider</module>
+        <module>sp31-mqtt-util</module>
+        <module>sp32-mqtt-consumer</module>
     </modules>
 
 </project>

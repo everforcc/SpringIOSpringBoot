@@ -1,0 +1,18 @@
+server:
+  port: 8032
+
+spring:
+  application:
+    name: mqtt-consumer
+  mqtt:
+    url: tcp://8.146.199.165:1883
+#    username: c.c.
+    username: cc
+    password: rootcccc
+#    username: emqx
+#    password: public
+    client:
+      id: ${spring.application.name}
+    default:
+      topic: topic
+
