@@ -11,7 +11,7 @@
 
     <artifactId>sp31-mqtt-client</artifactId>
     <name>sp31-mqtt-client</name>
-    <description>测试-mqtt-拉去推送</description>
+    <description>测试-mqtt-拉取推送-不带spring</description>
 
     <dependencies>
         <!-- MQTT 客户端库，例如：Paho -->

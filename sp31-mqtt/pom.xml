@@ -15,9 +15,11 @@
 
     <modules>
         <module>sp31-mqtt-client</module>
-        <module>sp31-mqtt-provider</module>
-        <module>sp31-mqtt-util</module>
-        <module>sp32-mqtt-consumer</module>
+        <module>sp31-mqtt-integration-pub</module>
+        <module>sp31-mqtt-paho-util</module>
+        <module>sp32-mqtt-integration-consumer</module>
+        <module>sp32-mqtt-spring</module>
+        <module>sp32-mqtt-spring-test</module>
     </modules>
 
 </project>

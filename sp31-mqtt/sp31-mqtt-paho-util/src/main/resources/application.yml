@@ -1,0 +1,21 @@
+##
+server:
+  port: 8031
+
+--- # mqtt配置
+spring:
+  mqtt:
+    # 账号 暂不使用
+    username: c.c.
+    # 密码
+    password: rootcccc
+    # mqtt连接tcp地址
+    host-url: tcp://8.146.199.165:1883
+    # 客户端Id，每个启动的id要不同
+    client-id: pub-cli-01
+    # 默认主题
+    default-topic: sdspring
+    # 超时时间
+    timeout: 100
+    # 保持连接数
+    keepalive: 100

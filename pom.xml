@@ -198,6 +198,12 @@
                 <version>${spring.boot}</version>
                 <type>pom</type>
                 <scope>import</scope>
+<!--                <exclusions>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>org.springframework.integration</groupId>-->
+<!--                        <artifactId>spring-integration-mqtt</artifactId>-->
+<!--                    </exclusion>-->
+<!--                </exclusions>-->
             </dependency>
 
             <!-- cloud Hoxton.SR1  -->

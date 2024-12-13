@@ -1,0 +1,17 @@
+server:
+  port: 8031
+
+spring:
+  application:
+    name: mqtt-provider
+  mqtt:
+    url: tcp://8.146.199.165:1883
+    username: c.c.
+    password: rootcccc
+    maxInflight: 5000
+    cleanSession: true
+    automaticReconnect: true
+#    clientId: ${spring.application.name}-${server.port}-client
+#    publishId: ${spring.application.name}-${server.port}-publish
+#    topic: [topic1, topic2]
+    completionTimeout: 10000
