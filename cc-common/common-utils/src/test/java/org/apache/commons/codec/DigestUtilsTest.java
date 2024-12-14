@@ -5,11 +5,15 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
+
+/**
+ * sha256 加密示例
+ */
 @Slf4j
 public class DigestUtilsTest {
 
     @Test
-    public void sha256HexTest(){
+    public void sha256HexTest() {
 
         // 密码
         String passWord = "passWord";

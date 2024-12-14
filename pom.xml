@@ -105,8 +105,8 @@
 
         <!-- 编码加密 -->
         <commons-codec.version>1.13</commons-codec.version>
-        <!-- 加密相关 -->
-        <org.bouncycastle.bcprov.jdk15on>1.58</org.bouncycastle.bcprov.jdk15on>
+        <!-- 加密相关 1.58 -->
+        <org.bouncycastle.bcprov.jdk15on>1.68</org.bouncycastle.bcprov.jdk15on>
 
         <!-- apache http 客户端 -->
         <!--<httpmime.version>4.5.10</httpmime.version>-->
