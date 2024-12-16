@@ -37,7 +37,8 @@ public class MyMVCConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 // 除了下面的路径
                 .excludePathPatterns("/login/**")
-                .excludePathPatterns("/open/**");
+                .excludePathPatterns("/open/**")
+                .excludePathPatterns("/monitor/**");
 
         //  也可以添加别的系统的拦截器
     }
