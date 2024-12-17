@@ -1,5 +1,6 @@
 package jdk.sun.misc;
 
+import cn.cc.codec.base64.Base64UserTest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.ApacheBase64Test;
 import org.bouncycastle.util.encoders.BouncyCastleBase64Test;
@@ -17,6 +18,7 @@ public class Base64Test {
         JDKBase64Test(str);
         ApacheBase64Test.apacheBase64Test(str);
 //        BouncyCastleBase64Test.bouncyCastleBase64(str);
+        Base64UserTest.userBase64(str);
     }
 
     @Test
