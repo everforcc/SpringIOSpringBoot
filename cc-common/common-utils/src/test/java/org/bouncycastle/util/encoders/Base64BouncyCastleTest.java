@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 @Slf4j
-public class BouncyCastleBase64Test {
+public class Base64BouncyCastleTest {
 
     @Test
     public void base64TestBouncyCastle() {
-        BouncyCastleBase64Test.bouncyCastleBase64("aaa");
+        Base64BouncyCastleTest.bouncyCastleBase64("aaa");
     }
 
     /**

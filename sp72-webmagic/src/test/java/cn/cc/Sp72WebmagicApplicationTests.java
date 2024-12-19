@@ -6,6 +6,7 @@ import cn.cc.config.pipeline.DtoSQLPipeline;
 import cn.cc.config.pipeline.WebmagicDtoPipeline;
 import cn.cc.test.dao.WebmagicDao;
 import cn.cc.test.dto.WebmagicDto;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,8 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
+
+import java.util.List;
 
 @SpringBootTest
 class Sp72WebmagicApplicationTests {
@@ -63,6 +66,15 @@ class Sp72WebmagicApplicationTests {
                 .thread(5)
                 //启动爬虫
                 .run();
+    }
+
+    @Test
+    void mpTest(){
+        List<WebmagicDto> webmagicDtoList = webmagicDao.selectList(new LambdaQueryWrapper<>(WebmagicDto.class)
+                .in(WebmagicDto::getStr,"todo","author")
+                .in(WebmagicDto::getNum,3,4)
+        );
+        webmagicDtoList.forEach(System.out::println);
     }
 
     @Autowired

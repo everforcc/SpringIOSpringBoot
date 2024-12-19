@@ -7,7 +7,7 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 @Slf4j
-public class ApacheBase64Test {
+public class Base64ApacheTest {
 
     public static void apacheBase64Test(String str) {
         byte[] encodeBytes = Base64.encodeBase64(str.getBytes());
