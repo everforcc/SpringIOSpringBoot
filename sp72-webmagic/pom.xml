@@ -47,10 +47,30 @@
             <scope>test</scope>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>cn.cc</groupId>-->
+<!--            <artifactId>common-mysql</artifactId>-->
+<!--        </dependency>-->
+        <!-- mysql链接 -->
         <dependency>
-            <groupId>cn.cc</groupId>
-            <artifactId>common-utils</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- mybatisPlus 核心库 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>cn.cc</groupId>-->
+<!--            <artifactId>common-utils</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>cn.cc</groupId>
             <artifactId>common-spring-core</artifactId>
