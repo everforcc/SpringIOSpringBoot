@@ -13,11 +13,18 @@ import java.util.Date;
 @TableName("cc_webmagic")
 public class WebmagicDto {
 
+    private Long id;
+
     private String str;
 
     private long num;
 
     private Date createTime;
 
+    public WebmagicDto(String str, long num, Date createTime) {
+        this.str = str;
+        this.num = num;
+        this.createTime = createTime;
+    }
 }
 

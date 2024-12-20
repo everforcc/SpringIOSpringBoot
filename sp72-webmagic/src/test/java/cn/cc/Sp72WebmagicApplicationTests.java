@@ -75,6 +75,14 @@ class Sp72WebmagicApplicationTests {
                 .in(WebmagicDto::getNum,3,4)
         );
         webmagicDtoList.forEach(System.out::println);
+
+        WebmagicDto webmagicDto = new WebmagicDto();
+        webmagicDto.setId(1L);
+        webmagicDto.setNum(999);
+        webmagicDto.setStr("sss");
+        webmagicDao.insert(webmagicDto);
+
+        System.out.println("end...");
     }
 
     @Autowired

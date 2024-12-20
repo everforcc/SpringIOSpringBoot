@@ -3,7 +3,7 @@ server:
 
 spring:
   redis:
-    password: hkzksingledev
-    host: 8.146.199.165
-    port: 5200
+    password: dn97ORdZwnJsqBqxUVPPPoHfo02zgYKQ
+    host: redis-10053.c263.us-east-1-2.ec2.redns.redis-cloud.com
+    port: 10053
     database: 0
