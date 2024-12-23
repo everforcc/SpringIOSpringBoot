@@ -15,6 +15,7 @@ public class MD5Test {
     public void md5Test() {
         MD5JDKTest.getMD5(str);
         MD5ApacheTest.getMD5(str);
+        // DigestUtilsTest spring工具类
     }
 
 }
