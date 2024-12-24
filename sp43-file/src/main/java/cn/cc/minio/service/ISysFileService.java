@@ -2,6 +2,8 @@ package cn.cc.minio.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface ISysFileService {
 
     /**
@@ -17,7 +19,7 @@ public interface ISysFileService {
      *
      * @param path 文件地址
      */
-    void downFile(String path);
+    void downFile(HttpServletResponse response, String path);
 
     /**
      * 删除文件

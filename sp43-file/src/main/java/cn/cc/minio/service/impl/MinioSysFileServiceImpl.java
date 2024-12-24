@@ -9,6 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+
 @Slf4j
 @Service
 public class MinioSysFileServiceImpl implements ISysFileService {
@@ -44,7 +51,16 @@ public class MinioSysFileServiceImpl implements ISysFileService {
     }
 
     @Override
-    public void downFile(String path) {
+    public void downFile(HttpServletResponse response, String path) {
+        String fileName = "D:\\2156.xlsx";
+        response.setContentType("application/octet-stream");
+        try {
+            response.setHeader("Content-Disposition","attachment;filename=" + URLEncoder.encode("中文-2156-abc.xlsx", "UTF-8"));
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(Files.readAllBytes(new File(fileName).toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         log.info("下载文件: {}", path);
     }
 
