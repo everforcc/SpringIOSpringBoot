@@ -1,6 +1,7 @@
-package org.apache.commons.codec.digest;
+package org.apache.commons.codec;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Slf4j
 public class MD5ApacheTest {
