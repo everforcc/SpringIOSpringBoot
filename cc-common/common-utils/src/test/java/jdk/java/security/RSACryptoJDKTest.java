@@ -105,10 +105,7 @@ public class RSACryptoJDKTest {
      * @throws Exception
      */
     public static String encrypt(String text, String publicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance(RSA);
-        cipher.init(Cipher.ENCRYPT_MODE, decodePublicKey(publicKey));
-        byte[] encryptedBytes = cipher.doFinal(text.getBytes());
-        return Base64.getEncoder().encodeToString(encryptedBytes);
+        return encrypt(text, decodePublicKey(publicKey));
     }
 
     /**
@@ -135,10 +132,7 @@ public class RSACryptoJDKTest {
      * @throws Exception
      */
     public static String decrypt(String encryptedText, String privateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance(RSA);
-        cipher.init(Cipher.DECRYPT_MODE, decodePrivateKey(privateKey));
-        byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
-        return new String(decryptedBytes);
+        return decrypt(encryptedText, decodePrivateKey(privateKey));
     }
 
 }
