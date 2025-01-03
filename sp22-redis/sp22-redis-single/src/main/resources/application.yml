@@ -3,7 +3,11 @@ server:
 
 spring:
   redis:
-    password: dn97ORdZwnJsqBqxUVPPPoHfo02zgYKQ
-    host: redis-10053.c263.us-east-1-2.ec2.redns.redis-cloud.com
-    port: 10053
+#    password: root
+    host: 127.0.0.1
+    port: 6379
     database: 0
+#    password: dn97ORdZwnJsqBqxUVPPPoHfo02zgYKQ
+#    host: redis-10053.c263.us-east-1-2.ec2.redns.redis-cloud.com
+#    port: 10053
+#    database: 0

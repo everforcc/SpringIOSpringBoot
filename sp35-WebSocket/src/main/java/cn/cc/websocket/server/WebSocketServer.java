@@ -1,5 +1,7 @@
 package cn.cc.websocket.server;
 
+import cn.cc.websocket.encoder.WebSocketDtoDecoder;
+import cn.cc.websocket.encoder.WebSocketDtoEncoder;
 import cn.cc.websocket.utils.MessageMap;
 import cn.cc.websocket.bean.BeanInit;
 import com.alibaba.fastjson.JSON;
@@ -27,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * var reqUrl = "http://localhost:8081/websocket/" + cid;
  * socket = new WebSocket(reqUrl.replace("http", "ws"));
  */
-@ServerEndpoint("/websocket/{sid}")
+@ServerEndpoint(value = "/websocket/{sid}", encoders = WebSocketDtoEncoder.class, decoders = WebSocketDtoDecoder.class)
 public class WebSocketServer {
 
     /**

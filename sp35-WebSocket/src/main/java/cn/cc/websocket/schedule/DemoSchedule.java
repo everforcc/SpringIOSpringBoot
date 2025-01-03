@@ -1,5 +1,6 @@
 package cn.cc.websocket.schedule;
 
+import cn.cc.websocket.dto.WebSocketDto;
 import cn.cc.websocket.utils.MessageMap;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
@@ -32,7 +33,7 @@ public class DemoSchedule {
     /**
      * 尝试把 Session 存到redis但是不行，因为不能序列化
      */
-    @Scheduled(cron = "0/25 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void demoMethod() {
         log.info("redissonClient.getRemoteService().toString(): {}", redissonClient.getRemoteService().toString());
         log.info("new Date().toString(): {}", new Date().toString());
@@ -51,7 +52,10 @@ public class DemoSchedule {
         onlineSessionClientMap.forEach((onlineSid, toSession) -> {
             String message = onlineSid + " :当前时间是: " + new Date().toString();
             log.info("服务端: {} 给客户端群发消息 ==> sid = {}, toSid = {}, message = {}", port, "schedule", onlineSid, message);
-            toSession.getAsyncRemote().sendText(message);
+//            toSession.getAsyncRemote().sendText(message);
+            WebSocketDto webSocketDto = new WebSocketDto();
+            webSocketDto.setString(message);
+            toSession.getAsyncRemote().sendObject(webSocketDto);
         });
     }
 

@@ -23,6 +23,10 @@
         </dependency>
 
         <!-- common -->
+<!--        <dependency>-->
+<!--            <groupId>cn.cc</groupId>-->
+<!--            <artifactId>common-utils</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>cn.cc</groupId>
             <artifactId>common-redis-single</artifactId>
