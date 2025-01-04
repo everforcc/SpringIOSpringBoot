@@ -2,6 +2,7 @@ package cn.cc.websocket.schedule;
 
 import cn.cc.websocket.dto.WebSocketDto;
 import cn.cc.websocket.utils.MessageMap;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
@@ -55,6 +56,10 @@ public class DemoSchedule {
 //            toSession.getAsyncRemote().sendText(message);
             WebSocketDto webSocketDto = new WebSocketDto();
             webSocketDto.setString(message);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("k", "v");
+            jsonObject.put("k2", 233);
+            webSocketDto.setJsonObject(jsonObject);
             toSession.getAsyncRemote().sendObject(webSocketDto);
         });
     }

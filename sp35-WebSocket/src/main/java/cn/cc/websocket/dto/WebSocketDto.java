@@ -1,5 +1,6 @@
 package cn.cc.websocket.dto;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,5 +9,7 @@ import java.io.Serializable;
 public class WebSocketDto implements Serializable {
 
     private String string;
+
+    private JSONObject jsonObject;
 
 }
