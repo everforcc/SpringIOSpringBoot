@@ -1,5 +1,7 @@
-package cn.cc.utils.commons.regex;
+package cn.cc.utils.regex;
 
+import cn.cc.utils.regex.constant.RegexSqlConstant;
+import cn.cc.utils.regex.RegexUtils;
 import org.junit.Test;
 
 public class RegexSql {

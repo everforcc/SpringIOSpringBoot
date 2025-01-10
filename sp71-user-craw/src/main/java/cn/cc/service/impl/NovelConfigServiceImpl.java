@@ -14,7 +14,7 @@ import cn.cc.dto.NovelConfigDto;
 import cn.cc.dto.NovelMsgDto;
 import cn.cc.service.INovelConfigService;
 import cn.cc.utils.DownUtils;
-import cn.cc.utils.commons.web.HttpParamUtils;
+import cn.cc.utils.http.util.HttpParamUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

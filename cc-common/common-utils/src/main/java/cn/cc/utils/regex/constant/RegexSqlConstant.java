@@ -1,4 +1,4 @@
-package cn.cc.utils.commons.regex;
+package cn.cc.utils.regex.constant;
 
 public class RegexSqlConstant {
 

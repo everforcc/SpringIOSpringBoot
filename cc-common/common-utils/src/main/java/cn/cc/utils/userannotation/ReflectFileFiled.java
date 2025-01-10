@@ -1,4 +1,4 @@
-package cn.cc.utils.userinterface;
+package cn.cc.utils.userannotation;
 
 import java.lang.annotation.*;
 

@@ -7,9 +7,9 @@
  * Copyright
  */
 
-package cn.cc.utils.http;
+package cn.cc.utils.http.util;
 
-import cn.cc.utils.commons.regex.RegexUtils;
+import cn.cc.utils.regex.RegexUtils;
 import cn.cc.utils.enums.CharsetsEnum;
 import cn.cc.utils.exception.Code;
 import cn.cc.utils.commons.lang.RStringUtils;

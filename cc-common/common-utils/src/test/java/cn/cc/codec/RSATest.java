@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.security.KeyPair;
 
 @Slf4j
-public class RSACryptoTest {
+public class RSATest {
 
     @Test
     public void rsaTest() {

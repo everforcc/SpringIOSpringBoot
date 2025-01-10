@@ -1,4 +1,4 @@
-package cn.cc.utils.entity;
+package cn.cc.utils.domain;
 
 
 import cn.cc.utils.exception.Code;
@@ -7,7 +7,7 @@ import cn.cc.utils.constant.HttpHeadersConstant;
 import cn.cc.utils.constant.NumberConstant;
 import cn.cc.utils.exception.ICode;
 import cn.cc.utils.exception.UserException;
-import cn.cc.utils.i.ICall;
+import cn.cc.utils.userinterface.ICall;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,12 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * 闪尖的时候用的，有点乱，以后不用了
+ * 也不该放在这个包下面
+ * @param <E>
+ */
+@Deprecated
 @Slf4j
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package cn.cc.utils.i;
+package cn.cc.utils.userinterface;
 
 /**
  * lambda

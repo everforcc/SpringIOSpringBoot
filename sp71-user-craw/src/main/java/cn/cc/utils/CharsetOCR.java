@@ -8,8 +8,8 @@
 package cn.cc.utils;
 
 import cn.cc.utils.commons.io.RFileUtils;
-import cn.cc.utils.commons.web.HttpParamUtils;
-import cn.cc.utils.commons.web.JHttpUrlConnectUtils;
+import cn.cc.utils.http.util.HttpParamUtils;
+import cn.cc.utils.http.util.JHttpUrlConnectUtils;
 import cn.cc.utils.opencv.OCRUtils;
 import lombok.extern.slf4j.Slf4j;
 

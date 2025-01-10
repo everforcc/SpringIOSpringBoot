@@ -7,7 +7,7 @@
 
 package cn.cc.dodo;
 
-import cn.cc.utils.commons.web.HttpParamUtils;
+import cn.cc.utils.http.util.HttpParamUtils;
 import org.junit.Test;
 
 public class NovelConfigDoTest {

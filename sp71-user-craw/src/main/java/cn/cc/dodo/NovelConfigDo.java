@@ -8,7 +8,7 @@
 package cn.cc.dodo;
 
 import cn.cc.dto.NovelConfigDto;
-import cn.cc.utils.commons.web.HttpParamUtils;
+import cn.cc.utils.http.util.HttpParamUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

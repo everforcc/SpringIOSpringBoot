@@ -1,9 +1,9 @@
-package cn.cc.utils.dto;
+package cn.cc.utils.domain;
 
 
 import cn.cc.utils.commons.codec.JUUIDUtils;
 import cn.cc.utils.enums.impl.StatusEnum;
-import cn.cc.utils.i.valited.IUpdate;
+import cn.cc.utils.userinterface.valited.IUpdate;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,10 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * 对象的公共参数
+ */
+@Deprecated
 //@Data 会重写toString
 @Getter
 @Setter
@@ -22,9 +26,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class CommonFiledDto {
 
-    @NotNull(groups = {IUpdate.class},message = "id不允许为null")
+    @NotNull(groups = {IUpdate.class}, message = "id不允许为null")
     private int id;
-    @NotNull(groups = {IUpdate.class},message = "uuid不允许为null")
+    @NotNull(groups = {IUpdate.class}, message = "uuid不允许为null")
     private String uuid;
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createTime;
@@ -44,7 +48,7 @@ public class CommonFiledDto {
         return JSONObject.toJSONString(this);
     }
 
-    public CommonFiledDto(Integer createUserid,Integer updateUserid) {
+    public CommonFiledDto(Integer createUserid, Integer updateUserid) {
         this.createUserid = createUserid;
         this.updateUserid = updateUserid;
         this.uuid = JUUIDUtils.uuid32();
@@ -63,17 +67,17 @@ public class CommonFiledDto {
         this.status = StatusEnum.EFFECT;
     }
 
-    public static CommonFiledDto save(Object userid){
+    public static CommonFiledDto save(Object userid) {
         int createUserid = Integer.parseInt(userid.toString());
-        return new CommonFiledDto(createUserid,createUserid);
+        return new CommonFiledDto(createUserid, createUserid);
     }
 
-    public static CommonFiledDto update(Object userid){
+    public static CommonFiledDto update(Object userid) {
         int updateUserid = Integer.parseInt(userid.toString());
         return new CommonFiledDto(updateUserid);
     }
 
-    public static Timestamp nowTime(){
+    public static Timestamp nowTime() {
         return new Timestamp(new Date().getTime());
     }
 

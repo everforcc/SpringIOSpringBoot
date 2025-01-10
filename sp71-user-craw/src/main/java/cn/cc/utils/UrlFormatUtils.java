@@ -7,7 +7,7 @@
 
 package cn.cc.utils;
 
-import cn.cc.utils.commons.web.HttpParamUtils;
+import cn.cc.utils.http.util.HttpParamUtils;
 
 public class UrlFormatUtils {
 

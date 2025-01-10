@@ -1,4 +1,4 @@
-package cn.cc.utils.test.pool;
+package cn.cc.utils.pool;
 
 import cn.cc.utils.concurrent.ThreadPool;
 

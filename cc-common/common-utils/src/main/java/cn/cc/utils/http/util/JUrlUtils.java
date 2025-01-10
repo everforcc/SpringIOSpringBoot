@@ -1,4 +1,4 @@
-package cn.cc.utils.commons.web;
+package cn.cc.utils.http.util;
 
 import java.net.URLEncoder;
 import java.nio.charset.Charset;

@@ -12,7 +12,7 @@ import cn.cc.dto.NovelContentDto;
 import cn.cc.dto.NovelMsgDto;
 import cn.cc.service.INovelConfigInitService;
 import cn.cc.service.INovelConfigService;
-import cn.cc.utils.entity.ResultE;
+import cn.cc.utils.domain.ResultE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

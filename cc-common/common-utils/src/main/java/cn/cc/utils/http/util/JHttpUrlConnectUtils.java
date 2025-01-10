@@ -5,7 +5,7 @@
  * Copyright
  */
 
-package cn.cc.utils.commons.web;
+package cn.cc.utils.http.util;
 
 import cn.cc.utils.constant.HttpUserAgent;
 

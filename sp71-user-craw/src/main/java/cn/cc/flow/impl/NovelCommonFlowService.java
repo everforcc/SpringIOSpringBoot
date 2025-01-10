@@ -19,7 +19,7 @@ import cn.cc.utils.UrlFormatUtils;
 import cn.cc.utils.commons.io.JFileNameUtils;
 import cn.cc.utils.commons.lang.RObjectsUtils;
 import cn.cc.utils.commons.lang.RStringUtils;
-import cn.cc.utils.commons.web.HttpParamUtils;
+import cn.cc.utils.http.util.HttpParamUtils;
 import cn.cc.utils.craw.xsoup.XSoupUtils;
 import cn.cc.utils.exception.AppCode;
 import cn.cc.utils.selenium.selenium.SeleniumPool;

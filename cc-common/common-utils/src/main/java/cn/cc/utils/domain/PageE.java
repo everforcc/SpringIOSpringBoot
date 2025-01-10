@@ -1,4 +1,4 @@
-package cn.cc.utils.entity;
+package cn.cc.utils.domain;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
