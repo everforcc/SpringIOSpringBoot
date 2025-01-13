@@ -15,11 +15,8 @@
     <description>测试spring web的一些功能</description>
 
     <dependencies>
+
         <!-- common start -->
-        <dependency>
-            <groupId>cn.cc</groupId>
-            <artifactId>common-utils</artifactId>
-        </dependency>
         <dependency>
             <groupId>cn.cc</groupId>
             <artifactId>common-spring-core</artifactId>
@@ -29,6 +26,17 @@
             <artifactId>common-spring-fastjson</artifactId>
         </dependency>
         <!-- common end -->
+
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        <!-- httpclient -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

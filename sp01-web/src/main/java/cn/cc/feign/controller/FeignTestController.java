@@ -1,10 +1,13 @@
 package cn.cc.feign.controller;
 
 import cn.cc.feign.dto.ListDemo;
+import cn.cc.feign.util.FileUpload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -30,5 +33,20 @@ public class FeignTestController {
         listDemo.setName("feign");
         return listDemo;
     }
+
+    /**
+     * 文件上传
+     *
+     * @param file 文件
+     */
+    @PostMapping("/file")
+    public void file(MultipartFile file) {
+        log.info("...file start");
+        FileUpload.uploadMultipartFile("http://127.0.0.1:8043/upload", file);
+        log.info("...file end");
+    }
+
+    // 文件下载
+    // org.apache.http.HttpClientsDownTest
 
 }

@@ -4,10 +4,7 @@ import cn.cc.minio.service.ISysFileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,11 +31,24 @@ public class FileController {
         return "";
     }
 
+    /**
+     * http://43.140.221.95:9000/pro-test/1736739944299百度.png
+     *
+     * @param response 下载
+     * @param path     文件位置
+     */
     @GetMapping("/down")
     @ResponseBody
-    public void down(HttpServletResponse response) {
+    public void down(HttpServletResponse response, @RequestParam("path") String path) {
         log.info("下载文件");
-        minioSysFileServiceImpl.downFile(response, "");
+        minioSysFileServiceImpl.downFile(response, path);
+    }
+
+    @GetMapping("/remove")
+    @ResponseBody
+    public boolean remove(HttpServletResponse response, @RequestParam("path") String path) {
+        log.info("下载文件");
+        return minioSysFileServiceImpl.removeFile(path);
     }
 
 }

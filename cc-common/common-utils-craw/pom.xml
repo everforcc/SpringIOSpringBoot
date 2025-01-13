@@ -45,11 +45,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- 驱动 -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
