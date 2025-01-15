@@ -8,6 +8,7 @@
 package cn.cc.asyn.controller;
 
 import cn.cc.asyn.service.AsynService;
+import cn.cc.utils.UUIDUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,8 @@ public class OpenAsynController {
 
     @GetMapping("/task")
     public void asyn() {
-        asynService.asynTests();
+        String uuid32 = UUIDUtils.uuid32();
+        asynService.asynTests(uuid32);
     }
 
     @GetMapping("/return")

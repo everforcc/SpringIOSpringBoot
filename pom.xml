@@ -159,6 +159,7 @@
         <module>sp31-mqtt</module>
         <module>sp33-amqp</module>
         <module>sp35-WebSocket</module>
+        <module>sp35-WebSocket2</module>
         <module>sp41-drools</module>
         <module>sp42-velocity</module>
         <module>sp43-file</module>

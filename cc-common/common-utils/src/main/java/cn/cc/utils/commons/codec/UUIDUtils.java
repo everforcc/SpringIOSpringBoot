@@ -2,7 +2,7 @@ package cn.cc.utils.commons.codec;
 
 import java.util.UUID;
 
-public class JUUIDUtils {
+public class UUIDUtils {
 
     /**
      * 生成uuid并去掉中间 -

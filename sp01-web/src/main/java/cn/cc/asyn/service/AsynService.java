@@ -25,10 +25,10 @@ public class AsynService {
     @Resource
     MyAsyncTask myAsyncTask;
 
-    public void asynTests() {
-        log.info("测试asyn开始");
-        myAsyncTask.asyncCpsItemImportTask("param");
-        log.info("测试asyn结束");
+    public void asynTests(String uuid) {
+        log.info("测试asyn开始： {}", uuid);
+        myAsyncTask.asyncCpsItemImportTask(uuid);
+        log.info("测试asyn结束： {}", uuid);
     }
 
     public void asyncCReturn() {

@@ -30,13 +30,13 @@ public class MyAsyncTask {
      */
     @Async //使用自定义的线程池(执行器)
     public void asyncCpsItemImportTask(String param) {
-        log.info("进入异步方法 {}", param);
+        log.info("进入异步方法---开始 {}", param);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000 * 10);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        log.info("进入异步方法---结束");
+        log.info("进入异步方法---结束 {}", param);
     }
 
     @Async //使用自定义的线程池(执行器)

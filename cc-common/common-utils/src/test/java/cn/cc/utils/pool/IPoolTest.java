@@ -6,13 +6,23 @@ public class IPoolTest {
 
     public static void main(String[] args) {
 
+//        for(int i=0;i<3;i++){
+//            try {
+//                //Thread.sleep(500);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            ThreadPool.getPool().execute(new IPoolThread(i));
+//        }
+
+        System.out.println("cccc");
         for(int i=0;i<3;i++){
             try {
                 //Thread.sleep(500);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            ThreadPool.getPool().execute(new IPoolThread(i));
+            ThreadPool.getPool().submit(new IPoolThread(i));
         }
         //iPool.closeT(poolVO);
 

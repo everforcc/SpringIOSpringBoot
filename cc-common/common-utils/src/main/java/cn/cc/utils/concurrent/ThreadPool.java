@@ -14,7 +14,7 @@ public class ThreadPool {
      * 如何选择线程池数量
      * @return
      */
-    private static int threadSize(){
+    public static int threadSize(){
         int ncpus = Runtime.getRuntime().availableProcessors();
         return ncpus;
     }
@@ -34,6 +34,7 @@ public class ThreadPool {
      */
     @SneakyThrows
     public static void shutdown(ExecutorService executorService){
+
         executorService.shutdown();
 //        if(!executorService.awaitTermination(awaitTime, TimeUnit.MILLISECONDS)){
 //            executorService.shutdownNow();

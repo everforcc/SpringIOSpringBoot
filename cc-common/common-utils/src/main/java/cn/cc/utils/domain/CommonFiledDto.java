@@ -1,7 +1,7 @@
 package cn.cc.utils.domain;
 
 
-import cn.cc.utils.commons.codec.JUUIDUtils;
+import cn.cc.utils.commons.codec.UUIDUtils;
 import cn.cc.utils.enums.impl.StatusEnum;
 import cn.cc.utils.userinterface.valited.IUpdate;
 import com.alibaba.fastjson.JSONObject;
@@ -51,7 +51,7 @@ public class CommonFiledDto {
     public CommonFiledDto(Integer createUserid, Integer updateUserid) {
         this.createUserid = createUserid;
         this.updateUserid = updateUserid;
-        this.uuid = JUUIDUtils.uuid32();
+        this.uuid = UUIDUtils.uuid32();
         this.createTime = nowTime();
         this.updateTime = nowTime();
         this.effect = StatusEnum.EFFECT;
@@ -60,7 +60,7 @@ public class CommonFiledDto {
 
     public CommonFiledDto(Integer updateUserid) {
         this.updateUserid = updateUserid;
-        this.uuid = JUUIDUtils.uuid32();
+        this.uuid = UUIDUtils.uuid32();
         this.createTime = nowTime();
         this.updateTime = nowTime();
         this.effect = StatusEnum.EFFECT;
