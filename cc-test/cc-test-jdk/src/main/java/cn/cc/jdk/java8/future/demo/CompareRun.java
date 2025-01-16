@@ -43,7 +43,7 @@ public class CompareRun {
         long start = System.currentTimeMillis();
 
         // 等凉菜
-        Callable ca1 = () -> {
+        Callable<String> ca1 = () -> {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -55,7 +55,7 @@ public class CompareRun {
         new Thread(ft1).start();
 
         // 等包子 -- 必须要等待返回的结果，所以要调用join方法
-        Callable ca2 = () -> {
+        Callable<String> ca2 = () -> {
             try {
                 Thread.sleep(1000 * 3);
             } catch (InterruptedException e) {
@@ -74,9 +74,7 @@ public class CompareRun {
     }
 
     public static void main(String[] args) {
-
         try {
-
             threadRun();
             futureRun();
         } catch (ExecutionException | InterruptedException e) {
