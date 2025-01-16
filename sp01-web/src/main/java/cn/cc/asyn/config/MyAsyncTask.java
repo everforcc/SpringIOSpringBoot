@@ -28,7 +28,7 @@ public class MyAsyncTask {
      *
      * @param param 业务参数
      */
-    @Async //使用自定义的线程池(执行器)
+    @Async("AsyncTaskExecutor2") //使用自定义的线程池(执行器)
     public void asyncCpsItemImportTask(String param) {
         log.info("进入异步方法---开始 {}", param);
         try {
