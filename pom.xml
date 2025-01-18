@@ -121,6 +121,10 @@
         <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
         <!-- 文字识别 -->
         <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
+        <!-- pdfbox 处理 -->
+        <!-- 2.0.24 -->
+        <!-- 3.0.3 -->
+        <apache.pdfbox>2.0.24</apache.pdfbox>
         <!-- 文件处理 -->
 
         <!-- 爬虫相关 -->
@@ -490,6 +494,11 @@
                 <groupId>com.github.crab2died</groupId>
                 <artifactId>Excel4J</artifactId>
                 <version>${com.github.excel4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>${apache.pdfbox}</version>
             </dependency>
             <!-- 加密工具包 -->
             <dependency>

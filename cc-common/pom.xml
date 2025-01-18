@@ -18,6 +18,7 @@
         <module>common-file-easyexcel</module>
         <module>common-file-easypoi</module>
         <module>common-file-minio</module>
+        <module>common-file-pdf</module>
         <module>common-mysql</module>
         <module>common-redis-cluster</module>
         <module>common-redis-single</module>

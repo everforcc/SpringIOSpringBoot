@@ -37,6 +37,11 @@
             </dependency>
             <dependency>
                 <groupId>cn.cc</groupId>
+                <artifactId>common-file-pdf</artifactId>
+                <version>${cn.cc.minio}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.cc</groupId>
                 <artifactId>common-mysql</artifactId>
                 <version>${cn.cc.mysql}</version>
             </dependency>
