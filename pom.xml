@@ -170,6 +170,7 @@
         <module>sp61-webapi</module>
         <module>sp71-user-craw</module>
         <module>sp72-webmagic</module>
+        <module>sp80-znkj</module>
     </modules>
 
     <dependencyManagement>

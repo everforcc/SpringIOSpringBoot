@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
         <groupId>cn.cc</groupId>
-        <artifactId>sp21-mybatis</artifactId>
+        <artifactId>SpringIOSpringBoot</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cc</groupId>
-    <artifactId>sp21.1-mybatis</artifactId>
-    <name>sp21.1-mybatis</name>
-    <description>测试spring mysql功能</description>
+    <artifactId>sp80-znkj</artifactId>
+    <name>sp80-znkj</name>
+    <description>sp80-znkj</description>
+
+    <properties>
+        <com.huifu>3.0.13</com.huifu>
+    </properties>
 
     <dependencies>
-
         <!-- common -->
         <dependency>
             <groupId>cn.cc</groupId>
@@ -25,61 +26,38 @@
             <groupId>cn.cc</groupId>
             <artifactId>common-spring-fastjson</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.cc</groupId>
+            <artifactId>common-mysql</artifactId>
+        </dependency>
         <!-- common -->
 
-        <!-- 数据库 start -->
-        <!-- mybatis自己写的 starter -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <!-- 数据库 end -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- 数据源 -->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
+            <groupId>com.huifu.bspay.sdk</groupId>
+            <artifactId>dg-java-sdk</artifactId>
+            <version>${com.huifu}</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>fastjson</artifactId>-->
-<!--        </dependency>-->
-
     </dependencies>
 
     <build>
@@ -87,14 +65,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
             <!--编译跳过测试文件检查的生命周期-->
             <plugin>

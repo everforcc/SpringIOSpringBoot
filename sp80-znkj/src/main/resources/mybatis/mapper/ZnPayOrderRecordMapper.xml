@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cc.huifu.refund.mapper.ZnPayOrderRecordMapper">
+
+    <cache
+    eviction="FIFO"
+    flushInterval="60000"
+    size="512"
+    readOnly="true"
+    />
+
+    <!-- 列表查询 -->
+    <select id="listZnPayOrderRecord" resultType="cn.cc.huifu.dto.ZnPayOrderRecord">
+        SELECT json_unquote(JSON_EXTRACT(e.other_data,'$.hf_seq_id')) as otherDataHfSeqId,e.pay_amt,e.req_date,e.create_time,e.other_data,e.* FROM zn_pay_order_record e
+        WHERE e.req_date = ${reqDate} and e.pay_amt is not null
+        <if test="list != null and list != ''">
+            and json_unquote(JSON_EXTRACT(e.other_data,'$.hf_seq_id')) not in
+            <foreach collection="list" item="hf" open="(" separator="," close=")">
+                #{hf}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

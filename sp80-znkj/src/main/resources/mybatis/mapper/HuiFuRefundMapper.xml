@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cc.huifu.refund.mapper.HuifuRefundMapper">
+
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"
+    />
+
+    <!-- 列表查询 -->
+    <select id="getOneHuifuRefund" resultType="cn.cc.huifu.dto.HuifuRefund">
+        select *
+        from znkj_huifu_refund
+        where req_date = #{reqDate}
+          and hf_seq_id = #{hfSeqId}
+    </select>
+
+    <select id="listHfSeqId" resultType="java.lang.String">
+        select distinct hf_seq_id
+        from znkj_huifu_refund
+        where req_date = #{reqDate}
+    </select>
+
+    <insert id="saveHuifuRefund">
+        insert into znkj_huifu_refund (hf_seq_id, amt, req_date, bank_code, resp_desc, response) VALUE
+            (#{hfSeqId}, #{amt}, #{reqDate}, #{bankCode}, #{respDesc}, #{response})
+    </insert>
+
+</mapper>
