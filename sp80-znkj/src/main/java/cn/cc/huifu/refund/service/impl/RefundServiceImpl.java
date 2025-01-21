@@ -77,7 +77,7 @@ public class RefundServiceImpl implements IRefundService {
                 huifuRefund.setBankCode(bank_code);
                 huifuRefund.setRespDesc(resp_desc);
                 huifuRefund.setReqDate(reqDate);
-                huifuRefund.setAmt(String.valueOf(payAmt));
+                huifuRefund.setAmt(amtStr);
                 huifuRefund.setResponse(resultMap.toString());
                 huifuRefund.setType("园区");
                 huifuRefund.setSysTime(znPayOrderRecord.getCreateTime());

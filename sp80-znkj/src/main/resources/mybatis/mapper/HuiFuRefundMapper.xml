@@ -26,8 +26,8 @@
     </select>
 
     <insert id="saveHuifuRefund">
-        insert into znkj_huifu_refund (hf_seq_id, amt, req_date, bank_code, resp_desc, response) VALUE
-            (#{hfSeqId}, #{amt}, #{reqDate}, #{bankCode}, #{respDesc}, #{response})
+        insert into znkj_huifu_refund (type, hf_seq_id, amt, req_date, bank_code, resp_desc, response, sys_time) VALUE
+            (#{type}, #{hfSeqId}, #{amt}, #{reqDate}, #{bankCode}, #{respDesc}, #{response}, #{sysTime})
     </insert>
 
 </mapper>
