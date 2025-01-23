@@ -103,12 +103,13 @@ public class JFileTypeUtils {
             return null;
         }
 
-        byte[] fileTypes = new byte[4];
+        byte[] fileTypes = new byte[5];
         // 取出头信息
         System.arraycopy(fileBytes, 0, fileTypes, 0, file_min_length);
 
         String fileType = Hex.encodeHexString(fileTypes, false);
 
+        System.out.println("fileType: " + fileType);
         if (type_file_map.containsKey(fileType)) {
             String v = type_file_map.get(fileType);
             return v;
@@ -128,14 +129,62 @@ public class JFileTypeUtils {
     }
 
     public static void main(String[] args) {
-        String path = "E:\\filesystem\\project\\Bilibili_craw\\up\\[480974636]_[庚哥有点野]\\短视频\\598595778\\";
+        String path = "D:\\cache\\ChromeDown\\";
         String fileName_1 = "[av598595778]_[7月19深圳外卖小哥发生车祸遭遇二次碾压行车记录仪录像]_[7月19深圳外卖小哥发生车祸遭遇二次碾压行车记录仪录像].flv";
-        String fileName_2 = "[av598595778]_[cover].jpg";
-        String fileName_3 = "";
-        byte[] bytes = RFileUtils.readFileToBytes(path + fileName_2);
+        String fileName_2 = "20250123193511A135.mp3";
+        String fileName_3 = "20250123193649A143.mp3";
 
+        // mp3 49 44 33 04
+        // m4a
+        String fileName_4 = "02.mp3";
+        String fileName_5 = "百度.mp3";
+        String fileName_6 = "1.mp3";
+        String fileName_7 = "222.mp3";
+        String fileName_8 = "333.mp3";
+        String fileName_9 = "555.mp3";
+        String fileName_10 = "666.mp3";
+        // 777.wav
+        String fileName_11 = "777.wav";
+
+        byte[] bytes = RFileUtils.readFileToBytes(path + fileName_2);
         String fileType = getFileRealType(bytes);
         System.out.println("文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_3);
+        fileType = getFileRealType(bytes);
+        System.out.println("文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_4);
+        fileType = getFileRealType(bytes);
+        System.out.println("494433文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_5);
+        fileType = getFileRealType(bytes);
+        System.out.println("文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_6);
+        fileType = getFileRealType(bytes);
+        System.out.println("494433文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_7);
+        fileType = getFileRealType(bytes);
+        System.out.println("222文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_8);
+        fileType = getFileRealType(bytes);
+        System.out.println("333文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_9);
+        fileType = getFileRealType(bytes);
+        System.out.println("555文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_10);
+        fileType = getFileRealType(bytes);
+        System.out.println("555文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_11);
+        fileType = getFileRealType(bytes);
+        System.out.println("777文件类型是 【{}】" + fileType);
     }
 
 }
