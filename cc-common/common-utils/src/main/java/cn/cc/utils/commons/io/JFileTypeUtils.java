@@ -61,6 +61,7 @@ public class JFileTypeUtils {
         file_type_map.put("mov", "6D6F6F76");  //Quicktime (mov)
         file_type_map.put("asf", "3026B2758E66CF11"); //Windows Media (asf)
         file_type_map.put("mid", "4D546864");  //MIDI (mid)
+        file_type_map.put("mp3", "49443304");  //MIDI (mid)
     }
 
     static {
@@ -96,6 +97,7 @@ public class JFileTypeUtils {
         type_file_map.put("CFAD12FEC5FD746F", "dbx");
         type_file_map.put("2E524D46", "rm");
         type_file_map.put("D0CF11E0", "xls");
+        type_file_map.put("49443304", "mp3");
     }
 
     public static String getFileRealType(byte[] fileBytes) {
@@ -103,7 +105,7 @@ public class JFileTypeUtils {
             return null;
         }
 
-        byte[] fileTypes = new byte[5];
+        byte[] fileTypes = new byte[file_min_length];
         // 取出头信息
         System.arraycopy(fileBytes, 0, fileTypes, 0, file_min_length);
 
@@ -146,6 +148,9 @@ public class JFileTypeUtils {
         // 777.wav
         String fileName_11 = "777.wav";
 
+        String fileName_12 = "auto_temp_voice.mp3";
+        String fileName_13 = "auto_temp_voice.m4a";
+
         byte[] bytes = RFileUtils.readFileToBytes(path + fileName_2);
         String fileType = getFileRealType(bytes);
         System.out.println("文件类型是 【{}】" + fileType);
@@ -185,6 +190,14 @@ public class JFileTypeUtils {
         bytes = RFileUtils.readFileToBytes(path + fileName_11);
         fileType = getFileRealType(bytes);
         System.out.println("777文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_12);
+        fileType = getFileRealType(bytes);
+        System.out.println("888文件类型是 【{}】" + fileType);
+
+        bytes = RFileUtils.readFileToBytes(path + fileName_13);
+        fileType = getFileRealType(bytes);
+        System.out.println("888文件类型是 【{}】" + fileType);
     }
 
 }
