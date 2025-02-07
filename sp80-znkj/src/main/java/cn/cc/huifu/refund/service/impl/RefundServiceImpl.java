@@ -37,7 +37,7 @@ public class RefundServiceImpl implements IRefundService {
         LocalDate localDate = LocalDate.now();
         String reqDate = localDate.getYear() +
                 String.format("%02d", localDate.getMonthValue()) +
-                localDate.getDayOfMonth();
+                String.format("%02d", localDate.getDayOfMonth());
 
         List<HuifuRefund> huifuRefundList = new ArrayList<>();
 

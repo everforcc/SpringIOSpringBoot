@@ -9,6 +9,7 @@ package cn.cc.asyn.service;
 
 import cn.cc.asyn.config.MyAsyncTask;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +29,7 @@ public class AsynService {
     public void asynTests(String uuid) {
         log.info("测试asyn开始： {}", uuid);
         myAsyncTask.asyncCpsItemImportTask(uuid);
+        this.thisAsync(uuid);
         log.info("测试asyn结束： {}", uuid);
     }
 
@@ -44,6 +46,11 @@ public class AsynService {
         }
 
         log.info("测试 asyncCReturn 结束");
+    }
+
+    @Async("AsyncTaskExecutor2")
+    public void thisAsync(String uuid){
+        log.info("测试本地方法，不能执行异步: {}", uuid);
     }
 
 }
