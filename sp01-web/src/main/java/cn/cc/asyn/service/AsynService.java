@@ -35,13 +35,20 @@ public class AsynService {
 
     public void asyncCReturn() {
         log.info("测试 asyncCReturn 开始");
+        // More than one TaskExecutor bean found within the context, and none is named 'taskExecutor'.
+        // Mark one of them as primary or name it 'taskExecutor' (possibly as an alias) in order to use it for async processing:
+        // [AsyncTaskExecutor1, AsyncTaskExecutor2]
         Future<String> stringFuture = myAsyncTask.asyncCReturn("param");
         try {
             String result = stringFuture.get();
             log.info("result: {}", result);
         } catch (InterruptedException e) {
+            log.error("报错InterruptedException: {}", e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
+            log.error("报错ExecutionException: {}", e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
