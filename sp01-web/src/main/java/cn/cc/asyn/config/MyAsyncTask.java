@@ -39,9 +39,11 @@ public class MyAsyncTask {
         log.info("进入异步方法---结束 {}", param);
     }
 
+    // todo 记录源码的地方
     // taskExecutor
     // applicationTaskExecutor
-    @Async("taskExecutor") //使用自定义的线程池(执行器)
+    // 其他 name 不能用
+    @Async //使用自定义的线程池(执行器)
     public Future<String> asyncCReturn(String param) {
         log.info("进入异步 asyncCReturn 方法 {}", param);
         Callable callable = () -> {

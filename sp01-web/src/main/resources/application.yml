@@ -1,14 +1,16 @@
 spring:
   thymeleaf:
     cache: false
-  task:
-    execution:
-      pool:
-        max-size: 18
-        core-size: 6
-        keep-alive: 30s
-        queue-capacity: 1000
-        allow-core-thread-timeout: true
+    # 使用自定义的线程池
+    # 如果使用默认。修改下面配置
+#  task:
+#    execution:
+#      pool:
+#        max-size: 18
+#        core-size: 6
+#        keep-alive: 30s
+#        queue-capacity: 1000
+#        allow-core-thread-timeout: true
 #      thread-name-prefix: aa-thread-
   info:
     git:
