@@ -22,12 +22,12 @@
     <select id="listHfSeqId" resultType="java.lang.String">
         select distinct hf_seq_id
         from znkj_huifu_refund
-        where req_date = #{reqDate}
+        where req_date = #{reqDate} and ip = #{ip}
     </select>
 
     <insert id="saveHuifuRefund">
-        insert into znkj_huifu_refund (type, hf_seq_id, amt, req_date, bank_code, resp_desc, response, sys_time) VALUE
-            (#{type}, #{hfSeqId}, #{amt}, #{reqDate}, #{bankCode}, #{respDesc}, #{response}, #{sysTime})
+        insert into znkj_huifu_refund (type, ip, hf_seq_id, amt, req_date, bank_code, resp_desc, response, sys_time) VALUE
+            (#{type}, #{ip}, #{hfSeqId}, #{amt}, #{reqDate}, #{bankCode}, #{respDesc}, #{response}, #{sysTime})
     </insert>
 
 </mapper>

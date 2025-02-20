@@ -30,10 +30,10 @@ public class RefundController {
 
     @GetMapping("/yq/{reqDate}")
     public R<List<ZnPayOrderRecord>> refundYq(@PathVariable("reqDate") String reqDate) {
-        return R.ok(iZnPayOrderRecordService.listZnPayOrderRecord(reqDate, null));
+        return R.ok(iZnPayOrderRecordService.listZnPayOrderRecord136(reqDate, null));
     }
 
-    @GetMapping("/yqlocal{reqDate}")
+    @GetMapping("/yqlocal/{reqDate}")
     public R<List<HuiFuInfo>> refundYqLocal(@PathVariable("reqDate") String reqDate) {
         return R.ok(iHuiFuInfoService.listHuiFuInfo(reqDate, null));
     }

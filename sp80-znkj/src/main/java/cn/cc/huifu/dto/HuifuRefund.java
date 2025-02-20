@@ -1,5 +1,6 @@
 package cn.cc.huifu.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,8 @@ public class HuifuRefund {
     private int id;
 
     private String type;
+
+    private String ip;
 
     /**
      * 汇付请求id
@@ -41,10 +44,13 @@ public class HuifuRefund {
      */
     private String response;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date sysTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updadteTime;
 
 

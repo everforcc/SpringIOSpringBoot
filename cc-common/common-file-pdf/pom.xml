@@ -33,6 +33,30 @@
             <!-- 依赖传递 -->
             <optional>true</optional>
         </dependency>
+
+<!--        &lt;!&ndash; iText 7 核心包  实现转pdf的依赖&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.itextpdf</groupId>-->
+<!--            <artifactId>itext7-core</artifactId>-->
+<!--&lt;!&ndash;            <version>7.2.5</version>&ndash;&gt;-->
+<!--            <version>7.2.5</version>-->
+<!--            <type>pom</type>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>html2pdf</artifactId>
+            <version>5.0.2</version>
+        </dependency>
+
+
+        <!-- 如果需要支持中文，添加以下依赖 -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>font-asian</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+
     </dependencies>
 
 </project>

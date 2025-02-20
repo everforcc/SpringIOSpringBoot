@@ -11,5 +11,5 @@ public interface HuifuRefundMapper {
 
     int saveHuifuRefund(HuifuRefund huifuRefund);
 
-    List<String> listHfSeqId(@Param("reqDate") String reqDate);
+    List<String> listHfSeqId(@Param("reqDate") String reqDate, @Param("ip") String ip);
 }

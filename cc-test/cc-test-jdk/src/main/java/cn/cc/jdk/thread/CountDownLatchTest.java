@@ -27,6 +27,7 @@ public class CountDownLatchTest {
             boolean flag = count.await(11, TimeUnit.SECONDS);
             System.out.println("最多等待5秒后向下执行: " + flag);
             System.out.println("count.getCount() await: " + count.getCount());
+            exec.shutdown();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

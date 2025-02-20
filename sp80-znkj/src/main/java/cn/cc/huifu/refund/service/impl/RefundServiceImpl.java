@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -31,6 +28,9 @@ public class RefundServiceImpl implements IRefundService {
     @Resource
     HuifuRefundMapper huifuRefundMapper;
 
+    List<String> yqIPList = Arrays.asList("192.168.1.136", "192.168.1.138");
+
+    List<String> boxIPList = Arrays.asList("192.168.1.132");
 
     @Override
     public List<HuifuRefund> refundList() {
@@ -39,28 +39,36 @@ public class RefundServiceImpl implements IRefundService {
                 String.format("%02d", localDate.getMonthValue()) +
                 String.format("%02d", localDate.getDayOfMonth());
 
+        // 退款清单
         List<HuifuRefund> huifuRefundList = new ArrayList<>();
 
-        List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate);
+        for(String ip:yqIPList) {
+            List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
 
-        log.info("已处理退款数据: {}", hfSeqIdList.size());
+            log.info("{}: 园区 已处理退款数据: {}", ip, hfSeqIdList.size());
 
-        List<ZnPayOrderRecord> znPayOrderRecordList = iZnPayOrderRecordService.listZnPayOrderRecord(reqDate, hfSeqIdList);
-        log.info("园区待处理数据: {}", znPayOrderRecordList.size());
-        // 园区
-        for (ZnPayOrderRecord znPayOrderRecord : znPayOrderRecordList) {
-            String otherDataHfSeqId = znPayOrderRecord.getOtherDataHfSeqId();
-            Long payAmt = znPayOrderRecord.getPayAmt();
-//            double amt = (double) payAmt / 100;
-            String amtStr = String.valueOf(payAmt);
-            if(amtStr.length()>2){
-                amtStr = amtStr.substring(0,amtStr.length()-2) + "." + amtStr.substring(amtStr.length()-2, amtStr.length());
+            List<ZnPayOrderRecord> znPayOrderRecordList;
+            if("192.168.1.136".equals(ip)){
+                znPayOrderRecordList = iZnPayOrderRecordService.listZnPayOrderRecord136(reqDate, hfSeqIdList);
             }else {
-                amtStr = "0." + amtStr;
+                znPayOrderRecordList = iZnPayOrderRecordService.listZnPayOrderRecord138(reqDate, hfSeqIdList);
             }
 
-            log.info("园区 退款 日期: {}, 汇付id: {}, 金额: {}, {}", reqDate, otherDataHfSeqId, payAmt, amtStr);
-            otherDataHfSeqId = otherDataHfSeqId.replace("\"","");
+            log.info("{}: 园区 待处理数据: {}", ip, znPayOrderRecordList.size());
+            // 园区
+            for (ZnPayOrderRecord znPayOrderRecord : znPayOrderRecordList) {
+                String otherDataHfSeqId = znPayOrderRecord.getOtherDataHfSeqId();
+                Long payAmt = znPayOrderRecord.getPayAmt();
+//            double amt = (double) payAmt / 100;
+                String amtStr = String.valueOf(payAmt);
+                if (amtStr.length() > 2) {
+                    amtStr = amtStr.substring(0, amtStr.length() - 2) + "." + amtStr.substring(amtStr.length() - 2, amtStr.length());
+                } else {
+                    amtStr = "0." + amtStr;
+                }
+
+                log.info("{}:园区 退款 日期: {}, 汇付id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
+                otherDataHfSeqId = otherDataHfSeqId.replace("\"", "");
 //            HuifuRefund exist = huifuRefundMapper.getOneHuifuRefund(otherDataHfSeqId, reqDate);
 //            if (Objects.nonNull(exist)) {
 //                log.info("退款数据已存在: {}", exist.toString());
@@ -68,30 +76,37 @@ public class RefundServiceImpl implements IRefundService {
 //                continue;
 //            }
 
-            Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, amtStr);
-            if (Objects.nonNull(resultMap)) {
-                String bank_code = (String) resultMap.get("bank_code");
-                String resp_desc = (String) resultMap.get("resp_desc");
-                HuifuRefund huifuRefund = new HuifuRefund();
-                huifuRefund.setHfSeqId(otherDataHfSeqId);
-                huifuRefund.setBankCode(bank_code);
-                huifuRefund.setRespDesc(resp_desc);
-                huifuRefund.setReqDate(reqDate);
-                huifuRefund.setAmt(amtStr);
-                huifuRefund.setResponse(resultMap.toString());
-                huifuRefund.setType("园区");
-                huifuRefund.setSysTime(znPayOrderRecord.getCreateTime());
-                huifuRefundMapper.saveHuifuRefund(huifuRefund);
-                huifuRefundList.add(huifuRefund);
+                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, amtStr);
+                if (Objects.nonNull(resultMap)) {
+                    String bank_code = (String) resultMap.get("bank_code");
+                    String resp_desc = (String) resultMap.get("resp_desc");
+                    HuifuRefund huifuRefund = new HuifuRefund();
+                    huifuRefund.setIp(ip);
+                    huifuRefund.setHfSeqId(otherDataHfSeqId);
+                    huifuRefund.setBankCode(bank_code);
+                    huifuRefund.setRespDesc(resp_desc);
+                    huifuRefund.setReqDate(reqDate);
+                    huifuRefund.setAmt(amtStr);
+                    huifuRefund.setResponse(resultMap.toString());
+                    huifuRefund.setType("园区");
+                    huifuRefund.setSysTime(znPayOrderRecord.getCreateTime());
+                    huifuRefundMapper.saveHuifuRefund(huifuRefund);
+                    huifuRefundList.add(huifuRefund);
+                }
             }
         }
-        // 订单
-        List<HuiFuInfo> huiFuInfoList = iHuiFuInfoService.listHuiFuInfo(reqDate, hfSeqIdList);
-        log.info("订单待处理数据: {}", huiFuInfoList.size());
-        for (HuiFuInfo huiFuInfo : huiFuInfoList) {
-            String otherDataHfSeqId = huiFuInfo.getHfSeqId();
-            String payAmt = huiFuInfo.getTransAmt();
-            log.info("订单 退款 日期: {}, 汇付id: {}, 金额: {}", reqDate, otherDataHfSeqId, payAmt);
+
+        for(String ip:boxIPList) {
+            List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
+
+            log.info("{}: 订单 已处理退款数据: {}", ip, hfSeqIdList.size());
+            // 订单 192.168.1.132
+            List<HuiFuInfo> huiFuInfoList = iHuiFuInfoService.listHuiFuInfo(reqDate, hfSeqIdList);
+            log.info("{}: 订单 待处理数据: {}", ip, huiFuInfoList.size());
+            for (HuiFuInfo huiFuInfo : huiFuInfoList) {
+                String otherDataHfSeqId = huiFuInfo.getHfSeqId();
+                String payAmt = huiFuInfo.getTransAmt();
+                log.info("{}: 订单 退款 日期: {}, 汇付id: {}, 金额: {}", ip, reqDate, otherDataHfSeqId, payAmt);
 
 //            HuifuRefund exist = huifuRefundMapper.getOneHuifuRefund(otherDataHfSeqId, reqDate);
 //            if (Objects.nonNull(exist)) {
@@ -100,21 +115,23 @@ public class RefundServiceImpl implements IRefundService {
 //                continue;
 //            }
 
-            Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, payAmt);
-            if (Objects.nonNull(resultMap)) {
-                String bank_code = (String) resultMap.get("bank_code");
-                String resp_desc = (String) resultMap.get("resp_desc");
-                HuifuRefund huifuRefund = new HuifuRefund();
-                huifuRefund.setHfSeqId(otherDataHfSeqId);
-                huifuRefund.setBankCode(bank_code);
-                huifuRefund.setRespDesc(resp_desc);
-                huifuRefund.setReqDate(reqDate);
-                huifuRefund.setAmt(String.valueOf(payAmt));
-                huifuRefund.setResponse(resultMap.toString());
-                huifuRefund.setType("订单");
-                huifuRefund.setSysTime(huiFuInfo.getCreateTime());
-                huifuRefundMapper.saveHuifuRefund(huifuRefund);
-                huifuRefundList.add(huifuRefund);
+                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, payAmt);
+                if (Objects.nonNull(resultMap)) {
+                    String bank_code = (String) resultMap.get("bank_code");
+                    String resp_desc = (String) resultMap.get("resp_desc");
+                    HuifuRefund huifuRefund = new HuifuRefund();
+                    huifuRefund.setIp(ip);
+                    huifuRefund.setHfSeqId(otherDataHfSeqId);
+                    huifuRefund.setBankCode(bank_code);
+                    huifuRefund.setRespDesc(resp_desc);
+                    huifuRefund.setReqDate(reqDate);
+                    huifuRefund.setAmt(String.valueOf(payAmt));
+                    huifuRefund.setResponse(resultMap.toString());
+                    huifuRefund.setType("订单");
+                    huifuRefund.setSysTime(huiFuInfo.getCreateTime());
+                    huifuRefundMapper.saveHuifuRefund(huifuRefund);
+                    huifuRefundList.add(huifuRefund);
+                }
             }
         }
 

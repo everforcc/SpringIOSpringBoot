@@ -12,6 +12,11 @@ import java.util.Random;
 
 public class ZnPayOrderRefund {
 
+    public static void main(String[] args) {
+
+        refundFlow("002900TOP2B250220203519P803ac139c7a00000","20250220","12.00");
+    }
+
     public static Map<String, Object> refundFlow(String org_hf_seq_id, String req_date, String ord_amt) {
 //        PayConfig
         try {
