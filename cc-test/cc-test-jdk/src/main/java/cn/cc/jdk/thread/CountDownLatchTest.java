@@ -11,17 +11,21 @@ public class CountDownLatchTest {
             CountDownLatch count = new CountDownLatch(size);
             for (int i = size; i > 0; i--) {
                 final int sleepI = i;
-                exec.submit((Callable<Boolean>) () -> {
+                Future<Integer> future = exec.submit((Callable<Integer>) () -> {
                     try {
                         System.out.println("start: ----------------: " + sleepI);
                         Thread.sleep(sleepI * 1000L);
                         System.out.println("end: ----------------: " + sleepI);
-                        return null;
+                        return sleepI;
                     } finally {
                         System.out.println("count.getCount() countDown: " + count.getCount());
                         count.countDown();
                     }
                 });
+                // 会阻塞
+//                Integer result = future.get();
+//                System.out.println("result: " + result);
+
             }
 //            count.await();
             boolean flag = count.await(11, TimeUnit.SECONDS);
