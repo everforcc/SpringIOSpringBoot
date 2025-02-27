@@ -1,8 +1,6 @@
-package jdk.sun.misc;
+package sun.misc;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 @Slf4j
 public class Base64JDKTest {

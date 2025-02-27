@@ -1,9 +1,9 @@
 package cn.cc.codec;
 
-import jdk.java.security.SHAJDKTest;
-import jdk.java.util.UUIDTest;
 import org.apache.commons.codec.SHAApacheTest;
 import org.junit.Test;
+import security.SHAJDKTest;
+import util.UUIDTest;
 
 /**
  * sha256示例

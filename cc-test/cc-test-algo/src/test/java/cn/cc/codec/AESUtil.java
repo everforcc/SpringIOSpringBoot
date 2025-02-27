@@ -1,8 +1,9 @@
 package cn.cc.codec;
 
-import jdk.javax.crypto.AESJDKUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import javax.crypto.AESJDKUtil;
 
 @Slf4j
 public class AESUtil {

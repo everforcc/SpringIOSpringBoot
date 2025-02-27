@@ -1,8 +1,4 @@
-package jdk.javax.crypto;
-
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+package javax.crypto;
 
 public class DESJDKUtil {
 

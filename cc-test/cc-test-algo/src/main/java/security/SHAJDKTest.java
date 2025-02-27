@@ -1,4 +1,4 @@
-package jdk.java.security;
+package security;
 
 import lombok.extern.slf4j.Slf4j;
 

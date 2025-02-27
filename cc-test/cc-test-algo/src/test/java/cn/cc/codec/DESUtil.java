@@ -1,9 +1,9 @@
 package cn.cc.codec;
 
-import jdk.javax.crypto.DESJDKUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import javax.crypto.DESJDKUtil;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 

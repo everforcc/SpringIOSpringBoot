@@ -1,8 +1,8 @@
 package cn.cc.codec;
 
-import jdk.java.security.RSACryptoJDKTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import security.RSACryptoJDKTest;
 
 import java.security.KeyPair;
 
