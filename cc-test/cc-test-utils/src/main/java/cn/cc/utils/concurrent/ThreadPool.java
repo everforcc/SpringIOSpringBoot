@@ -1,12 +1,12 @@
 package cn.cc.utils.concurrent;
 
-import lombok.SneakyThrows;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
+/**
+ * 测试自定义的线程池
+ */
 public class ThreadPool {
 
     /**
@@ -32,7 +32,6 @@ public class ThreadPool {
      * 超时的时候向线程池中所有的线程发出中断(interrupted)。
      * @param executorService
      */
-    @SneakyThrows
     public static void shutdown(ExecutorService executorService){
 
         executorService.shutdown();

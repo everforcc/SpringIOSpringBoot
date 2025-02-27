@@ -1,4 +1,4 @@
-package cn.cc.utils.pool;
+package cn.cc.utils.concurrent;
 
 import org.apache.http.util.EntityUtils;
 

@@ -127,8 +127,8 @@ public class ClassLoaderTest {
     }
 
     public static void main(String[] args) {
-        //webClassLoader();
-        jarClassLoader();
+        webClassLoader();
+//        jarClassLoader();
     }
 
 }

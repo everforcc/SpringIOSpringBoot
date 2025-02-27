@@ -1,8 +1,6 @@
-package cn.cc.utils.pool;
+package cn.cc.utils.concurrent;
 
-import cn.cc.utils.concurrent.ThreadPool;
-
-public class PoolVO{
+public class PoolVO {
 
     private final static String lock = "PoolVO-锁";
 

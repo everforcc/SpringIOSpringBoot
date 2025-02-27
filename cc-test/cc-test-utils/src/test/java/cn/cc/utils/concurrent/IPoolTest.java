@@ -1,22 +1,35 @@
-package cn.cc.utils.pool;
+package cn.cc.utils.concurrent;
 
-import cn.cc.utils.concurrent.ThreadPool;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
+@Slf4j
 public class IPoolTest {
 
-    public static void main(String[] args) {
+    /**
+     * 测试 execute
+     * 没保证全部执行完
+     */
+    @Test
+    public void tExecute() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                //Thread.sleep(500);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            ThreadPool.getPool().execute(new IPoolThread(i));
+        }
+    }
 
-//        for(int i=0;i<3;i++){
-//            try {
-//                //Thread.sleep(500);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            ThreadPool.getPool().execute(new IPoolThread(i));
-//        }
+    /**
+     * 测试 submit
+     * 没保证全部执行完
+     */
+    @Test
+    public void tSubmit() {
 
-        System.out.println("cccc");
-        for(int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             try {
                 //Thread.sleep(500);
             } catch (Exception e) {
@@ -25,10 +38,9 @@ public class IPoolTest {
             ThreadPool.getPool().submit(new IPoolThread(i));
         }
         //iPool.closeT(poolVO);
-
     }
 
-    public static class IPoolThread implements Runnable{
+    public static class IPoolThread implements Runnable {
 
         private int i;
 
@@ -39,12 +51,12 @@ public class IPoolTest {
         @Override
         public void run() {
             try {
-                System.out.print("i:-ins " + i );
+                System.out.print("i:-ins " + i);
                 IPool iPool = IPool.getInstance();
                 PoolVO poolVO = iPool.getT();
                 System.out.println(" 成功获取 >>> " + poolVO.getIndex());
                 //iPool.closeT(poolVO);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("i-err:  " + i + " >>> " + e.toString());
 
