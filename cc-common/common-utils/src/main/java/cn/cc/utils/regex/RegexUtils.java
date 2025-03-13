@@ -13,11 +13,18 @@ import java.util.regex.Pattern;
  */
 public class RegexUtils {
 
-    // 不是javabean 无所谓
-    public static boolean isMatches(String regex,String string){
+    /**
+     * true 符合
+     * false 不符合
+     *
+     * @param regex  正则
+     * @param string 要检查的字符串
+     * @return 检查整个输入字符串是否完全符合指定的正则表达式模式
+     */
+    public static boolean isMatches(String regex, String string) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(string);
-        //是否匹配到了
+        // 尝试根据模式匹配整个区域。
         if (matcher.matches()) {
             return true;
         }
@@ -27,28 +34,30 @@ public class RegexUtils {
     /**
      * 匹配str
      * 不带组
+     *
      * @param regex
      * @param content
      * @return
      */
-    public static String matcheStr(String regex,String content) {
-        return matcheStr(regex,content,0);
+    public static String matcheStr(String regex, String content) {
+        return matcheStr(regex, content, 0);
     }
 
     /**
      * 匹配str
      * 普通捕获组
+     *
      * @param regex
      * @param content
      * @param group
      * @return
      */
-    public static String matcheStr(String regex, String content, int group){
+    public static String matcheStr(String regex, String content, int group) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(content);
         //是否匹配到了
         if (matcher.find()) {// 进入后可以全匹配
-            return matcher.group(group );
+            return matcher.group(group);
         }
         return null;
     }
@@ -56,39 +65,40 @@ public class RegexUtils {
     /**
      * 命名捕获组
      * 正则编写好，可以直接匹配到需要的内容，不用多处理
-     * @param regex
-     * @param content
-     * @param group
-     * @return
-     */
-    public static String matcheStr(String regex, String content, String group){
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(content);
-        //是否匹配到了
-        if (matcher.find()) {// 进入后可以全匹配
-            return matcher.group(group );
-        }
-        return null;
-    }
-
-    /**
-     * 匹配List
-     * @param regex
-     * @param content
-     * @return
-     */
-    public static List<String> matcheList(String regex,String content) {
-        return matcheList(regex,content,0);
-    }
-
-    /**
      *
      * @param regex
      * @param content
      * @param group
      * @return
      */
-    public static List<String> matcheList(String regex,String content,int group){
+    public static String matcheStr(String regex, String content, String group) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+        //是否匹配到了
+        if (matcher.find()) {// 进入后可以全匹配
+            return matcher.group(group);
+        }
+        return null;
+    }
+
+    /**
+     * 匹配List
+     *
+     * @param regex
+     * @param content
+     * @return
+     */
+    public static List<String> matcheList(String regex, String content) {
+        return matcheList(regex, content, 0);
+    }
+
+    /**
+     * @param regex
+     * @param content
+     * @param group
+     * @return
+     */
+    public static List<String> matcheList(String regex, String content, int group) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(content);
         //是否匹配到了
@@ -100,7 +110,7 @@ public class RegexUtils {
         return stringSet;
     }
 
-    public static Set<String> matcheList(String regex,String content,String group){
+    public static Set<String> matcheList(String regex, String content, String group) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(content);
         //是否匹配到了

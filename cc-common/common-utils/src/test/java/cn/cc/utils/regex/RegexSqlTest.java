@@ -4,7 +4,7 @@ import cn.cc.utils.regex.constant.RegexSqlConstant;
 import cn.cc.utils.regex.RegexUtils;
 import org.junit.Test;
 
-public class RegexSql {
+public class RegexSqlTest {
 
     //    Pattern updatePattern = Pattern.compile("UPDATE\\s+(\\w+)\\s+SET");
     // String updatePattern = "UPDATE\\s+(\\w+)\\s+SET";
