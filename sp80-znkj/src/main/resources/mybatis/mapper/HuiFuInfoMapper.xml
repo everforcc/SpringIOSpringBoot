@@ -12,7 +12,19 @@
     />
 
     <!-- 列表查询 -->
-    <select id="listHuiFuInfo" resultType="cn.cc.huifu.dto.HuiFuInfo">
+    <select id="listHuiFuInfo132" resultType="cn.cc.huifu.dto.HuiFuInfo">
+        select e.hf_seq_id,e.trans_amt,e.create_by,e.req_date,e.* from znkj_huifu_info e
+        where e.req_date = ${reqDate}
+        <if test="list != null and list.size() > 0">
+            and e.hf_seq_id not in
+            <foreach collection="list" item="hf" open="(" separator="," close=")">
+                #{hf}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- 列表查询 -->
+    <select id="listHuiFuInfo152" resultType="cn.cc.huifu.dto.HuiFuInfo">
         select e.hf_seq_id,e.trans_amt,e.create_by,e.req_date,e.* from znkj_huifu_info e
         where e.req_date = ${reqDate}
         <if test="list != null and list.size() > 0">

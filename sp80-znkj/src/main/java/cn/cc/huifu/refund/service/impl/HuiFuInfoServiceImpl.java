@@ -15,8 +15,12 @@ public class HuiFuInfoServiceImpl implements IHuiFuInfoService {
     HuiFuInfoMapper huiFuInfoMapper;
 
     @Override
-    public List<HuiFuInfo> listHuiFuInfo(String reqDate, List<String> hfSeqIdList) {
-        return huiFuInfoMapper.listHuiFuInfo(reqDate, hfSeqIdList);
+    public List<HuiFuInfo> listHuiFuInfo132(String reqDate, List<String> hfSeqIdList) {
+        return huiFuInfoMapper.listHuiFuInfo132(reqDate, hfSeqIdList);
     }
 
+    @Override
+    public List<HuiFuInfo> listHuiFuInfo152(String reqDate, List<String> hfSeqIdList) {
+        return huiFuInfoMapper.listHuiFuInfo152(reqDate, hfSeqIdList);
+    }
 }

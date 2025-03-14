@@ -35,7 +35,7 @@ public class RefundController {
 
     @GetMapping("/yqlocal/{reqDate}")
     public R<List<HuiFuInfo>> refundYqLocal(@PathVariable("reqDate") String reqDate) {
-        return R.ok(iHuiFuInfoService.listHuiFuInfo(reqDate, null));
+        return R.ok(iHuiFuInfoService.listHuiFuInfo132(reqDate, null));
     }
 
     @GetMapping()

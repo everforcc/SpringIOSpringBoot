@@ -30,7 +30,7 @@ public class RefundServiceImpl implements IRefundService {
 
     List<String> yqIPList = Arrays.asList("192.168.1.136", "192.168.1.138");
 
-    List<String> boxIPList = Arrays.asList("192.168.1.132");
+    List<String> boxIPList = Arrays.asList("192.168.1.132", "192.168.1.152");
 
     @Override
     public List<HuifuRefund> refundList() {
@@ -100,8 +100,13 @@ public class RefundServiceImpl implements IRefundService {
             List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
 
             log.info("{}: 订单 已处理退款数据: {}", ip, hfSeqIdList.size());
+            List<HuiFuInfo> huiFuInfoList;
             // 订单 192.168.1.132
-            List<HuiFuInfo> huiFuInfoList = iHuiFuInfoService.listHuiFuInfo(reqDate, hfSeqIdList);
+            if("192.168.1.132".equals(ip)) {
+                huiFuInfoList = iHuiFuInfoService.listHuiFuInfo132(reqDate, hfSeqIdList);
+            }else {
+                huiFuInfoList = iHuiFuInfoService.listHuiFuInfo152(reqDate, hfSeqIdList);
+            }
             log.info("{}: 订单 待处理数据: {}", ip, huiFuInfoList.size());
             for (HuiFuInfo huiFuInfo : huiFuInfoList) {
                 String otherDataHfSeqId = huiFuInfo.getHfSeqId();

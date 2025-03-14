@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface HuiFuInfoMapper {
 
-    @DS("yqlocal")
-    List<HuiFuInfo> listHuiFuInfo(@Param("reqDate") String reqDate, @Param("list") List<String> hfSeqIdList);
+    List<HuiFuInfo> listHuiFuInfo132(@Param("reqDate") String reqDate, @Param("list") List<String> hfSeqIdList);
+
+    List<HuiFuInfo> listHuiFuInfo152(@Param("reqDate") String reqDate, @Param("list") List<String> hfSeqIdList);
 }
