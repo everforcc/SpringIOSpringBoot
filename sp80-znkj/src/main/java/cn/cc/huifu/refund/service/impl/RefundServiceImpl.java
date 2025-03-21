@@ -76,7 +76,7 @@ public class RefundServiceImpl implements IRefundService {
 //                continue;
 //            }
 
-                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, amtStr);
+                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, amtStr, znPayOrderRecord.getHuifuid());
                 if (Objects.nonNull(resultMap)) {
                     String bank_code = (String) resultMap.get("bank_code");
                     String resp_desc = (String) resultMap.get("resp_desc");
@@ -120,7 +120,7 @@ public class RefundServiceImpl implements IRefundService {
 //                continue;
 //            }
 
-                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, payAmt);
+                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, payAmt, huiFuInfo.getHuifuId());
                 if (Objects.nonNull(resultMap)) {
                     String bank_code = (String) resultMap.get("bank_code");
                     String resp_desc = (String) resultMap.get("resp_desc");

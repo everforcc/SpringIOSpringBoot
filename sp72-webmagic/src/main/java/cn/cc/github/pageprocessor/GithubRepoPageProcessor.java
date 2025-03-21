@@ -1,4 +1,4 @@
-package cn.cc.config.pageprocessor;
+package cn.cc.github.pageprocessor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

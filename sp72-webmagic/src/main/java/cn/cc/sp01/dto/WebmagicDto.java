@@ -1,4 +1,4 @@
-package cn.cc.test.dto;
+package cn.cc.sp01.dto;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;

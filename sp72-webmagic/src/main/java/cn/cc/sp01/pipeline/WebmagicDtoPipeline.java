@@ -1,7 +1,7 @@
-package cn.cc.config.pipeline;
+package cn.cc.sp01.pipeline;
 
-import cn.cc.test.dao.WebmagicDao;
-import cn.cc.test.dto.WebmagicDto;
+import cn.cc.sp01.dao.WebmagicDao;
+import cn.cc.sp01.dto.WebmagicDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

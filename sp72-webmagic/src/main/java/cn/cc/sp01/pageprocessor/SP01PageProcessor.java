@@ -1,4 +1,4 @@
-package cn.cc.config.pageprocessor;
+package cn.cc.sp01.pageprocessor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -45,6 +45,7 @@ public class SP01PageProcessor implements PageProcessor {
         Spider.create(new SP01PageProcessor())
                 //从"https://github.com/code4craft"开始抓
                 .addUrl("http://127.0.0.1:8001/open/init/dog")
+//                .addPipeline()
                 //开启5个线程抓取
                 .thread(5)
                 //启动爬虫

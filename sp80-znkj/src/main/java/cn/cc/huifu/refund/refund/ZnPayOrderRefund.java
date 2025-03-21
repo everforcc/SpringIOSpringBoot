@@ -14,10 +14,10 @@ public class ZnPayOrderRefund {
 
     public static void main(String[] args) {
 
-        refundFlow("002900TOP2B250220203519P803ac139c7a00000","20250220","12.00");
+        refundFlow("002900TOP4A250319200507P827ac1369bb00000","20250320","3.00", "6666000154267351");
     }
 
-    public static Map<String, Object> refundFlow(String org_hf_seq_id, String req_date, String ord_amt) {
+    public static Map<String, Object> refundFlow(String org_hf_seq_id, String req_date, String ord_amt, String huifu_id) {
 //        PayConfig
         try {
             BasePay.initWithMerConfig(PayConfig.getMerchantConfig());
@@ -41,7 +41,10 @@ public class ZnPayOrderRefund {
 
         paramsInfo.put("req_seq_id", randomNum + "");
         // 商户号
-        paramsInfo.put("huifu_id", "6666000151824676");
+        // 6666000154267351
+        // 6666000154267351
+        // 6666000151824676
+        paramsInfo.put("huifu_id", huifu_id);
         // 申请退款金额
         paramsInfo.put("ord_amt", ord_amt);
         // 原交易请求日期
