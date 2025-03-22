@@ -31,10 +31,13 @@ public class BasicController {
     RabbitTemplate rabbitTemplate;
 
     @GetMapping("/test")
-    public void test() {
+    public void test() throws InterruptedException {
         String queueName = "simple.queue";
         String message = "hello, spring amqp!";
-        rabbitTemplate.convertAndSend(queueName, message);
+        for (int i = 1; i < 5; i++) {
+            rabbitTemplate.convertAndSend(queueName, message + i);
+//            Thread.sleep(20);
+        }
     }
 
     /**
@@ -44,11 +47,11 @@ public class BasicController {
     @GetMapping("/work")
     public void work() throws InterruptedException {
         String queueName = "work.queue";
-        for (int i = 1; i < 51; i++) {
+        for (int i = 1; i < 5; i++) {
             String message = "hello, spring amqp-" + i;
             log.info("work: {}", message);
             rabbitTemplate.convertAndSend(queueName, message);
-            Thread.sleep(20);
+//            Thread.sleep(20);
         }
     }
 

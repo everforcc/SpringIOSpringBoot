@@ -9,16 +9,17 @@ import org.springframework.stereotype.Component;
 @Component // 测试另一个虚拟主机，先屏蔽这个
 public class SpringRabbitListener {
 
-    @RabbitListener(queues = "simple.queue")
-    public void listenSimpleQueueMessage(String msg) {
-        log.info("spring 消费者接收到消息: {}", msg);
-        log.info("消息处理完成");
+    @RabbitListener(queues = "simple.queue", concurrency = "3")
+    public void listenSimpleQueueMessage(String msg) throws InterruptedException {
+        log.info("simple.queue 消费者接收到消息: {}", msg);
+//        log.info("消息处理完成");
+        Thread.sleep(20);
     }
 
     @RabbitListener(queues = "work.queue")
     public void listenWorQueue1(String msg) throws InterruptedException {
-        log.info("spring 消费者1 接收到消息: {}", msg);
-        log.info("消息处理完成");
+        log.info("work.queue 消费者1 接收到消息: {}", msg);
+//        log.info("消息处理完成");
         Thread.sleep(20);
     }
 
