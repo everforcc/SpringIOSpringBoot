@@ -4,6 +4,8 @@ package cn.cc.client;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * mqtt 接收消息
  */
@@ -18,7 +20,8 @@ public class SubClient {
             MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
             // 死了活过来认为是新的
             mqttConnectOptions.setCleanSession(true);
-
+            mqttConnectOptions.setUserName(MQTTConstant.userName);
+            mqttConnectOptions.setPassword(MQTTConstant.password);
             // 将配置设置到客户端
             mqttClient.connect(mqttConnectOptions);
 
@@ -34,6 +37,7 @@ public class SubClient {
                 public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
                     System.out.println("主题: " + s);
                     System.out.println("接收消息: " + new String(mqttMessage.getPayload()));
+
                 }
 
                 @Override
@@ -41,6 +45,13 @@ public class SubClient {
                     System.out.println("传递消息完成");
                 }
             });
+
+            // 创建消息对象
+            MqttMessage message22 = new MqttMessage(("确认收到消息").getBytes(StandardCharsets.UTF_8));
+            // 设置服务质量
+            message22.setQos(2);
+
+            mqttClient.publish(MQTTConstant.topic2, message22);
 
             mqttClient.subscribe(MQTTConstant.topic);
             System.out.println("订阅已经准备好了");
