@@ -12,6 +12,7 @@ import cn.cc.core.domain.R;
 import cn.cc.utils.UUIDUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,8 +41,9 @@ public class OpenAsynController {
         asynService.asyncCReturn();
     }
 
+    @CrossOrigin
     @GetMapping("/count")
-    public R<Integer> threadCount(){
+    public R<Integer> threadCount() {
 // 获取所有线程的堆栈跟踪
         Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
 
