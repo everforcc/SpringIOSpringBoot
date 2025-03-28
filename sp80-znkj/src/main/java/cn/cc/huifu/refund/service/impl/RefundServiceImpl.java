@@ -42,15 +42,15 @@ public class RefundServiceImpl implements IRefundService {
         // 退款清单
         List<HuifuRefund> huifuRefundList = new ArrayList<>();
 
-        for(String ip:yqIPList) {
+        for (String ip : yqIPList) {
             List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
 
             log.info("{}: 园区 已处理退款数据: {}", ip, hfSeqIdList.size());
 
             List<ZnPayOrderRecord> znPayOrderRecordList;
-            if("192.168.1.136".equals(ip)){
+            if ("192.168.1.136".equals(ip)) {
                 znPayOrderRecordList = iZnPayOrderRecordService.listZnPayOrderRecord136(reqDate, hfSeqIdList);
-            }else {
+            } else {
                 znPayOrderRecordList = iZnPayOrderRecordService.listZnPayOrderRecord138(reqDate, hfSeqIdList);
             }
 
@@ -64,7 +64,11 @@ public class RefundServiceImpl implements IRefundService {
                 if (amtStr.length() > 2) {
                     amtStr = amtStr.substring(0, amtStr.length() - 2) + "." + amtStr.substring(amtStr.length() - 2, amtStr.length());
                 } else {
-                    amtStr = "0." + amtStr;
+                    if (amtStr.length() == 2) {
+                        amtStr = "0." + amtStr;
+                    } else if (amtStr.length() == 1) {
+                        amtStr = "0.0" + amtStr;
+                    }
                 }
 
                 log.info("{}:园区 退款 日期: {}, 汇付id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
@@ -96,15 +100,15 @@ public class RefundServiceImpl implements IRefundService {
             }
         }
 
-        for(String ip:boxIPList) {
+        for (String ip : boxIPList) {
             List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
 
             log.info("{}: 订单 已处理退款数据: {}", ip, hfSeqIdList.size());
             List<HuiFuInfo> huiFuInfoList;
             // 订单 192.168.1.132
-            if("192.168.1.132".equals(ip)) {
+            if ("192.168.1.132".equals(ip)) {
                 huiFuInfoList = iHuiFuInfoService.listHuiFuInfo132(reqDate, hfSeqIdList);
-            }else {
+            } else {
                 huiFuInfoList = iHuiFuInfoService.listHuiFuInfo152(reqDate, hfSeqIdList);
             }
             log.info("{}: 订单 待处理数据: {}", ip, huiFuInfoList.size());

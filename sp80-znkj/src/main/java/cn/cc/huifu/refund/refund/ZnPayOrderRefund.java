@@ -14,7 +14,7 @@ public class ZnPayOrderRefund {
 
     public static void main(String[] args) {
 
-        refundFlow("002900TOP4A250319200507P827ac1369bb00000","20250320","3.00", "6666000154267351");
+        refundFlow("002900TOP1A250328193148P411ac139cc100000","20250328","0.02", "6666000151824676");
     }
 
     public static Map<String, Object> refundFlow(String org_hf_seq_id, String req_date, String ord_amt, String huifu_id) {
