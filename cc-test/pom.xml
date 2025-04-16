@@ -15,8 +15,9 @@
 
     <modules>
         <module>cc-test-algo</module>
-        <module>cc-test-jdk</module>
         <module>cc-test-io</module>
+        <module>cc-test-jdk</module>
+        <module>cc-test-netty</module>
         <module>cc-test-utils</module>
     </modules>
 

@@ -13,6 +13,7 @@ public class SeleniumDriver {
 
     public static WebDriver chromeDriver(){
         ChromeOptions chromeOptions = new ChromeOptions();
+        // 设置无头浏览器
         //chromeOptions.setHeadless(true);
         WebDriver driver = new ChromeDriver(chromeOptions);
         return driver;
