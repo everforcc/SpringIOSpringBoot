@@ -3,4 +3,5 @@ server:
 sysconfig:
   bdRoot: D:\cache\BaiduSyncdisk
   fileRoot: ${sysconfig.bdRoot}\java\filesystem\project\SpringIOSpringBoot\sp31-user-craw\novel\
-  chromedriver: ${sysconfig.bdRoot}\sync\env\driver\chromedriver-win64-131.0.6778.85\chromedriver.exe
+  #chromedriver: ${sysconfig.bdRoot}\java\environment\driver\chrome-headless-shell-win64-135.0.7049.84\chrome-headless-shell.exe
+  chromedriver: ${sysconfig.bdRoot}\java\environment\driver\chromedriver-win64-135.0.7049.84\chromedriver.exe

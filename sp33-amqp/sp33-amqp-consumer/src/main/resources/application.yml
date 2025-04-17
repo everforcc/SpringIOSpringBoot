@@ -10,3 +10,7 @@ spring:
     listener:
       simple:
         prefetch: 10 # 默认只投递一条，处理完了才能继续下一个
+        concurrency: 10 # 消费端的监听个数
+        max-concurrency: 20 # 消费端最大监听个数
+        aa: c
+    connection-timeout: 15000 # 超时时间
