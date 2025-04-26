@@ -35,9 +35,11 @@ public class RedisClientSocket {
 
             System.out.println("连接成功");
             // 3. 发送命令
-            sendCommand(writer, "LRANGE", "list", "0", "3");
+            //sendCommand(writer, "LRANGE", "list", "0", "3");
+            sendCommand(writer, "LPUSH", "runoobkey ", "redis");
             System.out.println("发送命令成功");
             // 4. 解析响应
+            System.out.println("开始读取");
             Object result = readResponse(reader);
             System.out.println("result: " + result);
             System.out.println("解析响应成功");
@@ -95,8 +97,9 @@ public class RedisClientSocket {
                 if (len == -1) {
                     return null;
                 }
+                // bug 如果返回的确实为空，需要读一下 CR 数据
                 if (len == 0) {
-                    return "";
+                    return reader.readLine();
                 }
                 String line = reader.readLine();
 
@@ -105,7 +108,7 @@ public class RedisClientSocket {
             case ConstantRESP.ARRAYS:
                 return readBulkString(reader);
             default:
-                System.err.println("不支持的响应类型: " + prefix);
+                System.err.println("不支持的响应类型: " + prefix + (char)(prefix));
                 System.err.println("不支持的响应类型: " + reader.readLine());
                 throw new RuntimeException("不支持的响应类型");
         }
