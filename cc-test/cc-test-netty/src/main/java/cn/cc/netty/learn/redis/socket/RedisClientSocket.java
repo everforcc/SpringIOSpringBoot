@@ -2,26 +2,44 @@ package cn.cc.netty.learn.redis.socket;
 
 import cn.cc.netty.learn.redis.constant.ConstantRESP;
 import cn.cc.netty.learn.redis.constant.ConstantRedis;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+/**
+ * todo 优化为字节流
+ */
+@Slf4j
 public class RedisClientSocket {
 
     public static void main(String[] args) {
 
         // 2. 获取 输出流 输入流
-        //
-        flow();
+
+        List<String> commandList = Arrays.asList(
+                "keys *" ,
+                "get k");
+        commandList.forEach(command -> {
+            flow(command);
+            log.info("-----------------");
+        });
+
+
+    }
+
+    public static String[] importToCommand(String userImport) {
+        return userImport.split(" ");
     }
 
     /**
      * 主流程
      */
-    public static void flow() {
+    public static void flow(String command) {
         Socket socket = null;
         PrintWriter writer = null;
         BufferedReader reader = null;
@@ -33,16 +51,16 @@ public class RedisClientSocket {
             writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 
-            System.out.println("连接成功");
+            log.info("[连接成功]");
+            log.info("[发送命令] : {}", command);
             // 3. 发送命令
-            //sendCommand(writer, "LRANGE", "list", "0", "3");
-            sendCommand(writer, "LPUSH", "runoobkey ", "redis");
-            System.out.println("发送命令成功");
+            sendCommand(writer, importToCommand(command));
+
+            log.info("[发送命令成功]");
             // 4. 解析响应
-            System.out.println("开始读取");
+            log.info("[开始读取]");
             Object result = readResponse(reader);
-            System.out.println("result: " + result);
-            System.out.println("解析响应成功");
+            log.info("[解析响应成功]: {}", result);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,19 +99,19 @@ public class RedisClientSocket {
         switch (prefix) {
             case ConstantRESP.SIMPLE_STRINGS:
                 String temp = reader.readLine();
-                System.out.println(ConstantRESP.SIMPLE_STRINGS + ": " + temp);
+                log.info("[{}] : {}", ConstantRESP.SIMPLE_STRINGS , temp);
                 return temp;
             case ConstantRESP.ERRORS:
                 String err = reader.readLine();
-                System.err.println(ConstantRESP.ERRORS + ": " + err);
+                log.error("[{}] : {}", ConstantRESP.ERRORS , err);
                 throw new RuntimeException(err);
             case ConstantRESP.INT:
                 Long tempLong = Long.parseLong(reader.readLine());
-                System.out.println(ConstantRESP.INT + ": " + tempLong);
+                log.info("[{}] : {}", ConstantRESP.INT , tempLong);
                 return tempLong;
             case ConstantRESP.BULK_STRINGS:
                 int len = Integer.parseInt(reader.readLine());
-                System.out.println(ConstantRESP.BULK_STRINGS + ": " + len);
+                log.info("[{}] : {}", ConstantRESP.BULK_STRINGS , len);
                 if (len == -1) {
                     return null;
                 }
@@ -103,14 +121,14 @@ public class RedisClientSocket {
                 }
                 String line = reader.readLine();
 
-                System.out.println(ConstantRESP.BULK_STRINGS + ":  " + line);
+                log.info("[{}] : {}", ConstantRESP.BULK_STRINGS , line);
                 return line;
             case ConstantRESP.ARRAYS:
                 return readBulkString(reader);
             default:
-                System.err.println("不支持的响应类型: " + prefix + (char)(prefix));
-                System.err.println("不支持的响应类型: " + reader.readLine());
-                throw new RuntimeException("不支持的响应类型");
+                log.error("[不支持的响应类型]: " + prefix + (char)(prefix));
+                log.error("[不支持的响应类型]: " + reader.readLine());
+                throw new RuntimeException("[不支持的响应类型]");
         }
     }
 
@@ -118,7 +136,7 @@ public class RedisClientSocket {
         // 获取数组大小
         int len = Integer.parseInt(reader.readLine());
 
-        System.out.println(ConstantRESP.ARRAYS + ": " + len);
+        log.info("[{}] : {}", ConstantRESP.ARRAYS , len);
         List<Object> list = new ArrayList<>(len);
 
         for (int i = 0; i < len; i++) {
