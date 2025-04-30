@@ -22,21 +22,29 @@ public class RedisClientSocket {
     public static void main(String[] args) {
 
         // 2. 获取 输出流 输入流
+        commandLine();
 
     }
 
-    public static void commandLine(){
+    /**
+     * 命令行 客户端
+     */
+    public static void commandLine() {
         try {
             connect();
-            while (true) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
                 // 获取系统用户录入命令
                 log.info("等待用户录入");
                 Scanner scanner = new Scanner(System.in);
                 String command = scanner.nextLine();
                 flow(command);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -44,7 +52,7 @@ public class RedisClientSocket {
         try {
             List<String> command_String = Arrays.asList(
                     "ping",
-                    "keys *" ,
+                    "keys *",
                     "EXISTS k",
                     "EXISTS c",
                     "get k"
@@ -175,19 +183,19 @@ public class RedisClientSocket {
         switch (prefix) {
             case ConstantRESP.SIMPLE_STRINGS:
                 String temp = reader.readLine();
-                log.info("[{}] : {}", ConstantRESP.SIMPLE_STRINGS , temp);
+                log.info("[{}] : {}", ConstantRESP.SIMPLE_STRINGS, temp);
                 return temp;
             case ConstantRESP.ERRORS:
                 String err = reader.readLine();
-                log.error("[{}] : {}", ConstantRESP.ERRORS , err);
+                log.error("[{}] : {}", ConstantRESP.ERRORS, err);
                 throw new RuntimeException(err);
             case ConstantRESP.INT:
                 Long tempLong = Long.parseLong(reader.readLine());
-                log.info("[{}] : {}", ConstantRESP.INT , tempLong);
+                log.info("[{}] : {}", ConstantRESP.INT, tempLong);
                 return tempLong;
             case ConstantRESP.BULK_STRINGS:
                 int len = Integer.parseInt(reader.readLine());
-                log.info("[{}] : {}", ConstantRESP.BULK_STRINGS , len);
+                log.info("[{}] : {}", ConstantRESP.BULK_STRINGS, len);
                 if (len == -1) {
                     return null;
                 }
@@ -197,12 +205,12 @@ public class RedisClientSocket {
                 }
                 String line = reader.readLine();
 
-                log.info("[{}] : {}", ConstantRESP.BULK_STRINGS , line);
+                log.info("[{}] : {}", ConstantRESP.BULK_STRINGS, line);
                 return line;
             case ConstantRESP.ARRAYS:
                 return readBulkString(reader);
             default:
-                log.error("[不支持的响应类型]: " + prefix + (char)(prefix));
+                log.error("[不支持的响应类型]: " + prefix + (char) (prefix));
                 log.error("[不支持的响应类型]: " + reader.readLine());
                 throw new RuntimeException("[不支持的响应类型]");
         }
@@ -212,7 +220,7 @@ public class RedisClientSocket {
         // 获取数组大小
         int len = Integer.parseInt(reader.readLine());
 
-        log.info("[{}] : {}", ConstantRESP.ARRAYS , len);
+        log.info("[{}] : {}", ConstantRESP.ARRAYS, len);
         List<Object> list = new ArrayList<>(len);
 
         for (int i = 0; i < len; i++) {
