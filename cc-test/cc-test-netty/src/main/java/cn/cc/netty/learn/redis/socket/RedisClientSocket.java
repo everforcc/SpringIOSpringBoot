@@ -8,9 +8,7 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * todo 1. 优化为字节流
@@ -18,100 +16,6 @@ import java.util.Scanner;
  */
 @Slf4j
 public class RedisClientSocket {
-
-    public static void main(String[] args) {
-
-        // 2. 获取 输出流 输入流
-        commandLine();
-
-    }
-
-    /**
-     * 命令行 客户端
-     */
-    public static void commandLine() {
-        try {
-            connect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        while (true) {
-            try {
-                // 获取系统用户录入命令
-                log.info("等待用户录入");
-                Scanner scanner = new Scanner(System.in);
-                String command = scanner.nextLine();
-                flow(command);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void commandTest() {
-        try {
-            List<String> command_String = Arrays.asList(
-                    "ping",
-                    "keys *",
-                    "EXISTS k",
-                    "EXISTS c",
-                    "get k"
-            );
-
-            List<String> command_Hash = Arrays.asList(
-                    "HMSET runoobkeyset name 'redis-tutorial' description 'redis-basic-commands-for-caching' likes 20 visitors 23000",
-                    "HGETALL runoobkeyset"
-            );
-
-            List<String> command_List = Arrays.asList(
-                    "LPUSH runoobkey redis",
-                    "LPUSH runoobkey mongodb",
-                    "LPUSH runoobkey mysql",
-                    "LRANGE runoobkey 0 10",
-                    "LINDEX runoobkey 3"
-            );
-
-            List<String> command_Set = Arrays.asList(
-                    "SADD runoobkey_set redis",
-                    "SADD runoobkey_set mongodb",
-                    "SADD runoobkey_set mysql",
-                    "SADD runoobkey_set mysql",
-                    "SMEMBERS runoobkey_set"
-            );
-
-            List<String> command_Sorted_Set = Arrays.asList(
-                    "ZADD runoobkey_sorted_set 1 redis",
-                    "ZADD runoobkey_sorted_set 2 mongodb",
-                    "ZADD runoobkey_sorted_set 3 mysql",
-                    "ZADD runoobkey_sorted_set 3 mysql",
-                    "ZADD runoobkey_sorted_set 4 mysql",
-                    "ZRANGE runoobkey_sorted_set 0 10 WITHSCORES"
-            );
-
-            connect();
-
-            List<String> auth_06 = Arrays.asList(
-                    "auth ruoyi123"
-            );
-
-            // 认证
-            auth_06.forEach(command -> {
-                flow(command);
-                log.info("认证成功");
-            });
-
-            // ZADD命令的返回值仅表示是否添加了新成员，而不是分数是否被更新。如果成员已存在且分数被更新，返回值仍然是0
-            List<String> commandList = Arrays.asList(
-                    "keys *"
-            );
-            commandList.forEach(command -> {
-                flow(command);
-                log.info("-----------------");
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static Socket socket = null;
     private static PrintWriter writer = null;
@@ -123,11 +27,18 @@ public class RedisClientSocket {
 
     public static void connect() throws IOException {
         // 1. 建立连接
-        socket = new Socket("192.168.0.6", ConstantRedis.PORT);
+        socket = new Socket(ConstantRedis.HOST, ConstantRedis.PORT);
         // 2. 输入输出流
         writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
         log.info("[连接成功]");
+    }
+
+    public static void flow(List<String> commandList) {
+        commandList.forEach(command -> {
+            RedisClientSocket.flow(command);
+            log.info("-----------------");
+        });
     }
 
     /**
