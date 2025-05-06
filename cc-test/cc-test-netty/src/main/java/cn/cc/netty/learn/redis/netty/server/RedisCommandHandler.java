@@ -26,15 +26,24 @@ public class RedisCommandHandler extends SimpleChannelInboundHandler<RedisComman
             } else {
                 ctx.writeAndFlush(new IntegerReply(0));
             }
-        }
-        else if (msg.getName().equalsIgnoreCase("get")) {
+        } else if (msg.getName().equalsIgnoreCase("get")) {
             byte[] value = database.get(new String(msg.getArg1()));
             if (value != null && value.length > 0) {
                 ctx.writeAndFlush(new BulkReply(value));
             } else {
                 ctx.writeAndFlush(BulkReply.NIL_REPLY);
             }
-        }else {
+        } else if (msg.getName().equalsIgnoreCase("auth")) {
+            String pas = new String(msg.getArg1());
+            log.info("密码：" + pas);
+            if ("cc".equals(pas)) {
+                log.info("密码正确");
+                ctx.writeAndFlush(new IntegerReply(1));
+            } else {
+                log.info("密码错误");
+                ctx.writeAndFlush(new IntegerReply(0));
+            }
+        } else {
             log.info("连接操作");
             ctx.writeAndFlush(new IntegerReply(1));
         }

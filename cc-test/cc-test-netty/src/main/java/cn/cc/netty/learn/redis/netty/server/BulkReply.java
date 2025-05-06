@@ -5,6 +5,9 @@ import io.netty.buffer.ByteBuf;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * 写出 字符串类型 信息
+ */
 public class BulkReply implements RedisReply<byte[]> {
 
     public static final BulkReply NIL_REPLY = new BulkReply();

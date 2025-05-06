@@ -41,6 +41,7 @@ public class RedisCommandDecoder extends ReplayingDecoder<Void> {
         System.out.println("RedisCommandDecoder NumOfArgs: " + numOfArgs);
         cmds = new byte[numOfArgs][];
 
+        // todo 看看这段解析
         checkpoint();
     }
 
@@ -97,9 +98,14 @@ public class RedisCommandDecoder extends ReplayingDecoder<Void> {
     }
 
     private int readInt(ByteBuf in) {
+        // 假设输入的是字符串 "123\r\n"
         int integer = 0;
         char c;
+        // c: 是从输入缓冲区读取的一个字符（如 '1', '2', '3' 等）。
+        // '0': 是字符 '0' 的 ASCII 值（即 48），用于将字符数字转为真正的整数值。
+        // c - '0': 将字符 '0' 到 '9' 转换为整数 0 到 9。
         while ((c = (char) in.readByte()) != '\r') {
+            // 实现多位数字的拼接。比如：
             integer = (integer * 10) + (c - '0');
         }
 

@@ -2,6 +2,9 @@ package cn.cc.netty.learn.redis.netty.server;
 
 import java.util.Arrays;
 
+/**
+ * 解析参数对象
+ */
 public class RedisCommand {
 
     /** Command name */

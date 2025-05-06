@@ -4,6 +4,9 @@ import io.netty.buffer.ByteBuf;
 
 import java.io.IOException;
 
+/**
+ * 写出 数值类型 信息
+ */
 public class IntegerReply implements RedisReply<Integer> {
 
     private static final char MARKER = ':';
