@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 
 /**
- * 执行Command中的命令。
+ * 2. 执行Command中的命令。
  */
 @Slf4j
 @ChannelHandler.Sharable

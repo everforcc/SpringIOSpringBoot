@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
- * 将响应写入到输出流中，返回给客户端。
+ * 3. 将响应写入到输出流中，返回给客户端。
  */
 public class RedisReplyEncoder extends MessageToByteEncoder<RedisReply> {
 

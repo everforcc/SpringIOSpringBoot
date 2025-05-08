@@ -1,6 +1,6 @@
 param:
   server:
-    port: 8021
+    port: 8073
   mysql:
     ip: 8.146.199.165
     port: 3308
@@ -8,7 +8,6 @@ param:
     pas: 5664c.c.
 server:
   port: ${param.server.port}
-
 spring:
   datasource:
     username: ${param.mysql.un}
@@ -39,9 +38,9 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
       useGlobalDataSourceStat: true
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-mybatis-plus:
+mybatis:
   # 指定全局配置文件位置  便于管理和扫描 config-location 和 configuration不能同时使用
-  type-aliases-package: cn.cc.**.dto
+  type-aliases-package: cn.cc.**.mapper
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

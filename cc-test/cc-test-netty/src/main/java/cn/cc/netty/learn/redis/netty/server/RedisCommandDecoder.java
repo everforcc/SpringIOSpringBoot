@@ -7,7 +7,9 @@ import io.netty.handler.codec.ReplayingDecoder;
 import java.util.List;
 
 /**
- * 解析Redis协议，将字节数组转为Command对象。
+ * 1. 解析Redis协议，将字节数组转为Command对象。
+ *
+ * todo ReplayingDecoder
  */
 public class RedisCommandDecoder extends ReplayingDecoder<Void> {
 
@@ -20,15 +22,19 @@ public class RedisCommandDecoder extends ReplayingDecoder<Void> {
     /** Decode in block-io style, rather than nio. */
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+        System.out.println("执行了一次方法");
         if (cmds == null) {
             if (in.readByte() == '*') {
+                // 先取出来的命令数量
                 doDecodeNumOfArgs(in);
             }
         } else {
+            // 解析具体的命令参数
             doDecodeArgs(in);
         }
 
         if (isComplete()) {
+            // 设置到参数里面
             doSendCmdToHandler(out);
             doCleanUp();
         }
@@ -79,6 +85,7 @@ public class RedisCommandDecoder extends ReplayingDecoder<Void> {
 
     /** Send decoded command to next handler */
     private void doSendCmdToHandler(List<Object> out) {
+        out.add(new RedisCommand("test"));
         System.out.println("RedisCommandDecoder: Send command to next handler");
         if (cmds.length == 1) {
             out.add(new RedisCommand(new String(cmds[0])));
