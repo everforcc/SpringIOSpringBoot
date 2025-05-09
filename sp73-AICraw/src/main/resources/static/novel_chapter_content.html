@@ -9,17 +9,57 @@
     <title>小说章节内容</title>
     <style>
         #chapter-content {
-            white-space: pre-wrap;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+            white-space: pre-wrap; /* 保留换行和空格 */
+            font-family: 'Georgia', serif; /* 使用更易读的字体 */
+            color: #333; /* 设置文字颜色 */
+        }
+        .btn {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        /* 新增样式 */
+        .floating-buttons {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .floating-buttons .btn {
+            margin-bottom: 0; /* 去除按钮之间的空隙 */
+            background-color: #f0f0f0; /* 浅灰色背景 */
+            color: #333; /* 文字颜色 */
+            width: 100px; /* 统一按钮宽度 */
+            border: none; /* 去除边框 */
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <p id="chapter-content"></p>
-        <a id="prev-chapter" href="#" class="btn btn-primary">上一章</a>
-        <a id="next-chapter" href="#" class="btn btn-primary">下一章</a>
-        <a href="#" id="table-of-contents-chapter" class="btn btn-primary">目录</a>
-        <a href="#" id="bookshelf" class="btn btn-primary">书架</a>
+        <!-- 将按钮移动到悬浮容器中 -->
+        <div class="floating-buttons">
+            <a href="#" id="bookshelf" class="btn btn-primary">书架</a>
+            <a id="prev-chapter" href="#" class="btn btn-primary">上一章</a>
+            <a href="#" id="table-of-contents-chapter" class="btn btn-primary">目录</a>
+            <a id="next-chapter" href="#" class="btn btn-primary">下一章</a>
+            <a href="#" id="to-top" class="btn btn-primary">到顶部</a>
+            <a href="#" id="to-bottom" class="btn btn-primary">到底部</a>
+        </div>
     </div>
     <script>
         $(document).ready(function() {
@@ -62,7 +102,15 @@
             $('#bookshelf').on('click', function() {
                 window.location.href = 'bookshelf_list.html?bookId=${bookId}';
             });
+
+            $('#to-top').on('click', function() {
+                $('html, body').animate({ scrollTop: 0 }, 'smooth');
+            });
+
+            $('#to-bottom').on('click', function() {
+                $('html, body').animate({ scrollTop: $(document).height() }, 'smooth');
+            });
         });
     </script>
 </body>
-</html>    
+</html>
