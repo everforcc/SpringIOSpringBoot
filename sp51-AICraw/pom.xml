@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.cc</groupId>
-    <artifactId>sp73-AICraw</artifactId>
+    <artifactId>sp51-AICraw</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sp73-AICraw</name>
-    <description>sp73-AICraw</description>
+    <name>sp51-AICraw</name>
+    <description>sp51-AICraw</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,7 +72,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>cn.cc.Sp73AiCrawApplication</mainClass>
+                    <mainClass>cn.cc.Sp51AiCrawApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
