@@ -1,6 +1,6 @@
 param:
   server:
-    port: 8073
+    port: 8051
   mysql:
     ip: 8.146.199.165
     port: 3308
