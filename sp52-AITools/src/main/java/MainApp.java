@@ -22,6 +22,9 @@ public class MainApp {
             frame.setSize(800, 600);
             frame.setLocationRelativeTo(null);
 
+            // 设置任务栏图标
+            IconSetter.setIcon(frame);
+
             // 创建主面板
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
