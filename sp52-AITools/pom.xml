@@ -50,7 +50,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Launcher</mainClass>
+                            <mainClass>cn.cc.Launcher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

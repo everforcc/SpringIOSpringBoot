@@ -1,3 +1,5 @@
+package cn.cc.app;
+
 public class GameConfig {
     // 调整贪吃蛇的大小
     public static final int SNAKE_SIZE = 5; // 从10调整为5

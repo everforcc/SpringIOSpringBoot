@@ -1,3 +1,5 @@
+package cn.cc.app;
+
 public class SnakeGame {
     private int snakeSize = GameConfig.SNAKE_SIZE;
     private int foodSize = GameConfig.FOOD_SIZE;

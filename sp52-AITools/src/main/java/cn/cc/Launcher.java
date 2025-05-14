@@ -1,3 +1,6 @@
+package cn.cc;
+import cn.cc.app.MainApp;
+
 /**
  * 应用程序启动入口类（补充说明）
  * 设计模式：门面模式(Facade Pattern)的轻量级实现

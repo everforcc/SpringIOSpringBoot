@@ -1,3 +1,5 @@
+package cn.cc.app;
+
 import javax.swing.*;
 
 import com.alibaba.fastjson.JSON;
