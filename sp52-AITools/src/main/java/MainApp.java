@@ -17,7 +17,7 @@ public class MainApp {
         }
 
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Swing 应用程序");
+            JFrame frame = new JFrame("AI生成的工具");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(800, 600);
             frame.setLocationRelativeTo(null);
@@ -61,6 +61,7 @@ public class MainApp {
             tabbedPane.addTab("首页", new HomePanel());
             tabbedPane.addTab("功能列表", new FunctionPanel());
             tabbedPane.addTab("书架", new BookShelfPanel());  // 新增书架标签页
+            tabbedPane.addTab("贪吃蛇", new SnakeGamePanel()); // 新增游戏标签页（位置前移）
             tabbedPane.addTab("帮助", new HelpPanel());
             tabbedPane.addTab("退出", new ExitPanel());
 
