@@ -1,0 +1,13 @@
+
+spring:
+  application:
+    name: mqtt-provider
+  mqtt:
+    url: tcp://broker.emqx.io:1883
+    username: c.c.
+    password: rootcccc
+    client:
+      id: ${spring.application.name}
+    default:
+      topic: topic
+

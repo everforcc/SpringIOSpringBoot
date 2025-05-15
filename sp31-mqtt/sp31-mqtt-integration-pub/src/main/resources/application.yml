@@ -1,15 +1,6 @@
 server:
   port: 8031
-
 spring:
-  application:
-    name: mqtt-provider
-  mqtt:
-    url: tcp://8.146.199.165:1883
-    username: c.c.
-    password: rootcccc
-    client:
-      id: ${spring.application.name}
-    default:
-      topic: topic
+  profiles:
+    active: free
 

@@ -1,3 +1,6 @@
 ##
 server:
   port: 8032
+spring:
+  profiles:
+    active: free

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class})
-@PropertySource(encoding = "UTF-8", value = {"classpath:config/mqtt.properties"})
+@PropertySource(encoding = "UTF-8", value = {"classpath:config/mqtt-free.properties"})
 public class Sp32MqttSpringApplication {
 
     public static void main(String[] args) {

@@ -71,7 +71,7 @@ public class MqttProviderConfig {
     public void publish(int qos,boolean retained,String topic,String message){
         MqttMessage mqttMessage = new MqttMessage();
         mqttMessage.setQos(qos);
-        mqttMessage.setRetained(retained);
+        mqttMessage.setRetained(retained);// true表示消息会被保留，eg: 断电重连
         mqttMessage.setPayload(message.getBytes());
         //主题的目的地，用于发布/订阅信息
         MqttTopic mqttTopic = client.getTopic(topic);
