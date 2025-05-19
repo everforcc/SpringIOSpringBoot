@@ -5,6 +5,11 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *    sign_user_info.put("name","冯双双");
+ *         sign_user_info.put("cert_no","411081198610079089");
+ *         sign_user_info.put("mobile_no","15936318171");
+ */
 @Data
 public class HuiFuMerchantIndv {
 
