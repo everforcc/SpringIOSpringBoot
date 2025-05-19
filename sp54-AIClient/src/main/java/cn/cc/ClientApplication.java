@@ -26,9 +26,25 @@ public class ClientApplication {
             // 设置FlatLaf深色主题
             try {
                 FlatDarkLaf.setup();
-                UIManager.put("Button.arc", 8); // 设置按钮圆角
-                UIManager.put("Component.arc", 8); // 设置组件圆角
-                UIManager.put("TextComponent.arc", 8); // 设置文本框圆角
+                UIManager.put("Button.arc", 10); // 设置按钮圆角
+                UIManager.put("Component.arc", 10); // 设置组件圆角
+                UIManager.put("TextComponent.arc", 10); // 设置文本框圆角
+                
+                // 添加更多美化设置
+                UIManager.put("Button.margin", new Insets(8, 14, 8, 14)); // 按钮内边距
+                UIManager.put("TabbedPane.showTabSeparators", true); // 显示选项卡分隔符
+                UIManager.put("ScrollBar.width", 12); // 滚动条宽度
+                UIManager.put("ScrollBar.thumbArc", 999); // 滚动条滑块圆角
+                UIManager.put("ScrollBar.thumbInsets", new Insets(2, 2, 2, 2)); // 滚动条滑块内边距
+                UIManager.put("TextField.margin", new Insets(6, 6, 6, 6)); // 文本框内边距
+                
+                // 设置字体
+                Font defaultFont = new Font("微软雅黑", Font.PLAIN, 14);
+                UIManager.put("Button.font", defaultFont);
+                UIManager.put("Label.font", defaultFont);
+                UIManager.put("TextField.font", defaultFont);
+                UIManager.put("TextArea.font", defaultFont);
+                UIManager.put("List.font", defaultFont);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -67,19 +83,33 @@ public class ClientApplication {
                                         loginFrame.dispose();
                                         mainFrame = new MainFrame();
                                         mainFrame.setVisible(true);
+                                        mainFrame.setCurrentUser(currentUser); // 设置当前用户
+                                        
                                         // 拉取好友列表
                                         Message friendReq = new Message();
                                         friendReq.setType("friendList");
                                         friendReq.setFrom(currentUser);
                                         nettyClient.send(com.alibaba.fastjson2.JSON.toJSONString(friendReq));
+                                        
                                         // 绑定聊天发送事件
                                         mainFrame.getSendButton().addActionListener(ev -> sendChatMsg());
+                                        
+                                        // 让回车键发送消息
+                                        mainFrame.getInputField().addActionListener(ev -> sendChatMsg());
+                                        
                                         mainFrame.getFriendList().addListSelectionListener(ev -> {
                                             if (!ev.getValueIsAdjusting()) {
-                                                currentChatFriend = mainFrame.getFriendList().getSelectedValue();
-                                                mainFrame.getChatArea().setText("");
+                                                String selectedFriend = mainFrame.getFriendList().getSelectedValue();
+                                                if (selectedFriend != null && !selectedFriend.equals(currentChatFriend)) {
+                                                    currentChatFriend = selectedFriend;
+                                                    // 清空聊天区域
+                                                    mainFrame.getMessagePanel().removeAll();
+                                                    mainFrame.getMessagePanel().revalidate();
+                                                    mainFrame.getMessagePanel().repaint();
+                                                }
                                             }
                                         });
+                                        
                                         // 绑定添加好友事件
                                         mainFrame.getAddFriendButton().addActionListener(ev -> {
                                             String friendAccount = JOptionPane.showInputDialog(mainFrame, "请输入要添加的好友账号：");
@@ -112,7 +142,8 @@ public class ClientApplication {
                                 // 展示聊天消息
                                 if (message.getFrom() != null && message.getFrom().equals(currentChatFriend)) {
                                     SwingUtilities.invokeLater(() -> {
-                                        mainFrame.getChatArea().append(message.getFrom() + ": " + message.getContent() + "\n");
+                                        // 使用新的addMessage方法显示消息
+                                        mainFrame.addMessage(message.getFrom(), message.getContent(), false);
                                     });
                                 }
                             } else if (message != null && "addFriendResp".equals(message.getType())) {
@@ -154,6 +185,7 @@ public class ClientApplication {
                 }
             }
         }).start();
+        
         if (mainFrame == null || currentChatFriend == null) {
             return;
         }
@@ -168,7 +200,11 @@ public class ClientApplication {
         chatMsg.setContent(text);
         chatMsg.setTime(System.currentTimeMillis());
         nettyClient.send(com.alibaba.fastjson2.JSON.toJSONString(chatMsg));
-        mainFrame.getChatArea().append(currentUser + ": " + text + "\n");
+        
+        // 使用新的addMessage方法显示自己的消息
+        mainFrame.addMessage(currentUser, text, true);
+        
+        // 清空输入框
         mainFrame.getInputField().setText("");
     }
 }
