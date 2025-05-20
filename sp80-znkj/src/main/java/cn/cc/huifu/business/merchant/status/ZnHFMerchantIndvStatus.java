@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * 商户业务开通
+ * @see <a href="https://paas.huifu.com/open/doc/api/#/shgl/shjj/api_shjj_sqdztcx">申请单状态查询</a>
+ *
  * https://api.huifu.com/v2/merchant/basicdata/status/query
  */
 public class ZnHFMerchantIndvStatus {
@@ -22,7 +23,9 @@ public class ZnHFMerchantIndvStatus {
 
 
         Map<String,Object> map = new HashMap<String,Object>();
+        // 协议信息
         Map<String,Object> agreement_info = new HashMap<String,Object>();
+        // 签约人
         Map<String,Object> sign_user_info = new HashMap<String,Object>();
         map.put("req_seq_id",new Random().nextLong() % 1000000000000000000L + 1000000000000000000L + "");
         map.put("req_date",new SimpleDateFormat("yyyyMMdd").format(new Date()));
@@ -48,15 +51,11 @@ public class ZnHFMerchantIndvStatus {
             System.err.println("---");
             System.err.println("初始化报错: " + e.getMessage());
         }
-//        Map<String, Object> paramsInfo = new HashMap<>();
-
-
-
 
         // 3. 发起API调用
         Map<String, Object> response = null;
         try {
-            response = BasePayRequest.requestBasePay("v2/merchant/busi/open", map, null, false);
+            response = BasePayRequest.requestBasePay("v2/merchant/basicdata/status/query", map, null, false);
         } catch (BasePayException e) {
             System.err.println("---");
             e.printStackTrace();

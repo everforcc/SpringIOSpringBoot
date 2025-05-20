@@ -1,4 +1,4 @@
-package cn.cc.huifu.business.merchant.modify;
+package cn.cc.huifu.business.merchant.open.modify;
 
 
 import cn.cc.huifu.config.PayConfig;

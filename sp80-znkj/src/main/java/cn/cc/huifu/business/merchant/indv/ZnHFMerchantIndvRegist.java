@@ -1,6 +1,7 @@
 package cn.cc.huifu.business.merchant.indv;
 
 
+import cn.cc.huifu.business.merchant.indv.dto.HuiFuMerchantIndv;
 import cn.cc.huifu.config.PayConfig;
 import com.huifu.bspay.sdk.opps.core.BasePay;
 import com.huifu.bspay.sdk.opps.core.exception.BasePayException;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * 个人商户进件
+ * @see <a href="https://paas.huifu.com/open/doc/api/#/shgl/shjj/api_shjj_grshjbxxrz_kyc">个人商户进件</a>
  * https://api.huifu.com/v2/merchant/basicdata/indv
  */
 public class ZnHFMerchantIndvRegist {
@@ -44,16 +45,16 @@ public class ZnHFMerchantIndvRegist {
 //        huiFuMerchantIndv.setOccupation();
         huiFuMerchantIndv.setContactMobileNo("15936318171");
         huiFuMerchantIndv.setContactEmail("2232806676@qq.com");
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("card_name","冯双双");
-        map.put("card_no","6230522050043262873");
-        map.put("area_id","411000");
-        map.put("cert_type","00");
-        map.put("cert_no","411081198610079089");
-        map.put("cert_validity_type","0");
-        map.put("cert_begin_date","20151214");
-        map.put("cert_end_date","20351214");
-        map.put("mp","15936318171");
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("card_name", "冯双双");
+        map.put("card_no", "6230522050043262873");
+        map.put("area_id", "411000");
+        map.put("cert_type", "00");
+        map.put("cert_no", "411081198610079089");
+        map.put("cert_validity_type", "0");
+        map.put("cert_begin_date", "20151214");
+        map.put("cert_end_date", "20351214");
+        map.put("mp", "15936318171");
         huiFuMerchantIndv.setCardInfo(map);
         // 结算卡正面
         huiFuMerchantIndv.setSettleCardFrontPic("8d88f358-a753-3670-b0a9-65f7b7a54dce");
@@ -67,7 +68,7 @@ public class ZnHFMerchantIndvRegist {
         refundFlow(huiFuMerchantIndv.toMap());
     }
 
-    public static Map<String, Object> refundFlow(Map<String,Object> map) {
+    public static Map<String, Object> refundFlow(Map<String, Object> map) {
         try {
             BasePay.initWithMerConfig(PayConfig.getMerchantConfig());
         } catch (Exception e) {
@@ -77,8 +78,6 @@ public class ZnHFMerchantIndvRegist {
             System.err.println("初始化报错: " + e.getMessage());
         }
 //        Map<String, Object> paramsInfo = new HashMap<>();
-
-
 
 
         // 3. 发起API调用

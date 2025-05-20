@@ -1,4 +1,4 @@
-package cn.cc.huifu.business.merchant.indv;
+package cn.cc.huifu.business.merchant.indv.dto;
 
 import lombok.Data;
 
@@ -16,6 +16,7 @@ public class HuiFuMerchantIndv {
     private String reqSeqId;
     private String reqDate;
     private String upperHuifuId;
+    private String huifuId;
     private String regName;
     private String shortName;
     private String mcc;
@@ -59,6 +60,7 @@ public class HuiFuMerchantIndv {
         map.put("req_seq_id", reqSeqId);
         map.put("req_date", reqDate);
         map.put("upper_huifu_id", upperHuifuId);
+        map.put("huifu_id", huifuId);
         map.put("reg_name", regName);
         map.put("short_name", shortName);
         map.put("mcc", mcc);
