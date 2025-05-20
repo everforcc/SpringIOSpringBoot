@@ -1,4 +1,4 @@
-package cn.cc.huifu.regist;
+package cn.cc.huifu.business.merchant.indv;
 
 import lombok.Data;
 

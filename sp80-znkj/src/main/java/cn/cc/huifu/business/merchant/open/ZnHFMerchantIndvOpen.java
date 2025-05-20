@@ -1,8 +1,7 @@
-package cn.cc.huifu.open;
+package cn.cc.huifu.business.merchant.open;
 
 
 import cn.cc.huifu.config.PayConfig;
-import cn.cc.huifu.regist.HuiFuMerchantIndv;
 import com.huifu.bspay.sdk.opps.core.BasePay;
 import com.huifu.bspay.sdk.opps.core.exception.BasePayException;
 import com.huifu.bspay.sdk.opps.core.net.BasePayRequest;

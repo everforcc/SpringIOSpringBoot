@@ -1,4 +1,4 @@
-package cn.cc.huifu.open;
+package cn.cc.huifu.business.merchant.modify;
 
 
 import cn.cc.huifu.config.PayConfig;
@@ -33,22 +33,34 @@ public class ZnHFMerchantIndvModify {
         // 2.5‰ 0.25%
         // {"resp_desc":"线下支付宝反扫支付费率不能低于渠道商/上级商户费率底价MAX(0.01,AMT*0.0025)","req_seq_id":"1067060048050371940","product_id":"PAYUN","req_date":"20250519","resp_code":"99999999","huifu_id":"6666000168410819"}
         // {"resp_desc":"线下支付宝反扫支付费率不能低于渠道商/上级商户费率底价MAX(0.01,AMT*0.0065)","req_seq_id":"1067060048050371940","product_id":"PAYUN","req_date":"20250519","resp_code":"99999999","huifu_id":"6666000168410819"}
-        JSONArray ali_conf_list = new JSONArray();
-        Map<String,Object> ali_conf1 = new HashMap<String,Object>();
-        ali_conf1.put("pay_scene","1");//
-        ali_conf1.put("fee_rate","0.25");
-        ali_conf1.put("switch_state","1");
-        ali_conf1.put("fee_min_amt","0.01");
-        Map<String,Object> ali_conf2 = new HashMap<String,Object>();
-        ali_conf2.put("pay_scene","2");
-        //
-        ali_conf2.put("fee_rate","0.65");
-        ali_conf2.put("switch_state","1");
-        ali_conf2.put("fee_min_amt","0.01");
-        ali_conf_list.add(ali_conf1);
-        ali_conf_list.add(ali_conf2);
-        map.put("ali_conf_list", ali_conf_list.toString());
 //        JSONArray ali_conf_list = new JSONArray();
+//        Map<String,Object> ali_conf1 = new HashMap<String,Object>();
+//        ali_conf1.put("pay_scene","1");//
+//        ali_conf1.put("fee_rate","0.25");
+//        ali_conf1.put("switch_state","1");
+//        ali_conf1.put("fee_min_amt","0.01");
+//        Map<String,Object> ali_conf2 = new HashMap<String,Object>();
+//        ali_conf2.put("pay_scene","2");
+//        //
+//        ali_conf2.put("fee_rate","0.65");
+//        ali_conf2.put("switch_state","1");
+//        ali_conf2.put("fee_min_amt","0.01");
+//        ali_conf_list.add(ali_conf1);
+//        ali_conf_list.add(ali_conf2);
+//        map.put("ali_conf_list", ali_conf_list.toString());
+//        JSONArray ali_conf_list = new JSONArray();
+
+        JSONArray wx_conf_list = new JSONArray();
+        Map<String,Object> wx_conf1 = new HashMap<String,Object>();
+        wx_conf1.put("pay_scene","1");
+        wx_conf1.put("fee_rate","0.25");
+        wx_conf1.put("switch_state","1");
+        wx_conf1.put("fee_min_amt","0.01");
+        wx_conf_list.add(wx_conf1);
+//        Map<String,Object> wx_conf2 = new HashMap<String,Object>();
+
+        map.put("wx_conf_list", wx_conf_list.toString());
+
 
         Map<String,Object> agreement_info = new HashMap<String,Object>();
         agreement_info.put("agreement_type","0");

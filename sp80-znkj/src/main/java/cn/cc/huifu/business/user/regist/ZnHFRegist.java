@@ -1,4 +1,4 @@
-package cn.cc.huifu.regist;
+package cn.cc.huifu.business.user.regist;
 
 
 import cn.cc.huifu.config.PayConfig;

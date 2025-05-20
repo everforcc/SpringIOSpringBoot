@@ -1,4 +1,4 @@
-package cn.cc.huifu.regist;
+package cn.cc.huifu.business.file;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
