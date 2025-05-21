@@ -23,22 +23,12 @@ public class ZnHFMerchantIndvStatus {
 
 
         Map<String,Object> map = new HashMap<String,Object>();
-        // 协议信息
-        Map<String,Object> agreement_info = new HashMap<String,Object>();
-        // 签约人
-        Map<String,Object> sign_user_info = new HashMap<String,Object>();
+
         map.put("req_seq_id",new Random().nextLong() % 1000000000000000000L + 1000000000000000000L + "");
         map.put("req_date",new SimpleDateFormat("yyyyMMdd").format(new Date()));
         map.put("huifu_id","6666000168410819");
         map.put("upper_huifu_id","6666000151772004");
-        agreement_info.put("agreement_type","0");
-//        agreement_info.put("message_send_type","");
-        map.put("agreement_info", agreement_info);
-        sign_user_info.put("type","LEGAL");
-        sign_user_info.put("name","冯双双");
-        sign_user_info.put("cert_no","411081198610079089");
-        sign_user_info.put("mobile_no","15936318171");
-        map.put("sign_user_info", sign_user_info);
+
         refundFlow(map);
     }
 

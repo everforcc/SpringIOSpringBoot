@@ -27,6 +27,8 @@ public class ZnHFMerchantIndvQuery {
         map.put("huifu_id","6666000168410819");
 //        map.put("upper_huifu_id","6666000151772004");
         refundFlow(map);
+        // 结算配置
+        // qry_settle_config_list
     }
 
     public static Map<String, Object> refundFlow(Map<String,Object> map) {
