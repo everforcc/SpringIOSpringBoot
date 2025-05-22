@@ -9,7 +9,7 @@ public class AirConditioner {
     // 压缩机转速
     private String compressorSpeed;
     // 压力传感器值
-    private String pressureSensorValue;
+    private String pressureSensor;
     // 冷凝器风扇速度
     private String condenserFanSpeed;
     // 冷凝器进口湿度

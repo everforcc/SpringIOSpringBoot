@@ -4,6 +4,9 @@ package cn.cc.sap;
 import lombok.Data;
 
 /**
+ * 
+security and protection
+
  * 声光报警器类，用于管理声光报警器的状态和信息。
  */
 @Data
