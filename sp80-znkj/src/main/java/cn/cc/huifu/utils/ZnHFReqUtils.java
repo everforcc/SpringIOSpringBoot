@@ -2,6 +2,7 @@ package cn.cc.huifu.utils;
 
 
 import cn.cc.huifu.config.PayConfig;
+import cn.cc.huifu.constants.ZnHFReqParamsContants;
 import com.huifu.bspay.sdk.opps.core.BasePay;
 import com.huifu.bspay.sdk.opps.core.exception.BasePayException;
 import com.huifu.bspay.sdk.opps.core.net.BasePayRequest;
@@ -25,9 +26,8 @@ public class ZnHFReqUtils {
         }
 
         // 公共字段
-        map.put("req_seq_id", new Random().nextLong() % 1000000000000000000L + 1000000000000000000L + "");
-        map.put("req_date", new SimpleDateFormat("yyyyMMdd").format(new Date()));
-
+        map.put("req_seq_id", ZnHFReqParamsContants.REQ_SEQ_ID);
+        map.put("req_date", ZnHFReqParamsContants.REQ_DATE);
 
         // 3. 发起API调用
         Map<String, Object> response = null;

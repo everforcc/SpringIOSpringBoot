@@ -1,17 +1,14 @@
 package cn.cc.huifu.business.merchant.indv.modify;
 
 
-import cn.cc.huifu.business.merchant.indv.dto.HuiFuMerchantIndv;
+import cn.cc.huifu.business.merchant.indv.dto.HuiFuMerchantIndvDto;
 import cn.cc.huifu.config.PayConfig;
 import com.huifu.bspay.sdk.opps.core.BasePay;
 import com.huifu.bspay.sdk.opps.core.exception.BasePayException;
 import com.huifu.bspay.sdk.opps.core.net.BasePayRequest;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * @see <a href="https://paas.huifu.com/open/doc/api/#/shgl/shjj/api_shjj_shjbxxxg_kyc">商户基本信息修改</a>
@@ -22,22 +19,21 @@ public class ZnHFMerchantIndvModify {
 
     public static void main(String[] args) {
 
-        HuiFuMerchantIndv huiFuMerchantIndv = new HuiFuMerchantIndv();
-        huiFuMerchantIndv.setReqSeqId(new Random().nextLong() % 1000000000000000000L + 1000000000000000000L + "");
-        huiFuMerchantIndv.setReqDate(new SimpleDateFormat("yyyyMMdd").format(new Date()));
-        huiFuMerchantIndv.setUpperHuifuId("6666000151772004");
-        huiFuMerchantIndv.setHuifuId("6666000168410819");
+        HuiFuMerchantIndvDto huiFuMerchantIndvDto = new HuiFuMerchantIndvDto();
+
+        huiFuMerchantIndvDto.setUpperHuifuId("6666000151772004");
+        huiFuMerchantIndvDto.setHuifuId("6666000168410819");
 
         // 结算信息
 
 //线下经营-门头照 F22
-        huiFuMerchantIndv.setStoreHeaderPic("68060757-03ef-3f60-9bdf-9d391811456b");
+        huiFuMerchantIndvDto.setStoreHeaderPic("68060757-03ef-3f60-9bdf-9d391811456b");
 //线下经营-内景照 F24
-        huiFuMerchantIndv.setStoreIndoorPic("8923b531-47e7-3d93-97b5-0cf60adc737e");
+        huiFuMerchantIndvDto.setStoreIndoorPic("8923b531-47e7-3d93-97b5-0cf60adc737e");
 //线下经营-收银台 F105
-        huiFuMerchantIndv.setStoreCashierDeskPic("30583964-ce18-34a6-aec2-24ac312287ba");
+        huiFuMerchantIndvDto.setStoreCashierDeskPic("30583964-ce18-34a6-aec2-24ac312287ba");
 
-        refundFlow(huiFuMerchantIndv.toMap());
+        refundFlow(huiFuMerchantIndvDto.toMap());
     }
 
     public static Map<String, Object> refundFlow(Map<String, Object> map) {
