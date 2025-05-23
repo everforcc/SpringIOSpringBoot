@@ -20,9 +20,12 @@ public class BracketChecker {
         brackets.put('}', '{');
 
         for (char c : s.toCharArray()) {
+            // 用于检查映射中是否存在特定的值
             if (brackets.containsValue(c)) { // 左括号入栈
                 stack.push(c);
+                // 检查Map集合对象中是否包含指定的键名
             } else if (brackets.containsKey(c)) { // 遇到右括号
+                // 该元素从堆栈顶部弹出，并从堆栈中移除。
                 if (stack.isEmpty() || stack.pop() != brackets.get(c)) {
                     return false;
                 }
