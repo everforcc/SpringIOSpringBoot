@@ -5,6 +5,8 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainFrame extends JFrame {
     private JList<String> friendList;
@@ -15,6 +17,8 @@ public class MainFrame extends JFrame {
     private JButton sendButton;
     private JButton addFriendButton;
     private String currentUser;
+    private JTextField searchField;
+    private Map<String, Boolean> onlineStatus = new HashMap<>();
 
     // 使用JPanel代替JTextArea来实现更复杂的聊天布局
     private JPanel messagePanel;
@@ -55,6 +59,9 @@ public class MainFrame extends JFrame {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                String friend = (String) value;
+                Boolean isOnline = onlineStatus.getOrDefault(friend, false);
+                label.setIcon(new ColorIcon(isOnline ? Color.GREEN : Color.GRAY, 8, 8));
                 label.setBorder(BorderFactory.createEmptyBorder(8, 10, 8, 10));
                 return label;
             }
@@ -77,15 +84,19 @@ public class MainFrame extends JFrame {
         chatPanel = new JPanel(new BorderLayout(0, 5));
         chatPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 10));
         
-        // 消息面板 - 使用垂直BoxLayout排列消息
+        // 消息面板
         messagePanel = new JPanel();
         messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
-        messagePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        messagePanel.setBorder(null);
         messagePanel.setBackground(Color.WHITE);
+        messagePanel.setOpaque(true);
         
         messageScrollPane = new JScrollPane(messagePanel);
         messageScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        messageScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         messageScrollPane.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+        messageScrollPane.setBackground(Color.WHITE);  // 设置滚动面板的背景色
+        messageScrollPane.getViewport().setBackground(Color.WHITE);  // 设置视口的背景色
         chatPanel.add(messageScrollPane, BorderLayout.CENTER);
         
         // 输入区域
@@ -120,78 +131,101 @@ public class MainFrame extends JFrame {
      * @param isSelf 是否是自己发送的
      */
     public void addMessage(String sender, String content, boolean isSelf) {
-        // 创建一条消息的面板
-        JPanel messageContainer = new JPanel();
-        messageContainer.setLayout(new BorderLayout());
+        // 创建一条消息的面板，使用BorderLayout来控制整体布局
+        JPanel messageContainer = new JPanel(new BorderLayout());
         messageContainer.setOpaque(false);
+        messageContainer.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));  // 移除所有边距
         
         // 创建消息气泡
-        JPanel bubblePanel = new JPanel();
-        bubblePanel.setLayout(new BorderLayout());
+        JPanel bubblePanel = new JPanel(new BorderLayout());
         
         // 根据是否自己发送设置不同的样式
         if (isSelf) {
-            messageContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            bubblePanel.setBackground(new Color(64, 128, 255)); // 蓝色背景
+            bubblePanel.setBackground(new Color(64, 128, 255));
             bubblePanel.setBorder(BorderFactory.createCompoundBorder(
                 new RoundedBorder(new Color(64, 128, 255), 15),
-                BorderFactory.createEmptyBorder(8, 15, 8, 15)
+                BorderFactory.createEmptyBorder(2, 8, 2, 8)
             ));
         } else {
-            messageContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
-            bubblePanel.setBackground(new Color(240, 240, 240)); // 灰色背景
+            bubblePanel.setBackground(new Color(240, 240, 240));
             bubblePanel.setBorder(BorderFactory.createCompoundBorder(
                 new RoundedBorder(new Color(240, 240, 240), 15),
-                BorderFactory.createEmptyBorder(8, 15, 8, 15)
+                BorderFactory.createEmptyBorder(2, 8, 2, 8)
             ));
         }
         
         // 消息文本
-        JLabel messageLabel = new JLabel("<html><body style='width: 250px'>" + content + "</body></html>");
+        JLabel messageLabel = new JLabel("<html><body style='width: 400px; word-wrap: break-word;'>" + content + "</body></html>");
         messageLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         messageLabel.setForeground(isSelf ? Color.WHITE : Color.BLACK);
         bubblePanel.add(messageLabel, BorderLayout.CENTER);
         
         // 添加时间戳
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        JLabel timeLabel = new JLabel(sdf.format(new Date()));
+        String currentTime = sdf.format(new Date());
+        
+        // 创建包含发送者名称和气泡的面板
+        // 创建包含发送者名称和气泡的面板
+        JPanel contentPanel = new JPanel(new BorderLayout(5, 0));  // 将垂直间距改为0
+        contentPanel.setOpaque(false);
+        
+        // 添加发送者名字和时间
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setOpaque(false);
+        
+        JLabel senderLabel = new JLabel(sender);
+        senderLabel.setFont(new Font("微软雅黑", Font.BOLD, 12));
+        JLabel timeLabel = new JLabel(currentTime);
         timeLabel.setFont(new Font("微软雅黑", Font.PLAIN, 10));
         timeLabel.setForeground(Color.GRAY);
         
-        // 创建包含发送者名称和气泡的面板
-        JPanel contentPanel = new JPanel(new BorderLayout(5, 3));
-        contentPanel.setOpaque(false);
-        
-        // 添加发送者名字
-        JLabel senderLabel = new JLabel(sender);
-        senderLabel.setFont(new Font("微软雅黑", Font.BOLD, 12));
+        // 创建一个包装面板来控制消息的对齐
+        JPanel wrapperPanel = new JPanel(new BorderLayout());
+        wrapperPanel.setOpaque(false);
         
         if (isSelf) {
-            contentPanel.add(timeLabel, BorderLayout.WEST);
-            contentPanel.add(bubblePanel, BorderLayout.EAST);
-            contentPanel.add(senderLabel, BorderLayout.NORTH);
+            headerPanel.add(timeLabel, BorderLayout.WEST);
+            headerPanel.add(senderLabel, BorderLayout.EAST);
+            contentPanel.add(headerPanel, BorderLayout.NORTH);
+            contentPanel.add(bubblePanel, BorderLayout.CENTER);
+            
+            // 使用额外的面板来实现右对齐，并设置最大宽度
+            JPanel rightAlignPanel = new JPanel() {
+                @Override
+                public Dimension getPreferredSize() {
+                    Dimension size = super.getPreferredSize();
+                    return new Dimension(messagePanel.getWidth() - 20, size.height);
+                }
+            };
+            rightAlignPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+            rightAlignPanel.setOpaque(false);
+            rightAlignPanel.add(contentPanel);
+            wrapperPanel.add(rightAlignPanel, BorderLayout.CENTER);
         } else {
-            contentPanel.add(timeLabel, BorderLayout.EAST);
-            contentPanel.add(bubblePanel, BorderLayout.WEST);
-            contentPanel.add(senderLabel, BorderLayout.NORTH);
+            headerPanel.add(senderLabel, BorderLayout.WEST);
+            headerPanel.add(timeLabel, BorderLayout.EAST);
+            contentPanel.add(headerPanel, BorderLayout.NORTH);
+            contentPanel.add(bubblePanel, BorderLayout.CENTER);
+            
+            // 使用额外的面板来实现左对齐
+            JPanel leftAlignPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+            leftAlignPanel.setOpaque(false);
+            leftAlignPanel.add(contentPanel);
+            wrapperPanel.add(leftAlignPanel, BorderLayout.CENTER);
         }
         
-        messageContainer.add(contentPanel);
+        messageContainer.add(wrapperPanel, BorderLayout.CENTER);
         
-        // 添加一些间距
-        messagePanel.add(Box.createVerticalStrut(10));
-        // 添加消息到面板
+        // 将消息添加到面板顶部
         messagePanel.add(messageContainer);
         
-        // 滚动到最新的消息
+        // 更新UI并滚动到底部
         SwingUtilities.invokeLater(() -> {
+            messagePanel.revalidate();
+            messagePanel.repaint();
             JScrollBar vertical = messageScrollPane.getVerticalScrollBar();
             vertical.setValue(vertical.getMaximum());
         });
-        
-        // 更新UI
-        messagePanel.revalidate();
-        messagePanel.repaint();
     }
     
     // 圆角边框内部类
@@ -230,4 +264,41 @@ public class MainFrame extends JFrame {
     // 替代原来的getChatArea方法
     public JPanel getMessagePanel() { return messagePanel; }
     public JScrollPane getMessageScrollPane() { return messageScrollPane; }
-} 
+    
+    public void setFriendOnlineStatus(String friend, boolean isOnline) {
+        onlineStatus.put(friend, isOnline);
+        friendList.repaint();
+    }
+    
+    // 添加消息撤回方法
+    public void withdrawMessage(String messageId) {
+        // 实现消息撤回逻辑
+    }
+    
+    // 内部类：颜色图标
+    private static class ColorIcon implements Icon {
+        private final Color color;
+        private final int width;
+        private final int height;
+        
+        public ColorIcon(Color color, int width, int height) {
+            this.color = color;
+            this.width = width;
+            this.height = height;
+        }
+        
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setColor(color);
+            g2d.fillOval(x, y, width, height);
+            g2d.dispose();
+        }
+        
+        @Override
+        public int getIconWidth() { return width; }
+        
+        @Override
+        public int getIconHeight() { return height; }
+    }
+}

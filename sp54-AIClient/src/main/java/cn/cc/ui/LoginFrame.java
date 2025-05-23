@@ -10,10 +10,12 @@ public class LoginFrame extends JFrame {
     private JTextField accountField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JCheckBox rememberPasswordBox;
+    private JLabel statusLabel;
 
     public LoginFrame() {
         setTitle("AI 聊天 - 登录");
-        setSize(400, 350);
+        setSize(400, 450); // 将高度从350增加到450
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -74,22 +76,37 @@ public class LoginFrame extends JFrame {
         formPanel.add(accountPanel);
         formPanel.add(passwordPanel);
         
+        // 添加记住密码选项
+        rememberPasswordBox = new JCheckBox("记住密码");
+        rememberPasswordBox.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        rememberPasswordBox.setForeground(new Color(150, 150, 150));
+        formPanel.add(rememberPasswordBox);
+        
+        // 添加状态提示标签
+        statusLabel = new JLabel("");
+        statusLabel.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        statusLabel.setForeground(new Color(150, 150, 150));
+        statusLabel.setHorizontalAlignment(JLabel.CENTER);
+        formPanel.add(Box.createVerticalStrut(10));
+        formPanel.add(statusLabel);
+        
         // 登录按钮
         loginButton = new JButton("登 录");
         loginButton.setFont(new Font("微软雅黑", Font.BOLD, 16));
         loginButton.setForeground(Color.WHITE);
-        loginButton.setBackground(new Color(64, 128, 255));
+        // 使用更柔和的颜色
+        loginButton.setBackground(new Color(75, 139, 190));
         loginButton.setFocusPainted(false);
         loginButton.setBorder(BorderFactory.createEmptyBorder(12, 0, 12, 0));
         loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        // 添加按钮悬停效果
+        // 添加按钮悬停效果 - 使用更柔和的过渡色
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                loginButton.setBackground(new Color(100, 150, 255));
+                loginButton.setBackground(new Color(95, 159, 210));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                loginButton.setBackground(new Color(64, 128, 255));
+                loginButton.setBackground(new Color(75, 139, 190));
             }
         });
         
@@ -120,4 +137,12 @@ public class LoginFrame extends JFrame {
     public JButton getLoginButton() {
         return loginButton;
     }
-} 
+    
+    public void setLoginStatus(String status) {
+        statusLabel.setText(status);
+    }
+    
+    public boolean isRememberPassword() {
+        return rememberPasswordBox.isSelected();
+    }
+}

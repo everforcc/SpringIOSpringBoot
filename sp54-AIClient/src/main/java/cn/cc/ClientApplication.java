@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Timer;        // Add this import
+import java.util.TimerTask;    // Add this import
 
 public class ClientApplication {
     private static NettyClient nettyClient;
@@ -19,6 +21,10 @@ public class ClientApplication {
     private static MainFrame mainFrame;
     private static List<String> friends = new ArrayList<>();
     private static String currentChatFriend = null;
+    private static final long HEARTBEAT_INTERVAL = 30000; // 30秒
+    private static Timer heartbeatTimer;
+    private static int reconnectAttempts = 0;
+    private static final int MAX_RECONNECT_ATTEMPTS = 5;
 
     public static void main(String[] args) {
         System.out.println("客户端启动...");
@@ -73,7 +79,7 @@ public class ClientApplication {
                 loginMsg.setContent(password);
                 new Thread(() -> {
                     try {
-                        nettyClient = new NettyClient("127.0.0.1", 8080, msg -> {
+                        nettyClient = new NettyClient("8.146.199.165", 9090, msg -> {
                             final Message message;
                             try { message = com.alibaba.fastjson2.JSON.parseObject(msg, Message.class); } catch (Exception ignore) { return; }
                             if (message != null && "loginResp".equals(message.getType())) {
@@ -166,25 +172,58 @@ public class ClientApplication {
                 }).start();
             });
         });
+        startHeartbeat();
     }
-
+    
+    private static void startHeartbeat() {
+        heartbeatTimer = new Timer();
+        heartbeatTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (nettyClient != null) {
+                    Message heartbeat = new Message();
+                    heartbeat.setType("heartbeat");
+                    heartbeat.setFrom(currentUser);
+                    heartbeat.setTime(System.currentTimeMillis());
+                    nettyClient.send(com.alibaba.fastjson2.JSON.toJSONString(heartbeat));
+                }
+            }
+        }, HEARTBEAT_INTERVAL, HEARTBEAT_INTERVAL);
+    }
+    
+    private static void reconnect() {
+        if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
+            reconnectAttempts++;
+            try {
+                Thread.sleep(1000 * reconnectAttempts); // 递增重连延迟
+                // 重新连接逻辑
+                // ... 实现重连逻辑 ...
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(mainFrame, "连接服务器失败，请检查网络后重试！");
+        }
+    }
+    
     private static void sendChatMsg() {
         // 新增消息发送动画效果
         Component sendBtn = mainFrame.getSendButton();
         sendBtn.setEnabled(false);
-        new Timer(100, new ActionListener() {
+        javax.swing.Timer animationTimer = new javax.swing.Timer(100, new ActionListener() {
             int count = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (count++ < 5) {
                     sendBtn.setBackground(count % 2 == 0 ? Color.GRAY : Color.DARK_GRAY);
                 } else {
-                    ((Timer)e.getSource()).stop();
+                    ((javax.swing.Timer)e.getSource()).stop();
                     sendBtn.setBackground(UIManager.getColor("Button.background"));
                     sendBtn.setEnabled(true);
                 }
             }
-        }).start();
+        });
+        animationTimer.start();  // 需要显式调用start()方法
         
         if (mainFrame == null || currentChatFriend == null) {
             return;
