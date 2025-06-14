@@ -3,10 +3,7 @@ package cn.cc.huifu.business.merchant.open.dto;
 import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 商户业务开通
@@ -87,26 +84,30 @@ public class HuiFuMerchantBusiOpenDto {
         map.put("sign_user_info", sign_user_info);
 
         JSONArray wx_conf_list = new JSONArray();
-        for(WxConf wxConf: wxConfList){
-            Map<String,Object> wx_conf = new HashMap<String,Object>();
-            wx_conf.put("pay_scene",wxConf.payScene);
-            wx_conf.put("fee_rate",wxConf.feeRate);
-            wx_conf.put("switch_state",wxConf.switchState);
-            wx_conf.put("fee_min_amt",wxConf.feeMinAmt);
-            wx_conf_list.add(wx_conf);
+        if(Objects.nonNull(wxConfList)) {
+            for (WxConf wxConf : wxConfList) {
+                Map<String, Object> wx_conf = new HashMap<String, Object>();
+                wx_conf.put("pay_scene", wxConf.payScene);
+                wx_conf.put("fee_rate", wxConf.feeRate);
+                wx_conf.put("switch_state", wxConf.switchState);
+                wx_conf.put("fee_min_amt", wxConf.feeMinAmt);
+                wx_conf_list.add(wx_conf);
+            }
+            map.put("wx_conf_list", wx_conf_list.toString());
         }
-        map.put("wx_conf_list", wx_conf_list.toString());
 
-        JSONArray ali_conf_list = new JSONArray();
-        for(AliConf aliConf: aliConfList){
-            Map<String,Object> ali_conf = new HashMap<String,Object>();
-            ali_conf.put("pay_scene",aliConf.payScene);
-            ali_conf.put("fee_rate",aliConf.feeRate);
-            ali_conf.put("switch_state",aliConf.switchState);
-            ali_conf.put("fee_min_amt",aliConf.feeMinAmt);
-            ali_conf_list.add(ali_conf);
+        if(Objects.nonNull(aliConfList)) {
+            JSONArray ali_conf_list = new JSONArray();
+            for (AliConf aliConf : aliConfList) {
+                Map<String, Object> ali_conf = new HashMap<String, Object>();
+                ali_conf.put("pay_scene", aliConf.payScene);
+                ali_conf.put("fee_rate", aliConf.feeRate);
+                ali_conf.put("switch_state", aliConf.switchState);
+                ali_conf.put("fee_min_amt", aliConf.feeMinAmt);
+                ali_conf_list.add(ali_conf);
+            }
+            map.put("ali_conf_list", ali_conf_list.toString());
         }
-        map.put("ali_conf_list", ali_conf_list.toString());
 
         return map;
     }

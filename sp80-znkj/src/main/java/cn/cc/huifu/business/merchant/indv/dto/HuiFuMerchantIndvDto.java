@@ -130,17 +130,19 @@ public class HuiFuMerchantIndvDto {
         map.put("contact_mobile_no", contactMobileNo);
         map.put("contact_email", contactEmail);
 
-        Map<String, String> cardInfoMap = new HashMap<String, String>();
-        cardInfoMap.put("card_name", cardInfo.getCardName());
-        cardInfoMap.put("card_no", cardInfo.getCardNo());
-        cardInfoMap.put("area_id", cardInfo.getAreaId());
-        cardInfoMap.put("cert_type", cardInfo.getCertType());
-        cardInfoMap.put("cert_no", cardInfo.getCertType());
-        cardInfoMap.put("cert_validity_type", cardInfo.getCertValidityType());
-        cardInfoMap.put("cert_begin_date", cardInfo.getCertBeginDate());
-        cardInfoMap.put("cert_end_date", cardInfo.getCertEndDate());
-        cardInfoMap.put("mp", cardInfo.getMp());
-        map.put("card_info", cardInfoMap);
+        if(Objects.nonNull(cardInfo)) {
+            Map<String, String> cardInfoMap = new HashMap<String, String>();
+            cardInfoMap.put("card_name", cardInfo.getCardName());
+            cardInfoMap.put("card_no", cardInfo.getCardNo());
+            cardInfoMap.put("area_id", cardInfo.getAreaId());
+            cardInfoMap.put("cert_type", cardInfo.getCertType());
+            cardInfoMap.put("cert_no", cardInfo.getCertType());
+            cardInfoMap.put("cert_validity_type", cardInfo.getCertValidityType());
+            cardInfoMap.put("cert_begin_date", cardInfo.getCertBeginDate());
+            cardInfoMap.put("cert_end_date", cardInfo.getCertEndDate());
+            cardInfoMap.put("mp", cardInfo.getMp());
+            map.put("card_info", cardInfoMap);
+        }
 
         map.put("settle_card_front_pic", settleCardFrontPic);
         map.put("settle_config", settleConfig);

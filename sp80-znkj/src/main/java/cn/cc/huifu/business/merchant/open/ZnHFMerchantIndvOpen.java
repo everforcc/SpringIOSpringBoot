@@ -17,7 +17,7 @@ public class ZnHFMerchantIndvOpen {
     public static void main(String[] args) {
         HuiFuMerchantBusiOpenDto huiFuMerchantIndvDto = new HuiFuMerchantBusiOpenDto();
 
-        huiFuMerchantIndvDto.setHuifuId("6666000168410819");
+        huiFuMerchantIndvDto.setHuifuId("6666000169018361");
         huiFuMerchantIndvDto.setUpperHuifuId("6666000151772004");
 
         HuiFuMerchantBusiOpenDto.AgreementInfo agreement_info = new HuiFuMerchantBusiOpenDto.AgreementInfo();
@@ -26,9 +26,9 @@ public class ZnHFMerchantIndvOpen {
 
         HuiFuMerchantBusiOpenDto.SignUserInfo signUserInfo = new HuiFuMerchantBusiOpenDto.SignUserInfo();
         signUserInfo.setType("LEGAL");
-        signUserInfo.setName("冯双双");
-        signUserInfo.setCertNo("411081198610079089");
-        signUserInfo.setMobileNo("15936318171");
+        signUserInfo.setName("郭凯龙");
+        signUserInfo.setCertNo("41018219960126531X");
+        signUserInfo.setMobileNo("15738573601");
         huiFuMerchantIndvDto.setSignUserInfo(signUserInfo);
 
         flowBusiOpen(huiFuMerchantIndvDto.toMap());

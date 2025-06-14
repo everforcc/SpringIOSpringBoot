@@ -31,11 +31,11 @@ public class ZnHFFileUpload {
         params.put("req_seq_id", ZnHFReqParamsContants.REQ_SEQ_ID);
         params.put("req_date", ZnHFReqParamsContants.REQ_DATE);
 
-        params.put("file_type", ZnHFFileContants.XIAN_XIA_NEI_JING_ZHAO);
+        params.put("file_type", ZnHFFileContants.XIAN_XIA_MEN_TOU_ZHAO);
         //如果商户还未成功进件huifu_id可以为空
 //        params.put("huifu_id", "6666000151772004");
         String data = JSON.toJSONString(params);
-        String localFile = "D:\\temp\\线下经营-内景照.jpg";
+        String localFile = "D:\\temp\\mtz.jpg";
         File file = new File(localFile);
 
         CloseableHttpClient httpclient1 = HttpClients.createDefault();
@@ -65,16 +65,16 @@ public class ZnHFFileUpload {
     }
 
     // 国徽
-    // {"data":{"resp_desc":"成功","file_id":"4610bef1-2df1-3f0a-ba22-32a4f1e9e50c","resp_code":"00000000"}}
+    // {"data":{"resp_desc":"成功","file_id":"7c15494a-544b-351f-810e-2713b83071fc","resp_code":"00000000"}}
     // 身份证人像面
-    // {"data":{"resp_desc":"成功","file_id":"76ec9902-bbb5-37b3-9b64-0ea4e02124e2","resp_code":"00000000"}}
+    // {"data":{"resp_desc":"成功","file_id":"ead9f625-a40d-3b3d-8ce7-6429de85298f","resp_code":"00000000"}}
     // 结算卡正面
-    // {"data":{"resp_desc":"成功","file_id":"a5ca3709-22a6-3376-b0e0-2fdf51c23ee2","resp_code":"00000000"}}
+    // {"data":{"resp_desc":"成功","file_id":"2847276a-4809-3a86-8efb-f9c8108a2423","resp_code":"00000000"}}
     // 线下经营-收银台
-    // {"data":{"resp_desc":"成功","file_id":"7cf4f5ce-4d00-321b-8bf7-b1d5770f9607","resp_code":"00000000"}}
+    // {"data":{"resp_desc":"成功","file_id":"881366c7-7be8-3a07-aec8-c9ec8c7607f4","resp_code":"00000000"}}
     // 线下经营-门头照
-    // {"data":{"resp_desc":"成功","file_id":"c71d64fe-0329-3282-9b84-a9deedf32a31","resp_code":"00000000"}}
+    // {"data":{"resp_desc":"成功","file_id":"507da3d0-53aa-35f9-a643-fdc16f685a0d","resp_code":"00000000"}}
     // 线下经营-内景照
-    // {"data":{"resp_desc":"成功","file_id":"be544e2e-6257-3736-928c-6516a567437c","resp_code":"00000000"}}
+    // {"data":{"resp_desc":"成功","file_id":"6ecb4693-7e66-3027-a599-3a3805a2e266","resp_code":"00000000"}}
 
 }

@@ -3,6 +3,7 @@ package cn.cc.huifu.business.merchant.indv.modify;
 
 import cn.cc.huifu.business.merchant.indv.dto.HuiFuMerchantIndvDto;
 import cn.cc.huifu.config.PayConfig;
+import cn.cc.huifu.constants.ZnHFReqParamsContants;
 import com.huifu.bspay.sdk.opps.core.BasePay;
 import com.huifu.bspay.sdk.opps.core.exception.BasePayException;
 import com.huifu.bspay.sdk.opps.core.net.BasePayRequest;
@@ -22,18 +23,58 @@ public class ZnHFMerchantIndvModify {
         HuiFuMerchantIndvDto huiFuMerchantIndvDto = new HuiFuMerchantIndvDto();
 
         huiFuMerchantIndvDto.setUpperHuifuId("6666000151772004");
-        huiFuMerchantIndvDto.setHuifuId("6666000168410819");
+        huiFuMerchantIndvDto.setHuifuId("6666000169026730");
 
         // 结算信息
+//        huiFuMerchantIndvDto.setLegalCertBackPic("78311945-30ee-36d1-b39c-7cc209e06247");
+//        huiFuMerchantIndvDto.setLegalCertFrontPic("e6a24733-a471-34ab-ae5a-ff98848de729");
 
 //线下经营-门头照 F22
-        huiFuMerchantIndvDto.setStoreHeaderPic("68060757-03ef-3f60-9bdf-9d391811456b");
+        huiFuMerchantIndvDto.setStoreHeaderPic("507da3d0-53aa-35f9-a643-fdc16f685a0d");
 //线下经营-内景照 F24
-        huiFuMerchantIndvDto.setStoreIndoorPic("8923b531-47e7-3d93-97b5-0cf60adc737e");
+        huiFuMerchantIndvDto.setStoreIndoorPic("6ecb4693-7e66-3027-a599-3a3805a2e266");
 //线下经营-收银台 F105
-        huiFuMerchantIndvDto.setStoreCashierDeskPic("30583964-ce18-34a6-aec2-24ac312287ba");
+        huiFuMerchantIndvDto.setStoreCashierDeskPic("881366c7-7be8-3a07-aec8-c9ec8c7607f4");
 
-        refundFlow(huiFuMerchantIndvDto.toMap());
+        test(huiFuMerchantIndvDto.toMap());
+    }
+
+    public static Map<String, Object> test(Map<String, Object> map) {
+        try {
+            BasePay.initWithMerConfig(PayConfig.getMerchantConfig());
+        } catch (Exception e) {
+            System.err.println("---");
+            e.printStackTrace();
+            System.err.println("---");
+            System.err.println("初始化报错: " + e.getMessage());
+        }
+
+        Map<String, Object> agreement_info = new HashMap<String, Object>();
+        agreement_info.put("agreement_type", "0");
+//        agreement_info.put("message_send_type","");
+        map.put("agreement_info", agreement_info);
+
+        Map<String, Object> sign_user_info = new HashMap<String, Object>();
+        sign_user_info.put("type", "LEGAL");
+        sign_user_info.put("name", "郭凯龙");
+        sign_user_info.put("cert_no", "41018219960126531X");
+        sign_user_info.put("mobile_no", "15738573601");
+        map.put("sign_user_info", sign_user_info);
+
+        map.put("req_seq_id", ZnHFReqParamsContants.REQ_SEQ_ID);
+        map.put("req_date", ZnHFReqParamsContants.REQ_DATE);
+        // 3. 发起API调用
+        Map<String, Object> response = null;
+        try {
+            response = BasePayRequest.requestBasePay("v2/merchant/basicdata/modify", map, null, false);
+        } catch (BasePayException e) {
+            System.err.println("---");
+            e.printStackTrace();
+            System.err.println("---");
+            System.err.println("返回报错: " + e.getMessage());
+        }
+        System.out.println(response);
+        return response;
     }
 
     public static Map<String, Object> refundFlow(Map<String, Object> map) {

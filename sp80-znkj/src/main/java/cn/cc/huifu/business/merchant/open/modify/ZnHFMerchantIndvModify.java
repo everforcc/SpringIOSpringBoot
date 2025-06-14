@@ -22,7 +22,7 @@ public class ZnHFMerchantIndvModify {
 
     public static void main(String[] args) {
         HuiFuMerchantBusiOpenDto huiFuMerchantBusiOpenDto = new HuiFuMerchantBusiOpenDto();
-        huiFuMerchantBusiOpenDto.setHuifuId("6666000168410819");
+        huiFuMerchantBusiOpenDto.setHuifuId("6666000169026730");
         huiFuMerchantBusiOpenDto.setUpperHuifuId("6666000151772004");
 
 
@@ -32,8 +32,8 @@ public class ZnHFMerchantIndvModify {
 
         List<HuiFuMerchantBusiOpenDto.AliConf> aliConfList = new ArrayList<>();
         HuiFuMerchantBusiOpenDto.AliConf aliConf = new HuiFuMerchantBusiOpenDto.AliConf();
-        JSONArray ali_conf_list = new JSONArray();
-        Map<String,Object> ali_conf1 = new HashMap<String,Object>();
+//        JSONArray ali_conf_list = new JSONArray();
+//        Map<String,Object> ali_conf1 = new HashMap<String,Object>();
         aliConf.setPayScene("1");//
         aliConf.setFeeRate("0.25");
         aliConf.setSwitchState("1");
@@ -64,9 +64,9 @@ public class ZnHFMerchantIndvModify {
 
         HuiFuMerchantBusiOpenDto.SignUserInfo  signUserInfo = new HuiFuMerchantBusiOpenDto.SignUserInfo();
         signUserInfo.setType("LEGAL");
-        signUserInfo.setName("冯双双");
-        signUserInfo.setCertNo("411081198610079089");
-        signUserInfo.setMobileNo("15936318171");
+        signUserInfo.setName("郭凯龙");
+        signUserInfo.setCertNo("41018219960126531X");
+        signUserInfo.setMobileNo("15738573601");
         huiFuMerchantBusiOpenDto.setSignUserInfo(signUserInfo);
 
         flowOpenModify(huiFuMerchantBusiOpenDto.toMap());
