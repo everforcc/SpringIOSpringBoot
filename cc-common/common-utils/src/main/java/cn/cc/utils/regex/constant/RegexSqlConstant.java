@@ -7,6 +7,6 @@ public class RegexSqlConstant {
      * update table_name set
      * update table_name tn set
      */
-    public static String updatePattern = "UPDATE\\s+(\\w+)\\s+(\\w+\\s+)?SET";
+    public static String updatePattern = "UPDATE\\s+(\\w+)\\s+(\\w+\\s+)?SET\\s+DEL_FLAG";
 
 }

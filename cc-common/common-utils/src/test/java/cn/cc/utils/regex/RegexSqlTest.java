@@ -9,12 +9,15 @@ public class RegexSqlTest {
     //    Pattern updatePattern = Pattern.compile("UPDATE\\s+(\\w+)\\s+SET");
     // String updatePattern = "UPDATE\\s+(\\w+)\\s+SET";
     // 别名
+    // update mt_user mu set del_flag= where a=a
+    // set\\s+del_flag=
+    //
 
 
     @Test
     public void testUpdate() {
 
-        String sql_1 = "update mt_user set xxx".toUpperCase();
+        String sql_1 = "update zn_dzg_card_member set  del_flag=2 where id=? and del_flag=0".toUpperCase();
         System.out.println(sql_1);
         String sql_1_match = RegexUtils.matcheStr(RegexSqlConstant.updatePattern, sql_1);
         System.out.println("匹配sql_1: " + sql_1_match);
@@ -35,6 +38,18 @@ public class RegexSqlTest {
 //        System.out.println(RegexUtils.isMatches("\\w+", "MT_USER"));
 //        System.out.println(RegexUtils.isMatches("\\s+SET", " SET XXX"));
 
+    }
+
+    @Test
+    public void testUpdate2() {
+        String sql = "update zn_dzg_card_member set  del_flag=2 where id=? and del_flag=0";
+        if (sql.matches(".*set\\s+del_flag=.*")){
+            System.out.println(sql);
+            sql=sql.replaceFirst("set\\s+del_flag=", "set up_count = 0,del_flag=");
+            System.out.println(sql);
+        }else {
+            System.out.println("没匹配到");
+        }
     }
 
 }
