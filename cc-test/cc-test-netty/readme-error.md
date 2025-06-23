@@ -1,3 +1,5 @@
+<span  style="font-family: Simsun,serif; font-size: 17px; ">
+
 # Netty MQTT 客户端开发调试错误总结
 
 本文档记录了在开发此 Netty MQTT 客户端过程中遇到的几个典型错误，并详细分析了其根本原因和最终的解决方案。这些都是 Netty 开发中非常常见的"坑"，理解它们有助于写出更健壮的 Netty 应用。
@@ -60,4 +62,6 @@
     **为每一个新的 `Channel` 创建一个全新的 `ChannelHandler` 实例。**
     1.  移除在 `MqttClient` 构造函数中创建的 `final MqttClientHandler handler`。
     2.  将 `Handler` 的实例化操作 `new MqttClientHandler(...)` 直接移到 `ChannelInitializer` 的 `initChannel` 方法内部。
-    这样，每当一个新的连接（包括重连）被建立时，`initChannel` 方法都会被调用，从而为这个新的 `Channel` 创建一个它自己专属的、全新的、状态干净的 `MqttClientHandler` 实例。 
+    这样，每当一个新的连接（包括重连）被建立时，`initChannel` 方法都会被调用，从而为这个新的 `Channel` 创建一个它自己专属的、全新的、状态干净的 `MqttClientHandler` 实例。
+
+</span>
