@@ -123,7 +123,7 @@
         <!-- 添加 poi 和 poi-ooxml 依赖版本 -->
         <poi.version>5.2.3</poi.version>
         <!-- 媒体相关 -->
-        <org.bytedeco.javacv.platform>1.5.9</org.bytedeco.javacv.platform>
+        <org.bytedeco.javacv.platform>1.5.5</org.bytedeco.javacv.platform>
         <!-- 文字识别 -->
         <net.sourceforge.tess4j>5.2.0</net.sourceforge.tess4j>
         <!-- pdfbox 处理 -->
