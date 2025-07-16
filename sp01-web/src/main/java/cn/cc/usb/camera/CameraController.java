@@ -50,7 +50,7 @@ public class CameraController {
                     // 10 100
                     // 33 30
                     // 40 25
-                    Thread.sleep(40); // 约30fps
+                    Thread.sleep(33); // 约30fps
                 }
             } catch (Exception e) {
                 e.printStackTrace();
