@@ -1,0 +1,11 @@
+
+###
+POST http://localhost:8080/publish
+Content-Type: application/json
+
+{
+  "topic":"znkj/largeScreen/humidness/alarm",
+  "payload":"555payload344444"
+}
+
+

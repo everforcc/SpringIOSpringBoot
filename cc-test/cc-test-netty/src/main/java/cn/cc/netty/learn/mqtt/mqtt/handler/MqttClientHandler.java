@@ -1,4 +1,4 @@
-package cn.cc.netty.learn.mqtt;
+package cn.cc.netty.learn.mqtt.mqtt.handler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -48,6 +48,9 @@ public class MqttClientHandler extends ChannelInboundHandlerAdapter {
     private boolean isReconnecting = false;
     private final Bootstrap bootstrap;
 
+    // 新增：保存 ChannelHandlerContext 引用，便于外部主动发送消息
+    private ChannelHandlerContext ctx;
+
     /**
      * 构造函数
      * @param host MQTT Broker 地址
@@ -72,6 +75,7 @@ public class MqttClientHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
+        this.ctx = ctx; // 保存上下文
         log.info("Netty通道已激活，发送CONNECT报文请求建立MQTT连接...");
         MqttConnectMessage connectMessage = createConnectMessage();
         ctx.writeAndFlush(connectMessage).addListener(future -> {
@@ -229,6 +233,27 @@ public class MqttClientHandler extends ChannelInboundHandlerAdapter {
         MqttFixedHeader fixedHeader = new MqttFixedHeader(MqttMessageType.PUBACK, false, MqttQoS.AT_MOST_ONCE, false, 0);
         MqttMessageIdVariableHeader variableHeader = MqttMessageIdVariableHeader.from(messageId);
         return new MqttPubAckMessage(fixedHeader, variableHeader);
+    }
+
+    /**
+     * 主动发布消息到指定 topic
+     * @param topic 主题
+     * @param payload 消息内容
+     * @return 是否发送成功
+     */
+    public boolean publishMessage(String topic, String payload) {
+        if (ctx == null) {
+            log.warn("还未建立连接，无法发送消息");
+            return false;
+        }
+        MqttFixedHeader fixedHeader = new MqttFixedHeader(
+            MqttMessageType.PUBLISH, false, MqttQoS.AT_LEAST_ONCE, false, 0);
+        MqttPublishVariableHeader variableHeader = new MqttPublishVariableHeader(topic, 1);
+        io.netty.buffer.ByteBuf buf = ctx.alloc().buffer();
+        buf.writeBytes(payload.getBytes(io.netty.util.CharsetUtil.UTF_8));
+        MqttPublishMessage publishMessage = new MqttPublishMessage(fixedHeader, variableHeader, buf);
+        ctx.writeAndFlush(publishMessage);
+        return true;
     }
 
     /**

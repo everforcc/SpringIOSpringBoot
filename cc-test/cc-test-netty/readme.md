@@ -2,6 +2,7 @@
 
 ### 待完善
 
-- [ ] mqtt发送消息
+- [x] mqtt发送消息
+- [x] 生成Netty HTTP Server
 
 </span>

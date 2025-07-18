@@ -1,5 +1,6 @@
-package cn.cc.netty.learn.mqtt;
+package cn.cc.netty.learn.mqtt.mqtt;
 
+import cn.cc.netty.learn.mqtt.mqtt.handler.MqttClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class MqttClient {
 
-    private static final String MQTT_HOST = "192.168.3.39";
+    private static final String MQTT_HOST = "192.168.0.30";
     private static final int MQTT_PORT = 1883;
     private static final String MQTT_USERNAME = "admin";
     private static final String MQTT_PASSWORD = "public";
@@ -31,6 +32,7 @@ public class MqttClient {
 
     private final EventLoopGroup group;
     private final Bootstrap bootstrap;
+    private MqttClientHandler handler;
 
     public MqttClient() {
         // 创建 Netty 的核心组件: EventLoopGroup 和 Bootstrap
@@ -61,7 +63,9 @@ public class MqttClient {
                          // 4. 核心业务处理器。
                          //    ！！！关键点：每次有新连接建立时，都必须创建一个新的 Handler 实例。
                          //    Handler 不能在多个 Channel 之间共享，因为它是有状态的（如 isReconnecting 标志）。
-                         pipeline.addLast("handler", new MqttClientHandler(MQTT_HOST, MQTT_PORT, MQTT_USERNAME, MQTT_PASSWORD, MQTT_TOPIC, bootstrap));
+                         // 每次新连接都创建新 handler
+                         handler = new MqttClientHandler(MQTT_HOST, MQTT_PORT, MQTT_USERNAME, MQTT_PASSWORD, MQTT_TOPIC, bootstrap);
+                         pipeline.addLast("handler", handler);
                      }
                  });
     }
@@ -83,6 +87,13 @@ public class MqttClient {
                 future.channel().eventLoop().schedule(this::connect, 5, TimeUnit.SECONDS);
             }
         });
+    }
+
+    /**
+     * 获取 handler 实例，便于外部集成 HTTP 服务等
+     */
+    public MqttClientHandler getHandler() {
+        return handler;
     }
 
     /**

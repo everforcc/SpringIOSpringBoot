@@ -7,11 +7,11 @@
 
 ### mqtt 配置
 
-ip 192.168.3.39
-port 1883
-username admin
-password public
-topic znkj/largeScreen/humidness/alarm
+- ip 192.168.0.30
+- port 1883
+- username admin
+- password public
+- topic znkj/largeScreen/humidness/alarm
 
 
 
