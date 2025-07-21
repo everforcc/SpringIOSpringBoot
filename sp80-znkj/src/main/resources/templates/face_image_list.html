@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>人脸图片管理</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body class="container mt-5">
+    <h2 class="mb-4">人脸图片管理</h2>
+    <a class="btn btn-secondary mb-3" href="/">返回主页</a>
+    <a class="btn btn-success mb-3" href="/face-log/list">识别日志</a>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>人员姓名</th>
+                <th>图片</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="img : ${images}">
+            <td>
+                <input type="text" th:value="${img.personName}" th:id="'name-'+${img.id}" class="form-control"/>
+            </td>
+            <td>
+                <img th:src="@{${img.imagePath}}" alt="图片" style="max-width:100px;max-height:100px;"/>
+            </td>
+            <td>
+                <button class="btn btn-primary" th:onclick="'updateName('+${img.id}+');'">保存</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script>
+        function updateName(id) {
+            var name = $("#name-" + id).val();
+            $.post("/face-image/update", {id: id, personName: name}, function (res) {
+                if (res === "success") {
+                    alert("修改成功！");
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

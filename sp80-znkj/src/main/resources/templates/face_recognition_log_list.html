@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>识别日志</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body class="container mt-5">
+    <h2 class="mb-4">识别日志</h2>
+    <a class="btn btn-secondary mb-3" href="/">返回主页</a>
+    <a class="btn btn-primary mb-3" href="/face-image/list">人脸图片管理</a>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>图片ID</th>
+                <th>输入图片</th>
+                <th>识别结果</th>
+                <th>相似度</th>
+                <th>识别时间</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${logs}">
+            <td th:text="${log.imageId}"></td>
+            <td>
+                <img th:src="${log.inputImagePath}" th:title="${log.inputImagePath}" alt="图片" style="max-width:100px;max-height:100px;"/>
+            </td>
+            <td th:text="${log.result}"
+                th:classappend="${log.result} == '存在' ? 'text-success' : 'text-danger'">
+            </td>
+            <td th:text="${log.similarity}"></td>
+            <td th:text="${#dates.format(log.recognizedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html> 

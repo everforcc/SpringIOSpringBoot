@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cc.face.mapper.FaceRecognitionLogMapper">
+    <resultMap id="FaceRecognitionLogMap" type="cn.cc.face.dao.FaceRecognitionLog">
+        <id property="id" column="id"/>
+        <result property="imageId" column="image_id"/>
+        <result property="inputImagePath" column="input_image_path"/>
+        <result property="result" column="result"/>
+        <result property="similarity" column="similarity"/>
+        <result property="recognizedAt" column="recognized_at"/>
+    </resultMap>
+    <select id="selectAllOrderByRecognizedAtDesc" resultMap="FaceRecognitionLogMap">
+        SELECT * FROM ai_test.face_recognition_log ORDER BY recognized_at DESC
+    </select>
+    <insert id="insert" parameterType="cn.cc.face.dao.FaceRecognitionLog">
+        INSERT INTO ai_test.face_recognition_log (image_id, input_image_path, result, similarity)
+        VALUES (#{imageId}, #{inputImagePath}, #{result}, #{similarity})
+    </insert>
+</mapper> 
