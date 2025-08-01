@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
-@ConfigurationProperties(prefix = "spring.redis")
+//@Component
+//@ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfiguration {
 
     private String host;

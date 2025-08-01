@@ -30,7 +30,7 @@ public class RefundServiceImpl implements IRefundService {
 
     List<String> yqIPList = Arrays.asList("192.168.1.136", "192.168.1.138");
 
-    List<String> boxIPList = Arrays.asList("192.168.1.132", "192.168.1.152");
+    List<String> boxIPList = Arrays.asList("192.168.1.132");
 
     @Override
     public List<HuifuRefund> refundList() {
