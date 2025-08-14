@@ -13,7 +13,7 @@ public class ZnkjRemainTest {
         // 获取当前日期
         LocalDate today = LocalDate.now();
         // 设置要比较的日期，例如：2023年3月15日
-        LocalDate specificDate = LocalDate.of(2026, 2, 1);
+        LocalDate specificDate = LocalDate.of(2025, 11, 8);
         // 计算两个日期之间的天数差
         long daysBetween = ChronoUnit.DAYS.between(today, specificDate);
 
