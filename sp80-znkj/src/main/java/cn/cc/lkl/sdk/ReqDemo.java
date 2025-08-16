@@ -297,12 +297,14 @@ public class ReqDemo {
                 System.out.println("errInfo:" + errInfo);
                 errInfo = err.substring(err.indexOf("{"), err.length());
                 System.out.println("errInfo:" + errInfo);
+                log.info("处理后的错误信息为: " + errInfo);
+                JSONObject jsonObject = JSONObject.parseObject(errInfo);
+                System.out.println("jsonObject:" + jsonObject);
+                System.out.println("jsonObject.getString(\"code\"): " + jsonObject.getString("code"));
+                errInfo = jsonObject.getString("msg");
+                System.out.println("jsonObject.getString(\"msg\"): " + jsonObject.getString("msg"));
             }
-            log.info("处理后的错误信息为: " + errInfo);
-            JSONObject jsonObject = JSONObject.parseObject(errInfo);
-            System.out.println("jsonObject:" + jsonObject);
-            System.out.println("jsonObject.getString(\"code\"): " + jsonObject.getString("code"));
-            System.out.println("jsonObject.getString(\"msg\"): " + jsonObject.getString("msg"));
+            throw new RuntimeException("处理后的错误信息为: " + errInfo);
         }catch (Exception e){
             System.out.println("e.getMessage(): " + e.getMessage());
             e.getCause().printStackTrace();

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * Stack
+ */
 public class BracketChecker {
     public static void main(String[] args) {
         String str = "a{a})aa";
