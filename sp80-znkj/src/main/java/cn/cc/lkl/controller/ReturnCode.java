@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto;
+package cn.cc.lkl.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,5 +1,6 @@
 package cn.cc.lkl.dto;
 
+import cn.cc.lkl.controller.ReturnCode;
 import cn.cc.lkl.enums.FunctionCodeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -80,7 +81,7 @@ public class CommonResponseDTO<T extends FunctionCodeEnum> {
      * @return 成功响应对象
      */
     public static <T extends FunctionCodeEnum> CommonResponseDTO<T> success(T functionCode, Object respData) {
-        return new CommonResponseDTO<>(ReturnCode.SUCCESS.getCode(), 
+        return new CommonResponseDTO<>(ReturnCode.SUCCESS.getCode(),
                                      ReturnCode.SUCCESS.getDescription(), 
                                      functionCode,
                                      respData);

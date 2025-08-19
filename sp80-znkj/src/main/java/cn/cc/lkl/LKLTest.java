@@ -1,9 +1,5 @@
 package cn.cc.lkl;
 
-import cn.cc.lkl.dto.CommonRequestDTO;
-import cn.cc.lkl.dto.CommonResponseDTO;
-import cn.cc.lkl.dto.ReturnCode;
-
 public class LKLTest {
 
     public static void main(String[] args) {

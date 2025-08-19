@@ -6,16 +6,17 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * 公共请求参数DTO
- * 
+ * extends V3CommRequest
  * @author system
  * @since 2025-04-14
  */
 @Data
-public class CommonRequestDTO<T extends BaseRequest> {
+public class CommonRequestDTO {
     
     /**
      * 请求时间戳
@@ -25,8 +26,11 @@ public class CommonRequestDTO<T extends BaseRequest> {
     @NotBlank(message = "请求时间不能为空")
     @Size(min = 14, max = 14, message = "请求时间格式错误，应为14位数字")
     @JsonProperty("req_time")
-    private String reqTime;
-    
+    private String req_time;
+
+    @JsonProperty("req_id")
+    private String req_id;
+
     /**
      * 版本号
      * 当前版本：1.0
@@ -35,58 +39,37 @@ public class CommonRequestDTO<T extends BaseRequest> {
     @Size(max = 8, message = "版本号长度不能超过8位")
     @JsonProperty("version")
     private String version;
-    
+
     /**
      * 功能码
      * 用于标识具体的业务接口
      */
     @JsonProperty("function_code")
-    private T functionCode;
+    private FunctionCodeEnum functionCode;
     
     /**
      * 请求参数
      * 具体参数格式参见各个接口的请求参数格式
      */
     @JsonProperty("req_data")
-    private Object reqData;
-    
+    private Object req_data;
+
     /**
      * 默认构造函数
      */
     public CommonRequestDTO() {
-        this.version = "1.0";
-        this.reqTime = String.valueOf(new Date().getTime());
+        this.version = "3.0";
+        this.req_time = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
+        this.req_id = String.valueOf(System.currentTimeMillis());
     }
-    
-    /**
-     * 带参数的构造函数
-     * 
-     * @param reqTime 请求时间
-     * @param functionCode 功能码
-     * @param reqData 请求数据
-     */
-    public CommonRequestDTO(String reqTime, T functionCode, Object reqData) {
-        this.reqTime = reqTime;
-        this.version = "1.0";
-        this.functionCode = functionCode;
-        this.reqData = reqData;
-    }
-    
+
     /**
      * 获取接口URL
-     * 
+     *
      * @return 接口URL
      */
     public String getApiUrl() {
-        return functionCode != null ? functionCode.getFunctionCode().getCode() : null;
+        return functionCode != null ? functionCode.getCode() : null;
     }
-    
-    /**
-     * 获取接口名称
-     * 
-     * @return 接口名称
-     */
-    public String getApiName() {
-        return functionCode != null ? functionCode.getFunctionCode().getName() : null;
-    }
+
 }
