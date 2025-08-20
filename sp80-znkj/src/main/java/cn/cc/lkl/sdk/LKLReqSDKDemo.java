@@ -20,7 +20,7 @@ public class LKLReqSDKDemo {
 
     public static void main(String[] args) {
         try {
-            LKLConfigDemo.demoConfig1();
+            LKLConfigDemo.demoConfig4();
 //            demoReq2();
             demoReqV2Upload();
         } catch (SDKException | IOException e) {
