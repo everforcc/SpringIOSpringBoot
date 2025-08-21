@@ -100,6 +100,26 @@ public class ArmingController {
 	}
 
 	/**
+	 * 2.1 指定当日槽位执行撤防（测试/联调用）
+	 *
+	 * 说明：
+	 * - daySlot 取值 0..47，对应 00:00-00:30 为 0，依次递增；
+	 * - 仅作用于“今天”的掩码，TTL 到午夜；
+	 * - 语义同 /defuse/{groupId}，唯一区别是从当前时间改为由调用方指定槽位。
+	 */
+	@PostMapping("/defuse/{groupId}/slot/{daySlot}")
+	public Map<String, Object> defuseAtSlot(@PathVariable("groupId") long groupId,
+										   @PathVariable("daySlot") int daySlot) {
+		boolean effective = armingService.defuseAtSlot(groupId, daySlot);
+		Map<String, Object> result = new HashMap<>();
+		result.put("groupId", groupId);
+		result.put("daySlot", daySlot);
+		result.put("status", "OK");
+		result.put("effective", effective);
+		return result;
+	}
+
+	/**
 	 * 3. 更新或新增设备与布防组的关联关系
 	 *
 	 * 接口说明：
@@ -195,6 +215,57 @@ public class ArmingController {
 		result.put("groupId", groupId);
 		result.put("format", format);
 		result.put("data", data);
+		return result;
+	}
+
+	/**
+	 * 5. 执行今日“重新布防”（撤销掩码）
+	 *
+	 * 说明：
+	 * - 当前在布防段：恢复包含当前槽位的连续布防区间；
+	 * - 当前在撤防段：恢复今天的下一个连续布防区间；
+	 * - 仅清除今日掩码中交集部分；目标区间若未被撤防则无效。
+	 */
+	@PostMapping("/rearm/{groupId}")
+	public Map<String, Object> rearm(@PathVariable("groupId") long groupId) {
+		boolean effective = armingService.rearmToday(groupId);
+		Map<String, Object> result = new HashMap<>();
+		result.put("groupId", groupId);
+		result.put("status", "OK");
+		result.put("effective", effective);
+		return result;
+	}
+
+	/**
+	 * 5.1 指定当日槽位执行“重新布防”（测试/联调用）
+	 */
+	@PostMapping("/rearm/{groupId}/slot/{daySlot}")
+	public Map<String, Object> rearmAtSlot(@PathVariable("groupId") long groupId,
+										   @PathVariable("daySlot") int daySlot) {
+		boolean effective = armingService.rearmAtSlot(groupId, daySlot);
+		Map<String, Object> result = new HashMap<>();
+		result.put("groupId", groupId);
+		result.put("daySlot", daySlot);
+		result.put("status", "OK");
+		result.put("effective", effective);
+		return result;
+	}
+
+	/**
+	 * 6. 指定当日槽位查询“是否有效布防”（是否需要上报）
+	 *
+	 * @param deviceId 设备ID
+	 * @param daySlot 当日槽位 0..47
+	 */
+	@GetMapping("/armedAt/{deviceId}/slot/{daySlot}")
+	public Map<String, Object> isArmedAtSlot(@PathVariable("deviceId") long deviceId,
+										   @PathVariable("daySlot") int daySlot) {
+		boolean armed = armingService.isArmedAtSlot(deviceId, daySlot);
+		Map<String, Object> result = new HashMap<>();
+		result.put("deviceId", deviceId);
+		result.put("daySlot", daySlot);
+		result.put("armed", armed);
+		result.put("status", "OK");
 		return result;
 	}
 }

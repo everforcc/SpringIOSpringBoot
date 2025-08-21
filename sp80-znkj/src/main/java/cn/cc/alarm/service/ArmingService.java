@@ -104,7 +104,7 @@ public class ArmingService {
 		}
 
 		// 步骤5：检查今日掩码，看是否被临时撤防
-		BitSet todayMask = loadTodayMask(groupId);
+		BitSet todayMask = loadOrRecoverTodayMask(groupId);
 		// 如果今日掩码为空或当前槽位未被撤防，则需要上报
 		return todayMask == null || !todayMask.get(daySlot);
 	}
@@ -138,12 +138,19 @@ public class ArmingService {
 		// 步骤4：从周位图中提取今天的48个槽位
 		BitSet dayBits = Bitmaps.sliceDay(weekBits, dayIdx);
 		
-		// 步骤5：获取Redis中的今日掩码键
-		String key = ArmingKeys.groupTodayMaskKey(groupId);
-		// todo 如果没有是否要从数据库重新获取
-		// 步骤6：从Redis读取现有的今日掩码
-		byte[] existed = redisBytes.opsForValue().get(key);
-		BitSet existedMask = Bitmaps.fromBytes(existed);
+		// 步骤 5.6. 获取Redis或mysql中的今日掩码键
+		BitSet existedMask = loadOrRecoverTodayMask(groupId);
+
+		// 额外规则（产品变更）：若当前处于“撤防段”（实际不布防），则当日仅允许撤防“下一个布防段”一次。
+		// 实现：若在当前或未来槽位已存在掩码位，则认为今天的“撤防段撤防”机会已用过，直接返回 false。
+		boolean nowEffectiveArmed = dayBits.get(daySlotNow) && !existedMask.get(daySlotNow);
+		if (!nowEffectiveArmed) {
+			// 如果返回-1，说明下个阶段没有被撤防过，如果不是-1，则认为有已撤防的槽位，返回false
+			int nextMasked = existedMask.nextSetBit(daySlotNow);
+			if (nextMasked != -1) {
+				return false;
+			}
+		}
 		
 		// 步骤7：根据当前时间、今日布防计划和现有掩码，构建撤防掩码
 		// 重要改进：传入现有掩码，确保撤防逻辑的正确性
@@ -162,13 +169,19 @@ public class ArmingService {
 		}
 		
 		// 步骤10：将新掩码与现有掩码合并
+		/**
+		 * existedMask: 1 1 0 0 0 0 0 0 (已撤防前2个槽位)
+		 * mask:        0 0 1 1 0 0 0 0 (新撤防中间2个槽位)
+		 * 执行or后:
+		 * existedMask: 1 1 1 1 0 0 0 0 (合并后撤防前4个槽位)
+		 */
 		existedMask.or(mask);
 		
 		// 步骤11：计算到午夜的剩余时间，作为TTL
 		Duration ttl = TimeSlotUtils.durationUntilMidnight(zone);
 		
 		// 步骤12：将合并后的掩码写入Redis，设置TTL
-		redisBytes.opsForValue().set(key, Bitmaps.toBytes(existedMask), ttl);
+		redisBytes.opsForValue().set(ArmingKeys.groupTodayMaskKey(groupId), Bitmaps.toBytes(existedMask), ttl);
 
 		// 步骤13：持久化今日掩码到MySQL（用于Redis宕机后的恢复）
 		// 注意：由于表中有唯一约束uk_gid_date(group_id, biz_date)，
@@ -178,6 +191,184 @@ public class ArmingService {
 		repo.upsertTodayMask(groupId, today, Bitmaps.toBytes(existedMask));
 		
 		return true;
+	}
+
+	/**
+	 * 指定当日槽位执行撤防（测试/联调用）。
+	 *
+	 * 语义同 {@link #defuseToday(long)}，唯一区别是由调用方指定 daySlot。
+	 * 仅作用于“今天”的掩码。
+	 *
+	 * @param groupId 组ID
+	 * @param daySlot 0..47 半小时槽
+	 */
+	public boolean defuseAtSlot(long groupId, int daySlot) {
+		int dayIdx = ZonedDateTime.now(zone).getDayOfWeek().getValue() % 7;
+		BitSet weekBits = loadWeekBits((int) groupId);
+		if (weekBits == null || weekBits.isEmpty()) {
+			return false;
+		}
+		BitSet dayBits = Bitmaps.sliceDay(weekBits, dayIdx);
+		BitSet existedMask = loadOrRecoverTodayMask(groupId);
+		boolean nowEffectiveArmed = dayBits.get(daySlot) && !existedMask.get(daySlot);
+		if (!nowEffectiveArmed) {
+			int nextMasked = existedMask.nextSetBit(daySlot);
+			if (nextMasked != -1) {
+				return false;
+			}
+		}
+		BitSet mask = Bitmaps.buildTodayDefenceMask(dayBits, daySlot, existedMask);
+		BitSet toAdd = (BitSet) mask.clone();
+		toAdd.andNot(existedMask);
+		if (toAdd.isEmpty()) {
+			return false;
+		}
+		existedMask.or(mask);
+		Duration ttl = TimeSlotUtils.durationUntilMidnight(zone);
+		redisBytes.opsForValue().set(ArmingKeys.groupTodayMaskKey(groupId), Bitmaps.toBytes(existedMask), ttl);
+		LocalDate today = ZonedDateTime.now(zone).toLocalDate();
+		repo.upsertTodayMask(groupId, today, Bitmaps.toBytes(existedMask));
+		return true;
+	}
+
+	/**
+	 * 当日重新布防（撤销今日掩码中一段撤防）：
+	 *
+	 * 规则说明：
+	 * - 若当前处于布防段：恢复包含当前槽位的“连续布防区间”；
+	 * - 若当前处于撤防段：恢复“今天的下一个连续布防区间”（与撤防逻辑的目标区间一致）；
+	 * - 仅对“今日掩码”中已置位的槽位生效，若目标区间在掩码中没有置位，则认为本次无效（返回 false）。
+	 * - 成功后将目标区间对应位从掩码中清除，并将结果写回 Redis（TTL 至午夜）与 MySQL（用于容灾恢复）。
+	 *
+	 * 场景举例：
+	 * 1) 0-8 段撤防后，在 0-8 内点击“布防”，则 0-8 重新布防；
+	 * 2) 0-8 段撤防后，8 点以后点击“布防”，不生效（目标区间与已撤防区间不交集）；
+	 * 3) 若 12-14 段被撤防，则在 8-12（撤防段）或 12-14（布防段）点击“布防”，都能将 12-14 恢复布防。
+	 *
+	 * @param groupId 布防组ID
+	 * @return true 表示本次“重新布防”生效（掩码有清除），false 表示掩码未发生变化
+	 */
+	public boolean rearmToday(long groupId) {
+		// 计算当日与时间槽
+		int dayIdx = ZonedDateTime.now(zone).getDayOfWeek().getValue() % 7;
+		int daySlotNow = TimeSlotUtils.currentDaySlot(zone);
+
+		// 读取周位图与今日掩码
+		BitSet weekBits = loadWeekBits((int) groupId);
+		if (weekBits == null || weekBits.isEmpty()) {
+			return false;
+		}
+		BitSet dayBits = Bitmaps.sliceDay(weekBits, dayIdx);
+		BitSet existedMask = loadOrRecoverTodayMask(groupId);
+
+		// 计算“目标恢复区间”位图：忽略现有掩码，仅按周计划选择当前段或下一个连续布防段
+		BitSet target = Bitmaps.buildTodayDefenceMask(dayBits, daySlotNow);
+		if (target.isEmpty()) {
+			return false;
+		}
+
+		// 仅清除今日掩码中已置位的交集部分
+		BitSet toRemove = (BitSet) target.clone();
+		toRemove.and(existedMask);
+		if (toRemove.isEmpty()) {
+			// 目标区间与掩码无交集 → 本次“重新布防”无效
+			return false;
+		}
+
+		// 清除目标区间对应位
+		existedMask.andNot(target);
+
+		// 写回 Redis（TTL 至午夜）
+		Duration ttl = TimeSlotUtils.durationUntilMidnight(zone);
+		redisBytes.opsForValue().set(ArmingKeys.groupTodayMaskKey(groupId), Bitmaps.toBytes(existedMask), ttl);
+
+		// 持久化至 MySQL（用于容灾恢复）
+		LocalDate today = ZonedDateTime.now(zone).toLocalDate();
+		repo.upsertTodayMask(groupId, today, Bitmaps.toBytes(existedMask));
+
+		return true;
+	}
+
+	/**
+	 * 指定当日槽位执行"重新布防"（测试/联调用）。
+	 * 
+	 * 语义同 {@link #rearmToday(long)}，唯一区别是由调用方指定 daySlot。
+	 * 
+	 * 重新布防的作用是撤销之前在特定时间段内的撤防操作，即恢复该时间段的布防状态。
+	 * 只有当目标时间段在今日掩码中已被标记为撤防时，重新布防操作才有效。
+	 *
+	 * @param groupId 组ID
+	 * @param daySlot 0..47 半小时槽，表示一天中的时间段（每半小时一个槽位）
+	 * @return true 表示本次"重新布防"生效（掩码有清除），false 表示掩码未发生变化
+	 */
+	public boolean rearmAtSlot(long groupId, int daySlot) {
+		// 获取当前是周几（0=周一，6=周日）
+		int dayIdx = ZonedDateTime.now(zone).getDayOfWeek().getValue() % 7;
+		
+		// 加载该组的周位图（包含一周7天的布防计划）
+		BitSet weekBits = loadWeekBits((int) groupId);
+		if (weekBits == null || weekBits.isEmpty()) {
+			// 组未配置周位图，无法进行重新布防操作
+			return false;
+		}
+		
+		// 从周位图中提取今天的48个槽位的布防计划
+		BitSet dayBits = Bitmaps.sliceDay(weekBits, dayIdx);
+		
+		// 获取Redis或mysql中的今日掩码（记录了今天哪些时间段被撤防）
+		BitSet existedMask = loadOrRecoverTodayMask(groupId);
+		
+		// 构建目标恢复区间的位图：根据当前槽位和今日布防计划，确定需要重新布防的时间段
+		// 这个方法会找出包含指定槽位的连续布防区间
+		BitSet target = Bitmaps.buildTodayDefenceMask(dayBits, daySlot);
+		if (target.isEmpty()) {
+			// 目标区间为空，说明指定的槽位不在任何布防时间段内，无法重新布防
+			return false;
+		}
+		
+		// 计算需要移除的掩码位：目标区间与现有掩码的交集
+		// 只有那些既在目标区间内又在现有掩码中的位才需要被清除
+		BitSet toRemove = (BitSet) target.clone();
+		toRemove.and(existedMask);
+		if (toRemove.isEmpty()) {
+			// 目标区间与掩码无交集，说明目标区间并未被撤防，无需重新布防
+			return false;
+		}
+		
+		// 从今日掩码中清除目标区间的位，实现重新布防
+		// andNot操作会从existedMask中移除target中为1的位
+		existedMask.andNot(target);
+		
+		// 计算到午夜的剩余时间，作为TTL（生存时间）
+		Duration ttl = TimeSlotUtils.durationUntilMidnight(zone);
+		
+		// 将更新后的掩码写入Redis，并设置TTL到午夜
+		redisBytes.opsForValue().set(ArmingKeys.groupTodayMaskKey(groupId), Bitmaps.toBytes(existedMask), ttl);
+		
+		// 持久化今日掩码到MySQL（用于容灾恢复）
+		LocalDate today = ZonedDateTime.now(zone).toLocalDate();
+		repo.upsertTodayMask(groupId, today, Bitmaps.toBytes(existedMask));
+		
+		return true;
+	}
+
+	/**
+	 * 指定当日槽位查询“是否需要上报”（有效布防）。
+	 * baseArmed = 周位图(dayIdx*48+daySlot)；
+	 * masked = 今日掩码(daySlot)；
+	 * 返回 baseArmed && !masked。
+	 */
+	public boolean isArmedAtSlot(long deviceId, int daySlot) {
+		Integer groupId = readDeviceGroup(deviceId);
+		if (groupId == null) return false;
+		BitSet weekBits = loadWeekBits(groupId);
+		if (weekBits == null || weekBits.isEmpty()) return false;
+		int dayIdx = ZonedDateTime.now(zone).getDayOfWeek().getValue() % 7;
+		int weekOffset = dayIdx * 48 + daySlot;
+		boolean baseArmed = weekBits.get(weekOffset);
+		if (!baseArmed) return false;
+		BitSet todayMask = loadOrRecoverTodayMask(groupId);
+		return todayMask == null || !todayMask.get(daySlot);
 	}
 
 	/**
@@ -294,34 +485,30 @@ public class ArmingService {
 	}
 
 	/**
-	 * 加载今日掩码：仅从 Redis 读取；不存在时视为全0。
-	 * 
-	 * 容灾策略：
-	 * - 优先从Redis读取今日掩码
-	 * - Redis缺失时，尝试从MySQL恢复（Redis宕机后的恢复路径）
-	 * - 恢复成功后重新写入Redis并设置TTL
-	 * 
+	 * 加载当日撤防掩码：优先Redis，缺失则从DB恢复并回填Redis（TTL到午夜）。
+	 *
+	 * 统一读取逻辑：
+	 * - Redis命中：直接返回对应BitSet；
+	 * - Redis缺失：从MySQL读取当日掩码，若存在则写回Redis并设置TTL；
+	 * - 最终返回：若均未命中，则返回空BitSet。
+	 *
 	 * @param groupId 布防组ID
-	 * @return 今日掩码的BitSet表示，如果不存在则返回空的BitSet
+	 * @return 今日掩码的BitSet表示；不存在时为空BitSet
 	 */
-	private BitSet loadTodayMask(int groupId) {
-		// 步骤1：尝试从Redis中读取今日掩码
-		byte[] bytes = redisBytes.opsForValue().get(ArmingKeys.groupTodayMaskKey(groupId));
-		
+	private BitSet loadOrRecoverTodayMask(long groupId) {
+		String key = ArmingKeys.groupTodayMaskKey(groupId);
+		byte[] bytes = redisBytes.opsForValue().get(key);
 		if (bytes == null || bytes.length == 0) {
 			// Redis缺失时，尝试从MySQL恢复今日掩码（Redis宕机后的恢复路径）
 			LocalDate today = ZonedDateTime.now(zone).toLocalDate();
 			byte[] fromDb = repo.findTodayMask(groupId, today);
-			
 			if (fromDb != null && fromDb.length > 0) {
 				// 从数据库恢复成功，重新写入Redis并设置TTL
 				Duration ttl = TimeSlotUtils.durationUntilMidnight(zone);
-				redisBytes.opsForValue().set(ArmingKeys.groupTodayMaskKey(groupId), fromDb, ttl);
-				return Bitmaps.fromBytes(fromDb);
+				redisBytes.opsForValue().set(key, fromDb, ttl);
+				bytes = fromDb;
 			}
 		}
-		
-		// 步骤2：将字节数组转换为BitSet（如果bytes为null则返回空BitSet）
 		return Bitmaps.fromBytes(bytes);
 	}
 

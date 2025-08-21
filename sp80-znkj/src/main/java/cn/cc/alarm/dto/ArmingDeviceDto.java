@@ -3,7 +3,7 @@ package cn.cc.alarm.dto;
 /**
  * 设备 DTO。
  */
-public class DeviceDto {
+public class ArmingDeviceDto {
 
 	private Long id;
 	private Long groupId;

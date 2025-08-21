@@ -75,5 +75,5 @@ mybatis:
   type-aliases-package: cn.cc.**.dto
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true # 驼峰命名法问题，等效配置文件

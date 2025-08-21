@@ -9,15 +9,15 @@
 -- 设备表：存储设备基本信息及其所属的布防组
 -- 说明：设备是布防系统的最小单位，每个设备只能归属一个布防组
 -- =====================================================
-drop table IF EXISTS device;
-CREATE TABLE IF NOT EXISTS device (
+drop table IF EXISTS arming_device;
+CREATE TABLE IF NOT EXISTS arming_device (
   id        BIGINT      NOT NULL PRIMARY KEY COMMENT '设备ID，主键',
   group_id  BIGINT      NOT NULL COMMENT '布防组ID，关联arming_group表',
   type_id   BIGINT      NULL COMMENT '设备类型ID，用于设备分类',
   model_id  BIGINT      NULL COMMENT '设备型号ID，用于设备规格',
   name      VARCHAR(64) NULL COMMENT '设备名称，便于识别和管理',
   updated_at TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
-  INDEX idx_device_group_id (group_id) COMMENT '布防组索引，提高查询性能'
+  INDEX idx_arming_device_group_id (group_id) COMMENT '布防组索引，提高查询性能'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='设备信息表';
 
 -- =====================================================
@@ -75,8 +75,8 @@ INSERT INTO arming_group_schedule(group_id, week_bits) VALUES(1, UNHEX(REPEAT('0
   ON DUPLICATE KEY UPDATE week_bits = VALUES(week_bits);
 
 -- 初始化一个测试设备，归属默认布防组
-INSERT INTO device(id, group_id, name) VALUES(10001, 1, '测试设备10001')
-  ON DUPLICATE KEY UPDATE group_id = VALUES(group_id), name = VALUES(name);
+INSERT INTO arming_device(id, group_id, name)VALUES (10001, 1, '测试设备10001')
+ON DUPLICATE KEY UPDATE group_id = VALUES(group_id), name = VALUES(name);
 
 -- =====================================================
 -- 数据说明
