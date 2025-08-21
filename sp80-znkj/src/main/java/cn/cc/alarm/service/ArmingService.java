@@ -360,13 +360,19 @@ public class ArmingService {
 	 */
 	public boolean isArmedAtSlot(long deviceId, int daySlot) {
 		Integer groupId = readDeviceGroup(deviceId);
-		if (groupId == null) return false;
+		if (groupId == null) {
+			return false;
+		}
 		BitSet weekBits = loadWeekBits(groupId);
-		if (weekBits == null || weekBits.isEmpty()) return false;
+		if (weekBits == null || weekBits.isEmpty()) {
+			return false;
+		}
 		int dayIdx = ZonedDateTime.now(zone).getDayOfWeek().getValue() % 7;
 		int weekOffset = dayIdx * 48 + daySlot;
 		boolean baseArmed = weekBits.get(weekOffset);
-		if (!baseArmed) return false;
+		if (!baseArmed) {
+			return false;
+		}
 		BitSet todayMask = loadOrRecoverTodayMask(groupId);
 		return todayMask == null || !todayMask.get(daySlot);
 	}
