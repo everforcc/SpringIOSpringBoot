@@ -20,8 +20,8 @@ public class ArmingRepository {
 		this.mapper = mapper;
 	}
 
-	public Optional<Long> findGroupIdByDeviceId(long deviceId) {
-		return Optional.ofNullable(mapper.findGroupIdByDeviceId(deviceId));
+	public Optional<Long> findGroupIdByDeviceId(long typeId, long deviceId) {
+		return Optional.ofNullable(mapper.findGroupIdByDeviceId(typeId, deviceId));
 	}
 
 	public Optional<byte[]> findWeekBitmapByGroupId(long groupId) {
@@ -29,8 +29,8 @@ public class ArmingRepository {
 		return Optional.ofNullable(dto == null ? null : dto.getWeekBits());
 	}
 
-	public void upsertDeviceGroup(long deviceId, long groupId) {
-		mapper.upsertDeviceGroup(deviceId, groupId);
+	public void upsertDeviceGroup(long deviceId, long typeId, long groupId) {
+		mapper.upsertDeviceGroup(deviceId, typeId, groupId);
 	}
 
 	public void upsertGroupSchedule(long groupId, byte[] weekBits) {

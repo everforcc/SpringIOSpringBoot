@@ -1,5 +1,6 @@
 package cn.cc.alarm.web;
 
+import cn.cc.alarm.dto.bo.ArmingDto;
 import cn.cc.alarm.service.ArmingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,15 +59,17 @@ public class ArmingController {
 	 * @param groupId 布防组ID（请求参数）
 	 * @return 包含操作结果的Map
 	 */
-	@PostMapping("/upsertDeviceGroup")
+	@GetMapping("/upsertDeviceGroup")
 	public Map<String, Object> upsertDeviceGroup(@RequestParam("deviceId") long deviceId,
+												 @RequestParam("typeId") long typeId,
 												 @RequestParam("groupId") long groupId) {
 		// 调用服务层更新设备组关系
-		armingService.upsertDeviceGroup(deviceId, groupId);
+		armingService.upsertDeviceGroup(deviceId, typeId, groupId);
 
 		// 构建返回结果
 		Map<String, Object> result = new HashMap<>();
 		result.put("deviceId", deviceId);
+		result.put("typeId", typeId);
 		result.put("groupId", groupId);
 		result.put("status", "OK");
 		return result;
@@ -131,6 +134,36 @@ public class ArmingController {
 										   @RequestParam(value = "format", required = false, defaultValue = "base64") String format) {
 		// 调用服务层获取周计划
 		String data = armingService.getGroupWeekSchedule(groupId, format);
+
+		// 构建返回结果
+		Map<String, Object> result = new HashMap<>();
+		result.put("groupId", groupId);
+		result.put("format", format);
+		result.put("data", data);
+		return result;
+	}
+
+	/**
+	 * 3.1 查询布防组的今日撤防计划
+	 *
+	 * 接口说明：
+	 * - 支持多种格式的数据返回
+	 * - 便于前端展示和调试
+	 * - 包含组ID和格式信息
+	 *
+	 * 返回格式：
+	 * - "base64"：42字节的Base64编码字符串（默认格式）
+	 * - "01"：336位的01字符串，便于人工查看
+	 *
+	 * @param groupId 布防组ID（路径参数）
+	 * @param format 返回格式，可选值："base64"或"01"，默认为"base64"
+	 * @return 包含周计划数据的Map
+	 */
+	@GetMapping("/schedule/today/{groupId}")
+	public Map<String, Object> getTodaySchedule(@PathVariable("groupId") long groupId,
+										   @RequestParam(value = "format", required = false, defaultValue = "base64") String format) {
+		// 调用服务层获取周计划
+		String data = armingService.getGroupTodaySchedule(groupId, format);
 
 		// 构建返回结果
 		Map<String, Object> result = new HashMap<>();
@@ -236,16 +269,18 @@ public class ArmingController {
 	 * 3. 检查是否被今日临时撤防覆盖
 	 * 4. 综合判断是否需要上报
 	 *
+	 * @param typeId 设备类型ID
 	 * @param deviceId 设备ID（路径参数）
 	 * @return 包含设备ID和判定结果的Map
 	 */
-	@GetMapping("/shouldReport/{deviceId}")
-	public Map<String, Object> shouldReport(@PathVariable("deviceId") long deviceId) {
+	@GetMapping("/shouldReport/{typeId}/{deviceId}")
+	public Map<String, Object> shouldReport(@PathVariable("typeId") long typeId, @PathVariable("deviceId") long deviceId) {
 		// 调用服务层进行事件上报判定
-		boolean shouldReport = armingService.shouldReport(deviceId);
+		boolean shouldReport = armingService.shouldReport(typeId, deviceId);
 
 		// 构建返回结果
 		Map<String, Object> result = new HashMap<>();
+		result.put("typeId", typeId);
 		result.put("deviceId", deviceId);
 		result.put("shouldReport", shouldReport);
 		return result;
@@ -257,10 +292,11 @@ public class ArmingController {
 	 * @param deviceId 设备ID
 	 * @param daySlot 当日槽位 0..47
 	 */
-	@GetMapping("/armedAt/{deviceId}/slot/{daySlot}")
-	public Map<String, Object> isArmedAtSlot(@PathVariable("deviceId") long deviceId,
+	@GetMapping("/armedAt/slot/{typeId}/{deviceId}/{daySlot}")
+	public Map<String, Object> isArmedAtSlot(@PathVariable("typeId") long typeId,
+											 @PathVariable("deviceId") long deviceId,
 										   @PathVariable("daySlot") int daySlot) {
-		boolean armed = armingService.isArmedAtSlot(deviceId, daySlot);
+		boolean armed = armingService.isArmedAtSlot(typeId, deviceId, daySlot);
 		Map<String, Object> result = new HashMap<>();
 		result.put("deviceId", deviceId);
 		result.put("daySlot", daySlot);

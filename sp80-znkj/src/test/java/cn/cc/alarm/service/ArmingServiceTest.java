@@ -249,11 +249,11 @@ public class ArmingServiceTest {
 		// 撤防
 		boolean cf1 = armingService.defuseAtSlot(groupId, slotNow1);
 		BitSet maskAfterDefuse = readMaskFromRedis(groupId);
-		log.info("maskAfterDefuse: {}", maskAfterDefuse);
+		log.info("maskAfterDefuse1: {}", maskAfterDefuse);
 		boolean cf2 = armingService.defuseAtSlot(groupId, slotNow2);
 
 		maskAfterDefuse = readMaskFromRedis(groupId);
-		log.info("maskAfterDefuse: {}", maskAfterDefuse);
+		log.info("maskAfterDefuse2: {}", maskAfterDefuse);
 		log.info("撤防1: {}, 撤防2: {}", cf1, cf2);
 
 		// 布防

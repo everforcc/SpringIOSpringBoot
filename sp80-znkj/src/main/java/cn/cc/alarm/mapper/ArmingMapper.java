@@ -23,8 +23,8 @@ public interface ArmingMapper {
 	 * @param deviceId 设备ID
 	 * @return 组ID，未配置返回null
 	 */
-	@Select("select group_id from arming_device where id = #{deviceId} limit 1")
-	Long findGroupIdByDeviceId(@Param("deviceId") long deviceId);
+	@Select("select group_id from arming_device where type_id = #{typeId} and device_id = #{deviceId} limit 1")
+	Long findGroupIdByDeviceId(@Param("typeId") long typeId, @Param("deviceId") long deviceId);
 
 	/**
 	 * 查询布防组周位图
@@ -34,9 +34,10 @@ public interface ArmingMapper {
 
 	/**
 	 * 写通：新增或更新设备归属组
+	 * todo 这个地方处理看具体新增还是删除，不走逻辑处理
 	 */
-	@Update("INSERT INTO arming_device(id, group_id) VALUES(#{deviceId}, #{groupId}) ON DUPLICATE KEY UPDATE group_id = VALUES(group_id)")
-	void upsertDeviceGroup(@Param("deviceId") long deviceId, @Param("groupId") long groupId);
+	@Update("INSERT INTO arming_device(device_id, type_id, group_id) VALUES(#{deviceId}, #{typeId}, #{groupId}) ON DUPLICATE KEY UPDATE group_id = VALUES(group_id)")
+	void upsertDeviceGroup(@Param("deviceId") long deviceId, @Param("typeId") long typeId, @Param("groupId") long groupId);
 
 	/**
 	 * 写通：新增或更新周位图
@@ -61,7 +62,7 @@ public interface ArmingMapper {
 	 * 
 	 * @return 设备组映射列表
 	 */
-	@Select("select id as deviceId, group_id as groupId from arming_device")
+	@Select("select id as deviceId, type_id typeId, group_id as groupId from arming_device")
 	List<DeviceGroupMapping> findAllDeviceGroupMappings();
 
 	/**
@@ -87,6 +88,7 @@ public interface ArmingMapper {
 	class DeviceGroupMapping {
 		private Long deviceId;
 		private Long groupId;
+		private Long typeId;
 
 		public Long getDeviceId() {
 			return deviceId;
@@ -102,6 +104,14 @@ public interface ArmingMapper {
 
 		public void setGroupId(Long groupId) {
 			this.groupId = groupId;
+		}
+
+		public Long getTypeId() {
+			return typeId;
+		}
+
+		public void setTypeId(Long typeId) {
+			this.typeId = typeId;
 		}
 	}
 

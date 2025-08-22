@@ -77,9 +77,9 @@ public class ArmingService {
 	 * @param deviceId 设备ID
 	 * @return true表示需要上报事件，false表示不需要上报
 	 */
-	public boolean shouldReport(long deviceId) {
+	public boolean shouldReport(long typeId, long deviceId) {
 		// 步骤1：获取设备所属的布防组ID
-		Integer groupId = readDeviceGroup(deviceId);
+		Integer groupId = readDeviceGroup(typeId, deviceId);
 		if (groupId == null) {
 			// 设备未配置布防组，保守返回false（不上报）
 			return false;
@@ -358,8 +358,8 @@ public class ArmingService {
 	 * masked = 今日掩码(daySlot)；
 	 * 返回 baseArmed && !masked。
 	 */
-	public boolean isArmedAtSlot(long deviceId, int daySlot) {
-		Integer groupId = readDeviceGroup(deviceId);
+	public boolean isArmedAtSlot(long typeId, long deviceId, int daySlot) {
+		Integer groupId = readDeviceGroup(typeId, deviceId);
 		if (groupId == null) {
 			return false;
 		}
@@ -384,16 +384,17 @@ public class ArmingService {
 	 * 作用：保证读路径可立即命中最新映射，减少外部一致性依赖。
 	 * 
 	 * @param deviceId 设备ID
+	 * @param typeId 设备类型ID
 	 * @param groupId 布防组ID
 	 */
-	public void upsertDeviceGroup(long deviceId, long groupId) {
+	public void upsertDeviceGroup(long deviceId, long typeId, long groupId) {
 		// 步骤1：先写入MySQL数据库
-		repo.upsertDeviceGroup(deviceId, groupId);
+		repo.upsertDeviceGroup(deviceId, typeId, groupId);
 		
 		// 步骤2：再写入Redis Hash，确保数据一致性
 		redisString.<String, String>opsForHash().put(
 			ArmingKeys.deviceGroupKey(), 
-			String.valueOf(deviceId), 
+			String.valueOf(typeId + ":" + deviceId),
 			String.valueOf(groupId)
 		);
 	}
@@ -426,11 +427,11 @@ public class ArmingService {
 	 * @param deviceId 设备ID
 	 * @return 布防组ID，如果设备未配置则返回null
 	 */
-	private Integer readDeviceGroup(long deviceId) {
+	private Integer readDeviceGroup(long typeId, long deviceId) {
 		// 步骤1：尝试从Redis Hash中读取设备组映射
 		String groupIdStr = redisString.<String, String>opsForHash().get(
 			ArmingKeys.deviceGroupKey(), 
-			String.valueOf(deviceId)
+			String.valueOf(typeId + ":" + deviceId)
 		);
 		
 		if (groupIdStr != null) {
@@ -439,14 +440,14 @@ public class ArmingService {
 		}
 		
 		// 步骤2：Redis未命中，从数据库查询
-		Optional<Long> fromDb = repo.findGroupIdByDeviceId(deviceId);
+		Optional<Long> fromDb = repo.findGroupIdByDeviceId(typeId, deviceId);
 		
 		if (fromDb.isPresent()) {
 			// 数据库命中，回填Redis
 			Long groupId = fromDb.get();
 			redisString.<String, String>opsForHash().put(
 				ArmingKeys.deviceGroupKey(), 
-				String.valueOf(deviceId), 
+				String.valueOf(typeId + ":" + deviceId),
 				String.valueOf(groupId)
 			);
 			return groupId.intValue();
@@ -564,6 +565,44 @@ public class ArmingService {
 		// 返回Base64编码的字符串
 		return Base64.getEncoder().encodeToString(raw);
 	}
+
+	public String getGroupTodaySchedule(long groupId, String format) {
+		// 步骤1：加载组的周位图
+		BitSet bits = loadOrRecoverTodayMask((int) groupId);
+		if (bits == null) {
+			return null;
+		}
+
+		// 步骤2：根据格式要求返回不同形式的字符串
+		if ("01".equalsIgnoreCase(format)) {
+			// 返回48位的01字符串，便于人工查看和调试
+			StringBuilder sb = new StringBuilder(48);
+			for (int i = 0; i < 48; i++) {
+				sb.append(bits.get(i) ? '1' : '0');
+			}
+			return sb.toString();
+		}
+
+		// 默认返回Base64格式，长度固定6字节
+		byte[] raw = bits.toByteArray();
+		if (raw == null) {
+			raw = new byte[0];
+		}
+
+		// 一天的掩码为48位
+		// 确保字节数组长度为6字节（48位需要6字节）
+		if (raw.length != 6) {
+			byte[] fixed = new byte[6];
+			int copy = Math.min(raw.length, 6);
+			// 将raw处理为42位，截取或填充0
+			System.arraycopy(raw, 0, fixed, 0, copy);
+			raw = fixed;
+		}
+
+		// 返回Base64编码的字符串
+		return Base64.getEncoder().encodeToString(raw);
+	}
+
 }
 
 

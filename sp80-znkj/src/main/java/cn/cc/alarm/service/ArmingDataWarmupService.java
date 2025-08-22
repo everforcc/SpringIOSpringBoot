@@ -1,6 +1,7 @@
 package cn.cc.alarm.service;
 
 import cn.cc.alarm.ArmingKeys;
+import cn.cc.alarm.TimeSlotUtils;
 import cn.cc.alarm.repo.ArmingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -88,7 +89,7 @@ public class ArmingDataWarmupService {
 	}
 
 	/**
-	 * 预热设备组映射数据
+	 * 步骤1：预热设备组映射数据
 	 * 
 	 * 预热策略：
 	 * - 从MySQL查询所有设备组关系
@@ -111,7 +112,7 @@ public class ArmingDataWarmupService {
 			for (ArmingMapper.DeviceGroupMapping mapping : mappings) {
 				redisString.<String, String>opsForHash().put(
 					ArmingKeys.deviceGroupKey(),
-					String.valueOf(mapping.getDeviceId()),
+					String.valueOf(mapping.getTypeId() + ":" + mapping.getDeviceId()),
 					String.valueOf(mapping.getGroupId())
 				);
 			}
@@ -123,7 +124,7 @@ public class ArmingDataWarmupService {
 	}
 
 	/**
-	 * 预热组周位图数据
+	 * 步骤2：预热组周位图数据
 	 * 
 	 * 预热策略：
 	 * - 从MySQL查询所有布防组的周位图
@@ -157,7 +158,7 @@ public class ArmingDataWarmupService {
 	}
 
 	/**
-	 * 预热今日掩码数据
+	 * 步骤3：预热今日掩码数据
 	 * 
 	 * 预热策略：
 	 * - 从MySQL查询当日的撤防掩码
@@ -179,7 +180,7 @@ public class ArmingDataWarmupService {
 			}
 			
 			// 计算到午夜的剩余时间，作为TTL
-			Duration ttl = calculateTimeUntilMidnight();
+			Duration ttl = TimeSlotUtils.durationUntilMidnight(zone);
 			
 			// 批量写入Redis String，设置TTL
 			for (ArmingMapper.GroupTodayMask mask : masks) {
@@ -201,9 +202,9 @@ public class ArmingDataWarmupService {
 	 * 
 	 * @return 到午夜的剩余时长
 	 */
-	private Duration calculateTimeUntilMidnight() {
-		ZonedDateTime now = ZonedDateTime.now(zone);
-		ZonedDateTime tomorrowStart = now.toLocalDate().plusDays(1).atStartOfDay(zone);
-		return Duration.between(now, tomorrowStart);
-	}
+//	private Duration calculateTimeUntilMidnight() {
+//		ZonedDateTime now = ZonedDateTime.now(zone);
+//		ZonedDateTime tomorrowStart = now.toLocalDate().plusDays(1).atStartOfDay(zone);
+//		return Duration.between(now, tomorrowStart);
+//	}
 }

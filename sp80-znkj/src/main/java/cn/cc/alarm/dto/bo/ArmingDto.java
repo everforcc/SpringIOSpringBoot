@@ -1,4 +1,4 @@
-package cn.cc.alarm.web;
+package cn.cc.alarm.dto.bo;
 
 /**
  * 布防计划数据传输对象

@@ -7,6 +7,7 @@ import java.util.Base64;
 public class ArmingTest {
 
     /**
+     * FFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FF
      * //8AD/D///8AD/D///8AD/D///8AD/D///8AD/D///8AD/D///8AD/D/
      */
     @Test
@@ -16,15 +17,15 @@ public class ArmingTest {
         for (int d = 0; d < 7; d++) {
             for (int h = 0; h < 24; h++) {
                 if (h < 8) {            // 0-8 布防
-                    sb.append("11");
+                    sb.append("11"); // 11
                 } else if (h < 12) {    // 8-12 撤防
-                    sb.append("00");
+                    sb.append("00"); // 00
                 } else if (h < 14) {    // 12-14 布防
-                    sb.append("11");
+                    sb.append("11"); // 11
                 } else if (h < 18) {    // 14-18 撤防
-                    sb.append("00");
+                    sb.append("00"); // 00
                 } else {                // 18-24 布防
-                    sb.append("11");
+                    sb.append("11"); // 11
                 }
             }
         }
@@ -47,7 +48,13 @@ public class ArmingTest {
             out[i] = (byte) b;
         }
         String base64 = Base64.getEncoder().encodeToString(out);
-        System.out.println(base64);
+        System.out.println("base64: " + base64);
+        // base64转16进制
+        String hex = "";
+        for (byte b : out) {
+            hex += String.format("%02x", b);
+        }
+        System.out.println("hex: " + hex);
 
     }
 
