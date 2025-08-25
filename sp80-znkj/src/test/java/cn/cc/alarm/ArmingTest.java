@@ -21,11 +21,11 @@ public class ArmingTest {
                 } else if (h < 12) {    // 8-12 撤防
                     sb.append("00"); // 00
                 } else if (h < 14) {    // 12-14 布防
-                    sb.append("11"); // 11
+                    sb.append("00"); // 11
                 } else if (h < 18) {    // 14-18 撤防
                     sb.append("00"); // 00
                 } else {                // 18-24 布防
-                    sb.append("11"); // 11
+                    sb.append("00"); // 11
                 }
             }
         }

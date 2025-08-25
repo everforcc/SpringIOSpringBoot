@@ -26,18 +26,20 @@ public interface ArmingMapper {
 	@Select("select group_id from arming_device where type_id = #{typeId} and device_id = #{deviceId} limit 1")
 	Long findGroupIdByDeviceId(@Param("typeId") long typeId, @Param("deviceId") long deviceId);
 
-	/**
-	 * 查询布防组周位图
-	 */
-	@Select("select group_id as groupId, week_bits as weekBits from arming_group_schedule where group_id = #{groupId}")
-	ArmingGroupScheduleDto findGroupSchedule(@Param("groupId") long groupId);
 
 	/**
+	 * 设备操作
 	 * 写通：新增或更新设备归属组
 	 * todo 这个地方处理看具体新增还是删除，不走逻辑处理
 	 */
 	@Update("INSERT INTO arming_device(device_id, type_id, group_id) VALUES(#{deviceId}, #{typeId}, #{groupId}) ON DUPLICATE KEY UPDATE group_id = VALUES(group_id)")
 	void upsertDeviceGroup(@Param("deviceId") long deviceId, @Param("typeId") long typeId, @Param("groupId") long groupId);
+
+	/**
+	 * 查询布防组周位图
+	 */
+	@Select("select group_id as groupId, week_bits as weekBits from arming_group_schedule where group_id = #{groupId}")
+	ArmingGroupScheduleDto findGroupSchedule(@Param("groupId") long groupId);
 
 	/**
 	 * 写通：新增或更新周位图

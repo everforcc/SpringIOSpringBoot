@@ -149,6 +149,10 @@ public final class Bitmaps {
 			while (right + 1 < 48) {
 				boolean rightArmedBySchedule = dayBits.get(right + 1);
 				boolean rightArmedByMask = existingMask != null && existingMask.get(right + 1);
+				// 左边是布防，右边是空，则++
+				// 左边是布防，右边是不撤防，则++
+				// 左边是布防，右边是撤防，则退出
+				// 左边是撤防，则退出
 				boolean rightArmed = rightArmedBySchedule && !rightArmedByMask;
 				if (!rightArmed) {
 					break;
