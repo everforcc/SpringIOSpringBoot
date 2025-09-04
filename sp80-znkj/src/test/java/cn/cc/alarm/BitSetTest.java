@@ -1,5 +1,6 @@
 package cn.cc.alarm;
 
+import com.alibaba.fastjson.JSONArray;
 import org.junit.Test;
 
 import java.util.BitSet;
@@ -31,6 +32,15 @@ public class BitSetTest {
             System.out.println("不等于nullstr");
         }
 
+    }
+
+    @Test
+    public void testAry(){
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(1);
+        jsonArray.add(2);
+        jsonArray.add(3);
+        System.out.println(jsonArray.toString());
     }
 
 }

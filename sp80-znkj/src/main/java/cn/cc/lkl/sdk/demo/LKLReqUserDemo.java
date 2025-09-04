@@ -1,6 +1,7 @@
-package cn.cc.lkl.sdk;
+package cn.cc.lkl.sdk.demo;
 
 import cn.cc.lkl.dto.CommonRequestDTO;
+import cn.cc.lkl.sdk.config.LKLConfigDemo;
 import com.alibaba.fastjson.JSONObject;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;

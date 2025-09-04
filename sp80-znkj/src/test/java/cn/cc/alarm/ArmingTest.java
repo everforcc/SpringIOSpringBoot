@@ -7,6 +7,7 @@ import java.util.Base64;
 public class ArmingTest {
 
     /**
+     * 生成周位图
      * FFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FFFFFF000FF0FF
      * //8AD/D///8AD/D///8AD/D///8AD/D///8AD/D///8AD/D///8AD/D/
      */
@@ -21,11 +22,11 @@ public class ArmingTest {
                 } else if (h < 12) {    // 8-12 撤防
                     sb.append("00"); // 00
                 } else if (h < 14) {    // 12-14 布防
-                    sb.append("00"); // 11
+                    sb.append("11"); // 11
                 } else if (h < 18) {    // 14-18 撤防
                     sb.append("00"); // 00
                 } else {                // 18-24 布防
-                    sb.append("00"); // 11
+                    sb.append("11"); // 11
                 }
             }
         }
@@ -58,6 +59,11 @@ public class ArmingTest {
 
     }
 
+    /**
+     * 测试
+     * b |= (1 << k);
+     * 处理操作
+     */
     @Test
     public void test0() {
         String bits01 = "10111111";
@@ -80,19 +86,22 @@ public class ArmingTest {
             out[i] = (byte) b;
             System.out.println("byte-b:" + b);
             System.out.println("---------------------------");
-            int intB = b&0xFF;
+            int intB = b & 0xFF;
             System.out.println("intB:" + intB);
             String binaryB = Integer.toBinaryString(intB);
             System.out.println("---------------------------");
             System.out.println("binary 和字符串8位 左右位置被翻转");
             System.out.println("binaryB:" + binaryB);
-            for(int j = 0; j < 8; j++){
-                int bj =(b >> (j % 8)) & 1;
+            for (int j = 0; j < 8; j++) {
+                int bj = (b >> (j % 8)) & 1;
                 System.out.println("bj:" + bj);
             }
         }
     }
 
+    /**
+     * base64转对应的周位图
+     */
     @Test
     public void base64ToStr() {
         String base64 = "//8AD/D///8AD/D///8AD/D///8AD/D///8AD/D///8AD/D///8AD/D/"; // 42字节的Base64

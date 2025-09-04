@@ -1,4 +1,4 @@
-package cn.cc;
+package cn.cc.huifu;
 
 import cn.cc.huifu.dto.ZnPayOrderRecord;
 import cn.cc.huifu.refund.service.IRefundService;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @SpringBootTest
-class Sp80ZnkjApplicationTests {
+class ZnkjHuiFuTests {
 
     @Resource
     IRefundService iRefundService;

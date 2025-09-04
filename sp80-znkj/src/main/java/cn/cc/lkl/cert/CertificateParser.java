@@ -2,11 +2,14 @@ package cn.cc.lkl.cert;
 
 import cn.cc.lkl.util.CertUtil;
 
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 
+/**
+ * 签名格式化
+ */
 public class CertificateParser {
 
     /**
@@ -71,42 +74,42 @@ public class CertificateParser {
 
     public static void main(String[] args) throws Exception {
         System.out.println("=== 证书转换和解析测试 ===");
-        
+
         // 测试1：证书转换
         System.out.println("测试1：证书转换");
         System.out.println("步骤1：将多行证书转换为单行格式（用于存储）");
         String singleLineCert = CertUtil.convertToSingleLine(lklCerStr);
         System.out.println("单行格式：");
         System.out.println(singleLineCert);
-        
+
         System.out.println("\n步骤2：将单行格式转换为标准格式（用于解析）");
         String standardCert = CertUtil.convertToStandardFormat(singleLineCert);
         System.out.println("标准格式：");
         System.out.println(standardCert);
-        
+
         System.out.println("\n步骤3：解析证书");
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         X509Certificate cert = (X509Certificate) cf.generateCertificate(
                 new ByteArrayInputStream(standardCert.getBytes(StandardCharsets.UTF_8))
         );
-        
+
         System.out.println("证书解析成功！");
         System.out.println("主体：" + cert.getSubjectDN());
         System.out.println("颁发者：" + cert.getIssuerDN());
         System.out.println("有效期至：" + cert.getNotAfter());
-        
+
         // 测试2：私钥转换
         System.out.println("\n\n=== 私钥转换和解析测试 ===");
         System.out.println("步骤1：将多行私钥转换为单行格式（用于存储）");
         String singleLinePriKey = CertUtil.convertToSingleLine(priKeyStr);
         System.out.println("单行格式：");
         System.out.println(singleLinePriKey);
-        
+
         System.out.println("\n步骤2：将单行格式转换为标准格式（用于解析）");
         String standardPriKey = CertUtil.convertToStandardFormat(singleLinePriKey);
         System.out.println("标准格式：");
         System.out.println(standardPriKey);
-        
+
         System.out.println("\n步骤3：解析私钥");
         try {
             // 注意：私钥不能直接用CertificateFactory解析，这里只是演示格式转换

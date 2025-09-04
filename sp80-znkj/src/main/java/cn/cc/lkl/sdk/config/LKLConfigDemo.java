@@ -1,4 +1,4 @@
-package cn.cc.lkl.sdk;
+package cn.cc.lkl.sdk.config;
 
 import cn.cc.lkl.dto.CommonRequestDTO;
 import cn.cc.lkl.util.CertUtil;
@@ -17,7 +17,7 @@ public class LKLConfigDemo {
      * 接入方唯一编号
      * 拉卡拉开放平台进行配置开通
      */
-    private static final String appId = "OP00000003";
+    public static final String appId = "OP00000003";
 
 
     /**
@@ -59,7 +59,7 @@ public class LKLConfigDemo {
     public static final String serverUrl = "https://test.wsmsd.cn/sit";
 
 
-    private static final String sm4Key = "如果需要密文传输请申请拉卡拉SM4密钥";
+    private static final String sm4Key = "LHo55AjrT4aDhAIBZhb5KQ==";
 
     // OP00000003_cert.cer 给lkl配置
 
@@ -216,7 +216,7 @@ public class LKLConfigDemo {
 //        config.setLklCer(lklNotifyCerStr);
 //        config.setLklNotifyCer(lklNotifyCerStr);
         config.setServerUrl(serverUrl);
-//        config.setSm4Key(sm4Key);
+        config.setSm4Key(sm4Key);
         return LKLSDK.init(config);
     }
 
