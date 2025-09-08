@@ -1,6 +1,6 @@
-package cn.cc.lkl.sdk.demo;
+package cn.cc.lkl.demo;
 
-import cn.cc.lkl.sdk.config.LKLConfigDemo;
+import cn.cc.lkl.sdk.config.LKLConfig;
 import com.alibaba.fastjson.JSONObject;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;
@@ -9,6 +9,8 @@ import com.lkl.laop.sdk.request.V3LabsTransMicropayRequest;
 import com.lkl.laop.sdk.request.model.V3LabsTradeLocationInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,17 +21,17 @@ import java.util.Date;
 @Slf4j
 public class LKLReqSDKDemo {
 
-    public static void main(String[] args) {
+    @Before
+    public void pre() {
         try {
-            LKLConfigDemo.demoConfig4();
-//            demoReq2();
-            demoReqV2Upload();
-        } catch (SDKException | IOException e) {
+            LKLConfig.initSDK();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void demoReqV2Upload() throws SDKException, IOException {
+    @Test
+    public void demoReqV2Upload() throws SDKException, IOException {
 
         V2MmsOpenApiUploadFileRequest commRequest = new V2MmsOpenApiUploadFileRequest();
         commRequest.setOrderNo((new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date()));
@@ -50,6 +52,7 @@ public class LKLReqSDKDemo {
      *
      * @throws SDKException
      */
+    @Test
     public static void demoReq2() throws SDKException {
 
         V3LabsTransMicropayRequest commRequest = new V3LabsTransMicropayRequest();

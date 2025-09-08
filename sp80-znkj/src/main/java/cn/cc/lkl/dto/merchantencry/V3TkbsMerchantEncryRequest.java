@@ -1,19 +1,17 @@
 package cn.cc.lkl.dto.merchantencry;
 
+import cn.cc.lkl.dto.LKLBaseRequest;
+import cn.cc.lkl.enums.FunctionCodeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.validation.constraints.*;
-
-import com.lkl.laop.sdk.request.V3CommRequest;
-import com.lkl.laop.sdk.utils.JsonUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -21,10 +19,7 @@ import java.util.Set;
  * 依据 docs/lkl/接口文档/新增商户进件.md 定义生成
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class V3TkbsMerchantEncryRequest {
+public class V3TkbsMerchantEncryRequest extends LKLBaseRequest {
 
     // === 基本信息 ===
     @NotNull
@@ -251,12 +246,9 @@ public class V3TkbsMerchantEncryRequest {
     @JsonProperty("contract_no")
     private String contractNo; // 电子合同编号（可选）
 
-    public String toBody() {
-        Map<String, Object> param = new HashMap();
-        param.put("req_time", (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date()));
-        param.put("version", "3.0");
-        param.put("req_data", this);
-        return JsonUtils.toJSONString(param);
+    @Override
+    public FunctionCodeEnum getFunctionCode() {
+        return FunctionCodeEnum.API_V3_TKBS_MERCHANT_ENCRY;
     }
 
 }

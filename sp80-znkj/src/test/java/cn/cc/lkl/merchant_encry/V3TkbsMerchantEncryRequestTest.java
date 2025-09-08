@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto;
+package cn.cc.lkl.merchant_encry;
 
 import cn.cc.config.JsonUtil;
 import cn.cc.lkl.dto.merchantencry.V3TkbsMerchantEncryRequest;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * 商户进件
+ */
 @Slf4j
 public class V3TkbsMerchantEncryRequestTest {
 

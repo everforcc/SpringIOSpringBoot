@@ -1,8 +1,6 @@
 package cn.cc.lkl.sdk.config;
 
-import cn.cc.lkl.dto.CommonRequestDTO;
 import cn.cc.lkl.util.CertUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.lkl.laop.sdk.Config;
 import com.lkl.laop.sdk.Config2;
 import com.lkl.laop.sdk.LKLSDK;
@@ -164,7 +162,6 @@ public class LKLConfigDemo {
     public static void main(String[] args) {
         try {
             demoConfig4();
-            demoOrganizationParentCode(serverUrl);
         } catch (SDKException e) {
             e.printStackTrace();
         }
@@ -216,21 +213,11 @@ public class LKLConfigDemo {
 //        config.setLklCer(lklNotifyCerStr);
 //        config.setLklNotifyCer(lklNotifyCerStr);
         config.setServerUrl(serverUrl);
-        config.setSm4Key(sm4Key);
+//        config.setSm4Key(sm4Key);
         return LKLSDK.init(config);
     }
 
-    public static void demoOrganizationParentCode(String serverUrl) throws SDKException {
-        CommonRequestDTO commRequest = new CommonRequestDTO();
 
-        JSONObject reqData = new JSONObject();
-        reqData.put("parent_code", "991000");
-        reqData.put("org_code", 1951582);
-        commRequest.setReq_data(reqData);
-        String response = LKLSDK.httpPost(serverUrl + "/api/v3/tkbs/organization_parent_code", JSONObject.toJSONString(commRequest));
-
-        log.info("response: \r\n{}", response);
-    }
 
     /**
      * 官方给的示例请求

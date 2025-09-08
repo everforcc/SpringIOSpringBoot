@@ -15,6 +15,4 @@ public class Sp80ZnkjApplication {
         SpringApplication.run(Sp80ZnkjApplication.class, args);
     }
 
- 
-
 }
