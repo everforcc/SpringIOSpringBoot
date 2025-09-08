@@ -11,6 +11,13 @@ import com.lkl.laop.sdk.exception.SDKException;
 public class LKLConfig {
 
     /**
+     * 开放平台鉴权机构
+     * 测试环境填1
+     * 200028
+     */
+    public static final String org_code = "200028";
+
+    /**
      * 接入方唯一编号
      * 拉卡拉开放平台进行配置开通
      */

@@ -6,8 +6,10 @@ import cn.cc.lkl.sdk.config.LKLConfig;
 import com.alibaba.fastjson.JSON;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class LKLPost {
 
@@ -18,6 +20,7 @@ public class LKLPost {
     public static LKLCommonResponse httpPostWithSm4(LKLBaseRequest lklBaseRequest, boolean reqEncrypt, boolean respDecrypt) {
         try {
             String body = lklBaseRequest.toBody();
+            log.info("请求参数: {}", body);
             if (reqEncrypt) {
                 body = LKLSDK.sm4Encrypt(lklBaseRequest.toBody(), LKLConfig.appId);
             }
