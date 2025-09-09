@@ -4,7 +4,9 @@ import cn.cc.config.JsonUtil;
 import cn.cc.lkl.dto.LKLCommonResponse;
 import cn.cc.lkl.dto.merchantencry.V3TkbsMerchantEncryRequest;
 import cn.cc.lkl.sdk.config.LKLConfig;
+import cn.cc.lkl.util.DateUtils;
 import cn.cc.lkl.util.LKLPost;
+import cn.cc.lkl.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lkl.laop.sdk.exception.SDKException;
@@ -31,7 +33,7 @@ public class V3TkbsMerchantEncryRequestTest {
         }
     }
 
-    String filePath = "C:/cc/code/gitee/SpringIOSpringBoot/sp80-znkj/docs/lkl/接口文档/test/V3TkbsMerchantEncryRequestTest.json";
+    String filePath = "C:/cc/code/gitee/SpringIOSpringBoot/sp80-znkj/docs/lkl/接口文档/test/lkl-商户进件入参-gkl.json";
 
     /**
      * 测试商户进件请求
@@ -49,7 +51,8 @@ public class V3TkbsMerchantEncryRequestTest {
             json = new String(Files.readAllBytes(Paths.get(filePath)));
             // json转V3TkbsMerchantEncryRequest
             JSONObject jsonObject = JSON.parseObject(json);
-
+            jsonObject.put("timestamp", DateUtils.getTimeStamp());
+            jsonObject.put("req_id", StringUtils.getSerialNumber());
             V3TkbsMerchantEncryRequest request = JsonUtil.fromJson(jsonObject.getString("req_data"), V3TkbsMerchantEncryRequest.class);
 
             LKLCommonResponse response4 = LKLPost.httpPostWithSm4(request, true, true);

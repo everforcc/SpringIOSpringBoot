@@ -1,7 +1,7 @@
-package cn.cc.lkl.merchantinfo;
+package cn.cc.lkl.merchantquery;
 
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.dto.merchantinfo.V3TkbsOpenMerchantInfoRequest;
+import cn.cc.lkl.dto.merchantquery.V3TkbsOpenMerchantInfoRequest;
 import cn.cc.lkl.sdk.config.LKLConfig;
 import cn.cc.lkl.util.LKLPost;
 import com.lkl.laop.sdk.exception.SDKException;
@@ -24,9 +24,9 @@ public class V3TkbsOpenMerchantInfoRequestTest {
     @Test
     public void testOpenMerchantInfo() {
         V3TkbsOpenMerchantInfoRequest request = new V3TkbsOpenMerchantInfoRequest();
-        request.setOrgCode("200028");
-//        request.setMerchantNo("822");
-        request.setCustomerNo("100143716");
+        request.setOrgCode("1951582");
+//        request.setMerchantNo("100143767");
+        request.setCustomerNo("100143785");
         LKLCommonResponse response = LKLPost.httpPostWithSm4(request, true, true);
         log.info("response:{}", response);
         log.info("response.isSuccess:{}", response.isSuccess());
