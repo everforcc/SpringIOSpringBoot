@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto.merchantencry;
+package cn.cc.lkl.dto.merchant;
 
 import cn.cc.lkl.dto.LKLBaseRequest;
 import cn.cc.lkl.enums.FunctionCodeEnum;

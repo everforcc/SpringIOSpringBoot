@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto.merchantencry;
+package cn.cc.lkl.dto.merchant;
 
 import cn.cc.lkl.dto.LKLBaseRequest;
 import cn.cc.lkl.enums.FunctionCodeEnum;
@@ -11,8 +11,11 @@ import lombok.Data;
  */
 @Data
 public class V3MmsOpenApiEcApplyRequest extends LKLBaseRequest {
+
+    // todo
+
     @Override
     public FunctionCodeEnum getFunctionCode() {
-        return null;
+        return FunctionCodeEnum.API_V3_MMS_OPEN_API_EC_APPLY;
     }
 }

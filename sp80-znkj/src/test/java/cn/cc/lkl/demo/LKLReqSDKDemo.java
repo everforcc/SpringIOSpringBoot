@@ -1,5 +1,6 @@
 package cn.cc.lkl.demo;
 
+import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.sdk.config.LKLConfig;
 import com.alibaba.fastjson.JSONObject;
 import com.lkl.laop.sdk.LKLSDK;
@@ -19,16 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Slf4j
-public class LKLReqSDKDemo {
-
-    @Before
-    public void pre() {
-        try {
-            LKLConfig.initSDK();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public class LKLReqSDKDemo extends LKLBaseTest {
 
     @Test
     public void demoReqV2Upload() throws SDKException, IOException {

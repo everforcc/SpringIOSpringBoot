@@ -1,14 +1,12 @@
-package cn.cc.lkl.merchant_encry;
+package cn.cc.lkl.merchant;
 
+import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.dto.merchantencry.V3TkbsCustomerFileUploadRequest;
-import cn.cc.lkl.sdk.config.LKLConfig;
+import cn.cc.lkl.dto.merchant.V3TkbsCustomerFileUploadRequest;
 import cn.cc.lkl.util.LKLPost;
 import com.alibaba.fastjson.JSONObject;
-import com.lkl.laop.sdk.exception.SDKException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,16 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Slf4j
-public class V3TkbsCustomerFileUploadRequestTest {
-
-    @Before
-    public void pre() {
-        try {
-            LKLConfig.initSDK();
-        } catch (SDKException e) {
-            e.printStackTrace();
-        }
-    }
+public class V3TkbsCustomerFileUploadRequestTest extends LKLBaseTest {
 
     @Test
     public void test() {
@@ -35,7 +24,7 @@ public class V3TkbsCustomerFileUploadRequestTest {
             request.setFileBase64(fileBase64);
             request.setImgType("CHECKSTAND_IMG");
             LKLCommonResponse lklCommonResponse = LKLPost.httpPost(request);
-            if (lklCommonResponse.isSuccess()) {
+            if (lklCommonResponse.resultSuccess()) {
                 log.info("response 成功: \r\n{}", lklCommonResponse);
             } else {
                 log.info("response 失败: \r\n{}", lklCommonResponse);

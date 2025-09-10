@@ -1,17 +1,16 @@
-package cn.cc.lkl.merchant_encry;
+package cn.cc.lkl.merchant;
 
 import cn.cc.config.JsonUtil;
+import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.dto.merchantencry.V3TkbsMerchantEncryRequest;
-import cn.cc.lkl.sdk.config.LKLConfig;
+import cn.cc.lkl.dto.merchant.V3TkbsMerchantEncryRequest;
 import cn.cc.lkl.util.DateUtils;
 import cn.cc.lkl.util.LKLPost;
+import cn.cc.lkl.util.LoadFileUtil;
 import cn.cc.lkl.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.lkl.laop.sdk.exception.SDKException;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -22,16 +21,7 @@ import java.nio.file.Paths;
  * 商户进件
  */
 @Slf4j
-public class V3TkbsMerchantEncryRequestTest {
-
-    @Before
-    public void pre() {
-        try {
-            LKLConfig.initSDK();
-        } catch (SDKException e) {
-            e.printStackTrace();
-        }
-    }
+public class V3TkbsMerchantEncryRequestTest extends LKLBaseTest {
 
     String filePath = "C:/cc/code/gitee/SpringIOSpringBoot/sp80-znkj/docs/lkl/接口文档/test/lkl-商户进件入参-gkl.json";
 
@@ -48,17 +38,17 @@ public class V3TkbsMerchantEncryRequestTest {
 
         String json = null;
         try {
-            json = new String(Files.readAllBytes(Paths.get(filePath)));
+            json = LoadFileUtil.loadJsonFromResource("进件/lkl-商户进件入参-gkl.json");
             // json转V3TkbsMerchantEncryRequest
             JSONObject jsonObject = JSON.parseObject(json);
             jsonObject.put("timestamp", DateUtils.getTimeStamp());
             jsonObject.put("req_id", StringUtils.getSerialNumber());
             V3TkbsMerchantEncryRequest request = JsonUtil.fromJson(jsonObject.getString("req_data"), V3TkbsMerchantEncryRequest.class);
 
-            LKLCommonResponse response4 = LKLPost.httpPostWithSm4(request, true, true);
+            LKLCommonResponse response4 = LKLPost.httpPost(request, true, true);
 
             log.info("commonResponseDTO: \r\n{}", response4);
-            log.info("isSuccess: \r\n{}", response4.isSuccess());
+            log.info("isSuccess: \r\n{}", response4.resultSuccess());
             log.info("getRespData: \r\n{}", response4.getRespData());
 
         } catch (IOException e) {
@@ -91,7 +81,8 @@ public class V3TkbsMerchantEncryRequestTest {
      */
     @Test
     public void testResponse() throws Exception {
-        String response = "{\"code\":\"000000\",\"msg\":\"SUCCESS\",\"resp_data\":{\"merchant_no\":\"100143527\",\"status\":\"WAIT_AUDI\",\"state\":\"1\"}}";
+        String response = LoadFileUtil.loadJsonFromResource("进件/进件返回示例.json");
+        log.info("response: \r\n{}", response);
         LKLCommonResponse LKLCommonResponse = JsonUtil.fromJson(response, LKLCommonResponse.class);
         log.info("commonResponseDTO: \r\n{}", LKLCommonResponse);
         String s = LKLCommonResponse.getRespData().toString();

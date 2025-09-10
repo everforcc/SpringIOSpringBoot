@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * https://o.lakala.com/p/#/document/detail?id=1060
- * 商户审核状态查询
+ * 商户信息变更 -> 商户审核状态查询
  */
 @Data
 public class V3TkbsCustomerUpdateReviewRequest extends LKLBaseRequest {

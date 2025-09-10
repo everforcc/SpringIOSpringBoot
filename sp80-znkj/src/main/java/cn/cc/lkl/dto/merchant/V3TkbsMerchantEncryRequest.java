@@ -1,12 +1,9 @@
-package cn.cc.lkl.dto.merchantencry;
+package cn.cc.lkl.dto.merchant;
 
 import cn.cc.lkl.dto.LKLBaseRequest;
 import cn.cc.lkl.enums.FunctionCodeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

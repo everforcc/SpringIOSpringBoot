@@ -1,0 +1,10 @@
+{
+  "ver": "1.0.0",
+  "timestamp": "${timestamp}",
+  "reqId": "${reqId}",
+  "reqData": {
+    "merchantNo": "8224910581208RL",
+    "tradeMode": "ALIPAY",
+    "subMerchantId": "808107443"
+  }
+}

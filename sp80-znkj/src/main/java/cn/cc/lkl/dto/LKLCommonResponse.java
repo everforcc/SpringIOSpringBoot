@@ -43,7 +43,7 @@ public class LKLCommonResponse {
     @JsonProperty("resp_data")
     private Object respData;
 
-    public boolean isSuccess() {
+    public boolean resultSuccess() {
         return "000000".equals(code);
     }
 

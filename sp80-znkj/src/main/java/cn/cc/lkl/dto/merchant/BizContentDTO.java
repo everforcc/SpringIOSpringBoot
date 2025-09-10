@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto.merchantencry;
+package cn.cc.lkl.dto.merchant;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.*;

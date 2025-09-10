@@ -1,33 +1,24 @@
 package cn.cc.lkl.transpreorder;
 
+import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.sdk.config.LKLConfig;
 import cn.cc.lkl.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;
 import com.lkl.laop.sdk.request.V3LabsTransPreorderRequest;
-import com.lkl.laop.sdk.request.model.V3LabsTradeAccBusiFieldInfo;
 import com.lkl.laop.sdk.request.model.V3LabsTradeLocationInfo;
 import com.lkl.laop.sdk.request.model.V3LabsTradePreorderAlipayBus;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Random;
-
+/**
+ * https://o.lakala.com/#/home/document/detail?id=110
+ * 聚合主扫
+ */
 @Slf4j
-public class V3LabsTransPreorderRequestTest {
-
-    @Before
-    public void pre() {
-        try {
-            LKLConfig.initSDK();
-        } catch (SDKException e) {
-            e.printStackTrace();
-        }
-    }
+public class V3LabsTransPreorderRequestTest extends LKLBaseTest {
 
     @Test
     public void test(){
@@ -55,7 +46,7 @@ public class V3LabsTransPreorderRequestTest {
             String response = LKLSDK.httpPost(request);
             LKLCommonResponse lklCommonResponse = JSON.parseObject(response, LKLCommonResponse.class);
             log.info("获取支付信息: {}", lklCommonResponse);
-            if (!lklCommonResponse.isSuccess()) {
+            if (!lklCommonResponse.resultSuccess()) {
                 log.info("获取支付信息失败: {}", lklCommonResponse.getMsg());
                 return;
             }
@@ -65,8 +56,6 @@ public class V3LabsTransPreorderRequestTest {
             JSONObject jsonObject = JSONObject.parseObject(respData.toString());
 //            JSONObject jsonObject = JSONObject.parseObject();
             log.info("获取支付信息成功: {}", jsonObject);
-
-
         } catch (SDKException e) {
             e.printStackTrace();
         }

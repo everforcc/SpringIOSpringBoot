@@ -1,0 +1,93 @@
+{
+  "req_data": {
+    "email": "718497737@qq.com",
+    "latitude": "113.424257",
+    "longtude": "34.443572",
+    "source": "H5",
+    "org_code": 1951582,
+    "user_no": 29153396,
+    "busi_code": "JHPAY",
+    "mer_reg_name": "CC转发进件测试",
+    "mer_type": "TP_PERSONAL",
+    "mer_name": "CC转发进件测试",
+    "mer_addr": "河南省郑州市管城回族区紫辰路正商华祥国际大厦B座19楼",
+    "province_code": "4900",
+    "city_code": "4910",
+    "county_code": "984910",
+    "license_name": "",
+    "license_no": "",
+    "license_dt_start": "",
+    "license_dt_end": "",
+    "business_content": "物联网开发平台",
+    "lar_name": "郭凯龙",
+    "lar_id_type": "01",
+    "lar_id_card": "41018219960126531X",
+    "lar_id_card_start": "2017-06-19",
+    "lar_id_card_end": "2027-06-19",
+    "contact_mobile": "15738573601",
+    "contact_name": "郭凯龙",
+    "openning_bank_code": "104491068066",
+    "openning_bank_name": "河南中南科技",
+    "clearing_bank_code": "104100000004",
+    "settle_province_code": "41",
+    "settle_province_name": "河南省",
+    "settle_city_code": "4910",
+    "settle_city_name": "郑州市",
+    "account_no": "6217898000003447322",
+    "account_name": "郭凯龙",
+    "account_type": "58",
+    "account_id_card": "41018219960126531X",
+    "account_id_dt_start": "2017-06-19",
+    "account_id_dt_end": "2027-06-19",
+    "biz_content": {
+      "mcc": "11002",
+      "term_num": "1",
+      "fees": [
+        {
+          "fee_code": "UNIONPAY_WALLET_CREDIT_FEE",
+          "fee_value": 0.6
+        },
+        {
+          "fee_code": "WECHAT",
+          "fee_value": 0.6
+        },
+        {
+          "fee_code": "ALIPAY",
+          "fee_value": 0.6
+        },
+        {
+          "fee_code": "SCAN_PAY",
+          "fee_value": 0.6
+        },
+        {
+          "fee_code": "CREDIT_CARD",
+          "fee_value": 0.6
+        },
+        {
+          "fee_code": "DEBIT_CARD",
+          "fee_value": 0.38,
+          "top_fee": 20.0
+        },
+        {
+          "fee_code": "UNIONPAY_WALLET_DEBIT_FEE",
+          "fee_value": 0.38,
+          "top_fee": 20.0
+        }
+      ],
+      "activity_id": 37
+    },
+    "attchments": [
+      {
+        "id": "merchant/imgages/20250909155042488552SHOP_OUTSIDE_IMG.jpeg",
+        "type": "SHOP_OUTSIDE_IMG"
+      },
+      {
+        "id": "merchant/imgages/20250909155321947352CHECKSTAND_IMG.jpeg",
+        "type": "CHECKSTAND_IMG"
+      }
+    ],
+    "settle_type": "D1"
+  },
+  "version": "3.0",
+  "req_time": "20250909153638"
+}

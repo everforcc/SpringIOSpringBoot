@@ -1,25 +1,18 @@
 package cn.cc.lkl.merchantquery;
 
+import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
 import cn.cc.lkl.dto.merchantquery.V3TkbsOpenMerchantInfoRequest;
-import cn.cc.lkl.sdk.config.LKLConfig;
 import cn.cc.lkl.util.LKLPost;
-import com.lkl.laop.sdk.exception.SDKException;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 获取商户信息
+ * https://o.lakala.com/p/#/document/detail?id=1089
+ */
 @Slf4j
-public class V3TkbsOpenMerchantInfoRequestTest {
-
-    @Before
-    public void pre() {
-        try {
-            LKLConfig.initSDK();
-        } catch (SDKException e) {
-            e.printStackTrace();
-        }
-    }
+public class V3TkbsOpenMerchantInfoRequestTest extends LKLBaseTest {
 
     @Test
     public void testOpenMerchantInfo() {
@@ -27,9 +20,9 @@ public class V3TkbsOpenMerchantInfoRequestTest {
         request.setOrgCode("1951582");
 //        request.setMerchantNo("100143767");
         request.setCustomerNo("100143785");
-        LKLCommonResponse response = LKLPost.httpPostWithSm4(request, true, true);
+        LKLCommonResponse response = LKLPost.httpPost(request, true, true);
         log.info("response:{}", response);
-        log.info("response.isSuccess:{}", response.isSuccess());
+        log.info("response.isSuccess:{}", response.resultSuccess());
         log.info("response.getRespData:{}", response.getRespData());
     }
 
