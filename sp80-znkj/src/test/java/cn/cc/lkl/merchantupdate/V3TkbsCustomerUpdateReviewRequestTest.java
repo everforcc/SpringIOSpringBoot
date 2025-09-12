@@ -1,6 +1,8 @@
-package cn.cc.lkl.merchantquery;
+package cn.cc.lkl.merchantupdate;
 
+import cn.cc.lkl.dto.LKLCommonResponse;
 import cn.cc.lkl.dto.merchantupdate.V3TkbsCustomerUpdateReviewRequest;
+import cn.cc.lkl.util.LKLPost;
 import org.junit.Test;
 
 /**
@@ -14,6 +16,9 @@ public class V3TkbsCustomerUpdateReviewRequestTest {
         V3TkbsCustomerUpdateReviewRequest request = new V3TkbsCustomerUpdateReviewRequest();
         request.setRevieRelatedId("");
         request.setOrgCode("");
+        LKLCommonResponse lklCommonResponse = LKLPost.httpPost(request);
+
+
     }
 
 }

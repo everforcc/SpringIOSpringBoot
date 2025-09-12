@@ -1,8 +1,9 @@
-package cn.cc.lkl;
+package cn.cc.lkl.demo;
 
+import cn.cc.lkl.util.LoadFileUtil;
 import org.junit.Test;
 
-public class LKLTest {
+public class LKLDebugTest {
 
     /**
      * 原先请求失败的时候解析字符串用的，现在不需要了
@@ -10,7 +11,8 @@ public class LKLTest {
     @Test
     public void t1() {
 
-        String str = "请求响应失败：{\"code\":\"OP90001\",\"msg\":\"请求服务失败【无效请求(请求角色【AGENT】无访问权限，联系相关人员开通)】\"}";
+        String str = LoadFileUtil.loadJsonFromResource("调试/参数错误.json");
+        System.out.println(str);
         // 将str截取为json字符串
         String json = str.substring(str.indexOf("{"), str.lastIndexOf("}") + 1);
         System.out.println(json);

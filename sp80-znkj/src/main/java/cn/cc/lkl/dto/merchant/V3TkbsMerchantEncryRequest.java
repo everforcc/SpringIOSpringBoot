@@ -220,7 +220,7 @@ public class V3TkbsMerchantEncryRequest extends LKLBaseRequest {
 
     @NotNull
     @JsonProperty("attchments")
-    private Set<AttachmentDTO> attchments; // 附件信息集合
+    private Set<V3AttachmentDTO> attchments; // 附件信息集合
 
     @NotBlank
     @Size(max = 10)

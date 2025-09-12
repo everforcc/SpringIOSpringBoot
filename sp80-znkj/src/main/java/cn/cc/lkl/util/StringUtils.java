@@ -11,4 +11,9 @@ public class StringUtils {
         return randomNum + "";
     }
 
+    // 获得uuid
+    public static String getUUID() {
+        return java.util.UUID.randomUUID().toString().replace("-", "");
+    }
+
 }

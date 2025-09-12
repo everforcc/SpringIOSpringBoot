@@ -1,0 +1,9 @@
+{
+  "code": "000000",
+  "msg": "成功",
+  "resp_data": {
+    "order_no": "e0a1d6f8dbca4ee99dddf8a805778d37",
+    "result_url": "https://jrt.wsmsd.cn/signature/s/3znie2iqu2xozxoq?rdm=1757576366888",
+    "ec_apply_id": 1018546299873976320
+  }
+}

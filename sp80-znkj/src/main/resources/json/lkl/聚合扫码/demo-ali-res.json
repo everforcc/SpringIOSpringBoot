@@ -1,0 +1,30 @@
+{
+  "code": "BBS00000",
+  "msg": "成功",
+  "resp_time": "20250912155244",
+  "resp_data": {
+    "merchant_no": "822290059430BF9",
+    "acc_resp_fields": {
+      "nonce_str": "",
+      "code": "https://qr.alipay.com/bax05127itxwchve6zop00e5",
+      "package": "",
+      "time_stamp": "",
+      "sub_mch_id": "2088240727800097",
+      "best_pay_info": "",
+      "prepay_id": "",
+      "form_data": "",
+      "partner_id": "",
+      "code_image": "",
+      "app_id": "",
+      "sign_type": "",
+      "redirect_url": "",
+      "pay_sign": ""
+    },
+    "out_trade_no": "859131135433722886",
+    "settle_term_no": "",
+    "trade_no": "2025091266200821270593",
+    "log_no": "66200821270593",
+    "settle_merchant_no": "",
+    "trade_req_date": "20250912"
+  }
+}

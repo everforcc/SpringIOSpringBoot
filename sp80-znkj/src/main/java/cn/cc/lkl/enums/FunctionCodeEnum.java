@@ -16,6 +16,7 @@ public enum FunctionCodeEnum {
     API_V3_TKBS_ORGANIZATION_PARENT_CODE("/api/v3/tkbs/organization_parent_code", "获取地区信息"),
 
     // 商户信息变更
+    API_V3_TKBS_OPEN_MERCHANT_ADDTERM("/api/v3/tkbs/open_merchant_addTerm", "增终进件"),
     API_V3_TKBS_CUSTOMER_UPDATE_REVIEW("/api/v3/tkbs/customer_update_review", "商户审核状态查询"),
 
     // 商户信息查询

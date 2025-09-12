@@ -1,0 +1,11 @@
+{
+  "merchant_no": "822290059430BF9",
+  "term_no": "D9261076",
+  "out_trade_no": "859131135433722886",
+  "account_type": "ALIPAY",
+  "trans_type": "41",
+  "total_amount": "2",
+  "location_info": {
+    "request_ip": "192.168.1.188"
+  }
+}

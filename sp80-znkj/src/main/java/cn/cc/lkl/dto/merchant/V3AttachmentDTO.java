@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttachmentDTO {
+public class V3AttachmentDTO {
 
     @NotBlank
     @Size(max = 20)
