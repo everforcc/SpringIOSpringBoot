@@ -24,9 +24,15 @@ public enum FunctionCodeEnum {
     API_V3_TKBS_OPEN_MERCHANT_SUBMER("/api/v3/tkbs/open_merchant_submer", "新子商户查询"),
 
     // 入网服务
+
+    API_V2_MMS_OPENAPI_QUERYSUBMERINFO("/api/v2/mms/openApi/querySubMerInfo", "商户报备结果查询"),
+
     API_V2_MMS_OPENAPI_REALNAME_SAVEALIPAYCONTACTINFO("/api/v2/mms/openApi/realName/saveAlipayContactInfo", "支付宝实名联系人信息保存"),
     API_V2_MMS_OPENAPI_REALNAME_SAVECONTACTINFO("/api/v2/mms/openApi/realName/saveContactInfo", "微信实名联系人信息保存"),
-
+   // /v2/mms/openApi/alipayRealNameQuery
+   API_V2_MMS_OPENAPI_ALIPAYREALNAMEQUERY("/api/v2/mms/openApi/alipayRealNameQuery", "支付宝实名认证信息查询"),
+    // /sit/api/v2/mms/openApi/wechatRealNameQuery
+    API_V2_MMS_OPENAPI_WECHATREALNAMEQUERY("/api/v2/mms/openApi/wechatRealNameQuery", "微信实名认证结果查询"),
     // 微信实名认证
     // 支付宝实名认证
     // 微信支付宝认证结果查询

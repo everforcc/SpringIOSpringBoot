@@ -45,7 +45,7 @@ public class LKLReqSDKDemo extends LKLBaseTest {
      * @throws SDKException
      */
     @Test
-    public static void demoReq2() throws SDKException {
+    public void demoReq2() throws SDKException {
 
         V3LabsTransMicropayRequest commRequest = new V3LabsTransMicropayRequest();
         String body = "{\n" +

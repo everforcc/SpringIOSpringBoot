@@ -23,7 +23,7 @@ public class V3tkbsOpenMerchantSubmerRequestTest extends LKLBaseTest {
 
     @Test
     public void testSDK() {
-        String json = LoadFileUtil.loadJsonFromResource("商户查询/新子商户查询_cc.json");
+        String json = LoadFileUtil.loadJsonFromResource("商户查询/新子商户查询_cc_req.json");
         try {
             json = LKLSDK.sm4Encrypt(json, LKLConfig.appId);
             String response = LKLSDK.httpPost("https://test.wsmsd.cn/sit/api/v3/tkbs/open_merchant_submer", json);

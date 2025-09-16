@@ -1,10 +1,10 @@
 {
   "ver": "1.0.0",
-  "timestamp": "${timestamp}",
-  "reqId": "${reqId}",
+  "timestamp": "1541589957003",
+  "reqId": "baff59de4694438ca9089862253517a3",
   "reqData": {
-    "merchantNo": "8224910581208RL",
-    "tradeMode": "ALIPAY",
+    "merchantNo": "4002021012659676355",
+    "tradeMode": "WECHAT",
     "subMerchantId": "808107443"
   }
 }

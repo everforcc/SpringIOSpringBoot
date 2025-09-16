@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 /**
- * 电子合同申请
+ * 1. 电子合同申请
  */
 @Slf4j
 public class V3MmsOpenApiEcApplyRequestTest extends LKLBaseTest {
@@ -28,7 +28,7 @@ public class V3MmsOpenApiEcApplyRequestTest extends LKLBaseTest {
         request = JsonUtil.fromJson(reqData, V3MmsOpenApiEcApplyRequest.class);
         log.info("request: \r\n{}", request);
         log.info("request: \r\n{}", JsonUtil.toJson(request));
-        request.setRetUrl("http://t9338923.natappfree.cc/lkl/res");
+        request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/lkl/res");
         request.setOrderNo(StringUtils.getUUID());
         request.setEcContentParameters(LoadFileUtil.loadJsonFromResource("进件/合同-cc-详细内容.json"));
 

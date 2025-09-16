@@ -55,7 +55,7 @@ public class V3LabsTransPreorderRequestTest extends LKLBaseTest {
             }
             log.info("获取支付信息成功: {}", lklCommonResponse.getRespData());
             Object respData = lklCommonResponse.getRespData();
-            // respData 转 JSONObject
+            // respData 转 JS  merInnerNo: 4002021012659676355ONObject
             JSONObject jsonObject = JSONObject.parseObject(respData.toString());
 //            JSONObject jsonObject = JSONObject.parseObject();
             log.info("获取支付信息成功: {}", jsonObject);

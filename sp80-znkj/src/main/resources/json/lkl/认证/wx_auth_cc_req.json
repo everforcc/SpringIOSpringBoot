@@ -1,0 +1,18 @@
+{
+  "reqData": {
+    "version": "1.0",
+    "orderNo": "2025091614485235492952",
+    "orgCode": "1951582",
+    "merInnerNo": "4002021012659676355",
+    "contactType": "LEGAL",
+    "name": "郭凯龙",
+    "contactIdDocType": "IDENTIFICATION_TYPE_IDCARD",
+    "idCardNumber": "41018219960126531X",
+    "contactPeriodBegin": "2017-06-19",
+    "contactPeriodEnd": "2027-06-19",
+    "mobile": "15738573601",
+    "functionCode": "API_V2_MMS_OPENAPI_REALNAME_SAVECONTACTINFO"
+  },
+  "version": "2.0",
+  "req_time": "20250916144852"
+}

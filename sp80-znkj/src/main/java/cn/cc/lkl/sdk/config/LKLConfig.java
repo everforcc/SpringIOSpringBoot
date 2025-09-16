@@ -15,7 +15,7 @@ public class LKLConfig {
      * 测试环境填1
      * 200028
      */
-    public static final String org_code = "200028";
+    public static final String orgCode = "1951582";
 
     /**
      * 接入方唯一编号
@@ -76,7 +76,12 @@ public class LKLConfig {
     public static final String serverUrl = "https://test.wsmsd.cn/sit";
 
 
-    private static final String sm4Key = "LHo55AjrT4aDhAIBZhb5KQ==";
+    public static final String sm4Key = "LHo55AjrT4aDhAIBZhb5KQ==";
+
+    /**
+     * lkl内部商户号
+     */
+    public static final String merInnerNo = "4002021012659676355";
 
     public static boolean initSDK() throws SDKException {
         //方式4：
@@ -84,7 +89,7 @@ public class LKLConfig {
         config.setAppId(appId);
         config.setSerialNo(serialNo);
         config.setPriKey(CertUtil.convertToStandardFormat(priKeyLineStr));
-        config.setLklCer(CertUtil.convertToStandardFormat(lklCerStr));
+        config.setLklCer(CertUtil.convertToStandardFormat(lklCerLineStr));
         config.setLklNotifyCer(CertUtil.convertToStandardFormat(lklCerLineStr));
 //        config.setPriKey(priKeyStr);
 //        config.setLklCer(lklNotifyCerStr);

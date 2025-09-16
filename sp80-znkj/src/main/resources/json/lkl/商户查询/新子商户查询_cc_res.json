@@ -1,0 +1,14 @@
+{
+  "code": "000000",
+  "msg": "SUCCESS",
+  "resp_data": {
+    "wx_list": [
+      {
+        "register_type": "微信",
+        "sub_merchant_no": "808107443",
+        "channel_id": "409391280",
+        "register_channel_name": "新网联"
+      }
+    ]
+  }
+}
