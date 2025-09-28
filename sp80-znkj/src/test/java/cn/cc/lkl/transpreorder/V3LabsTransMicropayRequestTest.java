@@ -12,6 +12,7 @@ import org.junit.Test;
 /**
  * https://o.lakala.com/#/home/document/detail?id=112
  * 聚合被扫
+ * https://test.wsmsd.cn/sit/api/v3/labs/trans/micropay
  */
 @Slf4j
 public class V3LabsTransMicropayRequestTest extends LKLBaseTest {
