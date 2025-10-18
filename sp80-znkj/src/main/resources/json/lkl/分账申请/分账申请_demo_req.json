@@ -1,0 +1,18 @@
+{
+  "reqData":{
+    "version":"1.0",
+    "orderNo":"KFPT20230223181025407788734",
+    "orgCode":"1",
+    "merInnerNo":"4002021033012340711",
+    "merCupNo":"822*******",
+    "contactMobile":"111111",
+    "splitLowestRatio":0,
+    "splitEntrustFileName":"授权委托书.pdf",
+    "splitEntrustFilePath":"G1/M00/00/16/CrFdEl0wGu6AHwGQAAAz1tt6luo194.jpg",
+    "splitRange":"MARK",
+    "retUrl":"http://run.mocky.io/v3/b02c9448-20a2-4ff6-a678-38ecab30161d"
+  },
+  "reqId":"KFPT20230223181025407788734",
+  "version":"2.0",
+  "reqTime":"20230223181025"
+}

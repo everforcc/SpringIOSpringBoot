@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 /**
  * https://o.lakala.com/#/home/document/detail?id=521
  * 微信实名联系人信息保存
+ * V2MmsOpenApiLedgerApplyLedgerMer
  */
 @Data
 public class V2MmsOpenApiRealNameSaveContactInfoRequest extends LKLBaseRequestV2 {

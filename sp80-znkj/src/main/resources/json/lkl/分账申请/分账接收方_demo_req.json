@@ -1,0 +1,29 @@
+{
+  "reqData":{
+    "version":"1.0",
+    "orderNo":"KFPT20230223182029463089445",
+    "orgCode":"1950836",
+    "receiverName":"分账接收方测试008",
+    "contactMobile":"111111",
+    "licenseNo":"",
+    "licenseName":"",
+    "legalPersonName":"",
+    "legalPersonCertificateType":"",
+    "legalPersonCertificateNo":"",
+    "acctNo":"11111*****",
+    "acctName":"张三",
+    "acctTypeCode":"58",
+    "acctCertificateType":"17",
+    "acctCertificateNo":"1111*****",
+    "acctOpenBankCode":"03050000",
+    "acctOpenBankName":"民生银行",
+    "attachList":[{
+      "attachName":"身份证正面",
+      "attachStorePath":"MMS/20230817/20230817171141-234b3a8ef3c443ae806464d5a954d719.jpg",
+      "attachType":"ID_CARD_FRONT"
+    }]
+  },
+  "reqId":"KFPT20230223182029463089445",
+  "version":"2.0",
+  "reqTime":"20230223182029"
+}

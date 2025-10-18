@@ -1,0 +1,32 @@
+{
+  "msg": "成功",
+  "resp_time": "20221220165220",
+  "code": "SACS0000",
+  "resp_data": {
+    "total_amt": "9900",
+    "finish_date": "20221220",
+    "log_date": "20221220",
+    "cal_type": "1",
+    "detail_datas": [
+      {
+        "recv_no": "82229005943096D",
+        "amt": 4950
+      },
+      {
+        "recv_no": "SR2022121620001",
+        "amt": 3960
+      },
+      {
+        "recv_no": "SR2022121620003",
+        "amt": 990
+      }
+    ],
+    "separate_no": "20221220770188000235800500",
+    "log_no": "66210306990190",
+    "separate_type": "1",
+    "out_separate_no": "41881743353701369229683385932217",
+    "cmd_type": "SEPARATE",
+    "separate_date": "20221220",
+    "status": "SUCCESS"
+  }
+}

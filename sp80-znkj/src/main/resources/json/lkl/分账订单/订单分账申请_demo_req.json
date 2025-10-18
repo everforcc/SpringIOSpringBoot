@@ -1,0 +1,29 @@
+{
+  "req_data": {
+    "merchant_no": "82229005943096D",
+    "log_date": "20221220",
+    "log_no": "66210306990190",
+    "out_separate_no": "41881743353701369229683385932217",
+    "total_amt": "9900",
+    "lkl_org_no": "1950836",
+    "cal_type": "1",
+    "separate_type": "1",
+    "notify_url": "http://run.mocky.io/v3/b02c9448-20a2-4ff6-a678-38ecab30161d",
+    "recv_datas": [
+      {
+        "recv_merchant_no": "82229005943096D",
+        "separate_value": "0.5"
+      },
+      {
+        "recv_no": "SR2022121620001",
+        "separate_value": "0.4"
+      },
+      {
+        "recv_no": "SR2022121620003",
+        "separate_value": "0.1"
+      }
+    ]
+  },
+  "version": "3.0",
+  "req_time": "20221220165008"
+}

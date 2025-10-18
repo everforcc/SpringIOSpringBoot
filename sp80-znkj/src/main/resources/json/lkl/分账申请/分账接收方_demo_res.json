@@ -1,0 +1,12 @@
+{
+  "retCode":"000000",
+  "retMsg":"分账接收方创建成功",
+  "respData":{
+    "version":"1.0",
+    "orderNo":"KFPT20230223182029463089445",
+    "orgCode":"1950836",
+    "orgId":"1950836",
+    "orgName":"红星集团",
+    "receiverNo":"SR2023022318013"
+  }
+}

@@ -23,6 +23,10 @@ public class LKLPost {
         return httpPost(request, false, false);
     }
 
+    public static LKLCommonResponseV2 httpPostV2(LklRequest request) {
+        return httpPostV2(request, false, false);
+    }
+
     /**
      * sdk 自带，简化处理相应
      */
@@ -30,6 +34,16 @@ public class LKLPost {
         try {
             String response = LKLSDK.httpPost(request, reqEncrypt, respDecrypt);
             return JSON.parseObject(response, LKLCommonResponse.class);
+        } catch (SDKException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static LKLCommonResponseV2 httpPostV2(LklRequest request, boolean reqEncrypt, boolean respDecrypt) {
+        try {
+            String response = LKLSDK.httpPost(request, reqEncrypt, respDecrypt);
+            return JSON.parseObject(response, LKLCommonResponseV2.class);
         } catch (SDKException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

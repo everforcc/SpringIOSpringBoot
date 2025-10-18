@@ -37,6 +37,11 @@ public enum FunctionCodeEnum {
     // 支付宝实名认证
     // 微信支付宝认证结果查询
 
+    // 分账相关接口 start
+    API_V2_MMS_OPENAPI_LEDGER_APPLYLEDGERMER("/api/v2/mms/openApi/ledger/applyLedgerMer", "商户分账业务开通申请"),
+
+    // 分账相关接口 end
+
     ;
 
     private final String code;
