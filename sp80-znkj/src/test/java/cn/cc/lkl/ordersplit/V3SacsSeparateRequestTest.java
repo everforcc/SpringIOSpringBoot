@@ -1,13 +1,12 @@
-package cn.cc.lkl.order;
+package cn.cc.lkl.ordersplit;
 
 import cn.cc.config.JsonUtil;
 import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.dto.order.V3SacsSeparateResponse;
+import cn.cc.lkl.dto.ordersplit.V3SacsSeparateResponse;
 import cn.cc.lkl.util.LKLPost;
 import cn.cc.lkl.util.LoadFileUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.lkl.laop.sdk.request.V2MmsOpenApiLedgerApplyBindRequest;
 import com.lkl.laop.sdk.request.V3SacsSeparateRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

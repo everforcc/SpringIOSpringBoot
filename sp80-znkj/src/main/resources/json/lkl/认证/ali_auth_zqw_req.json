@@ -1,0 +1,18 @@
+{
+  "reqData": {
+    "merInnerNo": "",
+    "orderNo": "",
+    "orgCode": 200028,
+    "contactType": "LEGAL",
+
+    "version": "1.0",
+    "name": "庄乾威",
+    "contactIdDocType": "RESIDENT",
+    "idCardNumber": "412326199011082195",
+    "mobile": "13022110823",
+    "realNameType": "ZFBZF"
+  },
+  "ver": "1.0.0",
+  "timestamp": "20250910163729",
+  "reqId": "992795958388208642"
+}

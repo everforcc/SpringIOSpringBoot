@@ -1,8 +1,10 @@
-package cn.cc.lkl.transpreorder;
+package cn.cc.lkl.ordertranspre;
 
 import cn.cc.config.JsonUtil;
+import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
+import cn.cc.lkl.sdk.config.LKLConfigProd;
 import cn.cc.lkl.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -19,14 +21,14 @@ import org.junit.Test;
  * 聚合主扫
  */
 @Slf4j
-public class V3LabsTransPreorderRequestTest extends LKLBaseTest {
+public class V3LabsTransPreorderRequestTest extends LKLBaseProdTest {
 
 
     @Test
     public void test() throws Exception {
         V3LabsTransPreorderRequest request = new V3LabsTransPreorderRequest();
-        request.setMerchantNo("822290059430BF9");
-        request.setTermNo("D9261076");
+        request.setMerchantNo(LKLConfigProd.merchantNo);
+        request.setTermNo(LKLConfigProd.termNo);
 
         request.setOutTradeNo(StringUtils.getSerialNumber());
         request.setAccountType("ALIPAY");
@@ -44,7 +46,7 @@ public class V3LabsTransPreorderRequestTest extends LKLBaseTest {
 //        request.setAccBusiFields(accBusiFields);
 
         log.info("获取支付信息: {}", request.toBody());
-        log.info("获取支付信息请求: \r\n{}", JsonUtil.toJson(request));
+//        log.info("获取支付信息请求: \r\n{}", JsonUtil.toJson(request));
         try {
             String response = LKLSDK.httpPost(request);
             LKLCommonResponse lklCommonResponse = JSON.parseObject(response, LKLCommonResponse.class);

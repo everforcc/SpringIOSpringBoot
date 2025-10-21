@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto.order;
+package cn.cc.lkl.dto.ordersplit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -6,7 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 分账结果查询响应
+ * 分账结果查询 响应
+ * https://o.lakala.com/#/home/document/detail?id=392
  * 
  * @author cc
  */

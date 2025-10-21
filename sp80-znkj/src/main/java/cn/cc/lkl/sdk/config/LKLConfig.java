@@ -99,4 +99,20 @@ public class LKLConfig {
         return LKLSDK.init(config);
     }
 
+    public static boolean initSDKProd() throws SDKException {
+        //方式4：
+        Config2 config = new Config2();
+        config.setAppId(appId);
+        config.setSerialNo(serialNo);
+        config.setPriKey(CertUtil.convertToStandardFormat(priKeyLineStr));
+        config.setLklCer(CertUtil.convertToStandardFormat(lklCerLineStr));
+        config.setLklNotifyCer(CertUtil.convertToStandardFormat(lklCerLineStr));
+//        config.setPriKey(priKeyStr);
+//        config.setLklCer(lklNotifyCerStr);
+//        config.setLklNotifyCer(lklNotifyCerStr);
+        config.setServerUrl(serverUrl);
+        config.setSm4Key(sm4Key);
+        return LKLSDK.init(config);
+    }
+
 }

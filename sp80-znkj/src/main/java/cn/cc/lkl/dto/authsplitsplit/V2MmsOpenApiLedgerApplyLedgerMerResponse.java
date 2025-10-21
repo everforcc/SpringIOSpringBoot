@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto.split;
+package cn.cc.lkl.dto.authsplitsplit;
 
 import lombok.Data;
 

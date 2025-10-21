@@ -1,11 +1,11 @@
 package cn.cc.lkl.authrealname;
 
-import cn.cc.lkl.LKLBaseTest;
+import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.dto.LKLCommonResponseV2;
 import cn.cc.lkl.dto.authrealname.V2MmsOpenApiRealNameSaveContactInfoRequest;
 import cn.cc.lkl.dto.authrealname.V2MmsOpenApiWechatRealNameQueryRequest;
 import cn.cc.lkl.dto.authrealname.V2MmsOpenApiWechatRealNameQueryResponse;
-import cn.cc.lkl.sdk.config.LKLConfig;
+import cn.cc.lkl.sdk.config.LKLConfigProd;
 import cn.cc.lkl.util.DateUtils;
 import cn.cc.lkl.util.LKLPost;
 import com.alibaba.fastjson.JSONObject;
@@ -14,46 +14,64 @@ import org.junit.Test;
 
 /**
  * 微信实名认证
+ *  结果查询会返回二维码
+ *
  */
 @Slf4j
-public class V2MmsOpenApiRealNameSaveContactInfoRequestTest extends LKLBaseTest {
+public class V2MmsOpenApiRealNameSaveContactInfoRequestTest extends LKLBaseProdTest {
 
     /**
-     * 微信实名认证
+     * 1. 微信实名认证
      */
     @Test
-    public void testWxReq(){
+    public void testWxReq() {
+//        String json = LoadFileUtil.loadJsonFromResource("认证/ali_auth_zqw_req.json");
+//        String reqData = JSONObject.parseObject(json).getString("reqData");
         V2MmsOpenApiRealNameSaveContactInfoRequest request = new V2MmsOpenApiRealNameSaveContactInfoRequest();
+//        V2MmsOpenApiRealNameSaveContactInfoRequest request = JSONObject.parseObject(reqData, V2MmsOpenApiRealNameSaveContactInfoRequest.class);
+
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setOrgCode(LKLConfig.orgCode);
-        request.setMerInnerNo(LKLConfig.merInnerNo);
+        request.setOrgCode(LKLConfigProd.orgCode);
+        request.setMerInnerNo(LKLConfigProd.merInnerNo);
         request.setContactType("LEGAL");
-        request.setName("郭凯龙");
+        request.setContactPeriodBegin("2020-11-30");
+        request.setContactPeriodEnd("2040-11-30");
+
+        request.setName("庄乾威");
         request.setContactIdDocType("IDENTIFICATION_TYPE_IDCARD");
-        request.setIdCardNumber("41018219960126531X");
-        request.setContactPeriodBegin("2017-06-19");
-        request.setContactPeriodEnd("2027-06-19");
-        request.setMobile("15738573601");
+        request.setIdCardNumber("412326199011082195");
+        request.setMobile("13022110823");
+
         log.info("request: \r\n{}", request.toBody());
-        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost( request);
-        log.info("response: \r\n{}", lklCommonResponse.toString());
+
+        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("response: \r\n{}", JSONObject.toJSONString(lklCommonResponse));
     }
 
     /**
-     * 微信实名认证结果查询
+     * 2. 微信实名认证修改
      */
     @Test
-    public void testWxResult(){
+    public void testWxUpdateReq() {
+        // 微信实名状态修改
+        // V2MmsOpenApiWechatRealNameModifyCommitRequest
+
+    }
+
+    /**
+     * 4. 微信实名认证结果查询
+     */
+    @Test
+    public void testWxResult() {
         V2MmsOpenApiWechatRealNameQueryRequest request = new V2MmsOpenApiWechatRealNameQueryRequest();
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setOrgCode(LKLConfig.orgCode);
-        request.setMerInnerNo(LKLConfig.merInnerNo);
-        request.setSubMchId("808107443");
+        request.setOrgCode(LKLConfigProd.orgCode);
+        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+        request.setSubMchId("817367616");
         log.info("request: \r\n{}", request.toBody());
-        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost( request);
-        log.info("response: \r\n{}", lklCommonResponse.toString());
-        if(lklCommonResponse.resultSuccess()){
+        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
+        log.info("response: \r\n{}", JSONObject.toJSONString(lklCommonResponse));
+        if (lklCommonResponse.resultSuccess()) {
             String respData = lklCommonResponse.getRespData().toString();
             V2MmsOpenApiWechatRealNameQueryResponse response = JSONObject.parseObject(respData, V2MmsOpenApiWechatRealNameQueryResponse.class);
             log.info("response: \r\n{}", response.toString());

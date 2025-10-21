@@ -1,9 +1,9 @@
-package cn.cc.lkl.order;
+package cn.cc.lkl.ordersplit;
 
 import cn.cc.config.JsonUtil;
 import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.dto.order.V3SacsQueryResponse;
+import cn.cc.lkl.dto.ordersplit.V3SacsQueryResponse;
 import cn.cc.lkl.util.LKLPost;
 import cn.cc.lkl.util.LoadFileUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -50,7 +50,7 @@ public class V3SacsQueryRequestTest extends LKLBaseTest {
         String json = LoadFileUtil.loadJsonFromResource("分账订单/订单分账结果查询_demo_res.json");
         String reqData = JSONObject.parseObject(json).getString("resp_data");
         V3SacsQueryResponse response = JsonUtil.fromJson(reqData, V3SacsQueryResponse.class);
-        log.info("分账订单结果:{}", JSONObject.toJSONString(response, SerializerFeature.PrettyFormat));
+        log.info("分账订单结果:\r\n{}", JSONObject.toJSONString(response, SerializerFeature.PrettyFormat));
     }
 
 

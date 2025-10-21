@@ -1,0 +1,17 @@
+{
+  "out_trade_no": "202203151637334864280014",
+  "trade_no": "2022031566210203291925",
+  "log_no": "66210203291925",
+  "acc_trade_no": "2022031522001483661454130929",
+  "trade_status": "SUCCESS",
+  "trade_state": "SUCCESS",
+  "total_amount": "1",
+  "payer_amount": "1",
+  "acc_settle_amount": "1",
+  "trade_time": "20220315163808",
+  "user_id1": "app***@163.com",
+  "user_id2": "2088432881453660",
+  "notify_url": "https://www.baidu.com",
+  "account_type": "ALIPAY",
+  "card_type": "99"
+}

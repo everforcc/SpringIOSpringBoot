@@ -1,9 +1,10 @@
-package cn.cc.lkl.authrealname;
+package cn.cc.lkl.merchant;
 
 import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponseV2;
-import cn.cc.lkl.dto.authrealname.V2MmsOpenApiQuerySubMerInfoRequest;
+import cn.cc.lkl.dto.merchantquery.V2MmsOpenApiQuerySubMerInfoRequest;
 import cn.cc.lkl.sdk.config.LKLConfig;
+import cn.cc.lkl.sdk.config.LKLConfigProd;
 import cn.cc.lkl.util.DateUtils;
 import cn.cc.lkl.util.LKLPost;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.junit.Test;
 
 /**
  * 商户报备结果查询
+ * https://o.lakala.com/#/home/document/detail?id=326
  */
 @Slf4j
 public class V2MmsOpenApiQuerySubMerInfoRequestTest extends LKLBaseTest {
@@ -19,7 +21,7 @@ public class V2MmsOpenApiQuerySubMerInfoRequestTest extends LKLBaseTest {
     public void test(){
         V2MmsOpenApiQuerySubMerInfoRequest request = new V2MmsOpenApiQuerySubMerInfoRequest();
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setOrgCode(LKLConfig.orgCode);
+        request.setOrgCode(LKLConfigProd.orgCode);
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("response: \r\n{}", lklCommonResponse.toString());
     }

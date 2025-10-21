@@ -1,0 +1,17 @@
+{
+  "reqData": {
+    "version": "1.0",
+    "orderNo": "2025091614485235492952",
+    "orgCode": "1951582",
+    "merInnerNo": "4002021012659676355",
+    "contactType": "LEGAL",
+    "name": "庄乾威",
+    "contactIdDocType": "IDENTIFICATION_TYPE_IDCARD",
+    "idCardNumber": "412326199011082195",
+    "contactPeriodBegin": "2020-11-30",
+    "contactPeriodEnd": "2040-11-30",
+    "mobile": "13022110823"
+  },
+  "version": "2.0",
+  "req_time": "20250916144852"
+}

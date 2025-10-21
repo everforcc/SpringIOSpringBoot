@@ -1,9 +1,9 @@
-package cn.cc.lkl.split;
+package cn.cc.lkl.authsplit;
 
 import cn.cc.config.JsonUtil;
 import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponseV2;
-import cn.cc.lkl.dto.split.V2MmsOpenApiLedgerApplyLedgerMerCallbackRequest;
+import cn.cc.lkl.dto.authsplitsplit.V2MmsOpenApiLedgerApplyLedgerMerCallbackRequest;
 import cn.cc.lkl.util.LKLPost;
 import cn.cc.lkl.util.LoadFileUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -30,7 +30,7 @@ public class V2MmsOpenApiLedgerApplyLedgerMerRequestTest extends LKLBaseTest {
         String reqData = JSONObject.parseObject(json).getString("reqData");
         request = JsonUtil.fromJson(reqData, V2MmsOpenApiLedgerApplyLedgerMerRequest.class);
         log.info("分账申请:{}", request);
-        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPostV2(request);
+        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("分账开通结果:{}", lklCommonResponse);
         if (lklCommonResponse.resultSuccess()) {
             log.info("分账开通成功");

@@ -1,4 +1,4 @@
-package cn.cc.lkl.dto.split;
+package cn.cc.lkl.dto.authsplitsplit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

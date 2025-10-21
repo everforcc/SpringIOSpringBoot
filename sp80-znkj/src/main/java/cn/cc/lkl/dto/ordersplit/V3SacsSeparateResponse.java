@@ -1,12 +1,12 @@
-package cn.cc.lkl.dto.order;
+package cn.cc.lkl.dto.ordersplit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 订单分账响应
+ * 订单分账 响应
  * https://o.lakala.com/#/home/document/detail?id=389
- * 
+ * V3SacsSeparateCallback
  * @author cc
  */
 @Data

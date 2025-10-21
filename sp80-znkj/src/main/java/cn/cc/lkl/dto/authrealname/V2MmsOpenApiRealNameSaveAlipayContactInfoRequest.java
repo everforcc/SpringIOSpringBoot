@@ -1,5 +1,6 @@
 package cn.cc.lkl.dto.authrealname;
 
+import cn.cc.lkl.dto.LKLBaseRequestV1;
 import cn.cc.lkl.dto.LKLBaseRequestV2;
 import cn.cc.lkl.enums.FunctionCodeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +13,7 @@ import lombok.Data;
  * /api/v2/mms/openApi/realName/saveAlipayContactInfo
  */
 @Data
-public class V2MmsOpenApiRealNameSaveAlipayContactInfoRequest extends LKLBaseRequestV2 {
+public class V2MmsOpenApiRealNameSaveAlipayContactInfoRequest extends LKLBaseRequestV1 {
 
     /**
      * 接口版本号	1.0

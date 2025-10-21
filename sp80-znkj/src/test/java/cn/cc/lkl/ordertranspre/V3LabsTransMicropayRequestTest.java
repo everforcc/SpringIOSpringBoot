@@ -1,6 +1,8 @@
-package cn.cc.lkl.transpreorder;
+package cn.cc.lkl.ordertranspre;
 
+import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.LKLBaseTest;
+import cn.cc.lkl.sdk.config.LKLConfigProd;
 import cn.cc.lkl.util.StringUtils;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;
@@ -15,12 +17,12 @@ import org.junit.Test;
  * https://test.wsmsd.cn/sit/api/v3/labs/trans/micropay
  */
 @Slf4j
-public class V3LabsTransMicropayRequestTest extends LKLBaseTest {
+public class V3LabsTransMicropayRequestTest extends LKLBaseProdTest {
 
     @Test
     public void test() throws SDKException {
         V3LabsTransMicropayRequest request = new V3LabsTransMicropayRequest();
-        request.setMerchantNo("822290059430BF9");
+        request.setMerchantNo(LKLConfigProd.merInnerNo);
         request.setTermNo("D9261076");
         request.setOutTradeNo(StringUtils.getSerialNumber());
         request.setAuthCode("135178236713755038");
