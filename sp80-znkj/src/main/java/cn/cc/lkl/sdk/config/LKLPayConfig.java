@@ -33,12 +33,12 @@ public class LKLPayConfig {
     /**
      * 商户私钥字符串,用于请求签名
      */
-    private String priKeyLineStr;
+    private String priKeyStrLine;
 
     /**
      * 拉卡拉公钥证书字符串,用于验签
      */
-    private String lklCerLineStr;
+    private String lklCerStrLine;
 
     /**
      * 拉卡拉开放平台服务地址
@@ -51,6 +51,21 @@ public class LKLPayConfig {
      * 商户内部编号
      */
     private String merInnerNo;
+
+    /**
+     * 商户号
+     */
+    private String merchantNo;
+
+    /**
+     * 终端号
+     */
+    private String termNo;
+
+    /**
+     * 商户归属用户信息
+     */
+    private String userNo;
 
     @Override
     public String toString() {

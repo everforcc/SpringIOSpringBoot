@@ -23,8 +23,13 @@ public class JsonUtil {
 
     }
 
-    public static <T> T fromJson(String json, Class<T> clazz) throws Exception {
-        return objectMapper.readValue(json, clazz);
+    public static <T> T fromJson(String json, Class<T> clazz) {
+        try {
+            return objectMapper.readValue(json, clazz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     public static <T> T fromJson(Object json, Class<T> clazz) {
@@ -37,8 +42,13 @@ public class JsonUtil {
     }
 
     // 添加对象转JSON的方法
-    public static String toJson(Object obj) throws Exception {
-        return objectMapper.writeValueAsString(obj);
+    public static String toJson(Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
 }

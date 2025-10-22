@@ -17,7 +17,17 @@ public class LKLConfigProd {
      */
     public static final String orgCode = "986557";
 
-    public static final String merchantNo = "822491058123JVJ";
+    public static final String userNo = "24437857";
+
+    /**
+     * 822491058123JVJ
+     */
+    public static final String merchantNo = "822491058123KH6";
+
+    /**
+     * lkl内部商户号
+     */
+    public static final String merInnerNo = "4002025102254621375";
 
     public static final String termNo = "N8006401";
 
@@ -35,11 +45,12 @@ public class LKLConfigProd {
      */
     private static final String serialNo = "019a00658e17";
 
+    private static final String priKeyStrLine = "-----BEGIN PRIVATE KEY----- MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCGU4E7AJaYbpoSNMgnHcTtE6zR1DtaoBbzN58y7oEPPMkNaJ3cW1M4ZhsOl6FnSCD8Dq1UMiV0pdwU0QTemVHp4yhXIo4A4HQcC+oh+PxesePXB40BnyLUWYXE3oGq35p6OhAmamnD8yFrCR64PJYR/VsuilBBUvHrbXUuu93lL62thpLb92OVke8EgmwF1DPTbWv3MwPhuNtbN77CRoxdgxkaMnx/gK1IBgjg6C7wUbR6dBGYZwvMbu/Hnh8HLlVkpH0M02WSVIYlnZ5fIBzf6RfcT1wBgVTUkGlNjU7dDAsFjHYoL4owdOVJco5GZ9GBrkRCxWVlLu1gY0ZEOUnFAgMBAAECggEALZXvOHfVo7t9PAp/lo7Kwu43aypMTlAgGcBZna5FTEeDr7I+SIcRsgUsz4Hz+5oF36SXfAhcn76d9s6MiYKcwvQdP5zxdii2HsKIXaki9HwIZ3QfjVpVNp1/ATXF6Zhi03IbAv6AEEjVoX6B12JwR4CkziGQZOriQNRvvUFyZ5GIpMf5VW59dI1JNFGQskPgV7EvGd172QtLSbqc+Am25PcHfBUl5tGucrWZDJez6BLjwZcJ+GwS7Gi5DrGzR57qxbzNn8bgbamtmioSh9ewmDRnHpBnUehORxievtZUQUHNPnPdErQgm8ezQsRAXjDTs2L1myY0XBRo/pRX/nRFbQKBgQD2xHotApXL5nrNcAnASDOZeCN3+q1FTq6Q5OP2QqsbayZvR6q5VeZ+oNYDHmYNCXpUw68/hcN7sfA6sx/HcbHdde0MoZcK+ogQDdy0CnKcFgpj5DjPYh2ekxZcUzuu/0MKMINkNe0TqRv+ypH4iaOiHiHvv7K0qO0D8mS706tuhwKBgQCLWhJ8RysR1Jr2DXtFopJVsPcdsvcOC/crIYhAIPY8Kg+hphfn245P4+dcZTtffurZ6bon15FTn3oqu7eyt/ULq7tNa8VerENBeyvrGlpHXXF0jED6Pi2TtXSYveaLGFZX+Tj1U0QSIxy8VvE3OK8HzXVGbwY4CQ6Bj6KLSEDsUwKBgDO5YUaX+SAhMnJnXpPgTniHtx+J+tHBOVQDtkjDFqyLnCXNJtrsR4EZY2KJ96gZ6Xtk/RHajuwZkxoqu6mJile6RTLVmBxkASskTLOsUPOopwrjJolJrp2zhQdbJvJ6bOnw20mhCA2L7+NLQKeQ6iysFj7ztpipo+yk3TqFlrR3AoGAT6Y9GKHJAVkG9YqBIi0o/Se4J1aKlZHLRfDVoun0NDFKW/fGhDTfI9S9AfeutwehDsrkJy+0lhp6RoCjH9i7jF8tILRvzIwjqQLQ+IFIhq/nUFl2LlJp1JqLuV4ZrvlLKN9/aeGc78z3+MKs/wY8LPaHiKme4Vpz2yQRIRE8YpcCgYEA4Kzb1C3wFr+k5pLsF51n1VjYDncpoOnzt9tJMH9XpEm0qqgQzucLO1RXoz2FPEIauZM85qjn7G+OTO/QnvOpNrwI6o3Kp6CiD5ey7IUd7LR+FXJqY6P0fO6uyBzBPnTuaU9TZuGcvm7fKZu/eKM9gYB5hRHyjskPux8bGY3OCYU= -----END PRIVATE KEY-----";
     /**
      * 商户私钥字符串,用于请求签名
      * OP00000003_private_key.pem
      */
-    private static final String priKeyLine = "-----BEGIN PRIVATE KEY-----\n" +
+    private static final String priKeyStr = "-----BEGIN PRIVATE KEY-----\n" +
             "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCGU4E7AJaYbpoS\n" +
             "NMgnHcTtE6zR1DtaoBbzN58y7oEPPMkNaJ3cW1M4ZhsOl6FnSCD8Dq1UMiV0pdwU\n" +
             "0QTemVHp4yhXIo4A4HQcC+oh+PxesePXB40BnyLUWYXE3oGq35p6OhAmamnD8yFr\n" +
@@ -68,6 +79,7 @@ public class LKLConfigProd {
             "gYB5hRHyjskPux8bGY3OCYU=\n" +
             "-----END PRIVATE KEY-----\n";
 
+    private static final String lklCerStrLine = "-----BEGIN CERTIFICATE----- MIIEMTCCAxmgAwIBAgIGAXUrc4b4MA0GCSqGSIb3DQEBCwUAMHYxCzAJBgNVBAYTAkNOMRAwDgYDVQQIDAdCZWlKaW5nMRAwDgYDVQQHDAdCZWlKaW5nMRcwFQYDVQQKDA5MYWthbGEgQ28uLEx0ZDEqMCgGA1UEAwwhTGFrYWxhIE9yZ2FuaXphdGlvbiBWYWxpZGF0aW9uIENBMB4XDTIwMTAxNTA4NDk1MloXDTMwMTAxMzA4NDk1MlowZTELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaUppbmcxEDAOBgNVBAcMB0JlaUppbmcxFzAVBgNVBAoMDkxha2FsYSBDby4sTHRkMRkwFwYDVQQDDBBBUElHVy5MQUtBTEEuQ09NMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwAXZw9lupWcFXouCNhm0DQT47Zf4KOIRF8rqT8Ps3pYzT8odROJ8rq4P+lciGrg29czpqrRM22yQktFritvcM7JlE6jFbGH3rycnvGvhRYU/j1N9k0ozm8oVwmKX357/OtGzNivBECGSnU9LBkp4Nm9M1K4cOwEuZ0xsQEthZjQYF0mDpnlWmVJL5i1Lq834atN2qrb/mzMHBNtDJnqRV7rPL39lKpe7LJiitsC2JuW1UbWZZU1NNwA/rz2d83C+KD1DLJ0+sMYY2Q3TOQ4BPAowDEwOH7XAXrHM/0kRm+ZeIFlwevEGIQWmMt1Ogz+AW4Iq0slINc4wOINKvH9tHwIDAQABo4HVMIHSMIGSBgNVHSMEgYowgYeAFCnH4DkZPR6CZxRn/kIqVsModJHpoWekZTBjMQswCQYDVQQGEwJDTjEQMA4GA1UECAwHQmVpSmluZzEQMA4GA1UEBwwHQmVpSmluZzEXMBUGA1UECgwOTGFrYWxhIENvLixMdGQxFzAVBgNVBAMMDkxha2FsYSBSb290IENBggYBaiUALIowHQYDVR0OBBYEFIya0Yc4OSBer55JLyA0AYe9m8mTMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMA0GCSqGSIb3DQEBCwUAA4IBAQCBEwOlk3mXigNv94Drn3dcaY2ml/y+8yNpAIuUhuBE00WFoqEX5lOatFy5fzdXuC12lBVQ8SjSm3aH7k2X0eXqDzkOHiur2ZBRKmJ++J4TeenuSUOjSIbQK/DTvxaqFUjYwFSVCyizpy7wfU4wKt+jOuFb9LyULJ9lkM1dV9Kh7Lmd9+nlJYYuPEPULJkkVZqSALSiiJudXnTwlISjZTXEAkJpdIlMw+hvPTAkoG95B95M+OV/uLbItGK+qT4+RHWo8EbBDPQYo6J4QYHOxRlfMoGBMyrz6XDt7ELLmT7ld4aE02w6KQPfK3gqkLDT+/STozvaNmXzBJh7J6KqxJBH -----END CERTIFICATE-----";
     /**
      * 拉卡拉公钥证书字符串,用于验签
      * lkl-apigw-v2.cer
@@ -97,7 +109,7 @@ public class LKLConfigProd {
             "qT4+RHWo8EbBDPQYo6J4QYHOxRlfMoGBMyrz6XDt7ELLmT7ld4aE02w6KQPfK3gq\n" +
             "kLDT+/STozvaNmXzBJh7J6KqxJBH\n" +
             "-----END CERTIFICATE-----";
-    private static final String lklCerLineStr = "";
+
 
     /**
      * 拉卡拉开放平台服务地址
@@ -107,32 +119,36 @@ public class LKLConfigProd {
     public static final String serverUrl = "https://s2.lakala.com";
 
 
-    public static final String sm4Key = "";
-
-    /**
-     * lkl内部商户号
-     */
-    public static final String merInnerNo = "4002025101124353942";
+    public static final String sm4Key = "X2yY+gl34xKxpt+bOWMy1g==";
 
     /**
      * todo 支付宝微信的子商户号不同，这个接口待定
      */
-    public static final String subMchId = "817367616";
+//    public static final String subMchId = "817367616";
 
     public static boolean initSDKProd() throws SDKException {
         //方式4：
         Config2 config = new Config2();
         config.setAppId(appId);
         config.setSerialNo(serialNo);
-        config.setPriKey(priKeyLine);
-        config.setLklCer(lklCerStr);
-        config.setLklNotifyCer(lklCerStr);
+        config.setPriKey(CertUtil.convertToStandardFormat(priKeyStrLine));
+        config.setLklCer(CertUtil.convertToStandardFormat(lklCerStrLine));
+        config.setLklNotifyCer(CertUtil.convertToStandardFormat(lklCerStrLine));
 //        config.setPriKey(priKeyStr);
-//        config.setLklCer(lklNotifyCerStr);
-//        config.setLklNotifyCer(lklNotifyCerStr);
+//        config.setLklCer(lklCerStr);
+//        config.setLklNotifyCer(lklCerStr);
+
         config.setServerUrl(serverUrl);
         config.setSm4Key(sm4Key);
         return LKLSDK.init(config);
+    }
+
+    public static void main(String[] args) {
+//        System.out.println(CertUtil.convertToSingleLine(priKeyLine));
+//        System.out.println(CertUtil.convertToStandardFormat(priKeyLineStr));
+        // lklCerStr
+//        System.out.println(CertUtil.convertToSingleLine(lklCerStr));
+//        System.out.println(CertUtil.convertToStandardFormat(lklCerStrLine));
     }
 
 }

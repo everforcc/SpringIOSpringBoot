@@ -67,7 +67,7 @@ public class V2MmsOpenApiRealNameSaveContactInfoRequestTest extends LKLBaseProdT
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
         request.setOrgCode(LKLConfigProd.orgCode);
         request.setMerInnerNo(LKLConfigProd.merInnerNo);
-        request.setSubMchId("817367616");
+        request.setSubMchId("820612759");
         log.info("request: \r\n{}", request.toBody());
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("response: \r\n{}", JSONObject.toJSONString(lklCommonResponse));

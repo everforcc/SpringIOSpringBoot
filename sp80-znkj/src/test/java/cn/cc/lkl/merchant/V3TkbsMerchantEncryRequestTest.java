@@ -51,8 +51,6 @@ public class V3TkbsMerchantEncryRequestTest extends LKLBaseTest {
             log.info("isSuccess: \r\n{}", response4.resultSuccess());
             log.info("getRespData: \r\n{}", response4.getRespData());
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
