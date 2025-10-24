@@ -62,7 +62,7 @@ public class V3TkbsOpenMerchantAddTermRequest extends LKLBaseRequest {
      */
 
     @Override
-    public FunctionCodeEnum getFunctionCode() {
+    public FunctionCodeEnum gFunctionCode() {
         return FunctionCodeEnum.API_V3_TKBS_OPEN_MERCHANT_ADDTERM;
     }
 }

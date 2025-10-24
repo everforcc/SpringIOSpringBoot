@@ -1,0 +1,20 @@
+{
+  "req_data": {
+    "acct_name": "蒋守业",
+    "acct_no": "6217853600054310213",
+    "acct_type_code": "58",
+    "cert_name": "蒋守业",
+    "cert_no": "410224198708033639",
+    "cert_type": "RESIDENT_ID",
+    "ec_type_code": "",
+    "ec_content_parameters": "",
+    "mobile": "18706828536",
+    "openning_bank_code": "104791005988",
+    "openning_bank_name": "中国银行西安逸翠园支行",
+    "order_no": "",
+    "org_id": 986557,
+    "remark": "测试",
+    "version": "1.0"
+  }
+}
+

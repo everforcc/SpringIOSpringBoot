@@ -10,6 +10,7 @@ public enum FunctionCodeEnum {
     // 商户进件
     API_V3_TKBS_MERCHANT_ENCRY("/api/v3/tkbs/merchant_encry", "新增商户进件"),
     API_V3_MMS_OPEN_API_EC_APPLY("/api/v3/mms/open_api/ec/apply", "电子合同申请"),
+    API_V3_MMS_OPEN_API_EC_Q_STATUS("/api/v3/mms/open_api/ec/q_status", "电子合同查询"),
     API_V3_TKBS_CUSTOMER_FILE_UPLOAD("/api/v3/tkbs/customer/file/upload", "商户进件文件上传"),
 
     // 进件相关信息查询

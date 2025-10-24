@@ -36,7 +36,9 @@ public class V2MmsOpenApiRealNameSaveAlipayContactInfoRequestTest extends LKLBas
         V2MmsOpenApiRealNameSaveAlipayContactInfoRequest request = JSONObject.parseObject(reqData, V2MmsOpenApiRealNameSaveAlipayContactInfoRequest.class);
 
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+        request.setMerInnerNo("2088080355047093");
+//        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+//        request.setOrgCode(LKLConfigProd.orgCode);
         request.setOrgCode(LKLConfigProd.orgCode);
         request.setContactType("LEGAL");
 
@@ -66,17 +68,19 @@ public class V2MmsOpenApiRealNameSaveAlipayContactInfoRequestTest extends LKLBas
     @Test
     public void testAliAuthMsg() throws Exception {
         V2MmsOpenApiRealNameQueryRequest request = new V2MmsOpenApiRealNameQueryRequest();
-        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+//        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+        request.setMerInnerNo("4002025102484657818");
+        request.setOrgCode(LKLConfigProd.orgCode);
 
 //        request.setSubMchId(LKLConfigProd.subMchId);
-        request.setSubMchId("2088080318924384");
+        request.setSubMchId("2088080355047093");
         request.setRealNameType("ZFBZF");
 
 //        request.setOrderNo("2025102111303913582023");
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setOrgCode(LKLConfigProd.orgCode);
 
-        log.info("request: \r\n{}", request.toBody());
+
+        log.info("request: \r\n{}", JsonUtil.toJson(request));
 
         LKLCommonResponseV2 response = LKLPost.httpPost(request);
         log.info("response: \r\n{}", JsonUtil.toJson(response));

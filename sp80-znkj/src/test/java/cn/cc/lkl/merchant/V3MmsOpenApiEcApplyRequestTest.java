@@ -1,15 +1,15 @@
 package cn.cc.lkl.merchant;
 
 import cn.cc.config.JsonUtil;
-import cn.cc.lkl.LKLBaseTest;
+import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
-import cn.cc.lkl.dto.merchant.V3MmsOpenApiEcApplyCallbackResponse;
-import cn.cc.lkl.dto.merchant.V3MmsOpenApiEcApplyRequest;
-import cn.cc.lkl.dto.merchant.V3MmsOpenApiEcApplyResponse;
+import cn.cc.lkl.dto.merchant.*;
+import cn.cc.lkl.sdk.config.LKLConfigProd;
 import cn.cc.lkl.util.LKLPost;
 import cn.cc.lkl.util.LoadFileUtil;
 import cn.cc.lkl.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ import org.junit.Test;
  * 1. 电子合同申请
  */
 @Slf4j
-public class V3MmsOpenApiEcApplyRequestTest extends LKLBaseTest {
+public class V3MmsOpenApiEcApplyRequestTest extends LKLBaseProdTest {
 
     @Test
     public void test() throws Exception {
@@ -61,6 +61,132 @@ public class V3MmsOpenApiEcApplyRequestTest extends LKLBaseTest {
         V3MmsOpenApiEcApplyCallbackResponse v3MmsOpenApiEcApplyCallbackResponse = JsonUtil.fromJson(LoadFileUtil.loadJsonFromResource("进件/合同-签署-cc-回调-res.json"), V3MmsOpenApiEcApplyCallbackResponse.class);
         log.info("v3MmsOpenApiEcApplyCallbackResponse: \r\n{}", v3MmsOpenApiEcApplyCallbackResponse);
         log.info("v3MmsOpenApiEcApplyCallbackResponse: \r\n{}", JsonUtil.toJson(v3MmsOpenApiEcApplyCallbackResponse));
+    }
+
+    @Test
+    public void testEC007() {
+        V3MmsOpenApiEc007 v3MmsOpenApiEc007 = new V3MmsOpenApiEc007();
+        String ecContentParameters = JSONObject.toJSONString(v3MmsOpenApiEc007, SerializerFeature.PrettyFormat);
+        log.info(ecContentParameters);
+        V3MmsOpenApiEcApplyRequest request = new V3MmsOpenApiEcApplyRequest();
+        request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/lkl/res");
+        request.setOrderNo(StringUtils.getUUID());
+        request.setEcContentParameters(ecContentParameters);
+
+        log.info(request.toBody());
+    }
+
+    private static void gkl(V3MmsOpenApiEc007 v3MmsOpenApiEc007) {
+        String userName = "郭凯龙";
+        String phone = "15738573601";
+        String mail = "718497737@qq.com";
+//        String address = "河南省郑州市管城回族区紫辰路华祥国际大厦B座19楼";
+        String IDCardNo = "41018219960126531X";
+        String yhkNo = "6217002430077411446";
+        String yhkAddress = "中国建设银行股份有限公司郑州滨河国际新城支行";
+    }
+
+    private static void jsy(V3MmsOpenApiEc007 v3MmsOpenApiEc007) {
+        String userName = "蒋守业";
+        String phone = "18706828536";
+        String mail = "623104270@qq.com";
+//        String address = "河南省郑州市管城回族区紫辰路华祥国际大厦B座19楼";
+        String IDCardNo = "410224198708033639";
+        String yhkNo = "6217853600054310213";
+        String yhkAddress = "中国银行西安逸翠园支行";
+    }
+
+    /**
+     * 测试小微
+     */
+    public static V3MmsOpenApiEc007 getV3MmsOpenApiEc007() {
+        V3MmsOpenApiEc007 v3MmsOpenApiEc007 = new V3MmsOpenApiEc007();
+        String userName = "蒋守业";
+        String phone = "18706828536";
+        String mail = "623104270@qq.com";
+//        String address = "河南省郑州市管城回族区紫辰路华祥国际大厦B座19楼";
+        String IDCardNo = "410224198708033639";
+        String yhkNo = "6217853600054310213";
+        String yhkAddress = "中国银行西安逸翠园支行";
+
+        String companyName = "河南郑州中南科技食品公司2";
+        String companyAddress = "河南省郑州市管城回族区紫辰路华祥国际大厦B座18楼";
+
+        v3MmsOpenApiEc007.setA1(userName);
+//        v3MmsOpenApiEc007.setB8(userName);
+        v3MmsOpenApiEc007.setB13(companyAddress);
+
+        // 对私
+        v3MmsOpenApiEc007.setB17("是");
+        v3MmsOpenApiEc007.setB18(userName);
+
+        v3MmsOpenApiEc007.setB19(yhkAddress);
+        v3MmsOpenApiEc007.setB20(yhkNo);
+
+        v3MmsOpenApiEc007.setB24(userName);
+        v3MmsOpenApiEc007.setB25(IDCardNo);
+        v3MmsOpenApiEc007.setB26(phone);
+        v3MmsOpenApiEc007.setB27(userName);
+        v3MmsOpenApiEc007.setB28(mail);
+        v3MmsOpenApiEc007.setB29(IDCardNo);
+        v3MmsOpenApiEc007.setB30(phone);
+
+        //公司信息
+        v3MmsOpenApiEc007.setB31(companyName);
+        v3MmsOpenApiEc007.setB32(userName);
+        v3MmsOpenApiEc007.setB33(companyAddress);
+        v3MmsOpenApiEc007.setB34(phone);
+
+        v3MmsOpenApiEc007.setD1(yhkAddress);
+        v3MmsOpenApiEc007.setD3(userName);
+        v3MmsOpenApiEc007.setD6(userName);
+        v3MmsOpenApiEc007.setD8(userName);
+        v3MmsOpenApiEc007.setD10(userName);
+
+        v3MmsOpenApiEc007.setE8(userName);
+
+        return v3MmsOpenApiEc007;
+    }
+
+    @Test
+    public void testEC007cc() {
+        // "business_license_name": "河南郑州中南科技食品公司",
+        V3MmsOpenApiEc007 v3MmsOpenApiEc007 = getV3MmsOpenApiEc007();
+        String ecContentParameters = JsonUtil.toJson(v3MmsOpenApiEc007);
+        log.info(ecContentParameters);
+        V3MmsOpenApiEcApplyRequest request;
+        String json = LoadFileUtil.loadJsonFromResource("进件/合同-demo-jsy-req.json");
+        String reqData = JSONObject.parseObject(json).getString("req_data");
+        request = JsonUtil.fromJson(reqData, V3MmsOpenApiEcApplyRequest.class);
+
+        request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/lkl/res");
+        request.setOrderNo(StringUtils.getUUID());
+
+        request.setEcTypeCode("EC007");
+        request.setEcContentParameters(JsonUtil.toJson(v3MmsOpenApiEc007));
+
+        log.info(request.toBody());
+
+        LKLCommonResponse response = LKLPost.httpPost(request);
+        log.info("response: \r\n{}", JsonUtil.toJson(response));
+        log.info("response: \r\n{}", response.resultSuccess());
+
+        V3MmsOpenApiEcApplyResponse v3MmsOpenApiEcApplyResponse = JsonUtil.fromJson(response.getRespData().toString(), V3MmsOpenApiEcApplyResponse.class);
+        log.info("v3MmsOpenApiEcApplyResponse: \r\n{}", JsonUtil.toJson(v3MmsOpenApiEcApplyResponse));
+    }
+
+    @Test
+    public void testEC007ccQuery() {
+        V3MmsOpenApiEcQStatusRequest request = new V3MmsOpenApiEcQStatusRequest();
+        request.setOrderNo(StringUtils.getUUID());
+        request.setOrgCode(LKLConfigProd.orgCode);
+        request.setEcApplyId("1033767775095672832");
+        log.info("电子合同查询: \r\n:{}",request.toBody());
+
+        LKLCommonResponse response = LKLPost.httpPost(request);
+
+        log.info("response: \r\n{}", JsonUtil.toJson(response));
+
     }
 
 }

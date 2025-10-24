@@ -1,12 +1,10 @@
 package cn.cc.lkl.util;
 
 import cn.cc.lkl.dto.*;
-import cn.cc.lkl.sdk.config.LKLConfig;
 import cn.cc.lkl.sdk.config.LKLConfigProd;
 import com.alibaba.fastjson.JSON;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;
-import com.lkl.laop.sdk.request.LklRequest;
 import com.lkl.laop.sdk.request.V2CommRequest;
 import com.lkl.laop.sdk.request.V3CommRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +72,7 @@ public class LKLPost {
             if (reqEncrypt) {
                 body = LKLSDK.sm4Encrypt(lklBaseRequest.toBody(), appId);
             }
-            String response = LKLSDK.httpPost(serverUrl + lklBaseRequest.getFunctionCode().getUrl(), body);
+            String response = LKLSDK.httpPost(serverUrl + lklBaseRequest.gFunctionCode().getUrl(), body);
             if (respDecrypt) {
                 response = LKLSDK.sm4Decrypt(response, appId);
             }

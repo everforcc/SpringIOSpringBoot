@@ -1,5 +1,6 @@
 package cn.cc.lkl.merchant;
 
+import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.LKLBaseTest;
 import cn.cc.lkl.dto.LKLCommonResponse;
 import cn.cc.lkl.dto.merchant.V3TkbsCustomerFileUploadRequest;
@@ -14,15 +15,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Slf4j
-public class V3TkbsCustomerFileUploadRequestTest extends LKLBaseTest {
+public class V3TkbsCustomerFileUploadRequestTest extends LKLBaseProdTest {
 
     @Test
     public void test() {
         V3TkbsCustomerFileUploadRequest request = new V3TkbsCustomerFileUploadRequest();
+
+        String path = "D:\\cache\\BaiduSyncdisk\\znkj\\project\\汇付\\用户信息\\cc\\";
+
         try {
-            String fileBase64 = Base64.encodeBase64String(Files.readAllBytes(Paths.get("D:\\cache\\BaiduSyncdisk\\znkj\\project\\汇付\\用户信息\\cc\\syt.jpg")));
+            String fileBase64 = Base64.encodeBase64String(Files.readAllBytes(Paths.get(path + "mnz.jpg")));
             request.setFileBase64(fileBase64);
-            request.setImgType("CHECKSTAND_IMG");
+            request.setImgType("SHOP_INSIDE_IMG");
             LKLCommonResponse lklCommonResponse = LKLPost.httpPost(request);
             if (lklCommonResponse.resultSuccess()) {
                 log.info("response 成功: \r\n{}", lklCommonResponse);

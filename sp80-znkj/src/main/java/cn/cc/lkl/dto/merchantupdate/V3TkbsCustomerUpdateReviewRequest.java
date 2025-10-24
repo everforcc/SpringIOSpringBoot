@@ -19,7 +19,7 @@ public class V3TkbsCustomerUpdateReviewRequest extends LKLBaseRequest {
     private String orgCode;
 
     @Override
-    public FunctionCodeEnum getFunctionCode() {
+    public FunctionCodeEnum gFunctionCode() {
         return FunctionCodeEnum.API_V3_TKBS_CUSTOMER_UPDATE_REVIEW;
     }
 }

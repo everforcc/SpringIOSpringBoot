@@ -69,7 +69,7 @@ public class V3TkbsCustomerFileUploadRequest extends LKLBaseRequest {
     }
 
     @Override
-    public FunctionCodeEnum getFunctionCode() {
+    public FunctionCodeEnum gFunctionCode() {
         return FunctionCodeEnum.API_V3_TKBS_CUSTOMER_FILE_UPLOAD;
     }
 }

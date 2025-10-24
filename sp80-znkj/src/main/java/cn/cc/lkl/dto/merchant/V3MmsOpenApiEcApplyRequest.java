@@ -48,7 +48,7 @@ public class V3MmsOpenApiEcApplyRequest extends LKLBaseRequest {
     @NotBlank
     @Size(max = 12, message = "合同类别长度不能超过12位")
     @JsonProperty("ec_type_code")
-    private String ecTypeCode;
+    private String ecTypeCode = "EC007";
 
     /**
      * 法人/经营者证件类型
@@ -136,8 +136,8 @@ public class V3MmsOpenApiEcApplyRequest extends LKLBaseRequest {
     private String acctNo;
 
     /**
-     * 企业/经营者结算卡名称
-     * 企业/经营者结算卡名称
+     * ~~企业/经营者结算卡名称~~
+     * 法人 姓名
      */
     @NotBlank
     @Size(max = 64, message = "结算卡名称长度不能超过64位")
@@ -217,7 +217,7 @@ public class V3MmsOpenApiEcApplyRequest extends LKLBaseRequest {
     private String retUrl;
 
     @Override
-    public FunctionCodeEnum getFunctionCode() {
+    public FunctionCodeEnum gFunctionCode() {
         return FunctionCodeEnum.API_V3_MMS_OPEN_API_EC_APPLY;
     }
 }

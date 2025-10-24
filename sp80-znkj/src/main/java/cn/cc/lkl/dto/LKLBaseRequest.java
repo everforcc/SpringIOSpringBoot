@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public abstract class LKLBaseRequest {
 
-    public abstract FunctionCodeEnum getFunctionCode();
+    public abstract FunctionCodeEnum gFunctionCode();
 
     public String toBody() {
         Map<String, Object> param = new HashMap<>();

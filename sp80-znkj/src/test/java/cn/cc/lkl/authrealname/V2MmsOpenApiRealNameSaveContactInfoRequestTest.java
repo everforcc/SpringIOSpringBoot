@@ -1,5 +1,6 @@
 package cn.cc.lkl.authrealname;
 
+import cn.cc.config.JsonUtil;
 import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.dto.LKLCommonResponseV2;
 import cn.cc.lkl.dto.authrealname.V2MmsOpenApiRealNameSaveContactInfoRequest;
@@ -65,17 +66,24 @@ public class V2MmsOpenApiRealNameSaveContactInfoRequestTest extends LKLBaseProdT
     public void testWxResult() {
         V2MmsOpenApiWechatRealNameQueryRequest request = new V2MmsOpenApiWechatRealNameQueryRequest();
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
+        request.setMerInnerNo("4002025102484657818");
         request.setOrgCode(LKLConfigProd.orgCode);
-        request.setMerInnerNo(LKLConfigProd.merInnerNo);
-        request.setSubMchId("820612759");
+
+        request.setSubMchId("821100958");
+
         log.info("request: \r\n{}", request.toBody());
+
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
+
         log.info("response: \r\n{}", JSONObject.toJSONString(lklCommonResponse));
+
         if (lklCommonResponse.resultSuccess()) {
-            String respData = lklCommonResponse.getRespData().toString();
-            V2MmsOpenApiWechatRealNameQueryResponse response = JSONObject.parseObject(respData, V2MmsOpenApiWechatRealNameQueryResponse.class);
-            log.info("response: \r\n{}", response.toString());
+            // 使用已注释掉的方式，这是最合适的解决方案
+            V2MmsOpenApiWechatRealNameQueryResponse response = JsonUtil.fromJson(lklCommonResponse.getRespData(), V2MmsOpenApiWechatRealNameQueryResponse.class);
+//            V2MmsOpenApiWechatRealNameQueryResponse response = JsonUtil.fromJson(lklCommonResponse.getRespData(), V2MmsOpenApiWechatRealNameQueryResponse.class);
+            log.info("response: \r\n{}", JsonUtil.toJson(response));
         }
+
     }
 
 }

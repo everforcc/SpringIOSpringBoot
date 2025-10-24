@@ -244,7 +244,7 @@ public class V3TkbsMerchantEncryRequest extends LKLBaseRequest {
     private String contractNo; // 电子合同编号（可选）
 
     @Override
-    public FunctionCodeEnum getFunctionCode() {
+    public FunctionCodeEnum gFunctionCode() {
         return FunctionCodeEnum.API_V3_TKBS_MERCHANT_ENCRY;
     }
 

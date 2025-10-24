@@ -25,7 +25,8 @@ public class V2MmsOpenApiQuerySubMerInfoRequestTest extends LKLBaseProdTest {
         V2MmsOpenApiQuerySubMerInfoRequest request = new V2MmsOpenApiQuerySubMerInfoRequest();
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
         request.setOrgCode(LKLConfigProd.orgCode);
-        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+//        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+        request.setMerCupNo("8224910581402AM");
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("response: \r\n{}", lklCommonResponse.toString());
         if (!lklCommonResponse.resultSuccess()) {
