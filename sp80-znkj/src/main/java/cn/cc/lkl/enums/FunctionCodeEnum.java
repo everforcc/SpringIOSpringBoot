@@ -40,7 +40,7 @@ public enum FunctionCodeEnum {
 
     // 分账相关接口 start
     API_V2_MMS_OPENAPI_LEDGER_APPLYLEDGERMER("/api/v2/mms/openApi/ledger/applyLedgerMer", "商户分账业务开通申请"),
-
+    API_V2_MMS_OPENAPI_UPLOADFILE("/api/v2/mms/openApi/uploadFile", "附件上传"),
     // 分账相关接口 end
 
     ;

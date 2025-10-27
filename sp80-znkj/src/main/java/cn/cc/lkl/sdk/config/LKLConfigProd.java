@@ -26,6 +26,7 @@ public class LKLConfigProd {
 
     /**
      * lkl内部商户号
+     * 申请出来的
      */
     public static final String merInnerNo = "4002025102254621375";
 
