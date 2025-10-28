@@ -69,11 +69,11 @@ public class V2MmsOpenApiRealNameSaveAlipayContactInfoRequestTest extends LKLBas
     public void testAliAuthMsg() throws Exception {
         V2MmsOpenApiRealNameQueryRequest request = new V2MmsOpenApiRealNameQueryRequest();
 //        request.setMerInnerNo(LKLConfigProd.merInnerNo);
-        request.setMerInnerNo("4002025102484657818");
+        request.setMerInnerNo("4002025102814755551");
         request.setOrgCode(LKLConfigProd.orgCode);
 
 //        request.setSubMchId(LKLConfigProd.subMchId);
-        request.setSubMchId("2088080355047093");
+        request.setSubMchId("2088080453310758");
         request.setRealNameType("ZFBZF");
 
 //        request.setOrderNo("2025102111303913582023");

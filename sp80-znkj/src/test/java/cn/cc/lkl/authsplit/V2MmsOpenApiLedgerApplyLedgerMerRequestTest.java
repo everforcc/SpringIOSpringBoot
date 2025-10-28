@@ -12,6 +12,7 @@ import cn.cc.lkl.util.LoadFileUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.lkl.laop.sdk.request.V2MmsOpenApiLedgerApplyLedgerMerRequest;
+import com.lkl.laop.sdk.request.V2MmsOpenApiLedgerModifyLedgerMerRequest;
 import com.lkl.laop.sdk.request.V2MmsOpenApiLedgerQueryLedgerMerRequest;
 import com.lkl.laop.sdk.request.V2MmsOpenApiUploadFileRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -44,16 +45,19 @@ public class V2MmsOpenApiLedgerApplyLedgerMerRequestTest extends LKLBaseProdTest
 
         request.setVersion("1.0");
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setMerInnerNo("4002025102584686558");
+        // todo 看看这两个参数含义
+        // 822491048160FN1
+        // 4002025102584686558
+        request.setMerInnerNo(LKLConfigProd.merInnerNo);
         request.setOrgCode(LKLConfigProd.orgCode);
-        request.setContactMobile("17600260259");
-        request.setSplitLowestRatio(BigDecimal.valueOf(10.00));
+        request.setContactMobile("13022110823");
+        request.setSplitLowestRatio(BigDecimal.valueOf(70.00));
         request.setSplitEntrustFileName("清分结算授权委托书.pdf");
         request.setSplitEntrustFilePath("MMS/20251027/161014-39c9ee5bca994de78b79326b34979471.pdf");
         request.setSplitRange("MARK");
         request.setSepFundSource("TR");
         request.setEleContractNo("QY20251025612937473");
-        request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/lkl/res");
+        request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/system/lkl/open/auth/split/apply");
 
 
         log.info("分账申请:{}", request);
@@ -67,13 +71,39 @@ public class V2MmsOpenApiLedgerApplyLedgerMerRequestTest extends LKLBaseProdTest
     }
 
     @Test
+    public void testUpdate() throws Exception {
+        V2MmsOpenApiLedgerModifyLedgerMerRequest request = new V2MmsOpenApiLedgerModifyLedgerMerRequest();
+        request.setVersion("1.0");
+        request.setOrderNo(DateUtils.getTimeStampAndRandom());
+        request.setMerInnerNo(LKLConfigProd.merInnerNo);
+        request.setOrgCode(LKLConfigProd.orgCode);
+        request.setContactMobile("17600260259");
+        request.setSplitLowestRatio("70.00");
+        request.setSplitEntrustFileName("清分结算授权委托书.pdf");
+        request.setSplitEntrustFilePath("MMS/20251027/161014-39c9ee5bca994de78b79326b34979471.pdf");
+        request.setSplitRange("MARK");
+//        request.setSepFundSource("TR");
+//        request.setEleContractNo("QY20251025612937473");
+        request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/system/lkl/open/auth/split/apply");
+        log.info("分账申请:{}", request);
+        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
+        log.info("分账开通结果:{}", JsonUtil.toJson(lklCommonResponse));
+        if (lklCommonResponse.resultSuccess()) {
+            log.info("分账开通成功");
+        } else {
+            log.info("分账开通失败: {}", lklCommonResponse.getRetMsg());
+        }
+
+    }
+
+    @Test
     public void testResult(){
         V2MmsOpenApiLedgerQueryLedgerMerRequest request = new V2MmsOpenApiLedgerQueryLedgerMerRequest();
         request.setVersion("1.0");
         request.setOrderNo(DateUtils.getTimeStampAndRandom());
         request.setOrgCode(LKLConfigProd.orgCode);
-//        request.setMerInnerNo("4002025102584686558");
         request.setMerInnerNo(LKLConfigProd.merInnerNo);
+//        request.setMerInnerNo(LKLConfigProd.merInnerNo);
         log.info("分账查询:{}", JsonUtil.toJson(request));
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("分账查询结果:{}", JsonUtil.toJson(lklCommonResponse));
