@@ -19,10 +19,12 @@ import org.junit.Test;
 @Slf4j
 public class V2MmsOpenApiLedgerApplyLedgerReceiverRequestTest extends LKLBaseProdTest {
 
+    /**
+     * 已通过
+     * @throws Exception
+     */
     @Test
-    public void testZnkj() throws Exception {
-
-
+    public void testReceive() throws Exception {
         V2MmsOpenApiLedgerApplyLedgerReceiverRequest request = new V2MmsOpenApiLedgerApplyLedgerReceiverRequest();
 //        String json = LoadFileUtil.loadJsonFromResource("分账申请/分账接收方_demo_req.json");
 //        request = JsonUtil.fromJson(json, V2MmsOpenApiLedgerApplyLedgerReceiverRequest.class);
@@ -45,8 +47,6 @@ public class V2MmsOpenApiLedgerApplyLedgerReceiverRequestTest extends LKLBasePro
         request.setAcctOpenBankName("中国银行股份有限公司郑州航海东路支行");
         request.setAcctClearBankCode("313491099267");
 
-
-
         log.info("账户分账接收方申请:{}", request);
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
         log.info("账户分账接收方申请结果:{}", lklCommonResponse);
@@ -58,9 +58,26 @@ public class V2MmsOpenApiLedgerApplyLedgerReceiverRequestTest extends LKLBasePro
     }
 
     @Test
+    public void testReceiveMsg() throws Exception {
+        V2MmsOpenApiLedgerQueryReceiverDetailRequest request = new V2MmsOpenApiLedgerQueryReceiverDetailRequest();
+        request.setVersion("1.0");
+        request.setOrderNo(DateUtils.getTimeStampAndRandom());
+        request.setOrgCode(LKLConfigProd.orgCode);
+        request.setReceiverNo("SR2024000165546");
+
+        log.info("账户分账接收方查询:{}", request);
+        LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
+        log.info("账户分账接收方查询结果:{}", lklCommonResponse);
+        if (lklCommonResponse.resultSuccess()) {
+            log.info("账户分账接收方查询成功");
+        } else {
+            log.info("账户分账接收方查询失败: {}", lklCommonResponse.getRetMsg());
+        }
+
+    }
+
+    @Test
     public void test() throws Exception {
-
-
         V2MmsOpenApiLedgerApplyLedgerReceiverRequest request = new V2MmsOpenApiLedgerApplyLedgerReceiverRequest();
 //        String json = LoadFileUtil.loadJsonFromResource("分账申请/分账接收方_demo_req.json");
 //        request = JsonUtil.fromJson(json, V2MmsOpenApiLedgerApplyLedgerReceiverRequest.class);

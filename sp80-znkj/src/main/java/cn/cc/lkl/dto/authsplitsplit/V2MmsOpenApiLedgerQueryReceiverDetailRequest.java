@@ -18,6 +18,6 @@ public class V2MmsOpenApiLedgerQueryReceiverDetailRequest extends LKLBaseRequest
 
     @Override
     public FunctionCodeEnum getFunctionCode() {
-        return null;
+        return FunctionCodeEnum.API_V2_MMS_OPENAPI_LEDGER_QUERYRECEIVERDETAIL;
     }
 }
