@@ -86,4 +86,30 @@ public class V2MmsOpenApiRealNameSaveAlipayContactInfoRequestTest extends LKLBas
         log.info("response: \r\n{}", JsonUtil.toJson(response));
     }
 
+    @Test
+    public void testAliAuthMsg2() throws Exception {
+        String json = "{\n" +
+                "  \"retCode\": \"000000\",\n" +
+                "  \"retMsg\": \"成功\",\n" +
+                "  \"respData\": {\n" +
+                "    \"merInnerNo\": \"4002021012659676355\",\n" +
+                "    \"subMchId\": \"1\",\n" +
+                "    \"channelId\": \"202103042502641607\",\n" +
+                "    \"applymentState\": \"APPLYMENT_STATE_FAIL\",\n" +
+                "    \"receOrgNo\": \"202103042502641607\",\n" +
+                "    \"applymentId\": \"202103042502641607\",\n" +
+                "    \"authorizeState\": \"AUTHORIZE_STATE_UNAUTHORIZED\",\n" +
+                "    \"registerChannel\": \"\",\n" +
+                "    \"qrcodeData\": \"\",\n" +
+                "    \"rejectParameter\": \"\",\n" +
+                "    \"rejectReason\": \"\"\n" +
+                "  }\n" +
+                "}\n";
+        JSONObject jsonObject = JSONObject.parseObject(json);
+        String applymentState = jsonObject.getJSONObject("respData").getString("applymentState");
+        log.info("applymentState: {}", applymentState);
+
+    }
+
+
 }

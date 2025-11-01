@@ -37,6 +37,9 @@ public class ZnkjRemainTest {
 
         System.out.println(startTime);
         System.out.println(endTime);
+
+        Integer a = 1;
+        System.out.println(a.equals(1));
     }
 
 }

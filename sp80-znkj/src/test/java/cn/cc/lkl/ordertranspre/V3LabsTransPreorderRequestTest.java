@@ -27,12 +27,16 @@ public class V3LabsTransPreorderRequestTest extends LKLBaseProdTest {
     @Test
     public void test() throws Exception {
         V3LabsTransPreorderRequest request = new V3LabsTransPreorderRequest();
-        request.setMerchantNo(LKLConfigProd.merchantNo);
-        request.setTermNo(LKLConfigProd.termNo);
+        request.setMerchantNo("8224910737200MK");
+//        request.setMerchantNo(LKLConfigProd.merchantNo);
+//        request.setTermNo(LKLConfigProd.termNo);
+        request.setTermNo("N8905587");
 
         request.setOutTradeNo(StringUtils.getSerialNumber());
-        request.setAccountType("ALIPAY");
-        request.setTransType("41");
+//        request.setAccountType("WECHAT");
+        request.setAccountType("WECHAT");
+        request.setTransType("61");
+//        request.setTransType("61");
         request.setTotalAmount("2");
         V3LabsTradeLocationInfo locationInfo = new V3LabsTradeLocationInfo();
         // 获取当前设备ip
@@ -42,8 +46,9 @@ public class V3LabsTransPreorderRequestTest extends LKLBaseProdTest {
 //        locationInfo.setBaseStation("");
         request.setLocationInfo(locationInfo);
         V3LabsTradePreorderAlipayBus accBusiFields = new V3LabsTradePreorderAlipayBus();
+//        accBusiFields.setUserId("232966729");
         accBusiFields.setUserId("232966729");
-//        request.setAccBusiFields(accBusiFields);
+        request.setAccBusiFields(accBusiFields);
 
         log.info("获取支付信息: {}", request.toBody());
 //        log.info("获取支付信息请求: \r\n{}", JsonUtil.toJson(request));

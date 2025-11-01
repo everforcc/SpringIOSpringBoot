@@ -23,7 +23,7 @@ public class V3TkbsOpenMerchantInfoRequestTest extends LKLBaseProdTest {
     public void testOpenMerchantInfo() throws Exception {
         V3TkbsOpenMerchantInfoRequest request = new V3TkbsOpenMerchantInfoRequest();
         request.setOrgCode(LKLConfigProd.orgCode);
-        request.setMerchantNo("100143767");
+        request.setMerchantNo("8224910737200MK");
 //        request.setCustomerNo("144173725");
         log.info("获取商户信息请求: {}", JsonUtil.toJson(request));
         LKLCommonResponse response = LKLPost.httpPost(request, true, true);

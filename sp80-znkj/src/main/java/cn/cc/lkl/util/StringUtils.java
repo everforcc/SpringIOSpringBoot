@@ -11,6 +11,17 @@ public class StringUtils {
         return randomNum + "";
     }
 
+    //
+
+    /**
+     * 获取流水号
+     * 年月日时分秒+6位随机数
+     * @return
+     */
+    public static String getSerialNumber2() {
+        return DateUtils.getTimeStamp() + getSerialNumber();
+    }
+
     // 获得uuid
     public static String getUUID() {
         return java.util.UUID.randomUUID().toString().replace("-", "");
