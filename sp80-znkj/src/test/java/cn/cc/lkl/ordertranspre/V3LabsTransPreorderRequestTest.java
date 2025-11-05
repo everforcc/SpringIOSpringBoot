@@ -34,8 +34,8 @@ public class V3LabsTransPreorderRequestTest extends LKLBaseProdTest {
 
         request.setOutTradeNo(StringUtils.getSerialNumber());
 //        request.setAccountType("WECHAT");
-        request.setAccountType("WECHAT");
-        request.setTransType("61");
+        request.setAccountType("ALIPAY");
+        request.setTransType("41");
 //        request.setTransType("61");
         request.setTotalAmount("2");
         V3LabsTradeLocationInfo locationInfo = new V3LabsTradeLocationInfo();

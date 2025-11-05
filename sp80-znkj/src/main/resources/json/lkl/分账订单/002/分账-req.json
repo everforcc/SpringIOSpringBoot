@@ -1,0 +1,18 @@
+{
+  "merchant_no": "8224910737200MK",
+  "log_no": "66202213740167",
+  "log_date": "20251105",
+  "out_separate_no": "1183410248887705600",
+  "total_amt": "5",
+  "notify_url": "https://test-znyd.zgzhongnan.com/cc/system/lkl/open/split/notify",
+  "recv_datas": [
+    {
+      "recv_merchant_no": "8224910737200MK",
+      "separate_value": "3"
+    },
+    {
+      "recv_no": "SR2024000165390",
+      "separate_value": "2"
+    }
+  ]
+}

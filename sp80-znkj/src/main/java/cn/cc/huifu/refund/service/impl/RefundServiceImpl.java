@@ -9,6 +9,7 @@ import cn.cc.huifu.refund.service.IHuiFuInfoService;
 import cn.cc.huifu.refund.service.IRefundService;
 import cn.cc.huifu.refund.service.IZnPayOrderRecordService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -58,6 +59,9 @@ public class RefundServiceImpl implements IRefundService {
             // 园区
             for (ZnPayOrderRecord znPayOrderRecord : znPayOrderRecordList) {
                 String otherDataHfSeqId = znPayOrderRecord.getOtherDataHfSeqId();
+                if(StringUtils.isEmpty(otherDataHfSeqId)){
+                    continue;
+                }
                 Long payAmt = znPayOrderRecord.getPayAmt();
 //            double amt = (double) payAmt / 100;
                 String amtStr = String.valueOf(payAmt);

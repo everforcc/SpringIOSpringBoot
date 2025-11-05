@@ -2,11 +2,14 @@ package cn.cc.lkl.dto.authrealname;
 
 import cn.cc.lkl.dto.LKLBaseRequestV2;
 import cn.cc.lkl.enums.FunctionCodeEnum;
+import lombok.Data;
 
 /**
+ * 支付宝微信商户开户状态查询
  * https://o.lakala.com/#/home/document/detail?id=488
  * /v2/mms/sme/mrchAuthStateQuery
  */
+@Data
 public class V2MmsSmeMrchAuthStateQueryRequest extends LKLBaseRequestV2 {
 
     /**

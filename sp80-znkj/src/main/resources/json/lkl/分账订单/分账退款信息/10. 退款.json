@@ -1,0 +1,11 @@
+{
+  "merchant_no": "8224910737200MK",
+  "term_no": "N8905587",
+  "out_trade_no": "220641789733837495",
+  "refund_amount": "100",
+  "refund_reason": "测试",
+  "origin_out_trade_no": "1183136260877852672",
+  "location_info": {
+    "request_ip": "10.176.1.188"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "merchant_no": "8224910737200MK",
+  "log_no": "66202212034710",
+  "log_date": "20251105",
+  "out_separate_no": "1183136909157867521",
+  "total_amt": "100",
+  "recv_datas": [
+    {
+      "recv_merchant_no": "8224910737200MK",
+      "separate_value": "99"
+    },
+    {
+      "separate_value": "1",
+      "recv_no": "SR2024000165390"
+    }
+  ]
+}

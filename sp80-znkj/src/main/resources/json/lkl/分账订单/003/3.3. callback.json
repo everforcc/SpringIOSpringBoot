@@ -1,0 +1,23 @@
+{
+  "log_no": "66202214281404",
+  "status": "SUCCESS",
+  "cal_type": "0",
+  "cmd_type": "FALLBACK",
+  "log_date": "20251105",
+  "total_amt": "2",
+  "finish_date": "20251105",
+  "separate_no": "20251105770288018263937300",
+  "detail_datas": [
+    {
+      "amt": "2",
+      "recv_no": "SR2024000165390",
+      "recv_merchant_no": ""
+    }
+  ],
+  "final_status": "SUCCESS",
+  "separate_date": "20251105",
+  "separate_type": "1",
+  "total_fee_amt": "0",
+  "out_separate_no": "2025110514421922320221",
+  "actual_separate_amt": "2"
+}

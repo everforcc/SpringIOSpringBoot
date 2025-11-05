@@ -1,0 +1,18 @@
+{
+  "log_no": "66202214504201",
+  "log_date": "20251105",
+  "total_amt": "5",
+  "notify_url": "https://test-znyd.zgzhongnan.com/cc/system/lkl/open/split/notify",
+  "recv_datas": [
+    {
+      "separate_value": "3",
+      "recv_merchant_no": "8224910737200MK"
+    },
+    {
+      "recv_no": "SR2024000165390",
+      "separate_value": "2"
+    }
+  ],
+  "merchant_no": "8224910737200MK",
+  "out_separate_no": "1183470628720746496"
+}

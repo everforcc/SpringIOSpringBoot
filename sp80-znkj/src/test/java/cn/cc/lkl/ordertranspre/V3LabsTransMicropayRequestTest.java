@@ -1,13 +1,18 @@
 package cn.cc.lkl.ordertranspre;
 
+import cn.cc.config.JsonUtil;
 import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.LKLBaseTest;
+import cn.cc.lkl.dto.LKLCommonResponse;
+import cn.cc.lkl.dto.scanpreorder.V3LabsTransMicropayResponse;
 import cn.cc.lkl.sdk.config.LKLConfigProd;
+import cn.cc.lkl.util.LKLPost;
 import cn.cc.lkl.util.StringUtils;
 import com.lkl.laop.sdk.LKLSDK;
 import com.lkl.laop.sdk.exception.SDKException;
 import com.lkl.laop.sdk.request.V3LabsTransMicropayRequest;
 import com.lkl.laop.sdk.request.model.V3LabsTradeLocationInfo;
+import com.lkl.laop.sdk.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -33,8 +38,11 @@ public class V3LabsTransMicropayRequestTest extends LKLBaseProdTest {
         request.setLocationInfo(locationInfo);
 
         log.info("request: \r\n{}", request.toBody());
-        String response = LKLSDK.httpPost(request);
+        LKLCommonResponse response = LKLPost.httpPost(request);
         log.info("response: \r\n{}", response);
+
+        V3LabsTransMicropayResponse v3LabsTransMicropayResponse = JsonUtil.fromJson(response.getRespData(), V3LabsTransMicropayResponse.class);
+
     }
 
 }

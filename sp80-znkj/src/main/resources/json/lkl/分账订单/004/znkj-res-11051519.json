@@ -1,0 +1,13 @@
+{
+  "code": "SACS0000",
+  "msg": "成功",
+  "resp_time": "20251105152020",
+  "resp_data": {
+    "separate_no": "20251105770188018264379800",
+    "out_separate_no": "1183466883001753600",
+    "status": "PROCESSING",
+    "log_no": "66202214402410",
+    "log_date": "20251105",
+    "total_amt": "5"
+  }
+}

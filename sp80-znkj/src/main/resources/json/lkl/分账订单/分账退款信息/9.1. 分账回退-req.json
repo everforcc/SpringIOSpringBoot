@@ -1,0 +1,16 @@
+{
+  "req_data": {
+    "merchant_no": "8224910737200MK",
+    "origin_separate_no": "20251105770188018259449600",
+    "out_separate_no": "2025110510573066807012",
+    "total_amt": "1",
+    "origin_recv_datas": [
+      {
+        "recv_no": "SR2024000165390",
+        "amt": "1"
+      }
+    ]
+  },
+  "version": "3.0",
+  "req_time": "20251105105730"
+}

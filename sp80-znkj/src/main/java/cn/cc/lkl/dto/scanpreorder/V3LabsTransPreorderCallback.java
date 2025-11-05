@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * https://o.lakala.com/#/home/document/detail?id=117
  * V3Labs交易预下单回调接口
  */
 @Data
