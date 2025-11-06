@@ -17,7 +17,7 @@ public class RefundSchedule {
     @Scheduled(cron = "0 30 23 * * ?")
     public void refund() {
         log.info("执行定时操作");
-        iRefundService.refundList();
+//        iRefundService.refundList();
     }
 
 }

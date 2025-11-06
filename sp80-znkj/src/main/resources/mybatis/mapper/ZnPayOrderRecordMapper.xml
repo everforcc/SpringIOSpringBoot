@@ -25,7 +25,7 @@
 
     <select id="listZnPayOrderRecord138" resultType="cn.cc.huifu.dto.ZnPayOrderRecord">
         SELECT json_unquote(JSON_EXTRACT(e.other_data,'$.hf_seq_id')) as otherDataHfSeqId,e.pay_amt,e.req_date,e.create_time,e.other_data,e.* FROM zn_pay_order_record e
-        WHERE e.req_date = ${reqDate} and e.pay_amt is not null and e.auth_type = '2'
+        WHERE e.req_date = ${reqDate} and e.pay_amt is not null and (e.auth_type = '1' or e.auth_type is null)
         <if test="list != null and list.size() > 0">
             and json_unquote(JSON_EXTRACT(e.other_data,'$.hf_seq_id')) not in
             <foreach collection="list" item="hf" open="(" separator="," close=")">

@@ -33,6 +33,15 @@ public class RefundServiceImpl implements IRefundService {
 
     List<String> boxIPList = Arrays.asList("192.168.1.132");
 
+    /**
+     * 调整
+     * 分为以下几种情况
+     * 1. 删除 boxIPList 没有和子退款了
+     * 2. 云端ip，136,138,148
+     * 3. 退款汇付
+     * 4. 退款拉卡拉 非分账情况
+     * 5. 退款拉卡拉 分账情况
+     */
     @Override
     public List<HuifuRefund> refundList() {
         LocalDate localDate = LocalDate.now();
