@@ -12,22 +12,28 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
-@Service
-public class ZnPayOrderRecordServiceImpl implements IZnPayOrderRecordService {
-
+@Service("iZnPayOrderRecordService138")
+public class ZnPayOrderRecordServiceImpl138 implements IZnPayOrderRecordService {
     @Resource
     ZnPayOrderRecordMapper znPayOrderRecordMapper;
-    @DS("yq136")
+
+    @DS("yq138")
     @Override
-    public List<ZnPayOrderRecord> listZnPayOrderRecord136(String reqDate, List<String> hfSeqIdList) {
+    public List<ZnPayOrderRecord> listZnPayOrderRecord(String reqDate, List<String> hfSeqIdList) {
         log.info("当前数据源: {}", DynamicDataSourceContextHolder.peek());
         return znPayOrderRecordMapper.listZnPayOrderRecord(reqDate, hfSeqIdList);
     }
 
     @DS("yq138")
     @Override
-    public List<ZnPayOrderRecord> listZnPayOrderRecord138(String reqDate, List<String> hfSeqIdList) {
-        log.info("当前数据源: {}", DynamicDataSourceContextHolder.peek());
-        return znPayOrderRecordMapper.listZnPayOrderRecord(reqDate, hfSeqIdList);
+    public List<ZnPayOrderRecord> listZnPayOrderRecordLkl(String reqDate, List<String> hfSeqIdList) {
+        return znPayOrderRecordMapper.listZnPayOrderRecordLkl(reqDate, hfSeqIdList);
     }
+
+    @DS("yq138")
+    @Override
+    public List<ZnPayOrderRecord> listZnPayOrderRecordLklSplit(String reqDate, List<String> hfSeqIdList) {
+        return znPayOrderRecordMapper.listZnPayOrderRecordLklSplit(reqDate, hfSeqIdList);
+    }
+
 }

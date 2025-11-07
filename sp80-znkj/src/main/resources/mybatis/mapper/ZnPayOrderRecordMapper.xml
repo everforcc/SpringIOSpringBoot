@@ -24,4 +24,26 @@
         </if>
     </select>
 
+    <select id="listZnPayOrderRecordLkl" resultType="cn.cc.huifu.dto.ZnPayOrderRecord" useCache="false">
+        SELECT e.req_seqId as otherDataHfSeqId,e.pay_amt,e.* FROM zn_pay_order_record e
+        WHERE e.req_date = ${reqDate} and e.pay_amt is not null and e.auth_type = '2' and e.acct_split_info is null
+        <if test="list != null and list.size() > 0">
+            and e.req_seqId not in
+            <foreach collection="list" item="hf" open="(" separator="," close=")">
+                #{hf}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="listZnPayOrderRecordLklSplit" resultType="cn.cc.huifu.dto.ZnPayOrderRecord" useCache="false">
+        SELECT e.req_seqId as otherDataHfSeqId,e.pay_amt,e.* FROM zn_pay_order_record e
+        WHERE e.req_date = ${reqDate} and e.pay_amt is not null and e.auth_type = '2' and e.lkl_split_status = 'SUCCESS'
+        <if test="list != null and list.size() > 0">
+            and e.req_seqId not in
+            <foreach collection="list" item="hf" open="(" separator="," close=")">
+                #{hf}
+            </foreach>
+        </if>
+    </select>
+
 </mapper>

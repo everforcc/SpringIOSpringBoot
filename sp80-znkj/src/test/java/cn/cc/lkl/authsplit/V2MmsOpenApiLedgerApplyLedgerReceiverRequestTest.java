@@ -1,5 +1,6 @@
 package cn.cc.lkl.authsplit;
 
+import cn.cc.config.JsonUtil;
 import cn.cc.lkl.LKLBaseProdTest;
 import cn.cc.lkl.dto.LKLCommonResponseV2;
 import cn.cc.lkl.dto.authsplitsplit.V2MmsOpenApiLedgerApplyLedgerReceiverResponse;
@@ -7,6 +8,7 @@ import cn.cc.lkl.dto.authsplitsplit.V2MmsOpenApiLedgerQueryReceiverDetailRequest
 import cn.cc.lkl.sdk.config.LKLConfigProd;
 import cn.cc.lkl.util.DateUtils;
 import cn.cc.lkl.util.LKLPost;
+import cn.cc.lkl.util.LoadFileUtil;
 import com.alibaba.fastjson.JSON;
 import com.lkl.laop.sdk.request.V2MmsOpenApiLedgerApplyLedgerReceiverRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -60,30 +62,30 @@ public class V2MmsOpenApiLedgerApplyLedgerReceiverRequestTest extends LKLBasePro
     @Test
     public void testReceiveXw() throws Exception {
         V2MmsOpenApiLedgerApplyLedgerReceiverRequest request = new V2MmsOpenApiLedgerApplyLedgerReceiverRequest();
-//        String json = LoadFileUtil.loadJsonFromResource("分账申请/分账接收方_demo_req.json");
-//        request = JsonUtil.fromJson(json, V2MmsOpenApiLedgerApplyLedgerReceiverRequest.class);
-        request.setVersion("1.0");
-        request.setOrderNo(DateUtils.getTimeStampAndRandom());
-        request.setOrgCode(LKLConfigProd.orgCode);
-        request.setReceiverName("河南霄瞰信息科技有限公司");
-        request.setContactMobile("17600260259");
-        request.setLicenseNo("91410100MAEM8Y8Y8K");
-        request.setLicenseName("河南霄瞰信息科技有限公司");
-        request.setLegalPersonName("薄飞跃");
-        request.setLegalPersonCertificateType("17");
-        request.setLegalPersonCertificateNo("412721199204214617");
-        request.setAcctNo("410126010190094109");
-        request.setAcctName("河南霄瞰信息科技有限公司");
-        request.setAcctTypeCode("57");
-        request.setAcctCertificateType("17");
-        request.setAcctCertificateNo("412721199204214617");
-        request.setAcctOpenBankCode("313491099267");
-        request.setAcctOpenBankName("中国银行股份有限公司郑州航海东路支行");
-        request.setAcctClearBankCode("313491099267");
+        String json = LoadFileUtil.loadJsonFromResource("分账申请/分账接收方_demo_req.json");
+        request = JsonUtil.fromJson(json, V2MmsOpenApiLedgerApplyLedgerReceiverRequest.class);
+//        request.setVersion("1.0");
+//        request.setOrderNo(DateUtils.getTimeStampAndRandom());
+//        request.setOrgCode(LKLConfigProd.orgCode);
+//        request.setReceiverName("河南霄瞰信息科技有限公司");
+//        request.setContactMobile("17600260259");
+//        request.setLicenseNo("91410100MAEM8Y8Y8K");
+//        request.setLicenseName("河南霄瞰信息科技有限公司");
+//        request.setLegalPersonName("薄飞跃");
+//        request.setLegalPersonCertificateType("17");
+//        request.setLegalPersonCertificateNo("412721199204214617");
+//        request.setAcctNo("410126010190094109");
+//        request.setAcctName("河南霄瞰信息科技有限公司");
+//        request.setAcctTypeCode("57");
+//        request.setAcctCertificateType("17");
+//        request.setAcctCertificateNo("412721199204214617");
+//        request.setAcctOpenBankCode("313491099267");
+//        request.setAcctOpenBankName("中国银行股份有限公司郑州航海东路支行");
+//        request.setAcctClearBankCode("313491099267");
 
         log.info("账户分账接收方申请:{}", request);
         LKLCommonResponseV2 lklCommonResponse = LKLPost.httpPost(request);
-        log.info("账户分账接收方申请结果:{}", lklCommonResponse);
+        log.info("账户分账接收方申请结果:{}", JsonUtil.toJson(lklCommonResponse));
         if (lklCommonResponse.resultSuccess()) {
             log.info("账户分账接收方申请成功");
         } else {

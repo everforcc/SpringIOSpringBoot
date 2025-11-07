@@ -20,28 +20,45 @@ class ZnkjHuiFuTests {
     @Test
     void contextLoads() {
         log.info("开始退款");
-        iRefundService.refundList();
+        iRefundService.refundListYqHf();
+        log.info("退款结束");
+    }
+
+    @Test
+    void refundLkl() {
+        log.info("开始退款");
+        iRefundService.refundListYqLkl();
+        log.info("退款结束");
+    }
+
+    @Test
+    void refundLklSplit() {
+        log.info("开始退款");
+        iRefundService.refundListYqLklSplit();
         log.info("退款结束");
     }
 
     @Resource
-    IZnPayOrderRecordService iZnPayOrderRecordService;
+    IZnPayOrderRecordService iZnPayOrderRecordService136;
+
+    @Resource
+    IZnPayOrderRecordService iZnPayOrderRecordService138;
 
     @Test
     void switchDB136() {
 //        List<ZnPayOrderRecord> list136 = iZnPayOrderRecordService.listZnPayOrderRecord136("20250219", null);
 //        log.info("136: {}", list136.size());
 
-        List<ZnPayOrderRecord> list138 = iZnPayOrderRecordService.listZnPayOrderRecord138("20250219", null);
+        List<ZnPayOrderRecord> list138 = iZnPayOrderRecordService136.listZnPayOrderRecord("20250219", null);
         log.info("138: {}", list138.size());
     }
 
     @Test
     void switchDB() {
-        List<ZnPayOrderRecord> list138 = iZnPayOrderRecordService.listZnPayOrderRecord138("20250219", null);
+        List<ZnPayOrderRecord> list138 = iZnPayOrderRecordService136.listZnPayOrderRecord("20250219", null);
         log.info("总数: 138: {}", list138.size());
 
-        List<ZnPayOrderRecord> list136 = iZnPayOrderRecordService.listZnPayOrderRecord136("20250219", null);
+        List<ZnPayOrderRecord> list136 = iZnPayOrderRecordService138.listZnPayOrderRecord("20250219", null);
         log.info("总数: 136: {}", list136.size());
     }
 

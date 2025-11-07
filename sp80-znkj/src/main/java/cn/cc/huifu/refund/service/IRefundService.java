@@ -6,6 +6,12 @@ import java.util.List;
 
 public interface IRefundService {
 
-    List<HuifuRefund> refundList();
+    List<HuifuRefund> refundListYqHf();
+
+    List<HuifuRefund> refundListBoxHf();
+
+    List<HuifuRefund> refundListYqLkl();
+
+    List<HuifuRefund> refundListYqLklSplit();
 
 }

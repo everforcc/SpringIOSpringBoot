@@ -101,6 +101,16 @@ public class ZnPayOrderRecord {
     private String huifuid;
 
     /**
+     * 拉卡拉商户号
+     */
+    private String lklMerchantNo;
+
+    /**
+     * 拉卡拉终端号
+     */
+    private String lklTermNo;
+
+    /**
      * 远程通知URL
      */
     private String notifyUrl;

@@ -2,10 +2,12 @@ package cn.cc.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.*;
+
+import java.io.IOException;
+import java.util.List;
 
 public class JsonUtil {
     private static final ObjectMapper objectMapper;
@@ -49,6 +51,21 @@ public class JsonUtil {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public static <T> List<T> parseToList(String text, Class<T> clazz) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, new Class[]{clazz});
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            return (List)mapper.readValue(text, javaType);
+        } catch (JsonParseException var4) {
+        } catch (JsonMappingException var5) {
+        } catch (IOException var6) {
+        }
+
+        return (List)null;
     }
 
 }

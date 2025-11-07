@@ -34,7 +34,7 @@ public class V2MmsOpenApiLedgerApplyBindRequestTest extends LKLBaseProdTest {
         request.setOrgCode(LKLConfigProd.orgCode);
         request.setMerInnerNo("4002025102814755551");
         // todo
-        request.setReceiverNo("SR2024000165390");
+        request.setReceiverNo("SR2024000171654");
         request.setEntrustFileName("收款方与分账方合作协议.png");
         request.setEntrustFilePath("MMS/20251029/171837-769a0883b9ab44fdbe90c2d083165316.png");
         request.setRetUrl("https://test-znyd.zgzhongnan.com/cc/system/lkl/open/auth/split/bind");

@@ -20,7 +20,7 @@ import java.util.List;
 public class RefundController {
 
     @Resource
-    IZnPayOrderRecordService iZnPayOrderRecordService;
+    IZnPayOrderRecordService iZnPayOrderRecordService136;
 
     @Resource
     IHuiFuInfoService iHuiFuInfoService;
@@ -30,7 +30,7 @@ public class RefundController {
 
     @GetMapping("/yq/{reqDate}")
     public R<List<ZnPayOrderRecord>> refundYq(@PathVariable("reqDate") String reqDate) {
-        return R.ok(iZnPayOrderRecordService.listZnPayOrderRecord136(reqDate, null));
+        return R.ok(iZnPayOrderRecordService136.listZnPayOrderRecord(reqDate, null));
     }
 
     @GetMapping("/yqlocal/{reqDate}")
@@ -40,7 +40,7 @@ public class RefundController {
 
     @GetMapping()
     public R<List<HuifuRefund>> refund() {
-        return R.ok(iRefundService.refundList());
+        return R.ok(iRefundService.refundListYqHf());
     }
 
 }
