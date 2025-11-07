@@ -61,22 +61,16 @@ public class RefundServiceImpl implements IRefundService {
     @Override
     public List<HuifuRefund> refundListYqHf() {
         String reqDate = DateUtils.getDate();
-
         // 退款清单
         List<HuifuRefund> huifuRefundList = new ArrayList<>();
-
         for (IZnPayOrderRecordService znPayOrderRecordService : iZnPayOrderRecordServiceList) {
             // 获取znPayOrderRecordService的servicename
             String yqKey = znPayOrderRecordService.getClass().getSimpleName();
             yqKey = yqKey.substring(0, yqKey.indexOf("$"));
             String ip = ipMap.get(yqKey);
             List<String> hfSeqIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
-
             log.info("{}: 园区 已处理退款数据: {}", ip, hfSeqIdList.size());
-
-
             List<ZnPayOrderRecord> znPayOrderRecordList = znPayOrderRecordService.listZnPayOrderRecord(reqDate, hfSeqIdList);
-
             log.info("{}: 园区 待处理数据: {}", ip, znPayOrderRecordList.size());
             // 园区
             for (ZnPayOrderRecord znPayOrderRecord : znPayOrderRecordList) {
@@ -85,18 +79,8 @@ public class RefundServiceImpl implements IRefundService {
                     continue;
                 }
                 Long payAmt = znPayOrderRecord.getPayAmt();
-//            double amt = (double) payAmt / 100;
-                String amtStr = String.valueOf(payAmt);
-                if (amtStr.length() > 2) {
-                    amtStr = amtStr.substring(0, amtStr.length() - 2) + "." + amtStr.substring(amtStr.length() - 2, amtStr.length());
-                } else {
-                    if (amtStr.length() == 2) {
-                        amtStr = "0." + amtStr;
-                    } else if (amtStr.length() == 1) {
-                        amtStr = "0.0" + amtStr;
-                    }
-                }
 
+                String amtStr = formatCurrency(payAmt);
                 log.info("{}:园区 退款 日期: {}, 汇付id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
                 otherDataHfSeqId = otherDataHfSeqId.replace("\"", "");
 //            HuifuRefund exist = huifuRefundMapper.getOneHuifuRefund(otherDataHfSeqId, reqDate);
@@ -105,7 +89,6 @@ public class RefundServiceImpl implements IRefundService {
 //                huifuRefundList.add(exist);
 //                continue;
 //            }
-
                 Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, amtStr, znPayOrderRecord.getHuifuid());
                 if (Objects.nonNull(resultMap)) {
                     String bank_code = (String) resultMap.get("bank_code");
@@ -183,25 +166,23 @@ public class RefundServiceImpl implements IRefundService {
     @Override
     public List<HuifuRefund> refundListYqLkl() {
         String reqDate = DateUtils.getDate();
-
         // 退款清单
         List<HuifuRefund> huifuRefundList = new ArrayList<>();
-
         for (IZnPayOrderRecordService znPayOrderRecordService : iZnPayOrderRecordServiceList) {
             // 获取znPayOrderRecordService的servicename
             String yqKey = znPayOrderRecordService.getClass().getSimpleName();
             // ZnPayOrderRecordServiceImpl136$$EnhancerBySpringCGLIB$$852f8bce
             // 获取实现类的类名
             yqKey = yqKey.substring(0, yqKey.indexOf("$"));
-            log.info("{}: 获取数据源: {}", yqKey, znPayOrderRecordService.getClass().getSimpleName());
+            log.info("拉卡拉非分账:{}: 获取数据源: {}", yqKey, znPayOrderRecordService.getClass().getSimpleName());
             String ip = ipMap.get(yqKey);
             List<String> existIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
 
-            log.info("{}: 园区 已处理退款数据: {}", ip, existIdList.size());
+            log.info("拉卡拉非分账:{}: 园区 已处理退款数据: {}", ip, existIdList.size());
 
             List<ZnPayOrderRecord> znPayOrderRecordList = znPayOrderRecordService.listZnPayOrderRecordLkl(reqDate, existIdList);
 
-            log.info("{}: 园区 待处理数据: {}", ip, znPayOrderRecordList.size());
+            log.info("拉卡拉非分账:{}: 园区 待处理数据: {}", ip, znPayOrderRecordList.size());
             // 园区
             for (ZnPayOrderRecord znPayOrderRecord : znPayOrderRecordList) {
                 String otherDataHfSeqId = znPayOrderRecord.getOtherDataHfSeqId();
@@ -209,21 +190,9 @@ public class RefundServiceImpl implements IRefundService {
                     continue;
                 }
                 Long payAmt = znPayOrderRecord.getPayAmt();
-//            double amt = (double) payAmt / 100;
-                String amtStr = String.valueOf(payAmt);
-                if (amtStr.length() > 2) {
-                    amtStr = amtStr.substring(0, amtStr.length() - 2) + "." + amtStr.substring(amtStr.length() - 2, amtStr.length());
-                } else {
-                    if (amtStr.length() == 2) {
-                        amtStr = "0." + amtStr;
-                    } else if (amtStr.length() == 1) {
-                        amtStr = "0.0" + amtStr;
-                    }
-                }
 
-                log.info("{}:园区 退款 日期: {}, 拉卡拉id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
-
-//                Map<String, Object> resultMap = ZnPayOrderRefund.refundFlow(otherDataHfSeqId, reqDate, amtStr, znPayOrderRecord.getHuifuid());
+                String amtStr = formatCurrency(payAmt);
+                log.info("拉卡拉非分账:{}:园区 退款 日期: {}, 拉卡拉id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
                 LKLCommonResponse response = lklRefundService.refund(znPayOrderRecord.getLklMerchantNo(), znPayOrderRecord.getLklTermNo(), znPayOrderRecord.getReqSeqid(), String.valueOf(znPayOrderRecord.getPayAmt()));
                 if (Objects.nonNull(response)) {
                     HuifuRefund huifuRefund = new HuifuRefund();
@@ -257,15 +226,15 @@ public class RefundServiceImpl implements IRefundService {
             // ZnPayOrderRecordServiceImpl136$$EnhancerBySpringCGLIB$$852f8bce
             // 获取实现类的类名
             yqKey = yqKey.substring(0, yqKey.indexOf("$"));
-            log.info("{}: 获取数据源: {}", yqKey, znPayOrderRecordService.getClass().getSimpleName());
+            log.info("拉卡拉分账:{}: 获取数据源: {}", yqKey, znPayOrderRecordService.getClass().getSimpleName());
             String ip = ipMap.get(yqKey);
             List<String> existIdList = huifuRefundMapper.listHfSeqId(reqDate, ip);
 
-            log.info("{}: 园区 已处理退款数据: {}", ip, existIdList.size());
+            log.info("拉卡拉分账:{}: 园区 已处理退款数据: {}", ip, existIdList.size());
 
             List<ZnPayOrderRecord> znPayOrderRecordList = znPayOrderRecordService.listZnPayOrderRecordLklSplit(reqDate, existIdList);
 
-            log.info("{}: 园区 待处理数据: {}", ip, znPayOrderRecordList.size());
+            log.info("拉卡拉分账:{}: 园区 待处理数据: {}", ip, znPayOrderRecordList.size());
             // 园区
             for (ZnPayOrderRecord znPayOrderRecord : znPayOrderRecordList) {
                 String otherDataHfSeqId = znPayOrderRecord.getOtherDataHfSeqId();
@@ -273,33 +242,24 @@ public class RefundServiceImpl implements IRefundService {
                     continue;
                 }
                 Long payAmt = znPayOrderRecord.getPayAmt();
-//            double amt = (double) payAmt / 100;
-                String amtStr = String.valueOf(payAmt);
-                if (amtStr.length() > 2) {
-                    amtStr = amtStr.substring(0, amtStr.length() - 2) + "." + amtStr.substring(amtStr.length() - 2, amtStr.length());
-                } else {
-                    if (amtStr.length() == 2) {
-                        amtStr = "0." + amtStr;
-                    } else if (amtStr.length() == 1) {
-                        amtStr = "0.0" + amtStr;
-                    }
-                }
-                log.info("{}:园区 退款 日期: {}, 拉卡拉分账id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
+
+                String amtStr = formatCurrency(payAmt);
+                log.info("拉卡拉分账:{}:园区 退款 日期: {}, 拉卡拉分账id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
                 String lklSplitRes = znPayOrderRecord.getLklSplitRes();
                 LKLCommonResponse lklCommonResponse = JsonUtil.fromJson(lklSplitRes, LKLCommonResponse.class);
                 V3SacsSeparateResponse v3SacsSeparateResponse = JsonUtil.fromJson(lklCommonResponse.getRespData(), V3SacsSeparateResponse.class);
-                log.info("{}: 退款信息: {}", ip, v3SacsSeparateResponse);
+
+                log.info("拉卡拉分账:{}: 待退款回调信息: {}", ip, v3SacsSeparateResponse);
                 String splitInfo = znPayOrderRecord.getAcctSplitInfo();
                 List<V3SacsSeparateRecvDatas> recvDatas = JsonUtil.parseToList(splitInfo, V3SacsSeparateRecvDatas.class);
-                log.info("{}: 退款信息: {}", ip, lklSplitRes);
-                log.info("{}: 退款信息-分账: {}", ip, splitInfo);
+                log.info("拉卡拉分账:{}: 待退款分账信息-: {}", ip, recvDatas);
+
                 for (V3SacsSeparateRecvDatas recvData : recvDatas) {
-                    // [{"root":false,"separate_value":7,"recv_merchant_no":"8224910737200MK"},{"root":false,"separate_value":3,"recv_no":"SR2024000171654"}]
+
                     if (StringUtils.isNotEmpty(recvData.getRecvNo())) {
-                        log.info("{}: 退款信息-分账-商户号: {}", ip, recvData.getRecvNo());
+                        log.info("拉卡拉分账:{}: 退款信息-分账-商户号: {}", ip, recvData.getRecvNo());
                         // 回退
                         lklRefundService.refundZnkjBack(v3SacsSeparateResponse.getSeparateNo(), recvData.getSeparateValue(), recvData.getRecvNo());
-
                         // 退款
                         LKLCommonResponse response = lklRefundService.refund(znPayOrderRecord.getLklMerchantNo(), znPayOrderRecord.getLklTermNo(), znPayOrderRecord.getReqSeqid(), String.valueOf(znPayOrderRecord.getPayAmt()));
                         if (Objects.nonNull(response)) {
@@ -316,11 +276,19 @@ public class RefundServiceImpl implements IRefundService {
                             huifuRefundMapper.saveHuifuRefund(huifuRefund);
                             huifuRefundList.add(huifuRefund);
                         }
-
                     }
                 }
             }
         }
         return huifuRefundList;
     }
+
+    private String formatCurrency(Long amount) {
+        if (amount == null) {
+            return "0.00";
+        }
+        return String.format("%.2f", amount / 100.0);
+    }
+
+
 }
