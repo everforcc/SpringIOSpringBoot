@@ -38,11 +38,11 @@ class ZnkjHuiFuTests {
 
     @Test
     void switchDB() {
-        List<ZnPayOrderRecord> list136 = iZnPayOrderRecordService.listZnPayOrderRecord136("20250219", null);
-        log.info("总数: 136: {}", list136.size());
-
         List<ZnPayOrderRecord> list138 = iZnPayOrderRecordService.listZnPayOrderRecord138("20250219", null);
         log.info("总数: 138: {}", list138.size());
+
+        List<ZnPayOrderRecord> list136 = iZnPayOrderRecordService.listZnPayOrderRecord136("20250219", null);
+        log.info("总数: 136: {}", list136.size());
     }
 
 }

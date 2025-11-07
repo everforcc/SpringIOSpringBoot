@@ -32,10 +32,10 @@ public class V3LabsRelationRefundRequestTest extends LKLBaseProdTest {
         request.setMerchantNo("8224910594708XR");
         request.setTermNo("M9395646");
         request.setOutTradeNo(StringUtils.getSerialNumber());
-        request.setRefundAmount("20");
+        request.setRefundAmount("100");
         request.setRefundReason("测试");
         // 原商户交易流水号
-        request.setOriginOutTradeNo("1183484517361524736");
+        request.setOriginOutTradeNo("1183901111560577024");
         // 原拉卡拉交易流水号
 //        request.setOriginTradeNo("");
         // 原对账单流水号
@@ -91,6 +91,7 @@ public class V3LabsRelationRefundRequestTest extends LKLBaseProdTest {
         V3SacsFallbackRequest request = new V3SacsFallbackRequest();
         request.setMerchantNo("8224910737200MK");
 
+        // {"msg": "成功", "code": "SACS0000", "resp_data": {"log_no": "66202214531005", "status": "PROCESSING", "log_date": "20251105", "total_amt": "5", "separate_no": "20251105770188018265128900", "out_separate_no": "1183481366227066880"}, "resp_time": "20251105161339"}
         // 8.2. znkj-res.json.resp_data..separate_no
         request.setOriginSeparateNo("20251105770188018265128900");
         request.setOutSeparateNo(DateUtils.getTimeStampAndRandom());

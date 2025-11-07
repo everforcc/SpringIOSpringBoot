@@ -88,7 +88,13 @@ public class ZnPayOrderRecord {
      * 商品描述
      */
     private String goodsDesc;
-
+    /**
+     *
+     * 认证类型
+     * 1 汇付 历史数据为空
+     * 2 拉卡拉
+     */
+    private String authType;
     /**
      * 汇付ID
      */
@@ -140,5 +146,17 @@ public class ZnPayOrderRecord {
      * 入账时间
      */
     private String acctDate;
+
+    private String lklSplitReq;
+    private String lklSplitRes;
+    private String lklSplitCallback;
+    /**
+     * 拉卡拉分账状态
+     */
+    private String lklSplitStatus;
+    /**
+     * 拉卡拉对账单流水号
+     */
+    private String lklLogNo;
 
 }

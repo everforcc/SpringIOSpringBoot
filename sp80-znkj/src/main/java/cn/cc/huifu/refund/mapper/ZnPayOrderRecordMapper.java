@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface ZnPayOrderRecordMapper {
 
-    List<ZnPayOrderRecord> listZnPayOrderRecord136(@Param("reqDate") String reqDate, @Param("list") List<String> hfSeqIdList);
 
-    List<ZnPayOrderRecord> listZnPayOrderRecord138(@Param("reqDate") String reqDate, @Param("list") List<String> hfSeqIdList);
+    List<ZnPayOrderRecord> listZnPayOrderRecord(@Param("reqDate") String reqDate, @Param("list") List<String> hfSeqIdList);
 
 }
