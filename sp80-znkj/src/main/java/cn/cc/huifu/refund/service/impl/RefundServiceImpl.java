@@ -11,7 +11,7 @@ import cn.cc.huifu.refund.service.IRefundService;
 import cn.cc.huifu.refund.service.IZnPayOrderRecordService;
 import cn.cc.lkl.dto.LKLCommonResponse;
 import cn.cc.lkl.dto.ordersplit.V3SacsSeparateResponse;
-import cn.cc.lkl.service.LKLRefundService;
+import cn.cc.lkl.service.ILKLRefundService;
 import cn.cc.util.DateUtils;
 import com.lkl.laop.sdk.request.model.V3SacsSeparateRecvDatas;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ public class RefundServiceImpl implements IRefundService {
     }
 
     @Resource
-    LKLRefundService lklRefundService;
+    ILKLRefundService ilklRefundService;
 
 
     /**
@@ -193,7 +193,7 @@ public class RefundServiceImpl implements IRefundService {
 
                 String amtStr = formatCurrency(payAmt);
                 log.info("拉卡拉非分账:{}:园区 退款 日期: {}, 拉卡拉id: {}, 金额: {}, {}", ip, reqDate, otherDataHfSeqId, payAmt, amtStr);
-                LKLCommonResponse response = lklRefundService.refund(znPayOrderRecord.getLklMerchantNo(), znPayOrderRecord.getLklTermNo(), znPayOrderRecord.getReqSeqid(), String.valueOf(znPayOrderRecord.getPayAmt()));
+                LKLCommonResponse response = ilklRefundService.refund(znPayOrderRecord.getLklMerchantNo(), znPayOrderRecord.getLklTermNo(), znPayOrderRecord.getReqSeqid(), String.valueOf(znPayOrderRecord.getPayAmt()));
                 if (Objects.nonNull(response)) {
                     HuifuRefund huifuRefund = new HuifuRefund();
                     huifuRefund.setIp(ip);
@@ -259,9 +259,9 @@ public class RefundServiceImpl implements IRefundService {
                     if (StringUtils.isNotEmpty(recvData.getRecvNo())) {
                         log.info("拉卡拉分账:{}: 退款信息-分账-商户号: {}", ip, recvData.getRecvNo());
                         // 回退
-                        lklRefundService.refundZnkjBack(v3SacsSeparateResponse.getSeparateNo(), recvData.getSeparateValue(), recvData.getRecvNo());
+                        ilklRefundService.refundZnkjBack(v3SacsSeparateResponse.getSeparateNo(), recvData.getSeparateValue(), recvData.getRecvNo());
                         // 退款
-                        LKLCommonResponse response = lklRefundService.refund(znPayOrderRecord.getLklMerchantNo(), znPayOrderRecord.getLklTermNo(), znPayOrderRecord.getReqSeqid(), String.valueOf(znPayOrderRecord.getPayAmt()));
+                        LKLCommonResponse response = ilklRefundService.refund(znPayOrderRecord.getLklMerchantNo(), znPayOrderRecord.getLklTermNo(), znPayOrderRecord.getReqSeqid(), String.valueOf(znPayOrderRecord.getPayAmt()));
                         if (Objects.nonNull(response)) {
                             HuifuRefund huifuRefund = new HuifuRefund();
                             huifuRefund.setIp(ip);

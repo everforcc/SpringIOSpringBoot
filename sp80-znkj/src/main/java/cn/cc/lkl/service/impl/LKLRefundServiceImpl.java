@@ -1,7 +1,8 @@
-package cn.cc.lkl.service;
+package cn.cc.lkl.service.impl;
 
 import cn.cc.config.JsonUtil;
 import cn.cc.lkl.dto.LKLCommonResponse;
+import cn.cc.lkl.service.ILKLRefundService;
 import cn.cc.lkl.util.DateUtils;
 import cn.cc.lkl.util.LKLPost;
 import cn.cc.lkl.util.StringUtils;
@@ -17,8 +18,9 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class LKLRefundService {
+public class LKLRefundServiceImpl implements ILKLRefundService {
 
+    @Override
     public String refundZnkjBack(String separate_no,String totalAmt,String recvNo) {
         V3SacsFallbackRequest request = new V3SacsFallbackRequest();
         request.setMerchantNo("8224910737200MK");
@@ -50,6 +52,7 @@ public class LKLRefundService {
         return JsonUtil.toJson(response);
     }
 
+    @Override
     public LKLCommonResponse refund(String merchantNo, String termNo, String outTradeNo, String refundAmount)  {
         V3LabsRelationRefundRequest request = new V3LabsRelationRefundRequest();
         request.setMerchantNo(merchantNo);

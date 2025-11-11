@@ -120,6 +120,7 @@
         <!-- 文件处理 -->
         <!-- excel -->
         <com.github.excel4j>3.0.0</com.github.excel4j>
+        <easyexcel.version>3.3.3</easyexcel.version>
         <!-- 添加 poi 和 poi-ooxml 依赖版本 -->
         <poi.version>5.2.3</poi.version>
         <!-- 媒体相关 -->
@@ -518,6 +519,17 @@
                 <groupId>com.github.crab2died</groupId>
                 <artifactId>Excel4J</artifactId>
                 <version>${com.github.excel4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi-ooxml-schemas</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.pdfbox</groupId>
