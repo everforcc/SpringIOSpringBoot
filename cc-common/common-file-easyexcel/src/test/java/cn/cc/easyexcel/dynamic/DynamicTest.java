@@ -1,22 +1,27 @@
 package cn.cc.easyexcel.dynamic;
 
 import com.alibaba.excel.util.FileUtils;
+import org.junit.Test;
 
 import java.io.*;
 import java.util.*;
 
+/**
+ * 普通文件导出
+ */
 public class DynamicTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         try {
-//            excelImport();
-            readFile(filePath);
+            excelImport();
+//            readFile(filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static String filePath = "D:\\cache\\test\\动态模板导出示例2.xlsx";
+    public static String filePath = "D:\\cache\\test\\动态模板导出示例3.xlsx";
     public static TemplateDefinition tpl = new TemplateDefinition();
 
     static {
