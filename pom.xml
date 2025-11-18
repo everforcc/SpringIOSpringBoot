@@ -155,6 +155,7 @@
         <module>cc-common</module>
         <module>cc-common-spring</module>
         <module>cc-test</module>
+        <module>cc-exam</module>
         <module>cc-tools</module>
         <module>sp01-web</module>
         <module>sp02-aop</module>
