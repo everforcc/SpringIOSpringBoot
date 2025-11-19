@@ -31,6 +31,10 @@
             <groupId>cn.cc</groupId>
             <artifactId>common-mysql</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
+        </dependency>
         <!-- common -->
 
         <dependency>
