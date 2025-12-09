@@ -69,6 +69,7 @@
         <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
         <!-- 数据源 -->
         <dynamic-ds.version>4.2.0</dynamic-ds.version>
+        <mysql.binlog>0.30.1</mysql.binlog>
         <!-- 数据库相关 -->
 
         <!--缓存-->
@@ -290,6 +291,15 @@
                 <version>${dynamic-ds.version}</version>
             </dependency>
             <!-- mybatis-plus插件 -->
+
+            <!-- binlog -->
+            <!-- https://mvnrepository.com/artifact/com.zendesk/mysql-binlog-connector-java -->
+            <dependency>
+                <groupId>com.zendesk</groupId>
+                <artifactId>mysql-binlog-connector-java</artifactId>
+                <version>${mysql.binlog}</version>
+            </dependency>
+            <!-- binlog -->
 
             <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
             <!-- 单机用 -->
