@@ -181,11 +181,12 @@
         <module>sp50-AITemp</module>
         <module>sp52-AITools</module>
         <module>sp53-AINetty</module>
+        <module>sp54-AIClient</module>
         <module>sp61-webapi</module>
         <module>sp71-user-craw</module>
         <module>sp72-webmagic</module>
+        <module>sp73-Readability</module>
         <module>sp80-znkj</module>
-        <module>sp54-AIClient</module>
     </modules>
 
     <dependencyManagement>

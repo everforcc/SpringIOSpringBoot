@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cc.sp73readability.mybatis.mapper.AiReadabilityChapterMapper">
+
+    <resultMap id="ChapterMap" type="cn.cc.sp73readability.model.AiReadabilityChapter">
+        <id property="chapterId" column="chapter_id"/>
+        <result property="novelId" column="novel_id"/>
+        <result property="chapterIndex" column="chapter_index"/>
+        <result property="chapterTitle" column="chapter_title"/>
+        <result property="content" column="content"/>
+        <result property="sourceUrl" column="source_url"/>
+    </resultMap>
+
+    <insert id="batchInsertOrUpdate" parameterType="list">
+        insert into ai_readability_chapter (novel_id, chapter_index, chapter_title, content, source_url)
+        values
+        <foreach collection="aiReadabilityChapters" item="item" separator=",">
+            (#{item.novelId}, #{item.chapterIndex}, #{item.chapterTitle}, #{item.content}, #{item.sourceUrl})
+        </foreach>
+        on duplicate key update
+            chapter_title = values(chapter_title),
+            content       = values(content),
+            source_url    = values(source_url)
+    </insert>
+
+</mapper>
+

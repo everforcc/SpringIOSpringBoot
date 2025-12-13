@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cc.sp73readability.mybatis.mapper.AiReadabilityNovelMapper">
+
+    <resultMap id="NovelMap" type="cn.cc.sp73readability.model.AiReadabilityNovel">
+        <id property="novelId" column="novel_id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="synopsis" column="synopsis"/>
+        <result property="catalogUrl" column="catalog_url"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectByCatalogUrl" parameterType="string" resultMap="NovelMap">
+        select novel_id, title, author, synopsis, catalog_url, status
+        from ai_readability_novel
+        where catalog_url = #{catalogUrl}
+        limit 1
+    </select>
+
+    <insert id="insertNovel" parameterType="cn.cc.sp73readability.model.AiReadabilityNovel" useGeneratedKeys="true" keyProperty="novelId">
+        insert into ai_readability_novel (title, author, synopsis, catalog_url, status)
+        values (#{title}, #{author}, #{synopsis}, #{catalogUrl}, #{status})
+    </insert>
+
+    <update id="updateNovel" parameterType="cn.cc.sp73readability.model.AiReadabilityNovel">
+        update ai_readability_novel
+        set title = #{title},
+            author = #{author},
+            synopsis = #{synopsis},
+            status = #{status}
+        where novel_id = #{novelId}
+    </update>
+
+</mapper>
+

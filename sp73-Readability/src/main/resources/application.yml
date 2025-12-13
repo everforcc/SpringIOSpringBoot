@@ -1,0 +1,52 @@
+param:
+  server:
+    port: 8073
+  mysql:
+    ip: 8.146.199.165
+    port: 3308
+    un: cceverfor
+    pas: 5664c.c.
+server:
+  port: ${param.server.port}
+spring:
+  redis:
+    #    password: root
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+  datasource:
+    username: ${param.mysql.un}
+    password: ${param.mysql.pas}
+    url: jdbc:mysql://${param.mysql.ip}:${param.mysql.port}/oneforall?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #   数据源其他配置， 如果用 com.alibaba 不同版本可能写法不一样，初次配置输出测试,
+    druid:
+      # 如果用 druid-spring-boot-starter 则可以一一对应 DruidDataSourceWrapper
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      # 版本不同此处配置也不相同，现在是历史配置
+      #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      #filters: stat,wall,log4j 旧版配置
+      #filters:
+      #  commons-log.connection-logger-name: stat,wall,log4j # 新版配置
+      filters: stat,wall # 2021暂时去掉  ,log4j
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+mybatis:
+  # 绑定到当前模块的模型类，便于 MyBatis 自动别名
+  type-aliases-package: cn.cc.sp73readability.model
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true # 驼峰命名法
