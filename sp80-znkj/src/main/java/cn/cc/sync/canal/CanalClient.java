@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-@Component
+//@Component
 public class CanalClient implements InitializingBean {
 
     private final static int BATCH_SIZE = 1000;

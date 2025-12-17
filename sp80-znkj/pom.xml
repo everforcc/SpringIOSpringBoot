@@ -54,6 +54,14 @@
             <version>2.3.1</version>
         </dependency>
 
+        <!-- binlog -->
+        <dependency>
+            <groupId>com.zendesk</groupId>
+            <artifactId>mysql-binlog-connector-java</artifactId>
+        </dependency>
+
+        <!-- binlog -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
