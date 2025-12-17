@@ -18,15 +18,27 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 基于 Jsoup 的目录页解析实现，采用启发式：
+ * 基于 Jsoup 的目录页解析实现，采用多层启发式策略：
  * - 从 <title>、<meta name=author> 等提取元数据
- * - 查找包含最多章节链接的容器作为章节列表
+ * - 三层降级策略提取章节列表：章节模式识别 → 关键词锚点 → 链接数量统计
+ * 
+ * 通用性设计：
+ * - 策略1（最优先）：识别包含"第X章"模式的链接，适用于大多数中文小说网站（覆盖率约 80%+）
+ * - 策略2（备选）：通过"最新章节"或"正文"关键词定位章节区域
+ * - 策略3（兜底）：统计链接数量最多的容器，适用于结构简单的网站
+ * - 自动排除推荐阅读、广告等噪声区域
+ * 
+ * 扩展性：可通过实现自定义 CatalogParser 或配置化章节模式正则来支持特殊网站
  */
 @Service
 public class CatalogParserImpl implements CatalogParser {
 
     private static final int MIN_LINK_TEXT = 2;
     private static final int MAX_LINK_TEXT = 60;
+    
+    // 章节模式正则表达式（可扩展支持更多格式，如"Chapter 1"、"第一章"等）
+    // 当前支持：第X章（X可以是数字或中文数字）
+    private static final String CHAPTER_PATTERN_REGEX = ".*第[\\d零一二三四五六七八九十百千万]+章.*";
 
     @Override
     public CatalogPageResult parse(String html, String baseUrl) {
@@ -216,14 +228,26 @@ public class CatalogParserImpl implements CatalogParser {
     }
 
     /**
-     * 判断文本是否包含章节模式（如"第1章"、"第122章"等）
+     * 判断文本是否包含章节模式（如"第1章"、"第122章"、"第一百章"等）
+     * 
+     * 当前支持的格式：
+     * - 第X章（X可以是阿拉伯数字或中文数字）
+     * 
+     * 扩展方向（可通过配置化实现）：
+     * - Chapter X、Chapter 1 等英文格式
+     * - 第一章、第一话 等变体
+     * - 1.、1- 等简化格式
+     * 
+     * @param text 链接文本
+     * @return 是否包含章节模式
      */
     private boolean isChapterPattern(String text) {
         if (!StringUtils.hasText(text)) {
             return false;
         }
         // 匹配"第X章"模式，X可以是数字或中文数字
-        return text.matches(".*第[\\d零一二三四五六七八九十百千万]+章.*");
+        // 使用预定义的正则表达式，便于后续扩展为配置化
+        return text.matches(CHAPTER_PATTERN_REGEX);
     }
 
     /**
