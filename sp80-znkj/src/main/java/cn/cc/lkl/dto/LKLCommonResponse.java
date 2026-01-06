@@ -44,7 +44,7 @@ public class LKLCommonResponse {
     private Object respData;
 
     public boolean resultSuccess() {
-        return "000000".equals(code);
+        return "BBS00000".equals(code);
     }
 
 }

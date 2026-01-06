@@ -13,6 +13,7 @@ import com.lkl.laop.sdk.exception.SDKException;
 import com.lkl.laop.sdk.request.V3LabsTransPreorderRequest;
 import com.lkl.laop.sdk.request.model.V3LabsTradeLocationInfo;
 import com.lkl.laop.sdk.request.model.V3LabsTradePreorderAlipayBus;
+import com.lkl.laop.sdk.request.model.V3LabsTradePreorderWechatBus;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -24,8 +25,12 @@ import org.junit.Test;
 public class V3LabsTransPreorderRequestTest extends LKLBaseProdTest {
 
 
+    /**
+     * 支付宝
+     * @throws Exception
+     */
     @Test
-    public void test() throws Exception {
+    public void testAli() throws Exception {
         V3LabsTransPreorderRequest request = new V3LabsTransPreorderRequest();
         request.setMerchantNo("8224910737200MK");
 //        request.setMerchantNo(LKLConfigProd.merchantNo);
@@ -51,6 +56,61 @@ public class V3LabsTransPreorderRequestTest extends LKLBaseProdTest {
         request.setAccBusiFields(accBusiFields);
 
         log.info("获取支付信息: {}", request.toBody());
+//        log.info("获取支付信息请求: \r\n{}", JsonUtil.toJson(request));
+        try {
+            String response = LKLSDK.httpPost(request);
+            LKLCommonResponse lklCommonResponse = JSON.parseObject(response, LKLCommonResponse.class);
+            log.info("获取支付信息结果: {}", JsonUtil.toJson(lklCommonResponse));
+            if (!lklCommonResponse.resultSuccess()) {
+                log.info("获取支付信息失败: {}", lklCommonResponse.getMsg());
+                return;
+            }
+            log.info("获取支付信息成功: {}", lklCommonResponse.getRespData());
+            Object respData = lklCommonResponse.getRespData();
+            // respData 转 JS  merInnerNo: 4002021012659676355ONObject
+            JSONObject jsonObject = JSONObject.parseObject(respData.toString());
+//            JSONObject jsonObject = JSONObject.parseObject();
+            log.info("获取支付信息成功: {}", jsonObject);
+        } catch (SDKException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 小程序APPID：wxd1e456dc8095136a
+     *  小程序秘钥：0cb3088bb6931328f769c6ed2f69d0ab
+     * openId:
+     * oQSRg7CFo36snwNJBzBVSTqbipwc
+     */
+    @Test
+    public void testWx() throws Exception {
+        V3LabsTransPreorderRequest request = new V3LabsTransPreorderRequest();
+        request.setMerchantNo("8224910737200MK");
+//        request.setMerchantNo(LKLConfigProd.merchantNo);
+//        request.setTermNo(LKLConfigProd.termNo);
+        request.setTermNo("N8905587");
+
+        request.setOutTradeNo(StringUtils.getSerialNumber());
+//        request.setAccountType("WECHAT");
+        request.setAccountType("WECHAT");
+        request.setTransType("71");
+//        request.setTransType("61");
+        request.setTotalAmount("2");
+        V3LabsTradeLocationInfo locationInfo = new V3LabsTradeLocationInfo();
+        // 获取当前设备ip
+        locationInfo.setRequestIp("192.168.1.188");
+        // 非必填
+//        locationInfo.setLocation("");
+//        locationInfo.setBaseStation("");
+        request.setLocationInfo(locationInfo);
+        V3LabsTradePreorderWechatBus accBusiFields = new V3LabsTradePreorderWechatBus();
+
+//        accBusiFields.setTimeoutExpress("15");
+        accBusiFields.setSubAppid("wxd1e456dc8095136a");
+        accBusiFields.setUserId("oQSRg7CFo36snwNJBzBVSTqbipwc");
+        request.setAccBusiFields(accBusiFields);
+
+        log.info("获取微信支付信息: {}", request.toBody());
 //        log.info("获取支付信息请求: \r\n{}", JsonUtil.toJson(request));
         try {
             String response = LKLSDK.httpPost(request);
