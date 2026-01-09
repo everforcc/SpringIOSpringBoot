@@ -1,4 +1,4 @@
-package cn.cc.xiaoyu.server;
+package cn.cc.xiaoyu.util;
 
 /**
  * 字符数值转 ASCLL

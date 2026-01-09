@@ -1,4 +1,4 @@
-package cn.cc.xiaoyu.server;
+package cn.cc.xiaoyu.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +34,14 @@ public class Crc16 {
 
 
     public static void main(String[] args) {
-        String s = "e5,5e,31,0,3,44,1,0,17,3,38,39,38,36,30,34,38,32,31,31,32,30,37,30,31,34,32,35,39,36,14,0";
-        String[] split = s.split(",");
-        byte[] data = new byte[split.length];
-        for (int i = 0; i < split.length; i++) {
-            data[i] = (byte) Integer.parseInt(split[i], 16);
-        }
+
+        byte[] data = new byte[]{(byte) 0xd5, (byte) 0x5d,
+                0x52, 0x0, 0x1, (byte) 0x81,
+                0x2,
+                0x0, 0x18,
+                0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,0x0,0x0,0x0,0x0,
+                };
+
 
         int crc = calculate(data);
         System.out.printf("CRC16: %04X", crc);

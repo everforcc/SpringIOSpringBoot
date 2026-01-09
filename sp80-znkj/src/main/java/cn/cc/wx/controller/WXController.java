@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * http://t9338923.natappfree.cc/lkl/res
+ *
  */
 @Slf4j
 @RestController

@@ -1,4 +1,4 @@
-package cn.cc.xiaoyu.server;
+package cn.cc.xiaoyu.util;
 
 import lombok.extern.slf4j.Slf4j;
 

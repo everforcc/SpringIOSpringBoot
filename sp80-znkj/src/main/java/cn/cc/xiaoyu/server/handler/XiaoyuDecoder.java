@@ -1,5 +1,7 @@
-package cn.cc.xiaoyu.server;
+package cn.cc.xiaoyu.server.handler;
 
+import cn.cc.xiaoyu.util.Crc16;
+import cn.cc.xiaoyu.util.XiaoyuUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -52,14 +54,18 @@ public class XiaoyuDecoder extends ByteToMessageDecoder {
             return;
         }
         //忽略包头
+        // 2个字节
         in.readShort();
-
+        // 4位
         int deviceId = in.readInt();
+        // 1位
         int cmd = in.readByte()&0xff;
+        // 2位
         int dataLen = in.readUnsignedShort();
 
 
         //校验和的长度
+        // 2 + 4 + 1 + 2
         int crcLen = dataLengthStart + dataLen + 2 ;
         int allLen = crcLen + 2;
 
@@ -83,6 +89,7 @@ public class XiaoyuDecoder extends ByteToMessageDecoder {
 
             if (calculate != crc16){
 //                log.info("校验和错误,数组:{},结果:{},应该是:{}",XiaoyuUtil.hexString(b),calculate,crc16);
+                // 是释放已读取的字节，回收缓冲区空间。
                 in.discardReadBytes();
                 return;
             }
@@ -105,7 +112,7 @@ public class XiaoyuDecoder extends ByteToMessageDecoder {
     private void printByteBuf(ByteBuf in) {
         byte [] bytes = new byte[in.readableBytes()];
         in.readBytes(bytes);
-        log.info("发来了数据:{}",XiaoyuUtil.hexString(bytes));
+        log.info("发来了数据:{}", XiaoyuUtil.hexString(bytes));
         in.resetReaderIndex();
     }
 

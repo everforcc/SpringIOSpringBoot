@@ -1,0 +1,51 @@
+package cn.cc.xiaoyu.client.handler;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * 定时向服务器发送心跳包
+ */
+@Slf4j
+public class XiaoYuHeartHandler extends ChannelDuplexHandler {
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        IdleStateEvent event = (IdleStateEvent) evt;
+        // 触发了写空闲事件
+        if (event.state() == IdleState.WRITER_IDLE) {
+            log.debug("3s 没有写数据了，发送一个心跳包");
+            ByteBuf byteBuf = ctx.alloc().buffer(37);
+            // byteBuf 写入十六进制 [0, d5, 5d, 52, 0, 1, 81, 1, 0, 18, 38, 39, 38, 36, 30, 34, 36, 31, 31, 36, 31, 39, 37, 32, 37, 37, 34, 32, 39, 30, b, 1b, 14, f, 72, ed, b3, 3b, d5, 5d, 52, 0, 1, 81, 1, 0, 18, 38, 39, 38, 36, 30, 34, 36, 31, 31, 36, 31, 39, 37, 32, 37, 37, 34, 32, 39, 30, b, 1b, 14, f, 72, ed, b3, 3b]
+//                                        byteBuf.writeBytes(new byte[]{
+//                                                (byte) 0xd5, (byte) 0x5d,
+//                                                0x52, 0x0, 0x1, (byte) 0x81,
+//                                                0x2,
+//                                                0x0, 0x14,
+//                                                0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+//                                                0x4f, (byte) 0xfa,
+//                                                (byte) 0xb3, 0x3b});
+            /**
+             * [d5, 5d,
+             * 52, 0, 1, 81,
+             * 2,
+             * 0, 14,
+             * 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+             */
+            byteBuf.writeBytes(new byte[]{
+                    (byte) 0xd5, (byte) 0x5d,
+                    0x52, 0x0, 0x1, (byte) 0x81,
+                    0x2,
+                    0x0, 0x18,
+                    0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,0x0,0x0,0x0,0x0,
+                    0x60, (byte) 0xFE,
+                    (byte) 0xb3, 0x3b});
+            ctx.writeAndFlush(byteBuf);
+        }
+    }
+
+}

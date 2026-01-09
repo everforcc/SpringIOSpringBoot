@@ -1,4 +1,4 @@
-package cn.cc.xiaoyu.server;
+package cn.cc.xiaoyu.server.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * http://t9338923.natappfree.cc/lkl/res
+ * 
  */
 @Slf4j
 @RestController
