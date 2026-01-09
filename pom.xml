@@ -112,8 +112,9 @@
 
         <!-- 编码加密 -->
         <commons-codec.version>1.13</commons-codec.version>
-        <!-- 加密相关 1.58 -->
+        <!-- 加密相关 1.58 1.70 -->
         <org.bouncycastle.bcprov.jdk15on>1.68</org.bouncycastle.bcprov.jdk15on>
+        <org.bouncycastle.bcpkix.jdk15on>1.68</org.bouncycastle.bcpkix.jdk15on>
 
         <!-- apache http 客户端 -->
         <!--<httpmime.version>4.5.10</httpmime.version>-->
@@ -560,6 +561,11 @@
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>${org.bouncycastle.bcprov.jdk15on}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${org.bouncycastle.bcpkix.jdk15on}</version>
             </dependency>
 
             <dependency>
