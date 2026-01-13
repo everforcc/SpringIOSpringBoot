@@ -1,5 +1,7 @@
 package cn.cc.xiaoyu.client.handler;
 
+import cn.cc.xiaoyu.client.instant.IXiaoYuClient;
+import cn.cc.xiaoyu.util.charutil.AsciiUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,12 +15,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class XiaoYuHeartHandler extends ChannelDuplexHandler {
 
+    private IXiaoYuClient iXiaoYuClient;
+
+    public XiaoYuHeartHandler() {
+    }
+
+    public XiaoYuHeartHandler(IXiaoYuClient iXiaoYuClient) {
+        this.iXiaoYuClient = iXiaoYuClient;
+    }
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         IdleStateEvent event = (IdleStateEvent) evt;
         // 触发了写空闲事件
         if (event.state() == IdleState.WRITER_IDLE) {
-            log.debug("3s 没有写数据了，发送一个心跳包");
+            log.debug("3s 没有写数据了，发送一个心跳包: {}", AsciiUtils.hexString(iXiaoYuClient.getHeartData()));
             ByteBuf byteBuf = ctx.alloc().buffer(37);
             // byteBuf 写入十六进制 [0, d5, 5d, 52, 0, 1, 81, 1, 0, 18, 38, 39, 38, 36, 30, 34, 36, 31, 31, 36, 31, 39, 37, 32, 37, 37, 34, 32, 39, 30, b, 1b, 14, f, 72, ed, b3, 3b, d5, 5d, 52, 0, 1, 81, 1, 0, 18, 38, 39, 38, 36, 30, 34, 36, 31, 31, 36, 31, 39, 37, 32, 37, 37, 34, 32, 39, 30, b, 1b, 14, f, 72, ed, b3, 3b]
 //                                        byteBuf.writeBytes(new byte[]{
@@ -36,14 +47,7 @@ public class XiaoYuHeartHandler extends ChannelDuplexHandler {
              * 0, 14,
              * 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
              */
-            byteBuf.writeBytes(new byte[]{
-                    (byte) 0xd5, (byte) 0x5d,
-                    0x52, 0x0, 0x1, (byte) 0x81,
-                    0x2,
-                    0x0, 0x18,
-                    0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,0x0,0x0,0x0,0x0,
-                    0x60, (byte) 0xFE,
-                    (byte) 0xb3, 0x3b});
+            byteBuf.writeBytes(iXiaoYuClient.getHeartData());
             ctx.writeAndFlush(byteBuf);
         }
     }

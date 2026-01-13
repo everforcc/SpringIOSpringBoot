@@ -9,6 +9,7 @@ package cn.cc.xiaoyu.client;
 
 import cn.cc.xiaoyu.client.handler.XiaoYuClientHandler;
 import cn.cc.xiaoyu.client.handler.XiaoYuHeartHandler;
+import cn.cc.xiaoyu.client.instant.IXiaoYuClient;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class XiaoYuClient {
 
-    public static void start() {
+    public static void start(IXiaoYuClient xiaoYuClient) {
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
@@ -49,7 +50,7 @@ public class XiaoYuClient {
                      * 依赖：需要 IdleStateHandler 产生的空闲事件
                      * 触发条件：当检测到写空闲时发送心跳数据
                      */
-                    pipeline.addLast(new XiaoYuHeartHandler());
+                    pipeline.addLast(new XiaoYuHeartHandler(xiaoYuClient));
                     /**
                      * 功能：处理入站事件
                      * 主要方法：
@@ -57,7 +58,7 @@ public class XiaoYuClient {
                      * channelRead：接收并处理服务器响应
                      * exceptionCaught：处理连接异常
                      */
-                    pipeline.addLast(new XiaoYuClientHandler());
+                    pipeline.addLast(new XiaoYuClientHandler(xiaoYuClient));
                 }
             });
 
