@@ -1,4 +1,4 @@
-package cn.cc.xiaoyu.client.handler;
+package cn.cc.xiaoyu.client.handler.test;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

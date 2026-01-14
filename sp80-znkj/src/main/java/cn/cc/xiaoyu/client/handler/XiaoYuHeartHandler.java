@@ -9,6 +9,8 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
 
+import java.nio.ByteBuffer;
+
 /**
  * 定时向服务器发送心跳包
  */
@@ -49,6 +51,20 @@ public class XiaoYuHeartHandler extends ChannelDuplexHandler {
              */
             byteBuf.writeBytes(iXiaoYuClient.getHeartData());
             ctx.writeAndFlush(byteBuf);
+
+
+            // 方式1：使用位运算组合
+//            int cardValue = ((card_1 & 0xFF) << 24) |
+//                    ((card_2 & 0xFF) << 16) |
+//                    ((card_3 & 0xFF) << 8) |
+//                    (card_4 & 0xFF);
+
+            // 方式2：使用ByteBuffer
+            int id = ByteBuffer.wrap(iXiaoYuClient.getId()).getInt();
+
+            log.info("3s 没有写数据了，当前通道信息id: {} 步骤: {}",id, XiaoYuClientHandler.step7Map.get(id));
+
+
         }
     }
 

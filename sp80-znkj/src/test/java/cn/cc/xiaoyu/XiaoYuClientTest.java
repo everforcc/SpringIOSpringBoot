@@ -11,6 +11,7 @@ import cn.cc.xiaoyu.client.XiaoYuClient;
 import cn.cc.xiaoyu.client.instant.IXiaoYuClient;
 import cn.cc.xiaoyu.client.instant.impl.XiaoYuClientImpl1;
 import cn.cc.xiaoyu.client.instant.impl.XiaoYuClientImpl2;
+import cn.cc.xiaoyu.client.instant.impl.XiaoYuClientImpl3;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,15 +27,15 @@ public class XiaoYuClientTest {
      * @param args
      */
     public static void main(String[] args) {
-//        thread2();
-        threadPool();
+        thread2();
+//        threadPool();
     }
 
     public static void thread2() {
-        IXiaoYuClient xiaoYuClient1 = new XiaoYuClientImpl1();
+        IXiaoYuClient xiaoYuClient3 = new XiaoYuClientImpl3();
         IXiaoYuClient xiaoYuClient2 = new XiaoYuClientImpl2();
         // 启动线程来执行这个方法 XiaoYuClient.start
-        new Thread(() -> XiaoYuClient.start(xiaoYuClient1)).start();
+        new Thread(() -> XiaoYuClient.start(xiaoYuClient3)).start();
         new Thread(() -> XiaoYuClient.start(xiaoYuClient2)).start();
     }
 

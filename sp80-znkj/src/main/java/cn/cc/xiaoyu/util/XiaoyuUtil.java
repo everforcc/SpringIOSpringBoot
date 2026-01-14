@@ -14,7 +14,7 @@ public class XiaoyuUtil {
     public static List<String> hexString(byte[] bytes) {
         List<String> strings = new ArrayList<>();
         for (byte aByte : bytes) {
-            log.info("aByte: {}", aByte);
+//            log.info("aByte: {}", aByte);
             String hexString = Integer.toHexString(aByte & 0xff);
             strings.add(hexString);
         }

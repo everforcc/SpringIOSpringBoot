@@ -5,12 +5,12 @@ import cn.cc.xiaoyu.util.Crc16;
 
 import java.nio.ByteBuffer;
 
-public class XiaoYuClientImpl2 implements IXiaoYuClient {
+public class XiaoYuClientImpl3 implements IXiaoYuClient {
 
     private static final byte card_1 = 0x52;
     private static final byte card_2 = 0x0;
     private static final byte card_3 = 0x1;
-    private static final byte card_4 = (byte)0x82;
+    private static final byte card_4 = (byte)0x83;
 
     @Override
     public byte[] getLoginData() {
@@ -123,4 +123,5 @@ public class XiaoYuClientImpl2 implements IXiaoYuClient {
     public byte[] getId() {
         return new byte[]{card_1, card_2, card_3, card_4};
     }
+
 }

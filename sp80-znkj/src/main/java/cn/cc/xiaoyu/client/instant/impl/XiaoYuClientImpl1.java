@@ -1,15 +1,22 @@
 package cn.cc.xiaoyu.client.instant.impl;
 
 import cn.cc.xiaoyu.client.instant.IXiaoYuClient;
+import cn.cc.xiaoyu.util.Crc16;
+
+import java.nio.ByteBuffer;
 
 public class XiaoYuClientImpl1 implements IXiaoYuClient {
 
+    private static final byte card_1 = 0x52;
+    private static final byte card_2 = 0x0;
+    private static final byte card_3 = 0x1;
+    private static final byte card_4 = (byte)0x81;
 
     @Override
     public byte[] getLoginData() {
         return new byte[]{
                 0x0, (byte) 0xd5, 0x5d,
-                0x52, 0x0, 0x1, (byte) 0x81,
+                card_1, card_2, card_3, card_4,
                 0x1,
                 0x0, 0x18,
 
@@ -28,11 +35,78 @@ public class XiaoYuClientImpl1 implements IXiaoYuClient {
     public byte[] getHeartData() {
         return new byte[]{
                 (byte) 0xd5, (byte) 0x5d,
-                0x52, 0x0, 0x1, (byte) 0x81,
+                card_1, card_2, card_3, card_4,
                 0x2,
                 0x0, 0x18,
                 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,0x0,0x0,0x0,0x0,
                 0x60, (byte) 0xFE,
                 (byte) 0xb3, 0x3b};
+    }
+
+    @Override
+    public byte[] getPortStatusData(byte[] orderArr, byte port) {
+        int crcLen = 2 + 4 + 1 + 2 + 27;
+        byte[] bytes = new byte[]{
+                (byte) 0xd5, (byte) 0x5d,
+                card_1, card_2, card_3, card_4,
+                0x13,
+                0x0, 0x1B,
+
+                orderArr[0], orderArr[1], orderArr[2], orderArr[3], orderArr[4], orderArr[5], orderArr[6], orderArr[7],
+                port,
+                0x0, 0x0,
+                0x0, 0x0,
+                0x0, 0x0,
+                0x0, 0x0,
+                0x0, 0x0,
+                0x0, (byte) 0x99,
+                0x01, (byte) 0x99,
+                0x01, (byte) 0x88,
+                0x0, 0x77,
+
+                0x60, (byte) 0xFE,
+                (byte) 0xb3, 0x3b};
+        short calculate = (short) Crc16.calculate(bytes, crcLen);
+        byte[] calculateBytes = ByteBuffer.allocate(2).putShort(calculate).array();
+        bytes[crcLen] = calculateBytes[0];
+        bytes[crcLen + 1] = calculateBytes[1];
+        return bytes;
+    }
+
+    @Override
+    public byte[] getEndElecData(byte[] orderArr, byte port, byte endType) {
+        int crcLen = 2 + 4 + 1 + 2 + 25;
+        byte[] bytes = new byte[]{
+                (byte) 0xd5, (byte) 0x5d,
+                card_1, card_2, card_3, card_4,
+                0x12,
+                0x0, 0x19,
+
+                orderArr[0], orderArr[1], orderArr[2], orderArr[3], orderArr[4], orderArr[5], orderArr[6], orderArr[7],
+                port,
+                endType,
+                0x0,
+
+                0x0, 0x0,
+                0x0, 0x0,
+                0x0, 0x0,
+                0x0, 0x0,
+
+                0x0, (byte) 0x99,
+                0x01, (byte) 0x99,
+                0x0, 0x77,
+
+                0x60, (byte) 0xFE,
+                (byte) 0xb3, 0x3b};
+        short calculate = (short) Crc16.calculate(bytes, crcLen);
+        byte[] calculateBytes = ByteBuffer.allocate(2).putShort(calculate).array();
+        bytes[crcLen] = calculateBytes[0];
+        bytes[crcLen + 1] = calculateBytes[1];
+        return bytes;
+    }
+
+    @Override
+    public byte[] getId() {
+        return new byte[]{card_1, card_2, card_3, card_4};
     }
 }

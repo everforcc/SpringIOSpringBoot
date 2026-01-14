@@ -6,4 +6,10 @@ public interface IXiaoYuClient {
 
     byte[] getHeartData();
 
+    byte[] getPortStatusData(byte[] orderArr, byte port);
+
+    byte[] getEndElecData(byte[] orderArr, byte port, byte endType);
+
+    byte[] getId();
+
 }

@@ -7,8 +7,10 @@
 
 package cn.cc.xiaoyu.client;
 
+import cn.cc.xiaoyu.client.constant.ScheduledTaskConstant;
 import cn.cc.xiaoyu.client.handler.XiaoYuClientHandler;
 import cn.cc.xiaoyu.client.handler.XiaoYuHeartHandler;
+import cn.cc.xiaoyu.client.handler.XiaoYuTimeHandler;
 import cn.cc.xiaoyu.client.instant.IXiaoYuClient;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -20,6 +22,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 1. 模拟充电桩发送请求
  */
@@ -27,6 +31,12 @@ import lombok.extern.slf4j.Slf4j;
 public class XiaoYuClient {
 
     public static void start(IXiaoYuClient xiaoYuClient) {
+
+        // 创建处理器实例
+        XiaoYuTimeHandler timeHandler = new XiaoYuTimeHandler(xiaoYuClient);
+        timeHandler.addScheduledTask(ScheduledTaskConstant.END_ELEC, 0, 60, TimeUnit.SECONDS);
+        timeHandler.addScheduledTask(ScheduledTaskConstant.PORT_STATUS, 0, 10, TimeUnit.SECONDS);
+
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
@@ -44,7 +54,7 @@ public class XiaoYuClient {
                      * 第2个参数(30)：写空闲时间，30秒内无写操作触发写空闲事件
                      * 第3个参数(0)：总空闲时间，0表示不检测总空闲
                      */
-                    pipeline.addLast(new IdleStateHandler(0, 60, 0));
+                    pipeline.addLast(new IdleStateHandler(0, 120, 0));
                     /**
                      * 功能：处理空闲事件，发送心跳包
                      * 依赖：需要 IdleStateHandler 产生的空闲事件
@@ -59,15 +69,19 @@ public class XiaoYuClient {
                      * exceptionCaught：处理连接异常
                      */
                     pipeline.addLast(new XiaoYuClientHandler(xiaoYuClient));
+                    /**
+                     * 功能：处理定时任务
+                     */
+                    pipeline.addLast(timeHandler);
                 }
             });
 
             // 链接服务器
             // https://dev-znyd.zgzhongnan.com/cc 80
             // 125.40.67.238 16999
-//            ChannelFuture channelFuture = bootstrap.connect("192.168.1.188", 9999).sync();
+            ChannelFuture channelFuture = bootstrap.connect("192.168.1.188", 9999).sync();
 //            ChannelFuture channelFuture = bootstrap.connect("125.40.67.238", 16999).sync();
-            ChannelFuture channelFuture = bootstrap.connect("zzhx.zgzhongnan.com", 16999).sync();
+//            ChannelFuture channelFuture = bootstrap.connect("zzhx.zgzhongnan.com", 16999).sync();
             channelFuture.channel().closeFuture().sync();
 
         } catch (Exception e) {

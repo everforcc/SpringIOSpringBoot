@@ -1,4 +1,4 @@
-package cn.cc.xiaoyu.client.handler;
+package cn.cc.xiaoyu.client.handler.test;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class TimedMessageHandler extends ChannelInboundHandlerAdapter {
-    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
     private int seconds;
 
     public TimedMessageHandler(int seconds) {
