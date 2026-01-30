@@ -41,7 +41,7 @@ public class XiaoYuClientHandler extends ChannelInboundHandlerAdapter {
         // byteBuf 写入十六进制 [0, d5, 5d, 52, 0, 1, 81, 72, ed, b3, 3b]
         byteBuf.writeBytes(iXiaoYuClient.getLoginData());
         ctx.writeAndFlush(byteBuf);
-        log.info("模拟充电桩客户端发送登录请求: {}", AsciiUtils.hexString(iXiaoYuClient.getLoginData()));
+        log.info("模拟充电桩客户端发送登录请求: {}", AsciiUtils.hexString(iXiaoYuClient.getLoginData()).toString());
 
         /**
          * 作用: 调用父类的 channelActive 方法
@@ -83,7 +83,7 @@ public class XiaoYuClientHandler extends ChannelInboundHandlerAdapter {
         byte[] orderNums = new byte[0];
         long orderNum = 0;
         byte port = 0;
-        if(0x01 != cmd && 0x02 != cmd) { // todo - bug
+        if(0x01 != cmd && 0x02 != cmd) { // todo 登录失败后注销掉连接
             orderNum = byteBuf.readLong();
             orderNums = ByteBuffer.allocate(8).putLong(orderNum).array();
 
@@ -125,7 +125,7 @@ public class XiaoYuClientHandler extends ChannelInboundHandlerAdapter {
                     openData[10] = (byte) 1; // 这个先随便写，用不到
 
                     // 服务器计费下面都写0
-                    byte[] defaultFee = ByteBuffer.allocate(8).putShort((short) 0).array();
+                    byte[] defaultFee = ByteBuffer.allocate(2).putShort((short) 1).array();
                     openData[11] = defaultFee[0];
                     openData[12] = defaultFee[1];
 

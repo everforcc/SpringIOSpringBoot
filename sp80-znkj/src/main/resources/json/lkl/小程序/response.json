@@ -1,0 +1,29 @@
+{
+  "code": "BBS00000",
+  "msg": "成功",
+  "resp_time": "20260106163417",
+  "resp_data": {
+    "merchant_no": "8224910737200MK",
+    "acc_resp_fields": {
+      "nonce_str": "c3719e90e0d04c53b70e07b378302834",
+      "code": "",
+      "package": "prepay_id=wx06163417751671fed4def1be70d28f0001",
+      "time_stamp": "1767688457",
+      "sub_mch_id": "822324396",
+      "best_pay_info": "",
+      "prepay_id": "wx06163417751671fed4def1be70d28f0001",
+      "partner_id": "",
+      "code_image": "",
+      "app_id": "wxd1e456dc8095136a",
+      "sign_type": "RSA",
+      "redirect_url": "",
+      "pay_sign": "e1a99bDbWDgqQHcI2MYfbX2RxlBJMl3weXfjr1aRPE5JgJrJL6B/AhQXIwsUUGgBxUe2X3OirK3ltckjvD7J02hD4pEoPkHW5h0KesLAindNjZelFPO6O/NGUaweyBP/RxtrWzZAcbVm1uWOfNFEle0LZJ4KSA10CzOuMyeXaq6ePuZAtQHgl5GRcwXUd12CUiqqq84mmJp8n+2lyn7nCXaJ0E2PSuGpdzu2N9z7CnQ7cC/060RGxBoM+gS7dGwTBj4qhbTCVvLl5zVZm9iF+E+CAWQ5Dw1eSxsgsnoBnxhYsqTJJNpIvoWzU9/YmRE8Tyxh/cIObo3YCDrQJlJ+VA=="
+    },
+    "out_trade_no": "217547304671002452",
+    "settle_term_no": "",
+    "trade_no": "20260106110113130266202388295258",
+    "log_no": "66202388295258",
+    "settle_merchant_no": "",
+    "trade_req_date": "20260106"
+  }
+}

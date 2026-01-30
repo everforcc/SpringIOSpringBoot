@@ -43,6 +43,7 @@ public class RefundServiceImpl implements IRefundService {
     static {
         ipMap.put("ZnPayOrderRecordServiceImpl136", "192.168.1.136");
         ipMap.put("ZnPayOrderRecordServiceImpl138", "192.168.1.138");
+        ipMap.put("ZnPayOrderRecordServiceImpl121", "192.168.1.121");
     }
 
     @Resource

@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class XiaoyuServer {
 
-
     public static void start(int port) {
         new Thread(() -> {
             EventLoopGroup group = new NioEventLoopGroup();

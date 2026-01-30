@@ -31,6 +31,12 @@ spring:
           username: root
           password: znkj123456
           url: jdbc:mysql://192.168.1.138:3306/smart_park?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
+        yq121:
+          type: ${spring.datasource.type}
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: znkj123456
+          url: jdbc:mysql://192.168.1.121:3306/smart_park?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
         dd132:
           type: ${spring.datasource.type}
           driver-class-name: com.mysql.cj.jdbc.Driver
