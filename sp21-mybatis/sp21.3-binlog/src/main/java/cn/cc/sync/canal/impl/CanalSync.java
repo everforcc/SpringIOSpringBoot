@@ -34,6 +34,7 @@ public class CanalSync {
             connector.subscribe(".*\\..*");
             //回滚到未进行ack的地方，下次fetch的时候，可以从最后一个没有ack的地方开始拿
             connector.rollback();
+            // todo 这里可以修改为定时任务或者监听之类的，先这样
             while (true) {
                 // 获取指定数量的数据
                 Message message = connector.getWithoutAck(BATCH_SIZE);

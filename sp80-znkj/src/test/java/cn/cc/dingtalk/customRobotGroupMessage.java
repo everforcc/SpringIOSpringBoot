@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 public class customRobotGroupMessage {
 
+    // 从钉钉app获取
     // https://oapi.dingtalk.com/robot/send?access_token=e960f81926fa118c0dedaf2f00babdabeba4580acec0b9c91e622d5fafd3459f
     public static final String CUSTOM_ROBOT_TOKEN = "e960f81926fa118c0dedaf2f00babdabeba4580acec0b9c91e622d5fafd3459f";
 

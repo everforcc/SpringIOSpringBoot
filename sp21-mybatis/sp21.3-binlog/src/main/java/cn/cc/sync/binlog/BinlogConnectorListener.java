@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
  * 该类同时结合 BinlogPositionTracker，保证消息落库时有权威位点信息可用。
  */
 @Slf4j
-@Component
+//@Component
 public class BinlogConnectorListener {
 
     private final BinaryLogClient client;

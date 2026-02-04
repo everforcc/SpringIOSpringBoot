@@ -88,13 +88,3 @@ mybatis:
 logging:
   level:
     com.baomidou.dynamic.datasource: debug
-
-binlog:
-  mysql:
-    host: 127.0.0.1
-    port: 3306
-    username: root
-    password: znkj123
-    server-id: 1        # 确保在 MySQL 主库中唯一
-    binlog-filename: DESKTOP-3CK8IIS-bin.000485
-    binlog-position: 4
