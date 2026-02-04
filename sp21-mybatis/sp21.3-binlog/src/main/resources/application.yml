@@ -1,0 +1,63 @@
+param:
+  server:
+    port: 8021
+  mysql:
+    ip: 8.146.199.165
+    port: 3308
+    un: cceverfor
+    pas: 5664c.c.
+server:
+  port: ${param.server.port}
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    dynamic:
+      datasource:
+        master:
+          type: ${spring.datasource.type}
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: ${param.mysql.un}
+          password: ${param.mysql.pas}
+          url: jdbc:mysql://${param.mysql.ip}:${param.mysql.port}/oneforall?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
+      druid:
+        # 如果用 druid-spring-boot-starter 则可以一一对应 DruidDataSourceWrapper
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        # 版本不同此处配置也不相同，现在是历史配置
+        #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        #filters: stat,wall,log4j 旧版配置
+        #filters:
+        #  commons-log.connection-logger-name: stat,wall,log4j # 新版配置
+        filters: stat,wall # 2021暂时去掉  ,log4j
+        maxPoolPreparedStatementPerConnectionSize: 20
+        useGlobalDataSourceStat: true
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+mybatis:
+  # 指定全局配置文件位置  便于管理和扫描 config-location 和 configuration不能同时使用
+  type-aliases-package: cn.cc.**.dto
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true # 驼峰命名法问题，等效配置文件
+logging:
+  level:
+    com.baomidou.dynamic.datasource: debug
+
+binlog:
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: znkj123
+    server-id: 1        # 确保在 MySQL 主库中唯一
+    binlog-filename: DESKTOP-3CK8IIS-bin.000586 # 怎么处理时间长 log变动问题
+    binlog-position: 9988

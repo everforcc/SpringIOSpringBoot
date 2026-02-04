@@ -16,6 +16,7 @@
 
     <modules>
         <module>sp21.1-mybatis</module>
+        <module>sp21.3-binlog</module>
     </modules>
 
 </project>
