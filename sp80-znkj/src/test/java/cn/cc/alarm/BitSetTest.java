@@ -13,6 +13,7 @@ public class BitSetTest {
         System.out.println(bitSet == null);
         System.out.println(bitSet.isEmpty());
         bitSet.set(0);
+        System.out.printf("bitSet:"+bitSet);
         System.out.println(bitSet.isEmpty());
 
         Long a = null;

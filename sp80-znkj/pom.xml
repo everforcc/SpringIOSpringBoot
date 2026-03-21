@@ -95,6 +95,8 @@
         </dependency>
         <!-- 拉卡拉       -->
         <!-- mvn install:install-file -Dfile=src/main/resources/lib/lkl-java-sdk-1.0.7.jar -DgroupId=com.lkl.laop.sdk -DartifactId=lkl-laop-java-sdk -Dversion=1.0.7 -Dpackaging=jar -->
+        <!-- 切换到 当前盘的根目录 -->
+        <!-- mvn install:install-file -Dfile=C:\cc\code\SpringIOSpringBoot\sp80-znkj\src\main\resources\lib\lkl-java-sdk-1.0.7.jar -DgroupId=com.lkl.laop.sdk -DartifactId=lkl-laop-java-sdk -Dversion=1.0.7 -Dpackaging=jar -->
         <dependency>
             <groupId>com.lkl.laop.sdk</groupId>
             <artifactId>lkl-laop-java-sdk</artifactId>
@@ -182,3 +184,4 @@
     </build>
 
 </project>
+
