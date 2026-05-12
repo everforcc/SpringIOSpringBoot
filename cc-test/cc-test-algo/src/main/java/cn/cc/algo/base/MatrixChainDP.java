@@ -1,11 +1,14 @@
 package cn.cc.algo.base;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 
 /**
  * 矩阵连乘问题 - 动态规划过程追踪版
  * 对应 2022年上半年下午真题试题四逻辑
  */
+@Slf4j
 public class MatrixChainDP {
 
     private static final int N = 100;
@@ -41,7 +44,9 @@ public class MatrixChainDP {
         System.out.println("[步骤1] 初始化对角线 cost[i][i] = 0 (单个矩阵无乘法开销)");
 
         // 2. p 为连乘链的长度（从长度 1 到 n-1）
-        for (p = 1; p < n; p++) {
+        // ** 变量p的严谨定义是索引偏移量**
+        // 可以把p理解为矩阵之间的**“乘号”数量**
+        for (p = 1; p < n; p++) { // todo 长度1但是却包含2个序列，所以 p 不能等于 n
             System.out.println("\n[长度 p = " + p + "] 正在计算所有包含 " + (p + 1) + " 个矩阵的子链:");
 
             // i 为连乘链的起点
@@ -54,16 +59,26 @@ public class MatrixChainDP {
              * 这就是i 自增的原因
              * j是终点，因为i是起点，p是连乘的长度，那么 j=i+p 就是终点
              * i < n-p , i+p 肯定要小于n，为什么不等于n，因为计算的时候，矩阵
-             *
-             *
+             */
+
+            /**
+             * 在 0 阶索引体系下，i 的取值范围从 0 开始。
+             * 矩阵总数为 n，最大合法索引为 n-1
+             * 当前子链的终点索引定义为 j=i+p,起点加上偏移量，就是终点
+             * 推导
+             *  j ≤ n−1
+             *  i+p ≤ n−1
+             *  i < n - p
              */
             for (i = 0; i < n - p; i++) { // i的含义 起点
-                j = i + p; // j 的含义终点 p是长度
+                j = i + p; // j 的含义终点 = p是长度 + i起点
                 int tempCost = -1;
 
                 System.out.println("  正在评估子链 A" + (i + 1) + " 到 A" + (j + 1) + ":");
 
                 // k 为切分点
+                // todo step n 根据定义 cost[i][k]是从 i+1 个矩阵到 k+1 个矩阵
+                // k < j 是因为终点是j，根据定义右侧等于 cost[k+1][j]，所以 k < j
                 for (k = i; k < j; k++) {
 
                     // 公式内容
@@ -72,7 +87,6 @@ public class MatrixChainDP {
                     int rightPart = cost[k + 1][j];
                     int mergePart = seq[i] * seq[k + 1] * seq[j + 1];
                     temp = leftPart + rightPart + mergePart;
-
                     // 几个参数都是题干定义
                     // 上面和下面的
                     // k+1 是切分点
@@ -80,6 +94,13 @@ public class MatrixChainDP {
                     // j+1是矩阵的维数
                     System.out.print("    尝试在 k=" + (k + 1) + " 处切分: (" + (i + 1) + ".." + (k + 1) + ") * (" + (k + 2) + ".." + (j + 1) + ")");
                     System.out.println(" -> 代价: " + leftPart + " + " + rightPart + " + " + mergePart + " = " + temp);
+
+                    System.out.printf("cost[%s][%s] = %s \r\n", i, k, leftPart);
+                    System.out.println("--------------");
+                    System.out.printf("cost[%s][%s] = %s \n", k + 1, j, rightPart);
+                    System.out.println("--------------");
+                    System.out.printf("seq[%s] * seq[%s] * seq[%s] = %s \n", i, k + 1, j + 1, mergePart);
+                    System.out.println("--------------");
 
                     if (tempCost == -1 || tempCost > temp) {
                         tempCost = temp;
