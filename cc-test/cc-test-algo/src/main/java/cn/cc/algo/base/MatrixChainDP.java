@@ -1,4 +1,5 @@
 package cn.cc.algo.base;
+
 import java.util.Arrays;
 
 /**
@@ -56,8 +57,8 @@ public class MatrixChainDP {
              *
              *
              */
-            for (i = 0; i < n - p; i++) {
-                j = i + p; // 终点
+            for (i = 0; i < n - p; i++) { // i的含义 起点
+                j = i + p; // j 的含义终点 p是长度
                 int tempCost = -1;
 
                 System.out.println("  正在评估子链 A" + (i + 1) + " 到 A" + (j + 1) + ":");
@@ -65,12 +66,18 @@ public class MatrixChainDP {
                 // k 为切分点
                 for (k = i; k < j; k++) {
 
+                    // 公式内容
                     // 状态转移方程：左子链代价 + 右子链代价 + 合并代价
                     int leftPart = cost[i][k];
                     int rightPart = cost[k + 1][j];
                     int mergePart = seq[i] * seq[k + 1] * seq[j + 1];
                     temp = leftPart + rightPart + mergePart;
 
+                    // 几个参数都是题干定义
+                    // 上面和下面的
+                    // k+1 是切分点
+                    // i+1和j+1是两个矩阵的维数
+                    // j+1是矩阵的维数
                     System.out.print("    尝试在 k=" + (k + 1) + " 处切分: (" + (i + 1) + ".." + (k + 1) + ") * (" + (k + 2) + ".." + (j + 1) + ")");
                     System.out.println(" -> 代价: " + leftPart + " + " + rightPart + " + " + mergePart + " = " + temp);
 
