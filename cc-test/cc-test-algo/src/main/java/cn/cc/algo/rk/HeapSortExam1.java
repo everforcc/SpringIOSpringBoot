@@ -1,4 +1,4 @@
-package cn.cc.algo.base;
+package cn.cc.algo.rk;
 
 import java.util.Arrays;
 
