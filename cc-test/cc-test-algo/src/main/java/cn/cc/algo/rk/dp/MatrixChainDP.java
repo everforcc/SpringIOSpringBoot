@@ -1,4 +1,4 @@
-package cn.cc.algo.rk;
+package cn.cc.algo.rk.dp;
 
 import lombok.extern.slf4j.Slf4j;
 

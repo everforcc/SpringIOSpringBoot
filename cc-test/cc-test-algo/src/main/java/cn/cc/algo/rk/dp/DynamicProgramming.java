@@ -1,4 +1,4 @@
-package cn.cc.algo.rk;
+package cn.cc.algo.rk.dp;
 
 /**
  * 动态规划

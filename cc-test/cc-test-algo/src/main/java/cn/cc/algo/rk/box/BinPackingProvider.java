@@ -1,5 +1,4 @@
-package cn.cc.algo.rk;
-import java.util.Arrays;
+package cn.cc.algo.rk.box;
 
 /**
  * 装箱问题（Bin Packing Problem）算法实现

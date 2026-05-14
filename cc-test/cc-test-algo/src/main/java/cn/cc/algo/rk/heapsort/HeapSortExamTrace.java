@@ -1,11 +1,11 @@
-package cn.cc.algo.rk;
+package cn.cc.algo.rk.heapsort;
 
 import java.util.Arrays;
 
 /**
  * 堆排序 Java 实现（完全还原 2022年下半年下午真题试题四逻辑）
  */
-public class HeapSortExam {
+public class HeapSortExamTrace {
 
     public static void main(String[] args) {
         // 初始序列：R[1...8]，R[0] 留空作为临时变量
