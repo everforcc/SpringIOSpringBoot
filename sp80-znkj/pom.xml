@@ -17,6 +17,18 @@
         <jackson.version>2.13.3</jackson.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-bom</artifactId>
+                <version>1.12.600</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- common -->
         <dependency>
@@ -93,10 +105,10 @@
             <artifactId>alibaba-dingtalk-service-sdk</artifactId>
             <version>2.0.0</version>
         </dependency>
-        <!-- 拉卡拉       -->
+        <!-- 拉卡拉      C:/Users/Administrator/IdeaProjects/SpringIOSpringBoot -->
         <!-- mvn install:install-file -Dfile=src/main/resources/lib/lkl-java-sdk-1.0.7.jar -DgroupId=com.lkl.laop.sdk -DartifactId=lkl-laop-java-sdk -Dversion=1.0.7 -Dpackaging=jar -->
         <!-- 切换到 当前盘的根目录 -->
-        <!-- mvn install:install-file -Dfile=C:\cc\code\SpringIOSpringBoot\sp80-znkj\src\main\resources\lib\lkl-java-sdk-1.0.7.jar -DgroupId=com.lkl.laop.sdk -DartifactId=lkl-laop-java-sdk -Dversion=1.0.7 -Dpackaging=jar -->
+        <!-- mvn install:install-file -Dfile=C:/Users/Administrator/IdeaProjects/SpringIOSpringBoot\sp80-znkj\src\main\resources\lib\lkl-java-sdk-1.0.7.jar -DgroupId=com.lkl.laop.sdk -DartifactId=lkl-laop-java-sdk -Dversion=1.0.7 -Dpackaging=jar -->
         <dependency>
             <groupId>com.lkl.laop.sdk</groupId>
             <artifactId>lkl-laop-java-sdk</artifactId>
@@ -163,7 +175,10 @@
             <version>1.68</version>
         </dependency>
         <!-- 工具包 -->
-        
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -184,4 +199,3 @@
     </build>
 
 </project>
-
