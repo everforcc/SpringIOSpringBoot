@@ -37,18 +37,18 @@ spring:
           username: root
           password: znkj123456
           url: jdbc:mysql://192.168.1.121:3306/smart_park?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
-        dd132:
-          type: ${spring.datasource.type}
-          driver-class-name: com.mysql.cj.jdbc.Driver
-          username: root
-          password: znkj123456
-          url: jdbc:mysql://192.168.1.132:3306/box_mall?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
+#        dd132:
+#          type: ${spring.datasource.type}
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          username: root
+#          password: znkj123456
+#          url: jdbc:mysql://192.168.1.132:3306/box_mall?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
 #        dd152:
 #          type: ${spring.datasource.type}
 #          driver-class-name: com.mysql.cj.jdbc.Driver
 #          username: root
 #          password: znkj123456
-#          url: jdbc:mysql://192.168.1.152:3306/box_mall?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT # 编码和时区
+#          url: jdbc:mysql://192.168.1.152:3306/box_mall?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GM                                                                                                                                                            T # 编码和时区
     #   数据源其他配置， 如果用 com.alibaba 不同版本可能写法不一样，初次配置输出测试,
       druid:
         # 如果用 druid-spring-boot-starter 则可以一一对应 DruidDataSourceWrapper
@@ -88,3 +88,7 @@ mybatis:
 logging:
   level:
     com.baomidou.dynamic.datasource: debug
+oss:
+  root-path:
+    busi1: C:/tmp/oss/busi1
+    busi2: C:/tmp/oss/busi2

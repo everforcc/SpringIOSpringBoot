@@ -36,14 +36,15 @@ public class RefundServiceImpl implements IRefundService {
 
 //    List<String> yqIPList = Arrays.asList("192.168.1.136", "192.168.1.138");
 
-    List<String> boxIPList = Arrays.asList("192.168.1.132");
+//    List<String> boxIPList = Arrays.asList("192.168.1.132");
+    List<String> boxIPList = new ArrayList<>();
     // 初始化一个map，随便给个示例参数
     public static Map<String, String> ipMap = new HashMap<>();
 
     static {
-        ipMap.put("ZnPayOrderRecordServiceImpl136", "192.168.1.136");
+//        ipMap.put("ZnPayOrderRecordServiceImpl136", "192.168.1.136");
         ipMap.put("ZnPayOrderRecordServiceImpl138", "192.168.1.138");
-        ipMap.put("ZnPayOrderRecordServiceImpl121", "192.168.1.121");
+//        ipMap.put("ZnPayOrderRecordServiceImpl121", "192.168.1.121");
     }
 
     @Resource

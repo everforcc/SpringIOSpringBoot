@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface IHuiFuInfoService {
 
-    @DS("dd132")
+//    @DS("dd132")
     List<HuiFuInfo> listHuiFuInfo132(String reqDate, List<String> hfSeqIdList);
 
-    @DS("dd152")
+//    @DS("dd152")
     List<HuiFuInfo> listHuiFuInfo152(String reqDate, List<String> hfSeqIdList);
 
 }
